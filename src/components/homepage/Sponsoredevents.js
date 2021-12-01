@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '10px',
     cursor: 'pointer',
     '@media (max-width: 750px)': {
-      height: '210px',
+      height: '213px',
       width: '165px',
     },
   },
@@ -87,6 +87,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '.9rem',
     '@media (max-width: 750px)': {
       fontSize: '.7rem',
+    },
+    '@media (max-width: 500px)': {
+      marginTop: '4px',
     },
   },
   event_title: {
