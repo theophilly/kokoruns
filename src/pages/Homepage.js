@@ -6,7 +6,6 @@ import Usekokoruns from '../components/homepage/Usekokoruns';
 import Skills from '../components/homepage/Skills';
 import Sponsoredevents from '../components/homepage/Sponsoredevents';
 import Findoutmore from '../components/homepage/Findoutmore';
-import Footer from '../components/layout/Footer';
 
 export default function Homepage() {
   return (
@@ -16,7 +15,6 @@ export default function Homepage() {
       <Skills />
       <Sponsoredevents />
       <Findoutmore />
-      <Footer />
     </Box>
   );
 }

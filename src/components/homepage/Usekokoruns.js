@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
       alignItems: 'center',
       // border: '1px solid red',
-      //  marginTop: '-40px',
+      marginTop: '-40px',
     },
   },
   information_box_list: {

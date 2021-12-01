@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     //  border: '1px solid red',
     '@media (max-width: 1075px)': {
       height: '60.3vh !important',
-      marginBottom: '50px !important',
+      marginBottom: '100px !important',
     },
   }, // a style rule
   leaderboard_img: {
