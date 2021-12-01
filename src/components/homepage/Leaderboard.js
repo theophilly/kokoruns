@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
     background: theme.palette.background1,
     //  border: '1px solid red',
     '@media (max-width: 1075px)': {
-      height: '70.3vh',
-      marginBottom: '20px',
+      height: '60.3vh !important',
+      marginBottom: '50px !important',
     },
   }, // a style rule
   leaderboard_img: {
