@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '10px',
     cursor: 'pointer',
     '@media (max-width: 750px)': {
-      height: '213px',
+      height: 'max-content',
       width: '165px',
     },
   },
