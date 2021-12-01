@@ -42,6 +42,17 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '0px',
     textTransform: 'capitalize',
   },
+  overlay: {
+    top: 150,
+    left: 30,
+    color: 'white',
+    position: 'absolute',
+    // border: '1px solid red',
+    '@media (max-width: 400px)': {
+      top: 200,
+      left: 20,
+    },
+  },
 }));
 
 export default function Leaderboard() {
@@ -51,18 +62,13 @@ export default function Leaderboard() {
     leaderboard_text,
     leaderboard_register,
     leaderboard_contactus,
+    overlay,
   } = useStyles();
   return (
     <Box className={root}>
       <Box position="relative">
         <img alt="leaderboard" className={leaderboard_img} src="hero.png"></img>
-        <Box
-          //  border="1px solid red"
-          position="absolute"
-          top={150}
-          left={30}
-          color="white"
-        >
+        <Box className={overlay}>
           <Typography className={leaderboard_text} variant="h1" component="h1">
             Whoever you are,
             <br /> Whatever you do...
