@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'capitalize',
   },
   overlay: {
-    top: '210px !important',
+    top: '45vh !important',
     left: 30,
     color: 'white',
     position: 'absolute',
