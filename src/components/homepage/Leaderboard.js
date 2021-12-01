@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     // border: '1px solid red',
     '@media (max-width: 400px)': {
-      top: '40vh !important',
+      top: '45vh !important',
       left: 20,
     },
   },
