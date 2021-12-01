@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width: 900px)': {
       objectFit: 'contain !important',
       height: '80vh',
-      backgroundSize: '1000px',
+      backgroundSize: '1100px',
     },
     '&::before': {
       content: '""', // ::before and ::after both require content
