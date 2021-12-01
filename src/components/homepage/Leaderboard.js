@@ -10,6 +10,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     background: theme.palette.background1,
     //  border: '1px solid red',
+    '@media (max-width: 1075px)': {
+      height: '70.3vh',
+      marginBottom: '20px',
+    },
   }, // a style rule
   leaderboard_img: {
     width: '1150px',
@@ -43,15 +47,14 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'capitalize',
   },
   overlay: {
-    top: '45vh !important',
+    top: 150,
     left: 30,
     color: 'white',
     position: 'absolute',
     // border: '1px solid red',
     '@media (max-width: 400px)': {
-      top: 200,
+      top: '40vh !important',
       left: 20,
-      // border: '1px solid red',
     },
   },
 }));
