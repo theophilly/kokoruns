@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
       lineHeight: '2.2rem',
       textAlign: 'center',
       marginBottom: '30px',
-      fontSize: '1.6rem',
     },
   },
 }));

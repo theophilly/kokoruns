@@ -12,7 +12,7 @@ export function themeTypography(theme) {
     },
     title2: {
       lineHeight: '40px',
-      fontSize: 'clamp(20px, 2.5vw, 60px)',
+      fontSize: 'clamp(1.6rem, 2.5vw, 60px)',
       fontWeight: 'bold',
     },
     subtitle1: {
