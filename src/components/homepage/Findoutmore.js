@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width: 400px)': {
       backgroundSize: '1050px !important',
       backgroundRepeat: 'no-repeat !important',
+      height: '80vh !important',
     },
     '&::before': {
       content: '""', // ::before and ::after both require content

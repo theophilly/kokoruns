@@ -29,6 +29,7 @@ export default function About() {
           // buttonText="FIND OUT MORE"
         />
       </Box>
+      <Box height="100vh"></Box>
       <Findoutmore
         firstLine="Find, Join or Create a Team. Work With"
         secondLine="Professionals & Colleagues on Projects"
