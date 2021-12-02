@@ -34,13 +34,13 @@ const headersData = () => [
   },
   {
     label: 'Sign In',
-    href: '/',
+    href: '/login',
     class: 'loginButton',
     variant: 'outlined',
   },
   {
     label: 'Register',
-    href: '/',
+    href: '/register',
     class: 'signupButton',
     variant: 'contained',
   },

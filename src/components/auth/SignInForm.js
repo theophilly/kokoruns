@@ -47,19 +47,19 @@ const useStyles = makeStyles((theme) => ({
   },
   sign_up_google: {
     ...theme.typography.flex,
-    height: '70px',
+    height: '50px',
     borderRadius: '7px',
     background: '#F0F0F0',
     cursor: 'pointer',
   },
   google_img: {
-    width: '25px',
+    width: '20px',
     marginRight: '20px',
   },
 }));
 
 export default function SignInForm({ onclick, setClickData, showToast, path }) {
-  //  const navigate = useNavigate();
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
   const {
     root_left_lower,
@@ -145,7 +145,7 @@ export default function SignInForm({ onclick, setClickData, showToast, path }) {
       </Box>
       <Box className={sign_up_google}>
         <img className={google_img} alt="google logo" src="./google.png" />
-        <Typography>Sign up with Google</Typography>
+        <Typography>Sign in with Google</Typography>
       </Box>
       <Box
         alignItems="center"
@@ -155,10 +155,10 @@ export default function SignInForm({ onclick, setClickData, showToast, path }) {
         // border="1px solid red"
       >
         <Typography className={recommendation}>
-          Already have an account?
+          Dont have an account?
         </Typography>
         <Typography
-          onClick={() => onclick('signup')}
+          onClick={() => navigate('/register')}
           color="primary"
           className={recommendation_link}
         >
