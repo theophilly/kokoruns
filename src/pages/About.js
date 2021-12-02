@@ -5,12 +5,16 @@ import Findoutmore from '../components/homepage/Findoutmore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    //border: '1px solid red',
-
-    '& > :nth-child(1)': {
-      fontFamily: 'Mulish',
-      fontSize: '1.6rem',
-      fontWeight: '700',
+    // paddingBottom: '40px !important',
+    // border: '1px solid red',
+    background: theme.palette.background1,
+  },
+  inner_div: {
+    width: '90vw',
+    margin: '0px auto 0px',
+    paddingTop: '20px',
+    '@media (max-width: 500px)': {
+      paddingTop: '0px',
     },
   },
   first_div: {
@@ -38,10 +42,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function About() {
-  const { root, first_div, first_div_heading, about_heading } = useStyles();
+  const {
+    root,
+    first_div,
+    first_div_heading,
+    about_heading,
+    inner_div,
+  } = useStyles();
   return (
-    <Box>
-      <Box width="90vw" margin="20px auto 0px">
+    <Box className={root}>
+      <Box className={inner_div}>
         <Findoutmore
           firstLine="A golden standard team of dedicated talents"
           sub="We are a team of diverse talents that utilized our individual strengths inorder to build a product that serves the character of its purpose"
@@ -217,7 +227,9 @@ export default function About() {
             - Becoming top 100 Kokoruns Companies/School/Association <br />
           </Typography>
           <br />
-          <Typography>Register now and start defining you!</Typography>
+          <Typography style={{ paddingBottom: '30px' }}>
+            Register now and start defining you!
+          </Typography>
           <br />
         </Box>
       </Box>
