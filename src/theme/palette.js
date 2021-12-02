@@ -14,7 +14,8 @@ export function themePalette(theme) {
       lighter2: '#70BFFF',
     },
     secondary: {
-      main: '#D92627',
+      main: '#2196f3',
+      main1: '#D92627',
       darker1: '#AE1E1F',
       darker2: '#831717',
       lighter1: '#E15152',

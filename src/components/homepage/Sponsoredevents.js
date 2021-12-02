@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
     // border: '1px solid red',
     background: theme.palette.background1,
     flexDirection: 'column',
-    paddingBottom: '70px',
+    //  paddingBottom: '70px',
+    padding: ' 15px calc((100vw - 1300px) / 2) 70px !important',
     '@media (max-width: 500px)': {
       lineHeight: '2rem',
       // padding: '20px',
