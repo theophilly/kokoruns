@@ -1,13 +1,14 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '90vh',
+    height: (props) => (props.heigth ? `${props.heigth}` : '90vh'),
     // border: '1px solid red',
-    background: "url('dd.png')",
+    background: (props) => `url(${props.bg})`,
     backgroundRepeat: 'no-repeat',
     objectFit: 'contain',
     backgroundSize: '100%',
@@ -19,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
       objectFit: 'contain !important',
       height: '80vh',
       backgroundSize: '1200px',
+    },
+    '@media (max-width: 400px)': {
+      backgroundSize: '950px !important',
+      backgroundRepeat: 'no-repeat !important',
     },
     '&::before': {
       content: '""', // ::before and ::after both require content
@@ -55,6 +60,10 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.subtitle,
     textAlign: 'center',
     margin: '30px 0',
+    width: '50%',
+    '@media (max-width: 704px)': {
+      width: '90%',
+    },
   },
   inner_button: {
     color: 'white',
@@ -65,29 +74,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Findoutmore() {
-  const {
-    root,
-    inner,
-    inner_title,
-    inner_subtitle,
-    inner_button,
-  } = useStyles();
+export default function Findoutmore(props) {
+  const { root, inner, inner_title, inner_subtitle, inner_button } = useStyles(
+    props
+  );
   const matches = useMediaQuery('(min-width:704px)');
   return (
     <Box className={root}>
       <Box className={inner}>
         <Typography className={inner_title}>
-          Find, Join or Create a Team. Work With
+          {props.firstLine}
           {matches && <br />}
-          Professionals & Colleagues on Projects
+          {props.secondLine}
         </Typography>
-        <Typography className={inner_subtitle}>
-          Register for career-focused sponsored events here.
-        </Typography>
-        <Button className={inner_button} variant="outlined">
-          FIND OUT MORE
-        </Button>
+        <Typography className={inner_subtitle}>{props.sub}</Typography>
+        {props.buttonText && (
+          <Button
+            LinkComponent={Link}
+            to={props.path}
+            className={inner_button}
+            variant="outlined"
+          >
+            {props.buttonText}
+          </Button>
+        )}
       </Box>
     </Box>
   );

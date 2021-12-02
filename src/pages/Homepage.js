@@ -14,7 +14,14 @@ export default function Homepage() {
       <Usekokoruns />
       <Skills />
       <Sponsoredevents />
-      <Findoutmore />
+      <Findoutmore
+        firstLine="Find, Join or Create a Team. Work With"
+        secondLine="Professionals & Colleagues on Projects"
+        sub="Register for career-focused sponsored events here."
+        bg="dd.png"
+        path="/"
+        buttonText="FIND OUT MORE"
+      />
     </Box>
   );
 }

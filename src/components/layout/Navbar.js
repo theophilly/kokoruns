@@ -22,7 +22,7 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 const headersData = () => [
   {
     label: 'About us',
-    href: '/',
+    href: '/about',
   },
   {
     label: 'Contact Us',
@@ -74,6 +74,9 @@ const useStyles = makeStyles((theme) => ({
     size: '18px',
     marginLeft: '30px',
     textTransform: 'capitalize',
+    '&:hover': {
+      background: 'transparent',
+    },
   },
   toolbar: {
     display: 'flex',

@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import Home from '../pages/Homepage';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
+import About from '../pages/About';
 
 const AuthenticationRoutes = (isLoggedIn) => [
   {
@@ -16,6 +17,10 @@ const AuthenticationRoutes = (isLoggedIn) => [
   {
     path: '/register',
     element: <Signup />,
+  },
+  {
+    path: '/about',
+    element: <About />,
   },
 ];
 
