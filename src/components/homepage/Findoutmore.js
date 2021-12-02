@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundSize: '1200px',
     },
     '@media (max-width: 400px)': {
-      backgroundSize: '1050px !important',
+      backgroundSize: '1200px !important',
       backgroundRepeat: 'no-repeat !important',
       height: '80vh !important',
     },
