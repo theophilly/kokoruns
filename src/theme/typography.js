@@ -15,6 +15,11 @@ export function themeTypography(theme) {
       fontSize: 'clamp(1.6rem, 2.5vw, 60px)',
       fontWeight: 'bold',
     },
+    title3: {
+      lineHeight: '30px',
+      fontSize: 'clamp(1.1rem, 1.5vw, 50px)',
+      fontWeight: '600',
+    },
     subtitle1: {
       fontWeight: 'bold',
       fontSize: '0.9rem',
