@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import Findoutmore from '../components/homepage/Findoutmore';
 
@@ -13,10 +13,27 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: '700',
     },
   },
+  first_div: {
+    // height: '160px',
+    // border: '1px solid red',
+    ...theme.typography.flex,
+    '@media (max-width: 500px)': {
+      marginTop: '40px',
+    },
+  },
+  first_div_heading: {
+    ...theme.typography.title2,
+    color: theme.palette.primary.main,
+    '@media (max-width: 500px)': {
+      lineHeight: '2.2rem',
+      textAlign: 'center',
+      marginBottom: '30px',
+    },
+  },
 }));
 
 export default function About() {
-  const { root } = useStyles();
+  const { root, first_div, first_div_heading } = useStyles();
   return (
     <Box>
       <Box width="90vw" margin="20px auto 0px">
@@ -29,7 +46,11 @@ export default function About() {
           // buttonText="FIND OUT MORE"
         />
       </Box>
-      <Box height="100vh"></Box>
+      <Box height="100vh">
+        <Box className={first_div}>
+          <Typography className={first_div_heading}>About Kokoruns?</Typography>
+        </Box>
+      </Box>
       <Findoutmore
         firstLine="Find, Join or Create a Team. Work With"
         secondLine="Professionals & Colleagues on Projects"
