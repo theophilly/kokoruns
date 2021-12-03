@@ -4,6 +4,7 @@ import Home from '../pages/Homepage';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import About from '../pages/About';
+import Privacypolicy from '../pages/Privacypolicy';
 
 const AuthenticationRoutes = (isLoggedIn) => [
   {
@@ -21,6 +22,10 @@ const AuthenticationRoutes = (isLoggedIn) => [
   {
     path: '/about',
     element: <About />,
+  },
+  {
+    path: '/privacy',
+    element: <Privacypolicy />,
   },
 ];
 

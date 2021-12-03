@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     background: "url('register.png')",
     backgroundRepeat: 'no-repeat',
-    backgroundSize: '750px',
+    backgroundSize: '850px',
     backgroundPosition: 'center center',
     padding: '60px 40px',
     color: 'white',

@@ -155,7 +155,7 @@ export default function SignInForm({ onclick, setClickData, showToast, path }) {
         // border="1px solid red"
       >
         <Typography className={recommendation}>
-          Dont have an account?
+          Don't have an account?
         </Typography>
         <Typography
           onClick={() => navigate('/register')}

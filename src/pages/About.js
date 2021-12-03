@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import Findoutmore from '../components/homepage/Findoutmore';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function About() {
+  const matches = useMediaQuery('(min-width:500px)');
   const {
     root,
     first_div,
@@ -76,7 +78,10 @@ export default function About() {
             What the future holds......
           </Typography>
           <Typography
-            style={{ padding: '90px 0px 30px' }}
+            style={{
+              padding: matches ? '90px 0px 30px' : '30px 0px 30px',
+              //   border: matches ? '1px solid red' : '1px solid black',
+            }}
             className={about_heading}
           >
             Who we are.......
