@@ -94,6 +94,9 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'capitalize',
     fontWeight: 'bold',
     padding: '6px 60px',
+    '&:hover': {
+      background: 'rgb(6, 101, 178)',
+    },
   },
   loginButton: {
     fontWeight: 'bold',
