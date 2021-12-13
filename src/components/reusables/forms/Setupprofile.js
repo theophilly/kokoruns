@@ -74,6 +74,7 @@ const Setupprofile = () => {
   const [input, setInput] = useState('');
   const [tags, setTags] = useState([]);
   const [isKeyReleased, setIsKeyReleased] = useState(false);
+  const [ie, setIe] = useState('');
   const { setFieldValue } = useFormikContext();
 
   const onChange = (e) => {
@@ -94,6 +95,7 @@ const Setupprofile = () => {
       e.preventDefault();
       await setTags((prevState) => [...prevState, trimmedInput]);
       setInput('');
+      setIe((i) => key + i);
       await setFieldValue('languages', tags);
     }
 
@@ -261,6 +263,7 @@ const Setupprofile = () => {
         </Grid>
         <Grid xs={12} item>
           <Box display="flex" gap="10px" flexWrap="wrap">
+            <Typography>{ie}</Typography>
             {tags.map((item, index) => (
               <Tag index={index} deleteTag={deleteTag} text={item} />
             ))}
