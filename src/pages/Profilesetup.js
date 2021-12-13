@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
 import { Box, Grid, Typography, CircularProgress, Button } from '@mui/material';
+import * as Yup from 'yup';
 import { makeStyles } from '@mui/styles';
 
 import { Formik, Form } from 'formik';
@@ -65,26 +66,51 @@ const Profilesetup = () => {
           deliveryMethod: '',
           paymentMethod: '',
           disablility: false,
+          languages: [],
         }}
-        // onSubmit={async (formvalues) => {
-        //   await sleep(3000);
+        onSubmit={async (formvalues) => {
+          //  await sleep(3000);
 
-        //   const cookie = getCookie(token);
-        //   if (!cookie) {
-        //     await setAlertContent({
-        //       type: 'error',
-        //       content: 'session expired',
-        //     });
-        //     handleClick();
-        //     dispatch({ type: 'SIGN_OUT' });
-        //     return;
-        //   }
+          //  const cookie = getCookie(token);
+          //  if (!cookie) {
+          //    await setAlertContent({
+          //      type: 'error',
+          //      content: 'session expired',
+          //    });
+          //    handleClick();
+          //    dispatch({ type: 'SIGN_OUT' });
+          //    return;
+          //  }
 
-        //   values = formvalues;
-        //   initializePayment(onSuccessWrapper, onClose);
-        // }}
+          //  values = formvalues;
+          //  initializePayment(onSuccessWrapper, onClose);
+          console.log(formvalues);
+        }}
       >
-        <Setupprofile />
+        <Setupprofile
+          validationSchema={Yup.object().shape({
+            firstName: Yup.string().required('First Name is Required'),
+            lastName: Yup.string().required('Last Name is Required'),
+            address: Yup.string().required('Address is Required'),
+            //  postalCode: Yup.string().required('postalCode is Required'),
+            city: Yup.string().required('city is Required'),
+            lga: Yup.string().required('city is Required'),
+            dob: Yup.date().required('city is Required'),
+            postalCode: Yup.number()
+              .integer()
+              .typeError('Please enter a valid postal number')
+              .required('Postal code is Required'),
+            phone: Yup.number()
+              .integer()
+              .typeError('Please enter a valid phone number')
+              .required('Phone is Required'),
+            state: Yup.string().required('state is required'),
+            languages: Yup.array(Yup.string())
+              .length(1)
+              .required('select atleast one language'),
+            disablility: Yup.boolean().required('please tell us your status'),
+          })}
+        />
       </FormikStepper>
     </Box>
   );
@@ -142,6 +168,7 @@ export function FormikStepper({ children, ...props }) {
               </ThemeProvider> */}
 
           {currentChild}
+
           {/* 
 
           <Grid className={controls} container spacing={2}>

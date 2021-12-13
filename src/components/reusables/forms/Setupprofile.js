@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
-import { Box, Grid, Typography, CircularProgress, Button } from '@mui/material';
+import { Box, Grid, Typography, OutlinedInput, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import * as Yup from 'yup';
 import Textfield from '../FormUI/Textfield';
 import SelectWrapper from '../FormUI/SelectWrapper';
 import SelectLGA from '../FormUI/SelectLGA';
@@ -16,6 +15,8 @@ import maritalStatusData from '../../../config/maritalStatusData.json';
 import Datepicker from '../FormUI/Datepicker';
 import Textarea from '../FormUI/Textarea';
 import Checkbox from '../FormUI/Checkbox';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
+import { useField, useFormikContext } from 'formik';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,34 +27,94 @@ const useStyles = makeStyles((theme) => ({
   customer_info: {
     ...theme.typography.heading,
   },
+  language_input: {
+    height: '39px',
+    width: '100%',
+    marginTop: '5px',
+    background: 'white',
+    borderRadius: '0px',
+    '& ::placeholder': {
+      fontSize: '.9rem',
+    },
+  },
+  tag: {
+    background: theme.palette.primary.main,
+    color: 'white',
+    padding: '10px 20px',
+    width: 'max-content',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    position: 'relative',
+  },
+  tag_icon: {
+    position: 'absolute',
+    fontSize: 17,
+    color: '#D92627',
+    top: 2,
+    right: 2,
+  },
 }));
 
-const Setupprofile = () => {
-  const { root, customer_info } = useStyles();
+const Tag = ({ text, deleteTag, index }) => {
+  const { tag, tag_icon } = useStyles();
 
   return (
-    <Box
-      validationSchema={Yup.object().shape({
-        firstName: Yup.string().required('First Name is Required'),
-        lastName: Yup.string().required('Last Name is Required'),
-        address: Yup.string().required('Address is Required'),
-        //  postalCode: Yup.string().required('postalCode is Required'),
-        city: Yup.string().required('city is Required'),
-        lga: Yup.string().required('city is Required'),
-        dob: Yup.date().required('city is Required'),
-        postalCode: Yup.number()
-          .integer()
-          .typeError('Please enter a valid postal number')
-          .required('Postal code is Required'),
-        phone: Yup.number()
-          .integer()
-          .typeError('Please enter a valid phone number')
-          .required('Phone is Required'),
-        state: Yup.string().required('state is required'),
-        disablility: Yup.boolean().required('please tell us your status'),
-      })}
-      className={root}
-    >
+    <Box className={tag}>
+      <Typography>{text}</Typography>
+      <div onClick={() => deleteTag(index)}>
+        <DeleteOutlineRoundedIcon className={tag_icon} />
+      </div>
+    </Box>
+  );
+};
+
+const Setupprofile = () => {
+  const { root, customer_info, language_input } = useStyles();
+  const [input, setInput] = useState('');
+  const [tags, setTags] = useState([]);
+  const [isKeyReleased, setIsKeyReleased] = useState(false);
+  const { setFieldValue } = useFormikContext();
+
+  const onChange = (e) => {
+    const { value } = e.target;
+    setInput(value);
+  };
+
+  const deleteTag = async (index) => {
+    await setTags((prevState) => prevState.filter((tag, i) => i !== index));
+    await setFieldValue('languages', tags);
+  };
+
+  const onKeyDown = async (e) => {
+    const { key } = e;
+    const trimmedInput = input.trim();
+
+    if (key === ',' && trimmedInput.length && !tags.includes(trimmedInput)) {
+      e.preventDefault();
+      await setTags((prevState) => [...prevState, trimmedInput]);
+      setInput('');
+      await setFieldValue('languages', tags);
+    }
+
+    if (key === 'Backspace' && !input.length && tags.length && isKeyReleased) {
+      const tagsCopy = [...tags];
+      const poppedTag = tagsCopy.pop();
+      e.preventDefault();
+      await setTags(tagsCopy);
+      setInput(poppedTag);
+      await setFieldValue('languages', tags);
+    }
+
+    setIsKeyReleased(false);
+  };
+
+  const onKeyUp = () => {
+    setIsKeyReleased(true);
+  };
+
+  return (
+    <div className={root}>
       <Grid container spacing={2}>
         <Grid xs={12} item>
           <Typography className={customer_info}>
@@ -190,8 +251,34 @@ const Setupprofile = () => {
             helpertext="Do you have any disability?*"
           />
         </Grid>
+        <Grid
+          //  border="1px solid red"
+          marginTop="40px"
+          xs={12}
+          item
+        >
+          <Typography className={customer_info}>Languages Spoken</Typography>
+        </Grid>
+        <Grid xs={12} item>
+          <Box display="flex" gap="10px" flexWrap="wrap">
+            {tags.map((item, index) => (
+              <Tag index={index} deleteTag={deleteTag} text={item} />
+            ))}
+          </Box>
+        </Grid>
+        <Grid xs={12} md={6} item>
+          <OutlinedInput
+            className={language_input}
+            value={input}
+            placeholder="Enter a Language"
+            onKeyDown={onKeyDown}
+            onKeyUp={onKeyUp}
+            onChange={onChange}
+            fullWidth
+          />
+        </Grid>
       </Grid>
-    </Box>
+    </div>
   );
 };
 
