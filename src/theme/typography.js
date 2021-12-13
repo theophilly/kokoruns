@@ -16,9 +16,20 @@ export function themeTypography(theme) {
       fontWeight: 'bold',
     },
     title3: {
+      lineHeight: '40px',
+      fontSize: 'clamp(1.6rem, 2vw, 60px)',
+      fontWeight: 'bold',
+    },
+    sub_heading1: {
       lineHeight: '30px',
       fontSize: 'clamp(1.2rem, 1.5vw, 50px)',
       fontWeight: '600',
+    },
+    heading: {
+      fontWeight: '600',
+      fontSize: '1.2rem',
+      fontFamily: 'mulish',
+      // marginBottom: '20px',
     },
     subtitle1: {
       fontWeight: 'bold',

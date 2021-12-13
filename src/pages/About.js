@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   about_heading: {
-    ...theme.typography.title3,
+    ...theme.typography.sub_heading1,
     color: theme.palette.primary.main,
   },
 }));

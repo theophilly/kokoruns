@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import About from '../pages/About';
 import Privacypolicy from '../pages/Privacypolicy';
+import Profilesetup from '../pages/Profilesetup';
 
 const AuthenticationRoutes = (isLoggedIn) => [
   {
@@ -26,6 +27,10 @@ const AuthenticationRoutes = (isLoggedIn) => [
   {
     path: '/privacy',
     element: <Privacypolicy />,
+  },
+  {
+    path: '/profile-setup',
+    element: <Profilesetup />,
   },
 ];
 
