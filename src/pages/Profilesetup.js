@@ -26,10 +26,20 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main1,
     textAlign: 'center',
   },
+  lower_buttons: {
+     ...theme.typography.flex,
+     height: "150px",
+     background: "white",
+     padding: '20px',
+       '& > :nth-child(1)': {
+     padding: "7px 140px",
+     borderRadius: "0px"
+    },
+  }
 }));
 
 const Profilesetup = () => {
-  const { root, upper_bluebox, red_text_info } = useStyles();
+  const { root, upper_bluebox, red_text_info, lower_buttons } = useStyles();
   const [dis_ability, setDis_ability] = useState(false);
 
   return (
@@ -56,19 +66,26 @@ const Profilesetup = () => {
           address: '',
           postalCode: '',
           dob: new Date('2014-08-18T21:11:54'),
+          email: '',
           city: '',
           phone: '',
+          gender: '',
           state: '',
+          maritalStatus: '',
+          employment_status: '',
           lga: '',
+          profession: '',
+          academicLevel: '',
           about: '',
           preffered_jl: '',
           preffered_jlga: '',
           employment_type: '',
           preferred_lga: '',
-          deliveryMethod: '',
+          current_employer: '',
+          employer_address: '',
           paymentMethod: '',
           disablility: false,
-          languages: [],
+          languages: ['english'],
           disability_details: '',
         }}
         onSubmit={async (formvalues) => {
@@ -122,12 +139,9 @@ const Profilesetup = () => {
             employment_status: Yup.string().required(
               'Present Employment Status is required'
             ),
-            preferred_lga: Yup.string().required('preferred_lga is required'),
+            preffered_jlga: Yup.string().required('preffered_jlga is required'),
             preffered_jl: Yup.string().required('preffered_jl is required'),
-            postalCode: Yup.number()
-              .integer()
-              .typeError('Please enter a valid postal number')
-              .required('Postal code is Required'),
+
             languages: Yup.array(Yup.string())
               .length(1)
               .required('select atleast one language'),
@@ -146,7 +160,7 @@ const Profilesetup = () => {
 export default Profilesetup;
 
 export function FormikStepper({ children, ...props }) {
-  const { backsection, controls } = useStyles();
+  const { backsection, controls, lower_buttons } = useStyles();
   let history = useNavigate();
   const [step, setStep] = useState(0);
   const childrenArray = React.Children.toArray(children);
@@ -196,68 +210,29 @@ export function FormikStepper({ children, ...props }) {
 
           {currentChild}
 
-          {/* 
+         
 
-          <Grid className={controls} container spacing={2}>
+          <Grid 
+     
+           container 
+          >
+           
             {step === 0 ? (
-              <Grid
-                className={backsection}
-                onClick={() => history('/allmeals')}
-                item
-              >
-                <BsArrowLeft />
-                <Typography>Order page</Typography>
-              </Grid>
-            ) : null}
-            {step === 1 ? (
-              <Grid
-                className={backsection}
-                onClick={() => setStep((s) => s - 1)}
-                item
-              >
-                <BsArrowLeft />
-                <Typography>Customer Info</Typography>
-              </Grid>
-            ) : null}
-            {step === 2 ? (
-              <Grid
-                className={backsection}
-                onClick={isSubmitting ? null : () => setStep((s) => s - 1)}
-                item
-              >
-                <BsArrowLeft />
-                <Typography>Shipping Info</Typography>
-              </Grid>
-            ) : null}
-         section 
-            {step === 0 ? (
-              <Grid item>
+              <Grid  className={lower_buttons}  xs={12} item>
                 <Button
                   disabled={isSubmitting}
                   variant="contained"
-                  color="secondary"
+                 // color="secondary"
                   disableElevation
                   type="submit"
                 >
-                  Continue to shipping
+                  Continue
                 </Button>
               </Grid>
             ) : null}
+         
             {step === 1 ? (
-              <Grid item>
-                <Button
-                  disabled={isSubmitting}
-                  variant="contained"
-                  color="secondary"
-                  disableElevation
-                  type="submit"
-                >
-                  Continue to Billing
-                </Button>
-              </Grid>
-            ) : null}
-            {step === 2 ? (
-              <Grid item>
+              <Grid  className={lower_buttons} item>
                 <Button
                   startIcon={
                     isSubmitting ? <CircularProgress size="1rem" /> : null
@@ -277,8 +252,8 @@ export function FormikStepper({ children, ...props }) {
               </Grid>
             ) : null}
           </Grid>
-       
-        */}
+
+    
         </Form>
       )}
     </Formik>

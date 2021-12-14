@@ -6,7 +6,6 @@ import { makeStyles } from '@mui/styles';
 import Textfield from '../FormUI/Textfield';
 import SelectWrapper from '../FormUI/SelectWrapper';
 import SelectLGA from '../FormUI/SelectLGA';
-import { Formik, Form } from 'formik';
 import stateData from '../../../config/stateData.json';
 import academicLevel from '../../../config/academicLevel.json';
 import genderData from '../../../config/genderData.json';
@@ -219,7 +218,7 @@ const Setupprofile = ({ setDis_ability }) => {
         {/* employment type and empolyment status */}
         <Grid item xs={12} md={6}>
           <SelectWrapper
-            name="employment_type*"
+            name="employment_type"
             helpertext="Employment Type*"
             options={employmentType}
           />
