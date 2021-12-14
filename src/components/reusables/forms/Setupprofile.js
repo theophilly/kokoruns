@@ -17,6 +17,7 @@ import Textarea from '../FormUI/Textarea';
 import Checkbox from '../FormUI/Checkbox';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import { useField, useFormikContext } from 'formik';
+import AddIcon from '@mui/icons-material/Add';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,15 +31,20 @@ const useStyles = makeStyles((theme) => ({
   language_input: {
     height: '39px',
     width: '100%',
-    marginTop: '5px',
+    marginRight: '5px',
     background: 'white',
     borderRadius: '0px',
     '& ::placeholder': {
       fontSize: '.9rem',
     },
   },
+  add_button: {
+    height: '39px',
+    textTransform: 'capitalize',
+  },
   tag: {
     background: theme.palette.primary.main,
+    cursor: 'pointer',
     color: 'white',
     padding: '10px 20px',
     width: 'max-content',
@@ -53,29 +59,29 @@ const useStyles = makeStyles((theme) => ({
     color: '#D92627',
     top: 2,
     right: 2,
+    zIndex: 2,
   },
 }));
 
-const Tag = ({ text, deleteTag, index }) => {
+const Tag = ({ editTag, text, deleteTag, index }) => {
   const { tag, tag_icon } = useStyles();
 
   return (
-    <Box className={tag}>
+    <div onClick={() => editTag(index)} className={tag}>
       <Typography>{text}</Typography>
       <div onClick={() => deleteTag(index)}>
         <DeleteOutlineRoundedIcon className={tag_icon} />
       </div>
-    </Box>
+    </div>
   );
 };
 
 const Setupprofile = () => {
-  const { root, customer_info, language_input } = useStyles();
+  const { root, customer_info, language_input, add_button } = useStyles();
   const [input, setInput] = useState('');
-  const [tags, setTags] = useState([]);
-  const [isKeyReleased, setIsKeyReleased] = useState(false);
-  const [ie, setIe] = useState('');
-  const { setFieldValue } = useFormikContext();
+  const { setFieldValue, getFieldMeta } = useFormikContext();
+
+  const tagField = getFieldMeta('languages');
 
   const onChange = (e) => {
     const { value } = e.target;
@@ -83,36 +89,31 @@ const Setupprofile = () => {
   };
 
   const deleteTag = async (index) => {
-    await setTags((prevState) => prevState.filter((tag, i) => i !== index));
-    await setFieldValue('languages', tags);
+    const tagsCopy = [...tagField.value];
+    tagsCopy.splice(index, 1);
+    await setFieldValue('languages', tagsCopy);
   };
 
-  const onKeyDown = async (e) => {
-    const { key } = e;
+  const editTag = async (id) => {
+    const tagsCopy = [...tagField.value];
+    const poppedTag = tagsCopy[id];
+    tagsCopy.splice(id, 1);
+
+    // await setTags(tagsCopy);
+    setInput(poppedTag);
+    await setFieldValue('languages', tagsCopy);
+  };
+
+  const onAdd = async (e) => {
+    // e.preventDefault();
+
     const trimmedInput = input.trim();
 
-    if (key === ',' && trimmedInput.length && !tags.includes(trimmedInput)) {
-      e.preventDefault();
-      await setTags((prevState) => [...prevState, trimmedInput]);
+    if (trimmedInput.length && !tagField.value.includes(trimmedInput)) {
+      // await setTags((prevState) => [...prevState, trimmedInput]);
       setInput('');
-      setIe((i) => key + i);
-      await setFieldValue('languages', tags);
+      await setFieldValue('languages', [...tagField.value, trimmedInput]);
     }
-
-    if (key === 'Backspace' && !input.length && tags.length && isKeyReleased) {
-      const tagsCopy = [...tags];
-      const poppedTag = tagsCopy.pop();
-      e.preventDefault();
-      await setTags(tagsCopy);
-      setInput(poppedTag);
-      await setFieldValue('languages', tags);
-    }
-
-    setIsKeyReleased(false);
-  };
-
-  const onKeyUp = () => {
-    setIsKeyReleased(true);
   };
 
   return (
@@ -263,22 +264,35 @@ const Setupprofile = () => {
         </Grid>
         <Grid xs={12} item>
           <Box display="flex" gap="10px" flexWrap="wrap">
-            <Typography>{ie}</Typography>
-            {tags.map((item, index) => (
-              <Tag index={index} deleteTag={deleteTag} text={item} />
+            {tagField.value.map((item, index) => (
+              <Tag
+                index={index}
+                editTag={editTag}
+                deleteTag={deleteTag}
+                text={item}
+              />
             ))}
           </Box>
         </Grid>
         <Grid xs={12} md={6} item>
-          <OutlinedInput
-            className={language_input}
-            value={input}
-            placeholder="Enter a Language"
-            onKeyDown={onKeyDown}
-            onKeyUp={onKeyUp}
-            onChange={onChange}
-            fullWidth
-          />
+          <Box alignItems="center" display="flex">
+            <OutlinedInput
+              className={language_input}
+              value={input}
+              placeholder="Enter a Language"
+              onChange={onChange}
+              fullWidth
+            />
+            <Button
+              startIcon={<AddIcon />}
+              disableElevation
+              variant="contained"
+              className={add_button}
+              onClick={onAdd}
+            >
+              Add
+            </Button>
+          </Box>
         </Grid>
       </Grid>
     </div>
