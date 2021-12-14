@@ -1,11 +1,15 @@
 import React from 'react';
-import { OutlinedInput, Box, Typography } from '@mui/material';
+import {
+  TextareaAutosize,
+  Box,
+  Typography,
+  OutlinedInput,
+} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useField } from 'formik';
 
 const useStyles = makeStyles((theme) => ({
   log_input: {
-    minHeight: '150px',
     height: 'auto',
     width: '100%',
     marginTop: '5px',
@@ -19,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Textarea = ({ name, helpertext, ...otherProps }) => {
+const Textarea = ({ num_of_rows, name, helpertext, ...otherProps }) => {
   const { log_input } = useStyles();
   const [field, mata] = useField(name);
 
@@ -38,7 +42,12 @@ const Textarea = ({ name, helpertext, ...otherProps }) => {
   return (
     <Box>
       <Typography variant="caption">{helpertext}</Typography>
-      <textarea className={log_input} {...configTextfield} />
+      <OutlinedInput
+        multiline
+        rows={num_of_rows}
+        className={log_input}
+        {...configTextfield}
+      />
       <Typography style={{ color: '#f44336' }} variant="caption">
         {configTextfield.helperText}
       </Typography>

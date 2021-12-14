@@ -76,12 +76,15 @@ const Tag = ({ editTag, text, deleteTag, index }) => {
   );
 };
 
-const Setupprofile = () => {
+const Setupprofile = ({ setDis_ability }) => {
   const { root, customer_info, language_input, add_button } = useStyles();
   const [input, setInput] = useState('');
+
   const { setFieldValue, getFieldMeta } = useFormikContext();
 
   const tagField = getFieldMeta('languages');
+  const disablilityField = getFieldMeta('disablility');
+  setDis_ability(disablilityField.value);
 
   const onChange = (e) => {
     const { value } = e.target;
@@ -99,20 +102,22 @@ const Setupprofile = () => {
     const poppedTag = tagsCopy[id];
     tagsCopy.splice(id, 1);
 
-    // await setTags(tagsCopy);
     setInput(poppedTag);
     await setFieldValue('languages', tagsCopy);
   };
 
   const onAdd = async (e) => {
-    // e.preventDefault();
-
     const trimmedInput = input.trim();
 
-    if (trimmedInput.length && !tagField.value.includes(trimmedInput)) {
-      // await setTags((prevState) => [...prevState, trimmedInput]);
+    if (
+      trimmedInput.length &&
+      !tagField.value.includes(trimmedInput.toLowerCase())
+    ) {
       setInput('');
-      await setFieldValue('languages', [...tagField.value, trimmedInput]);
+      await setFieldValue('languages', [
+        ...tagField.value,
+        trimmedInput.toLowerCase(),
+      ]);
     }
   };
 
@@ -195,7 +200,7 @@ const Setupprofile = () => {
 
         {/* about */}
         <Grid item xs={12}>
-          <Textarea name="about" helpertext="About" />
+          <Textarea num_of_rows={8} name="about" helpertext="About" />
         </Grid>
 
         <Grid marginTop="40px" xs={12} item>
@@ -220,7 +225,10 @@ const Setupprofile = () => {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Textfield name="preferred_lga" helpertext="Preferred LGA" />
+          <Textfield
+            name="employment_status"
+            helpertext="Present Employment Status*"
+          />
         </Grid>
 
         {/* preferred job state and LGA */}
@@ -239,27 +247,8 @@ const Setupprofile = () => {
           />
         </Grid>
 
-        <Grid item xs={12} md={6}>
-          <Textfield name="postalCode" helpertext="Postal code" />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Textfield name="phone" helpertext="Phone" />
-        </Grid>
+        {/* languages spoken */}
         <Grid marginTop="40px" xs={12} item>
-          <Typography className={customer_info}>Disability*</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Checkbox
-            name="disablility"
-            helpertext="Do you have any disability?*"
-          />
-        </Grid>
-        <Grid
-          //  border="1px solid red"
-          marginTop="40px"
-          xs={12}
-          item
-        >
           <Typography className={customer_info}>Languages Spoken</Typography>
         </Grid>
         <Grid xs={12} item>
@@ -294,6 +283,28 @@ const Setupprofile = () => {
             </Button>
           </Box>
         </Grid>
+
+        {/* disabilities */}
+        <Grid marginTop="40px" xs={12} item>
+          <Typography className={customer_info}>Disability*</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Checkbox
+            name="disablility"
+            helpertext="Do you have any disability?*"
+          />
+        </Grid>
+
+        {/* give Details */}
+        {disablilityField.value && (
+          <Grid item xs={12}>
+            <Textarea
+              num_of_rows={3}
+              name="disability_details"
+              helpertext="Give Details"
+            />
+          </Grid>
+        )}
       </Grid>
     </div>
   );

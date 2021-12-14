@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Profilesetup = () => {
   const { root, upper_bluebox, red_text_info } = useStyles();
+  const [dis_ability, setDis_ability] = useState(false);
 
   return (
     <Box className={root}>
@@ -59,6 +60,7 @@ const Profilesetup = () => {
           phone: '',
           state: '',
           lga: '',
+          about: '',
           preffered_jl: '',
           preffered_jlga: '',
           employment_type: '',
@@ -67,6 +69,7 @@ const Profilesetup = () => {
           paymentMethod: '',
           disablility: false,
           languages: [],
+          disability_details: '',
         }}
         onSubmit={async (formvalues) => {
           //  await sleep(3000);
@@ -91,25 +94,49 @@ const Profilesetup = () => {
           validationSchema={Yup.object().shape({
             firstName: Yup.string().required('First Name is Required'),
             lastName: Yup.string().required('Last Name is Required'),
-            address: Yup.string().required('Address is Required'),
-            //  postalCode: Yup.string().required('postalCode is Required'),
-            city: Yup.string().required('city is Required'),
-            lga: Yup.string().required('city is Required'),
-            dob: Yup.date().required('city is Required'),
-            postalCode: Yup.number()
-              .integer()
-              .typeError('Please enter a valid postal number')
-              .required('Postal code is Required'),
+            gender: Yup.string().required('Gender is Required'),
+            maritalStatus: Yup.string().required('Marital Status is Required'),
+            email: Yup.string()
+              .email('Invalid email format')
+              .required('Required'),
             phone: Yup.number()
               .integer()
               .typeError('Please enter a valid phone number')
               .required('Phone is Required'),
+            //  postalCode: Yup.string().required('postalCode is Required'),
+            dob: Yup.date().required('city is Required'),
+            profession: Yup.string().required('profession is Required'),
+            academicLevel: Yup.string().required('academicLevel is Required'),
             state: Yup.string().required('state is required'),
+            lga: Yup.string().required('city is Required'),
+            about: Yup.string().required('About is required'),
+            current_employer: Yup.string().required(
+              'Current Employer is required'
+            ),
+            employer_address: Yup.string().required(
+              'employer address is required'
+            ),
+            employment_type: Yup.string().required(
+              'employment type is required'
+            ),
+            employment_status: Yup.string().required(
+              'Present Employment Status is required'
+            ),
+            preferred_lga: Yup.string().required('preferred_lga is required'),
+            preffered_jl: Yup.string().required('preffered_jl is required'),
+            postalCode: Yup.number()
+              .integer()
+              .typeError('Please enter a valid postal number')
+              .required('Postal code is Required'),
             languages: Yup.array(Yup.string())
               .length(1)
               .required('select atleast one language'),
             disablility: Yup.boolean().required('please tell us your status'),
+            disability_details: dis_ability
+              ? Yup.string().required('About is required')
+              : '',
           })}
+          setDis_ability={setDis_ability}
         />
       </FormikStepper>
     </Box>
