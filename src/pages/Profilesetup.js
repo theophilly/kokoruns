@@ -8,6 +8,7 @@ import { makeStyles } from '@mui/styles';
 import { Formik, Form } from 'formik';
 import Setupprofile from '../components/reusables/forms/Setupprofile';
 import Setupprofileimage from '../components/reusables/forms/Setupprofileimage';
+const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -90,7 +91,7 @@ const Profilesetup = () => {
           file: null,
         }}
         onSubmit={async (formvalues) => {
-          //    await sleep(3000);
+          await sleep(3000);
           //    const cookie = getCookie(token);
           //    if (!cookie) {
           //      await setAlertContent({
@@ -141,7 +142,10 @@ const Profilesetup = () => {
             preffered_jl: Yup.string().required('preffered_jl is required'),
 
             languages: Yup.array(Yup.string())
-              .length(1)
+              .test({
+                message: 'select atleast one language',
+                test: (arr) => arr.length > 1,
+              })
               .required('select atleast one language'),
             //   disablility: Yup.boolean().required('please tell us your status'),
             disability_details: dis_ability
