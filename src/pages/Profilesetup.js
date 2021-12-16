@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
 import { Box, Grid, Typography, CircularProgress, Button } from '@mui/material';
@@ -7,6 +7,7 @@ import { makeStyles } from '@mui/styles';
 
 import { Formik, Form } from 'formik';
 import Setupprofile from '../components/reusables/forms/Setupprofile';
+import Setupprofileimage from '../components/reusables/forms/Setupprofileimage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,20 +28,24 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   lower_buttons: {
-     ...theme.typography.flex,
-     height: "150px",
-     background: "white",
-     padding: '20px',
-       '& > :nth-child(1)': {
-     padding: "7px 140px",
-     borderRadius: "0px"
+    ...theme.typography.flex,
+    height: '150px',
+    background: 'white',
+    padding: '20px',
+    '& > :nth-child(1)': {
+      padding: '7px 120px',
+      borderRadius: '0px',
     },
-  }
+  },
 }));
+
+const FILE_SIZE = 200000;
+const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
 const Profilesetup = () => {
   const { root, upper_bluebox, red_text_info, lower_buttons } = useStyles();
   const [dis_ability, setDis_ability] = useState(false);
+  const filesharhe_ref = useRef();
 
   return (
     <Box className={root}>
@@ -63,11 +68,8 @@ const Profilesetup = () => {
         initialValues={{
           firstName: '',
           lastName: '',
-          address: '',
-          postalCode: '',
           dob: new Date('2014-08-18T21:11:54'),
           email: '',
-          city: '',
           phone: '',
           gender: '',
           state: '',
@@ -80,30 +82,27 @@ const Profilesetup = () => {
           preffered_jl: '',
           preffered_jlga: '',
           employment_type: '',
-          preferred_lga: '',
           current_employer: '',
           employer_address: '',
-          paymentMethod: '',
           disablility: false,
           languages: ['english'],
           disability_details: '',
+          file: null,
         }}
         onSubmit={async (formvalues) => {
-          //  await sleep(3000);
-
-          //  const cookie = getCookie(token);
-          //  if (!cookie) {
-          //    await setAlertContent({
-          //      type: 'error',
-          //      content: 'session expired',
-          //    });
-          //    handleClick();
-          //    dispatch({ type: 'SIGN_OUT' });
-          //    return;
-          //  }
-
-          //  values = formvalues;
-          //  initializePayment(onSuccessWrapper, onClose);
+          //    await sleep(3000);
+          //    const cookie = getCookie(token);
+          //    if (!cookie) {
+          //      await setAlertContent({
+          //        type: 'error',
+          //        content: 'session expired',
+          //      });
+          //      handleClick();
+          //      dispatch({ type: 'SIGN_OUT' });
+          //      return;
+          //    }
+          //    values = formvalues;
+          //    initializePayment(onSuccessWrapper, onClose);
           console.log(formvalues);
         }}
       >
@@ -120,7 +119,6 @@ const Profilesetup = () => {
               .integer()
               .typeError('Please enter a valid phone number')
               .required('Phone is Required'),
-            //  postalCode: Yup.string().required('postalCode is Required'),
             dob: Yup.date().required('city is Required'),
             profession: Yup.string().required('profession is Required'),
             academicLevel: Yup.string().required('academicLevel is Required'),
@@ -145,12 +143,36 @@ const Profilesetup = () => {
             languages: Yup.array(Yup.string())
               .length(1)
               .required('select atleast one language'),
-            disablility: Yup.boolean().required('please tell us your status'),
+            //   disablility: Yup.boolean().required('please tell us your status'),
             disability_details: dis_ability
               ? Yup.string().required('About is required')
               : '',
           })}
           setDis_ability={setDis_ability}
+        />
+        <Setupprofileimage
+          validationSchema={Yup.object().shape({
+            file: Yup.mixed()
+              .required('A file is required')
+              .test('fileSize', 'File too large', (value) =>
+                value && filesharhe_ref.current
+                  ? filesharhe_ref.current.files[0].size <= FILE_SIZE
+                    ? true
+                    : false
+                  : true
+              )
+              .test('fileFormat', 'Unsupported Format', (value) => {
+                //  console.log(filesharhe_ref.current.files[0].size);
+                return value && filesharhe_ref.current
+                  ? SUPPORTED_FORMATS.includes(
+                      filesharhe_ref.current.files[0].type
+                    )
+                    ? true
+                    : false
+                  : true;
+              }),
+          })}
+          ref={filesharhe_ref}
         />
       </FormikStepper>
     </Box>
@@ -179,9 +201,11 @@ export function FormikStepper({ children, ...props }) {
       {...props}
       validationSchema={currentChild.props.validationSchema}
       onSubmit={async (values, helpers) => {
+        console.log(values);
         if (isLastStep()) {
-          await props.onSubmit(values, helpers);
-          setCompleted(true);
+          await props.onSubmit(values);
+          //  await props.onSubmit(values, helpers);
+          //  setCompleted(true);
         } else {
           //   if (step === 0) {
           //     customer_details({ ...values });
@@ -189,40 +213,25 @@ export function FormikStepper({ children, ...props }) {
           setStep((s) => s + 1);
 
           helpers.setTouched({});
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+          });
         }
       }}
     >
       {({ isSubmitting }) => (
         <Form autoComplete="off">
-          {/* <ThemeProvider theme={muiTheme}>
-                <Stepper color="secondary" activeStep={step}>
-                  {childrenArray.map((child, index) => (
-                    <Step
-                      color="secondary"
-                      key={child.props.label}
-                      completed={step > index || completed}
-                    >
-                      <StepLabel>{child.props.label}</StepLabel>
-                    </Step>
-                  ))}
-                </Stepper>
-              </ThemeProvider> */}
-
           {currentChild}
 
-         
-
-          <Grid 
-     
-           container 
-          >
-           
+          <Grid container>
             {step === 0 ? (
-              <Grid  className={lower_buttons}  xs={12} item>
+              <Grid className={lower_buttons} xs={12} item>
                 <Button
                   disabled={isSubmitting}
                   variant="contained"
-                 // color="secondary"
+                  // color="secondary"
                   disableElevation
                   type="submit"
                 >
@@ -230,9 +239,9 @@ export function FormikStepper({ children, ...props }) {
                 </Button>
               </Grid>
             ) : null}
-         
+
             {step === 1 ? (
-              <Grid  className={lower_buttons} item>
+              <Grid className={lower_buttons} xs={12} item>
                 <Button
                   startIcon={
                     isSubmitting ? <CircularProgress size="1rem" /> : null
@@ -246,14 +255,12 @@ export function FormikStepper({ children, ...props }) {
                   {isSubmitting
                     ? 'Submitting'
                     : isLastStep()
-                    ? 'Complete Order'
+                    ? 'Save Profile'
                     : 'Next'}
                 </Button>
               </Grid>
             ) : null}
           </Grid>
-
-    
         </Form>
       )}
     </Formik>
