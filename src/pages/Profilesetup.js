@@ -204,6 +204,7 @@ export function FormikStepper({ children, ...props }) {
         console.log(values);
         if (isLastStep()) {
           await props.onSubmit(values);
+          history('/profilesuccess');
           //  await props.onSubmit(values, helpers);
           //  setCompleted(true);
         } else {

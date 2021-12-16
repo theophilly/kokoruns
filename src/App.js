@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, StyledEngineProvider } from '@mui/material';
+import { CssBaseline, StyledEngineProvider, Box } from '@mui/material';
 import './App.css';
 
 import theme from './theme';
