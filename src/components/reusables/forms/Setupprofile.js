@@ -60,6 +60,19 @@ const useStyles = makeStyles((theme) => ({
     right: 2,
     zIndex: 2,
   },
+  field_cell_left: {
+    paddingRight: '40px',
+    '@media (max-width: 900px)': {
+      padding: '0px',
+    },
+  },
+  field_cell_right: {
+    paddingLeft: '40px !important',
+    //   border: '1px solid red',
+    '@media (max-width: 900px)': {
+      padding: '0px',
+    },
+  },
 }));
 
 const Tag = ({ editTag, text, deleteTag, index }) => {
@@ -76,7 +89,14 @@ const Tag = ({ editTag, text, deleteTag, index }) => {
 };
 
 const Setupprofile = ({ setDis_ability }) => {
-  const { root, customer_info, language_input, add_button } = useStyles();
+  const {
+    root,
+    customer_info,
+    language_input,
+    add_button,
+    field_cell_left,
+    field_cell_right,
+  } = useStyles();
   const [input, setInput] = useState('');
 
   const { setFieldValue, getFieldMeta } = useFormikContext();
@@ -128,14 +148,14 @@ const Setupprofile = ({ setDis_ability }) => {
             Personal Information
           </Typography>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_left} item xs={12} md={6}>
           <Textfield
             //  disabled={!!user.firstName}
             name="firstName"
             helpertext="First Name"
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_right} item xs={12} md={6}>
           <Textfield
             //  disabled={!!user.lastName}
             name="lastName"
@@ -144,14 +164,14 @@ const Setupprofile = ({ setDis_ability }) => {
         </Grid>
         {/* gender and marital status */}
 
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_left} item xs={12} md={6}>
           <SelectWrapper
             name="gender"
             helpertext="Gender"
             options={genderData}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_right} item xs={12} md={6}>
           <SelectWrapper
             name="maritalStatus"
             helpertext="Marital Status"
@@ -160,31 +180,31 @@ const Setupprofile = ({ setDis_ability }) => {
         </Grid>
 
         {/* email address and phone */}
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_left} item xs={12} md={6}>
           <Textfield name="email" helpertext="Email Address" />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_right} item xs={12} md={6}>
           <Textfield name="phone" helpertext="Phone Number" />
         </Grid>
 
         {/* date of birth and  profession*/}
 
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_left} item xs={12} md={6}>
           <Datepicker name="dob" helpertext="Date of Birth" />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_right} item xs={12} md={6}>
           <Textfield name="profession" helpertext="Profession" />
         </Grid>
 
         {/* academic level and location */}
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_left} item xs={12} md={6}>
           <SelectWrapper
             name="academicLevel"
             helpertext="Academic Level"
             options={academicLevel}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_right} item xs={12} md={6}>
           <SelectWrapper
             name="state"
             helpertext="Current Location"
@@ -192,7 +212,7 @@ const Setupprofile = ({ setDis_ability }) => {
           />
         </Grid>
         {/* Lga and space */}
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_left} item xs={12} md={6}>
           <SelectLGA dependentField="state" name="lga" helpertext="LGA" />
         </Grid>
         <Grid item xs={12} md={6}></Grid>
@@ -208,22 +228,22 @@ const Setupprofile = ({ setDis_ability }) => {
           </Typography>
         </Grid>
         {/* current employer and address */}
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_left} item xs={12} md={6}>
           <Textfield name="current_employer" helpertext="Current Employer" />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_right} item xs={12} md={6}>
           <Textfield name="employer_address" helpertext="Address of Employer" />
         </Grid>
 
         {/* employment type and empolyment status */}
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_left} item xs={12} md={6}>
           <SelectWrapper
             name="employment_type"
             helpertext="Employment Type*"
             options={employmentType}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_right} item xs={12} md={6}>
           <Textfield
             name="employment_status"
             helpertext="Present Employment Status*"
@@ -231,14 +251,14 @@ const Setupprofile = ({ setDis_ability }) => {
         </Grid>
 
         {/* preferred job state and LGA */}
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_left} item xs={12} md={6}>
           <SelectWrapper
             name="preffered_jl"
             helpertext="Preffered Job Location"
             options={stateData}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid className={field_cell_right} item xs={12} md={6}>
           <SelectLGA
             dependentField="preffered_jl"
             name="preffered_jlga"

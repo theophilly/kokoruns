@@ -68,7 +68,7 @@ const Setupprofileimage = React.forwardRef((props, ref) => {
     configTextfield.helperText = mata.error;
   }
 
-  console.log(mata);
+  // console.log(mata);
 
   return (
     <Box className={root}>

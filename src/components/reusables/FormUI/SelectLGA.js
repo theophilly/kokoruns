@@ -37,8 +37,6 @@ const SelectLGA = ({
     setFieldValue(name, value);
   };
 
-  console.log(test.value);
-
   const configSelect = {
     ...field,
     ...otherProps,

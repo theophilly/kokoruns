@@ -104,7 +104,7 @@ const Profilesetup = () => {
           //    }
           //    values = formvalues;
           //    initializePayment(onSuccessWrapper, onClose);
-          console.log(formvalues);
+          //  console.log(formvalues);
         }}
       >
         <Setupprofile
@@ -205,7 +205,7 @@ export function FormikStepper({ children, ...props }) {
       {...props}
       validationSchema={currentChild.props.validationSchema}
       onSubmit={async (values, helpers) => {
-        console.log(values);
+        // console.log(values);
         if (isLastStep()) {
           await props.onSubmit(values);
           history('/profilesuccess');

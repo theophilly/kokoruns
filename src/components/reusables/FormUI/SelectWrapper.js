@@ -15,16 +15,13 @@ const useStyles = makeStyles(() => ({
 
 const SelectWrapper = ({ name, options, helpertext, ...otherProps }) => {
   const { select_input } = useStyles();
-  const { setFieldValue, getFieldMeta } = useFormikContext();
+  const { setFieldValue } = useFormikContext();
   const [field, meta] = useField(name);
 
   const handleChange = (evt) => {
     const { value } = evt.target;
     setFieldValue(name, value);
   };
-
-  const test = getFieldMeta('languages');
-  console.log(test.value);
 
   const configSelect = {
     ...field,
