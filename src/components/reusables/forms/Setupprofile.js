@@ -17,6 +17,7 @@ import Checkbox from '../FormUI/Checkbox';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import { useField, useFormikContext } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,11 +68,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   field_cell_right: {
-    paddingLeft: '40px !important',
-    //   border: '1px solid red',
-    '@media (max-width: 900px)': {
-      padding: '0px',
-    },
+    paddingLeft: (props) => (props.matches ? '40px' : '0px'),
+    // '@media (max-width: 900px)': {
+    //   paddingLeft: '0px',
+    //   padding: 0,
+    // },
   },
 }));
 
@@ -89,6 +90,7 @@ const Tag = ({ editTag, text, deleteTag, index }) => {
 };
 
 const Setupprofile = ({ setDis_ability }) => {
+  const matches = useMediaQuery('(min-width:900px)');
   const {
     root,
     customer_info,
@@ -96,8 +98,9 @@ const Setupprofile = ({ setDis_ability }) => {
     add_button,
     field_cell_left,
     field_cell_right,
-  } = useStyles();
+  } = useStyles({ matches });
   const [input, setInput] = useState('');
+  console.log(matches);
 
   const { setFieldValue, getFieldMeta } = useFormikContext();
 
