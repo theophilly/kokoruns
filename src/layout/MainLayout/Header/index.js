@@ -23,8 +23,8 @@ const Header = ({ handleLeftDrawerToggle }) => {
             {/* logo & toggler button */}
             <Box
                 sx={{
-                    alignSelf: 'flex-end',
                     width: 300,
+                    mt: '20px',
                     display: 'flex',
                     //   border: '1px solid red',
                     [theme.breakpoints.down('md')]: {
@@ -35,26 +35,19 @@ const Header = ({ handleLeftDrawerToggle }) => {
                 <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
                     <LogoSection />
                 </Box>
-                <ButtonBase sx={{ borderRadius: '12px', overflow: 'hidden' }}>
-                    <Avatar
-                        variant="rounded"
-                        sx={{
-                            ...theme.typography.commonAvatar,
-                            ...theme.typography.mediumAvatar,
-                            transition: 'all .2s ease-in-out',
-                            background: theme.palette.secondary.light,
-                            color: theme.palette.secondary.dark,
-                            '&:hover': {
-                                background: theme.palette.secondary.dark,
-                                color: theme.palette.secondary.light
-                            }
-                        }}
-                        onClick={handleLeftDrawerToggle}
-                        color="inherit"
-                    >
-                        <IconMenu2 color="white" stroke={1.5} size="1.3rem" />
-                    </Avatar>
-                </ButtonBase>
+
+                <Box
+                    onClick={handleLeftDrawerToggle}
+                    sx={{
+                        mt: '5px',
+                        cursor: 'pointer',
+                        [theme.breakpoints.down('md')]: {
+                            mt: '0px'
+                        }
+                    }}
+                >
+                    <IconMenu2 size="1.8rem" />
+                </Box>
             </Box>
 
             {/* header search */}
@@ -63,6 +56,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
             <Box sx={{ flexGrow: 1 }} />
 
             {/* notification & profile */}
+
             <NotificationSection />
             <ProfileSection />
         </>

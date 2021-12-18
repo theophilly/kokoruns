@@ -44,15 +44,15 @@ const NotificationList = () => {
     };
     const chipErrorSX = {
         ...chipSX,
-        color: theme.palette.orange.dark,
-        backgroundColor: theme.palette.orange.light,
+        // color: theme.palette.orange.dark,
+        //  backgroundColor: theme.palette.orange.light,
         marginRight: '5px'
     };
 
     const chipWarningSX = {
-        ...chipSX,
-        color: theme.palette.warning.dark,
-        backgroundColor: theme.palette.warning.light
+        ...chipSX
+        //  color: theme.palette.warning.dark,
+        //  backgroundColor: theme.palette.warning.light
     };
 
     const chipSuccessSX = {

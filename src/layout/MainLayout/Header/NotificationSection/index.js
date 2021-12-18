@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import {
     Avatar,
+    Badge,
     Box,
     Button,
     ButtonBase,
@@ -90,7 +91,7 @@ const NotificationSection = () => {
 
     return (
         <>
-            <Box
+            {/* <Box
                 sx={{
                     ml: 2,
                     mr: 3,
@@ -122,7 +123,17 @@ const NotificationSection = () => {
                         <IconBell stroke={1.5} size="1.3rem" />
                     </Avatar>
                 </ButtonBase>
-            </Box>
+            </Box> */}
+            <Badge
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left'
+                }}
+                badgeContent={2}
+                color="primary"
+            >
+                <IconBell size="1.8rem" />
+            </Badge>
             <Popper
                 placement={matchesXs ? 'bottom' : 'bottom-end'}
                 open={open}
