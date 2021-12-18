@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { BsArrowLeft } from 'react-icons/bs';
+import { useFormikContext } from 'formik';
+
+// material-ui
 import { Box, Grid, Typography, OutlinedInput, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
+import AddIcon from '@mui/icons-material/Add';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+// project imports
 import Textfield from '../FormUI/Textfield';
 import SelectWrapper from '../FormUI/SelectWrapper';
+import Datepicker from '../FormUI/Datepicker';
+import Textarea from '../FormUI/Textarea';
+import Checkbox from '../FormUI/Checkbox';
 import SelectLGA from '../FormUI/SelectLGA';
 import stateData from '../../../config/stateData.json';
 import academicLevel from '../../../config/academicLevel.json';
 import genderData from '../../../config/genderData.json';
 import employmentType from '../../../config/employmentType.json';
 import maritalStatusData from '../../../config/maritalStatusData.json';
-import Datepicker from '../FormUI/Datepicker';
-import Textarea from '../FormUI/Textarea';
-import Checkbox from '../FormUI/Checkbox';
-import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
-import { useField, useFormikContext } from 'formik';
-import AddIcon from '@mui/icons-material/Add';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
+// styles
 const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: '50px',
@@ -69,10 +73,6 @@ const useStyles = makeStyles((theme) => ({
     },
     field_cell_right: {
         paddingLeft: (props) => (props.matches ? '40px' : '0px')
-        // '@media (max-width: 900px)': {
-        //   paddingLeft: '0px',
-        //   padding: 0,
-        // },
     }
 }));
 

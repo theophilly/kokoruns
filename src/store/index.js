@@ -5,24 +5,23 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import authReducer from './reducers/authReducer';
+import customizationReducer from './reducers/customizationReducer';
 
 const rootReducer = combineReducers({
-  authReducer,
+    authReducer,
+    customization: customizationReducer
 });
 const middleware = [thunk];
 
 const persistConfig = {
-  key: 'root',
-  storage: storage,
-  whitelist: ['authReducer'],
+    key: 'root',
+    storage: storage,
+    whitelist: ['authReducer']
 };
 
 const PersistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(
-  PersistedReducer,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+const store = createStore(PersistedReducer, composeWithDevTools(applyMiddleware(...middleware)));
 
 const persistedStore = persistStore(store);
 

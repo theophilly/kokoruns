@@ -3,11 +3,12 @@ import { useRoutes } from 'react-router-dom';
 
 // routes
 import MainRoutes from './Mainroutes';
+import Dashboardroutes from './Dashboardroutes';
 
 // ===========================|| ROUTING RENDER ||=========================== //
 
 export default function ThemeRoutes() {
-  // const authed = useSelector((state) => state.authReducer.authenticated);
+    // const authed = useSelector((state) => state.authReducer.authenticated);
 
-  return useRoutes(MainRoutes());
+    return useRoutes([MainRoutes(), Dashboardroutes]);
 }

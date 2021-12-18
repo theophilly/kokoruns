@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { BsArrowLeft } from 'react-icons/bs';
-import { Box, Grid, Typography, CircularProgress, Button } from '@mui/material';
 import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+
+// material-ui
+import { Box, Grid, Typography, CircularProgress, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import { Formik, Form } from 'formik';
+// project imports
 import Setupprofile from '../components/reusables/forms/Setupprofile';
 import Setupprofileimage from '../components/reusables/forms/Setupprofileimage';
 const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
+// styles
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: '15px calc((100vw - 1150px) / 2)',
@@ -44,7 +47,7 @@ const FILE_SIZE = 200000;
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
 const Profilesetup = () => {
-    const { root, upper_bluebox, red_text_info, lower_buttons } = useStyles();
+    const { root, upper_bluebox, red_text_info } = useStyles();
     const [dis_ability, setDis_ability] = useState(false);
     const filesharhe_ref = useRef();
 
@@ -163,7 +166,7 @@ const Profilesetup = () => {
 export default Profilesetup;
 
 export function FormikStepper({ children, ...props }) {
-    const { backsection, controls, lower_buttons } = useStyles();
+    const { lower_buttons } = useStyles();
     let history = useNavigate();
     const [step, setStep] = useState(0);
     const childrenArray = React.Children.toArray(children);
