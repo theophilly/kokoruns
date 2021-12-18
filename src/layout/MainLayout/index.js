@@ -27,7 +27,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
     minHeight: 'calc(100vh - 88px)',
     flexGrow: 1,
     padding: '20px',
-    marginTop: '88px',
+    marginTop: '75px',
     marginRight: '20px',
     borderRadius: '20px',
 
@@ -50,6 +50,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
         },
         [theme.breakpoints.down('sm')]: {
             marginLeft: '10px',
+            marginTop: '60px',
             // width: `calc(100% - ${drawerWidth}px)`,
             width: '100% !important',
             padding: '16px',
@@ -102,7 +103,7 @@ const MainLayout = () => {
                 color="inherit"
                 elevation={0}
                 sx={{
-                    //   border: '1px solid red',
+                    //  border: '1px solid red',
                     bgcolor: theme.palette.background.default,
                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
                 }}

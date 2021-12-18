@@ -28,7 +28,8 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     display: 'flex',
                     //   border: '1px solid red',
                     [theme.breakpoints.down('md')]: {
-                        width: 'auto'
+                        width: 'auto',
+                        mt: '10px'
                     }
                 }}
             >
@@ -39,7 +40,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
                 <Box
                     onClick={handleLeftDrawerToggle}
                     sx={{
-                        mt: '5px',
+                        mt: '8px',
                         cursor: 'pointer',
                         [theme.breakpoints.down('md')]: {
                             mt: '0px'
