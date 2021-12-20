@@ -144,6 +144,22 @@ const Profile = () => {
                             </Typography>
                         </Box>
                     </SubCard>
+
+                    {/* edit profile button */}
+                    {matchDownMd && (
+                        <Grid xs={12} item>
+                            <Box sx={{ display: 'flex', justifyContent: 'center', textTransform: 'capitalize', mt: '20px' }}>
+                                <Button
+                                    startIcon={<BiEditAlt />}
+                                    disableElevation
+                                    variant="contained"
+                                    sx={{ textTransform: 'capitalize', background: '#0991FF', width: '100%', padding: '15px 0' }}
+                                >
+                                    Edit Profile
+                                </Button>
+                            </Box>
+                        </Grid>
+                    )}
                 </Grid>
 
                 {/* left section */}

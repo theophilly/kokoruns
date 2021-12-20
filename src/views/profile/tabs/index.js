@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import EducationTab from './EducationTab';
 import ResumeTab from './ResumeTab';
+import PortfolioTab from './PortfolioTab';
 
 const useStyles = makeStyles((theme) => ({
     root: {}
@@ -102,7 +103,7 @@ export default function FullWidthTabs() {
                     <ResumeTab />
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
-                    Item Three
+                    <PortfolioTab />
                 </TabPanel>
             </SwipeableViews>
         </Box>

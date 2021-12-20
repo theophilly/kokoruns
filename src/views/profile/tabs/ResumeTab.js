@@ -50,8 +50,26 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             border: 'none'
         }
+    },
+    tag: {
+        background: theme.palette.primary.main,
+        cursor: 'pointer',
+        color: 'white',
+        padding: '10px 20px',
+        width: 'max-content',
+        borderRadius: '5px'
     }
 }));
+
+const Tag = ({ text, index }) => {
+    const { tag } = useStyles();
+
+    return (
+        <div className={tag}>
+            <Typography>{text}</Typography>
+        </div>
+    );
+};
 
 const Item = ({ year, title, sub, experience }) => {
     const { item, first_box } = useStyles();
@@ -103,6 +121,22 @@ const ResumeTab = () => {
 
                         <Button className={lower_button} variant="outlined" startIcon={<AddCircleIcon />}>
                             Add Job to Resume
+                        </Button>
+                    </SubCard>
+                </Grid>
+            </Grid>
+            {/* skills */}
+            <Grid container>
+                <Grid xs={12} item>
+                    <SubCard divider={false} sx={{ bgcolor: 'white', boxShadow: 'none', padding: '0 5px', mt: '25px' }} title="Skills">
+                        <Box sx={{ display: 'flex', height: 'auto', flexWrap: 'wrap', gap: '10px' }}>
+                            {resume.skills.map((item) => (
+                                <Tag text={item} />
+                            ))}
+                        </Box>
+
+                        <Button className={lower_button} variant="outlined" startIcon={<AddCircleIcon />}>
+                            Add Skils
                         </Button>
                     </SubCard>
                 </Grid>
