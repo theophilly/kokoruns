@@ -16,7 +16,8 @@ const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: '15px calc((100vw - 1150px) / 2)',
-        background: theme.palette.background1
+        //   background: theme.palette.background1,
+        background: '#faf9f9'
     },
     upper_bluebox: {
         ...theme.typography.flex,

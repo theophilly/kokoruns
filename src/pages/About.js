@@ -11,7 +11,8 @@ import Findoutmore from '../components/homepage/Findoutmore';
 // styles
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: theme.palette.background1
+        background: '#faf9f9'
+        //   background: theme.palette.background1
     },
     inner_div: {
         width: '90vw',

@@ -3,7 +3,6 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from '../layout/MainLayout';
 import MinimalLayout from '../layout/MinimalLayout';
-import { Box } from '@mui/system';
 import Profile from '../views/profile';
 // import Loadable from 'ui-component/Loadable';
 
@@ -29,7 +28,7 @@ const Dashboardroutes = {
         {
             path: '/dash',
             element: (
-                <Box>
+                <div>
                     hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhOur dispatched technologies ensure that people
                     that find you can and will be able to add value to you because they are: Either your professional colleagues; your past,
                     present or potential employers or clients; or value adding entities like your professional associations, school’s alumni
@@ -42,7 +41,7 @@ const Dashboardroutes = {
                     work experiences, projects worked on, certifications earned, technical and soft skills, location and if you are living
                     with a disability. There is available feature to link all your social media as well as online pages on your Kokoruns
                     dashboard so that you can find all your pages in one place and so can others if you so wish.
-                </Box>
+                </div>
             )
         },
         {

@@ -7,14 +7,14 @@ export default function themePalette(theme) {
     return {
         textColor: '#333333',
         primary: {
-            main: '#0991FF',
+            main: '#0991FF !important',
             darker1: '#0076D6',
             darker2: '#005AA3',
             lighter1: '#3DA8FF',
             lighter2: '#70BFFF'
         },
         secondary: {
-            main: '#2196f3',
+            main: '#000',
             main1: '#D92627',
             darker1: '#AE1E1F',
             darker2: '#831717',

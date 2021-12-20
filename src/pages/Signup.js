@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         padding: ' 15px calc((100vw - 1200px) / 2) !important',
         gap: '20px',
-        background: theme.palette.background1,
+        // background: theme.palette.background1,
+        background: '#faf9f9',
         '@media (max-width: 1200px)': {
             padding: '15px'
         },

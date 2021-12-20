@@ -14,12 +14,10 @@ import Footer from './components/kk/Footer';
 function App() {
     return (
         <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={theme()}>
+            <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <ScrollToTop />
-                <Box>
-                    <Routes />
-                </Box>
+                <Routes />
             </ThemeProvider>
         </StyledEngineProvider>
     );

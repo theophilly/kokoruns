@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
     header: (props) => {
         console.log(props.theme.palette);
         return {
-            background: theme.palette.background1,
+            //   background: theme.palette.background1,
+            background: '#faf9f9',
 
             position: 'static',
             top: 0,

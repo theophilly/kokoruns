@@ -60,6 +60,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
+
 export default function SignInForm({ onclick, setClickData, showToast, path }) {
     const navigate = useNavigate();
     // const dispatch = useDispatch();
@@ -85,6 +87,8 @@ export default function SignInForm({ onclick, setClickData, showToast, path }) {
                         //   });
                         //   showToast();
                         // }
+                        await sleep(3000);
+                        navigate('/profile-setup');
                     }}
                     validationSchema={Yup.object().shape({
                         loginEmail: Yup.string().email('Invalid email format').required('Required'),

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // material-ui
 import { Box, Avatar, Typography, Button } from '@mui/material';
@@ -63,7 +64,7 @@ const Profilesetupsuccess = () => {
             <Typography className={success_subtitle}>
                 You have successfully set up your profile. <br /> You can go to your dashboard now.
             </Typography>
-            <Button variant="contained" disableElevation>
+            <Button LinkComponent={Link} to="/home" variant="contained" disableElevation>
                 Go to Dashboard
             </Button>
         </Box>

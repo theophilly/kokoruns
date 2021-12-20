@@ -9,16 +9,16 @@ import App from './App';
 window.store = store;
 
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate loading={<p>loading</p>} persistor={persistedStore}>
-      <React.StrictMode>
-        <Router>
-          <App />
-        </Router>
-      </React.StrictMode>
-    </PersistGate>
-  </Provider>,
-  document.getElementById('root')
+    <Provider store={store}>
+        <PersistGate loading={<p>loading</p>} persistor={persistedStore}>
+            <React.StrictMode>
+                <Router>
+                    <App />
+                </Router>
+            </React.StrictMode>
+        </PersistGate>
+    </Provider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
