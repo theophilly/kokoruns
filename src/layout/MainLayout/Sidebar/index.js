@@ -39,7 +39,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                     }}
                 >
                     <MenuList />
-                    {/* <MenuCard /> */}
+                    <MenuCard />
                 </Box>
             </BrowserView>
             <MobileView>

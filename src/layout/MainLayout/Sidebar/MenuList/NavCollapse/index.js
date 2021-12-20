@@ -17,6 +17,7 @@ import { IconChevronDown, IconChevronUp } from '@tabler/icons';
 const useStyles = makeStyles((theme) => ({
     root: {
         color: '#0991FF',
+        marginLeft: '10px',
 
         '& .MuiListItemIcon-root': {
             color: '#0991FF'

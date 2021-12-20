@@ -4,6 +4,7 @@ import { lazy } from 'react';
 import MainLayout from '../layout/MainLayout';
 import MinimalLayout from '../layout/MinimalLayout';
 import { Box } from '@mui/system';
+import Profile from '../views/profile';
 // import Loadable from 'ui-component/Loadable';
 
 // dashboard routing
@@ -46,7 +47,7 @@ const Dashboardroutes = {
         },
         {
             path: '/home',
-            element: <div>homw</div>
+            element: <Profile />
         },
         {
             path: '/test',

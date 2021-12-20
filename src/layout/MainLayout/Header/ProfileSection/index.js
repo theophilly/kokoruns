@@ -24,7 +24,8 @@ import {
     Popper,
     Stack,
     Switch,
-    Typography
+    Typography,
+    ButtonBase
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
@@ -143,15 +144,15 @@ const ProfileSection = () => {
                 onClick={handleToggle}
                 color="primary"
             /> */}
-            <Box
-                onClick={handleToggle}
+            <ButtonBase
+                // onClick={handleToggle}
                 ref={anchorRef}
                 aria-controls={open ? 'menu-list-grow' : undefined}
                 aria-haspopup="true"
                 color="inherit"
                 alignItems="center"
                 display="flex"
-                ml="10px"
+                sx={{ ml: '10px' }}
             >
                 <Typography className={title1} sx={{ ...theme.typography.title1 }}>
                     Adejola
@@ -164,7 +165,7 @@ const ProfileSection = () => {
                         cursor: 'pointer'
                     }}
                 />
-            </Box>
+            </ButtonBase>
 
             <Popper
                 placement="bottom-end"

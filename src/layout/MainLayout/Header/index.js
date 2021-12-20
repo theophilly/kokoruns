@@ -41,6 +41,8 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     onClick={handleLeftDrawerToggle}
                     sx={{
                         mt: '8px',
+                        mr: '40px',
+                        //   border: '1px solid red',
                         cursor: 'pointer',
                         [theme.breakpoints.down('md')]: {
                             mt: '0px'

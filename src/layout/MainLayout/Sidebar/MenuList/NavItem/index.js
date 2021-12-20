@@ -19,6 +19,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 const useStyles = makeStyles((theme) => ({
     root: {
         color: '#0991FF',
+        marginLeft: '10px',
 
         '& .MuiListItemIcon-root': {
             color: '#0991FF'

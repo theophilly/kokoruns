@@ -26,10 +26,10 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
     width: '100%',
     minHeight: 'calc(100vh - 88px)',
     flexGrow: 1,
-    padding: '20px',
+    padding: '10px',
     marginTop: '75px',
     marginRight: '20px',
-    borderRadius: '20px',
+    // borderRadius: '20px',
 
     ...(!open && {
         borderBottomLeftRadius: 0,
@@ -70,7 +70,8 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
             marginLeft: '20px'
         },
         [theme.breakpoints.down('sm')]: {
-            marginLeft: '10px'
+            marginLeft: '10px',
+            marginTop: '60px'
         }
     })
 }));
@@ -103,6 +104,7 @@ const MainLayout = () => {
                 color="inherit"
                 elevation={0}
                 sx={{
+                    padding: '0 15px',
                     //  border: '1px solid red',
                     bgcolor: theme.palette.background.default,
                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
