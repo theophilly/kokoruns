@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center'
     },
     title_sub: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: '0.8rem'
     },
     bio_card: {
         ...theme.typography.flex,
@@ -79,9 +80,7 @@ const Profile = () => {
                                 />
                                 <Box mt="78px">
                                     <Typography className={title}>Adejola Ademola</Typography>
-                                    <Typography className={title_sub} variant="caption">
-                                        UI/UX Designer at Kokoruns Ltd
-                                    </Typography>
+                                    <Typography className={title_sub}>UI/UX Designer at Kokoruns Ltd</Typography>
                                 </Box>
                             </Box>
                         </Grid>
