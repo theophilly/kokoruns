@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import resume from '../../../utils/resume';
 import SubCard from '../../../ui-component/cards/SubCard';
+import pictures from '../../../utils/pictures';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,6 +31,36 @@ const useStyles = makeStyles((theme) => ({
     website_link: {
         color: theme.palette.primary.main,
         cursor: 'pointer'
+    },
+    profile_cover_img: {
+        height: '160px',
+        minWidth: '100%',
+        borderRadius: '6px',
+        width: '100%',
+        overflowY: 'hidden !important',
+        overflowX: 'hidden !important',
+        '& img': {
+            objectFit: 'cover !important',
+            height: '160px',
+            width: '100%',
+            objectPosition: '10% 40%',
+            borderBottomRightRadius: '6px',
+            borderBottomLeftRadius: '6px'
+        }
+    },
+    picture_box_box: {
+        ...theme.typography.column,
+        justifyContent: 'center',
+        //  border: '1px solid red',
+        height: '70px',
+        paddingLeft: '10px',
+        '& > :nth-child(1)': {
+            fontSize: '1rem',
+            fontWeight: '600'
+        },
+        '& > :nth-child(2)': {
+            fontSize: '0.9rem'
+        }
     }
 }));
 
@@ -39,6 +70,29 @@ const Tag = ({ text, index }) => {
     return (
         <div className={tag}>
             <Typography>{text}</Typography>
+        </div>
+    );
+};
+const Picturebox = ({ title, path, year }) => {
+    const { tag, profile_cover_img, picture_box_box } = useStyles();
+
+    return (
+        <div
+            style={{
+                background: '#F5F5F5',
+                //  border: '1px solid red',
+                height: '230px',
+                borderBottomRightRadius: '6px',
+                borderBottomLeftRadius: '6px'
+            }}
+        >
+            <Box className={profile_cover_img}>
+                <img alt="bio" src={path} />
+            </Box>
+            <Box className={picture_box_box}>
+                <Typography> {title} </Typography>
+                <Typography> {year} </Typography>
+            </Box>
         </div>
     );
 };
@@ -78,6 +132,24 @@ const PortfolioTab = () => {
 
                         <Button className={lower_button} variant="outlined" startIcon={<AddCircleIcon />}>
                             Add Social Media Link
+                        </Button>
+                    </SubCard>
+                </Grid>
+            </Grid>
+            {/* pictures */}
+            <Grid container>
+                <Grid xs={12} item>
+                    <SubCard divider={false} sx={{ bgcolor: 'white', boxShadow: 'none', padding: '0 5px', mt: '25px' }} title="Pictures:">
+                        <Grid spacing={2} container>
+                            {pictures.map((item) => (
+                                <Grid item md={4} sm={6} xs={12}>
+                                    <Picturebox {...item} />
+                                </Grid>
+                            ))}
+                        </Grid>
+
+                        <Button className={lower_button} variant="outlined" startIcon={<AddCircleIcon />}>
+                            Add Pictures
                         </Button>
                     </SubCard>
                 </Grid>
