@@ -94,7 +94,7 @@ const Profile = () => {
                                         variant="contained"
                                         sx={{ textTransform: 'capitalize', background: '#0991FF' }}
                                     >
-                                        Edit Profile
+                                        Edit
                                     </Button>
                                 </Box>
                             </Grid>
