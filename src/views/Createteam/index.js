@@ -183,6 +183,9 @@ export default function Createteam() {
                                                     textTransform: 'capitalize',
                                                     '& :hover': {
                                                         color: 'black'
+                                                    },
+                                                    [theme.breakpoints.down('sm')]: {
+                                                        marginTop: '50px'
                                                     }
                                                 }}
                                                 disableElevation
@@ -241,7 +244,18 @@ export default function Createteam() {
                         </Box>
                     </Box>
                     <div onClick={handleClose} style={{ position: 'absolute', top: 20, right: 30 }}>
-                        <CancelOutlinedIcon style={{ color: 'red', height: '40px', width: '40px', cursor: 'pointer' }} />
+                        <CancelOutlinedIcon
+                            sx={{
+                                color: 'red',
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                [theme.breakpoints.down('sm')]: {
+                                    height: '20px',
+                                    width: '20px'
+                                }
+                            }}
+                        />
                     </div>
                 </DialogContent>
             </Dialog>

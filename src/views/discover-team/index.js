@@ -40,7 +40,7 @@ const DiscoverTeams = () => {
                 width: '100%',
                 padding: '10px',
                 [theme.breakpoints.down('sm')]: {
-                    padding: '0px'
+                    padding: '10px 0'
                 }
             }}
         >
@@ -106,10 +106,30 @@ const DiscoverTeams = () => {
 
                 {/* Recommended */}
                 <Grid xs={12}>
-                    <Typography sx={{ ...theme.typography.heading, mt: '10px' }}>Recommended</Typography>
+                    <Typography
+                        sx={{
+                            ...theme.typography.heading,
+                            mt: '10px',
+                            [theme.breakpoints.down('sm')]: {
+                                mt: '20px'
+                            }
+                        }}
+                    >
+                        Recommended
+                    </Typography>
                 </Grid>
                 <Grid xs={12} item>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '15px' }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '20px',
+                            marginTop: '15px',
+                            [theme.breakpoints.down('sm')]: {
+                                justifyContent: 'center'
+                            }
+                        }}
+                    >
                         <Teamsbox />
                         <Teamsbox />
                         <Teamsbox />
@@ -123,7 +143,17 @@ const DiscoverTeams = () => {
                     <Typography sx={{ ...theme.typography.heading, mt: '20px' }}>Popular</Typography>
                 </Grid>
                 <Grid xs={12} item>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '20px' }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '20px',
+                            marginTop: '20px',
+                            [theme.breakpoints.down('sm')]: {
+                                justifyContent: 'center'
+                            }
+                        }}
+                    >
                         <Teamsbox />
                         <Teamsbox />
                         <Teamsbox />
@@ -142,7 +172,17 @@ const DiscoverTeams = () => {
                     <Typography sx={{ ...theme.typography.heading, mt: '20px' }}>Others</Typography>
                 </Grid>
                 <Grid xs={12} item>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '30px', marginTop: '15px' }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '30px',
+                            marginTop: '15px',
+                            [theme.breakpoints.down('sm')]: {
+                                justifyContent: 'center'
+                            }
+                        }}
+                    >
                         <Teamsbox />
                         <Teamsbox />
                         <Teamsbox />

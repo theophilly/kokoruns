@@ -65,7 +65,7 @@ const Teams = () => {
                 width: '100%',
                 padding: '10px',
                 [theme.breakpoints.down('sm')]: {
-                    padding: '0px'
+                    padding: '10px 0'
                 }
             }}
         >
@@ -129,7 +129,18 @@ const Teams = () => {
                     </Box>
                 </Grid>
                 <Grid xs={12} item>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '15px' }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '20px',
+                            marginTop: '15px',
+                            [theme.breakpoints.down('sm')]: {
+                                justifyContent: 'center',
+                                mt: '20px'
+                            }
+                        }}
+                    >
                         <Teamsbox />
                         <Teamsbox />
                         <Teamsbox />
