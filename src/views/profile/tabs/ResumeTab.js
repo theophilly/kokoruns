@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Typography, Divider, Button } from '@mui/material';
+import { Box, Grid, Typography, Divider, Button, useTheme } from '@mui/material';
 import { BiEditAlt } from 'react-icons/bi';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { makeStyles } from '@mui/styles';
@@ -11,37 +11,7 @@ const useStyles = makeStyles((theme) => ({
         background: 'inherit',
         width: '100%'
     },
-    item: {
-        borderRadius: '10px',
-        //  border: '1px solid red',
-        background: 'white',
-        padding: '0 0px 13px',
 
-        '& > :nth-child(2)': {
-            fontSize: '0.8rem',
-            color: theme.palette.primary.main,
-
-            margin: '5px 0'
-        },
-        '& > :nth-child(3)': {
-            fontSize: '0.7rem',
-            //  fontWeight: '500',
-            marginBottom: '5px'
-        }
-    },
-    first_box: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        '& :nth-child(1)': {
-            fontSize: '0.9rem',
-            color: theme.palette.primary.main
-        },
-        '& :nth-child(2)': {
-            fontSize: '0.9rem',
-            color: theme.palette.primary.main
-        }
-    },
     lower_button: {
         width: '100%',
         textTransform: 'capitalize',
@@ -51,31 +21,66 @@ const useStyles = makeStyles((theme) => ({
             border: 'none'
         }
     },
-    tag: {
-        background: theme.palette.primary.main,
-        cursor: 'pointer',
-        color: 'white',
-        padding: '10px 20px',
-        width: 'max-content',
-        borderRadius: '5px'
-    }
+    tag: {}
 }));
 
 const Tag = ({ text, index }) => {
-    const { tag } = useStyles();
+    const theme = useTheme();
 
     return (
-        <div className={tag}>
+        <Box
+            sx={{
+                background: theme.palette.primary.main,
+                cursor: 'pointer',
+                color: 'white',
+                padding: '10px 20px',
+                width: 'max-content',
+                borderRadius: '5px'
+            }}
+        >
             <Typography>{text}</Typography>
-        </div>
+        </Box>
     );
 };
 
 const Item = ({ year, title, sub, experience }) => {
-    const { item, first_box } = useStyles();
+    const theme = useTheme();
     return (
-        <Box className={item}>
-            <Box className={first_box}>
+        <Box
+            sx={{
+                borderRadius: '10px',
+                //  border: '1px solid red',
+                background: 'white',
+                padding: '0 0px 13px',
+
+                '& > :nth-child(2)': {
+                    fontSize: '0.8rem',
+                    color: theme.palette.primary.main,
+
+                    margin: '5px 0'
+                },
+                '& > :nth-child(3)': {
+                    fontSize: '0.7rem',
+                    //  fontWeight: '500',
+                    marginBottom: '5px'
+                }
+            }}
+        >
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    '& :nth-child(1)': {
+                        fontSize: '0.9rem',
+                        color: theme.palette.primary.main
+                    },
+                    '& :nth-child(2)': {
+                        fontSize: '0.9rem',
+                        color: theme.palette.primary.main
+                    }
+                }}
+            >
                 <Typography>{year} </Typography>
                 <BiEditAlt />
             </Box>

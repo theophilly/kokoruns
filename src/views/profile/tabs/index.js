@@ -1,15 +1,10 @@
 import React from 'react';
-import { Box, AppBar, Tabs, Tab, Typography } from '@mui/material';
-import { makeStyles, useTheme } from '@mui/styles';
+import { Box, AppBar, Tabs, Tab, Typography, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import EducationTab from './EducationTab';
 import ResumeTab from './ResumeTab';
 import PortfolioTab from './PortfolioTab';
-
-const useStyles = makeStyles((theme) => ({
-    root: {}
-}));
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -71,7 +66,7 @@ export default function FullWidthTabs() {
             <AppBar
                 elevation={false}
                 sx={{
-                    bgcolor: 'white',
+                    bgcolor: 'white !important',
                     color: 'black',
                     mt: '30px'
                 }}

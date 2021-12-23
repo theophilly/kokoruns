@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Button, IconButton, Drawer, Link, Box, useTheme } from
 import { makeStyles } from '@mui/styles';
 
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 // import Notification from '../layout/MainLayout/Header/NotificationSection.js';
 // import Profile from '../layout/MainLayout/Header/ProfileSection.js';
@@ -42,13 +42,10 @@ const useStyles = makeStyles((theme) => ({
     header: (props) => {
         console.log(props.theme.palette);
         return {
-            //   background: theme.palette.background1,
-            background: '#faf9f9',
-
+            background: '#faf9f9 !important',
             position: 'static',
             top: 0,
             left: 0,
-
             padding: ' 15px calc((100vw - 1300px) / 2) !important',
             '@media (max-width: 900px)': {
                 paddingLeft: 0
@@ -75,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
     toolbar: {
         display: 'flex',
         justifyContent: 'space-between',
-        //   border: '1px solid red',
         color: 'black'
     },
     drawerContainer: {
@@ -98,13 +94,13 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '5px',
         padding: '6px 60px',
         backgroundColor: 'white',
-        textTransform: 'capitalize'
+        textTransform: 'capitalize',
+        border: '1px solid #0991FF'
     }
 }));
 
 export default function Navbar() {
     const theme = useTheme();
-    const location = useLocation();
 
     const { header, logo, menuButton, toolbar, drawerContainer, signupButton, loginButton } = useStyles({ theme });
 

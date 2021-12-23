@@ -1,7 +1,7 @@
 import React from 'react';
 
 // material-ui
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 // project imports
@@ -21,23 +21,7 @@ const useStyles = makeStyles((theme) => ({
             paddingTop: '0px'
         }
     },
-    first_div: {
-        marginTop: '40px',
 
-        ...theme.typography.flex,
-        '@media (max-width: 500px)': {
-            marginTop: '40px'
-        }
-    },
-    first_div_heading: {
-        ...theme.typography.title2,
-        color: theme.palette.primary.main,
-        '@media (max-width: 500px)': {
-            lineHeight: '2.2rem',
-            textAlign: 'center',
-            marginBottom: '10px'
-        }
-    },
     about_heading: {
         ...theme.typography.sub_heading1,
         color: theme.palette.primary.main
@@ -45,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Privacypolicy() {
-    const { root, first_div, first_div_heading, about_heading, inner_div } = useStyles();
+    const { root, inner_div } = useStyles();
+    const theme = useTheme();
     return (
         <Box className={root}>
             <Box className={inner_div}>
@@ -60,8 +45,29 @@ export default function Privacypolicy() {
             </Box>
             {/* middle */}
             <Box width="90vw" margin="20px auto 0px" height="auto">
-                <Box className={first_div}>
-                    <Typography className={first_div_heading}>Kokoruns Privacy Policy</Typography>
+                <Box
+                    sx={{
+                        marginTop: '40px',
+
+                        ...theme.typography.flex,
+                        '@media (max-width: 500px)': {
+                            marginTop: '40px'
+                        }
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            ...theme.typography.title2,
+                            color: theme.palette.primary.main,
+                            '@media (max-width: 500px)': {
+                                lineHeight: '2.2rem',
+                                textAlign: 'center',
+                                marginBottom: '10px'
+                            }
+                        }}
+                    >
+                        Kokoruns Privacy Policy
+                    </Typography>
                 </Box>
                 {/* content */}
                 <Box>
@@ -71,7 +77,10 @@ export default function Privacypolicy() {
                         keeping the data we collect about you private. This Privacy Policy applies to all of our registered users and those
                         who use our services.
                     </Typography>
-                    <Typography style={{ padding: '30px 0px' }} className={about_heading}>
+                    <Typography
+                        style={{ padding: '30px 0px' }}
+                        sx={{ ...theme.typography.sub_heading1, color: theme.palette.primary.main }}
+                    >
                         Introduction
                     </Typography>
                     <Typography>
@@ -85,7 +94,10 @@ export default function Privacypolicy() {
                         send messages and promote events, all with the view to find business and career opportunities.
                     </Typography>
 
-                    <Typography style={{ padding: '30px 0px' }} className={about_heading}>
+                    <Typography
+                        style={{ padding: '30px 0px' }}
+                        sx={{ ...theme.typography.sub_heading1, color: theme.palette.primary.main }}
+                    >
                         Services
                     </Typography>
 

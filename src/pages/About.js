@@ -1,56 +1,33 @@
 import React from 'react';
 
 // material-ui
-import { Box, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Box, Typography, useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 // project imports
 import Findoutmore from '../components/homepage/Findoutmore';
 
-// styles
-const useStyles = makeStyles((theme) => ({
-    root: {
-        background: '#faf9f9'
-        //   background: theme.palette.background1
-    },
-    inner_div: {
-        width: '90vw',
-        margin: '0px auto 0px',
-        paddingTop: '20px',
-        '@media (max-width: 500px)': {
-            paddingTop: '0px'
-        }
-    },
-    first_div: {
-        marginTop: '40px',
-
-        ...theme.typography.flex,
-        '@media (max-width: 500px)': {
-            marginTop: '40px'
-        }
-    },
-    first_div_heading: {
-        ...theme.typography.title2,
-        color: theme.palette.primary.main,
-        '@media (max-width: 500px)': {
-            lineHeight: '2.2rem',
-            textAlign: 'center',
-            marginBottom: '30px'
-        }
-    },
-    about_heading: {
-        ...theme.typography.sub_heading1,
-        color: theme.palette.primary.main
-    }
-}));
-
 export default function About() {
     const matches = useMediaQuery('(min-width:500px)');
-    const { root, first_div, first_div_heading, about_heading, inner_div } = useStyles();
+    const theme = useTheme();
+
     return (
-        <Box className={root}>
-            <Box className={inner_div}>
+        <Box
+            sx={{
+                background: '#faf9f9'
+                //   background: theme.palette.background1
+            }}
+        >
+            <Box
+                sx={{
+                    width: '90vw',
+                    margin: '0px auto 0px',
+                    paddingTop: '20px',
+                    '@media (max-width: 500px)': {
+                        paddingTop: '0px'
+                    }
+                }}
+            >
                 <Findoutmore
                     firstLine="A golden standard team of dedicated talents"
                     sub="We are a team of diverse talents that utilized our individual strengths inorder to build a product that serves the character of its purpose"
@@ -60,21 +37,44 @@ export default function About() {
             </Box>
             {/* middle */}
             <Box width="90vw" margin="20px auto 0px" height="auto">
-                <Box className={first_div}>
-                    <Typography className={first_div_heading}>About Kokoruns?</Typography>
+                <Box
+                    sx={{
+                        marginTop: '40px',
+
+                        ...theme.typography.flex,
+                        '@media (max-width: 500px)': {
+                            marginTop: '40px'
+                        }
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            ...theme.typography.title2,
+                            color: theme.palette.primary.main,
+                            '@media (max-width: 500px)': {
+                                lineHeight: '2.2rem',
+                                textAlign: 'center',
+                                marginBottom: '30px'
+                            }
+                        }}
+                    >
+                        About Kokoruns?
+                    </Typography>
                 </Box>
                 {/* content */}
                 <Box>
-                    <Typography className={about_heading}>Who we are.......</Typography>
-                    <Typography className={about_heading}>What we do.......</Typography>
-                    <Typography className={about_heading}>How we help......</Typography>
-                    <Typography className={about_heading}>Do your part......</Typography>
-                    <Typography className={about_heading}>What the future holds......</Typography>
+                    <Typography sx={{ ...theme.typography.sub_heading1, color: theme.palette.primary.main }}>Who we are.......</Typography>
+                    <Typography sx={{ ...theme.typography.sub_heading1, color: theme.palette.primary.main }}>What we do.......</Typography>
+                    <Typography sx={{ ...theme.typography.sub_heading1, color: theme.palette.primary.main }}>How we help......</Typography>
+                    <Typography sx={{ ...theme.typography.sub_heading1, color: theme.palette.primary.main }}>Do your part......</Typography>
+                    <Typography sx={{ ...theme.typography.sub_heading1, color: theme.palette.primary.main }}>
+                        What the future holds......
+                    </Typography>
                     <Typography
                         style={{
                             padding: matches ? '90px 0px 30px' : '30px 0px 30px'
                         }}
-                        className={about_heading}
+                        sx={{ ...theme.typography.sub_heading1, color: theme.palette.primary.main }}
                     >
                         Who we are.......
                     </Typography>
@@ -87,7 +87,10 @@ export default function About() {
                         be respected not because of what they say they are but all because of what they do and how they add value to
                         community.
                     </Typography>
-                    <Typography style={{ padding: '30px 0px' }} className={about_heading}>
+                    <Typography
+                        style={{ padding: '30px 0px' }}
+                        sx={{ ...theme.typography.sub_heading1, color: theme.palette.primary.main }}
+                    >
                         What we do.......
                     </Typography>
                     <Typography>
@@ -126,7 +129,10 @@ export default function About() {
                         as online pages on your Kokoruns dashboard so that you can find all your pages in one place and so can others if you
                         so wish.
                     </Typography>
-                    <Typography style={{ padding: '30px 0px' }} className={about_heading}>
+                    <Typography
+                        style={{ padding: '30px 0px' }}
+                        sx={{ ...theme.typography.sub_heading1, color: theme.palette.primary.main }}
+                    >
                         How we help......
                     </Typography>
 
@@ -170,7 +176,10 @@ export default function About() {
                         Privacy Policy is a huge part of being a Kokoruns community member. Also, a well completed user profile and a
                         ‘verified user’ tag, connotes reliability and openness to work opportunities.
                     </Typography>
-                    <Typography style={{ padding: '30px 0px' }} className={about_heading}>
+                    <Typography
+                        style={{ padding: '30px 0px' }}
+                        sx={{ ...theme.typography.sub_heading1, color: theme.palette.primary.main }}
+                    >
                         What the future holds......
                     </Typography>
                     <Typography>As a Kokoruns’ citizen, you have a bright future ahead of you.</Typography>

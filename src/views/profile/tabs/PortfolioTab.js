@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Typography, Divider, Button } from '@mui/material';
+import { Box, Grid, Typography, Divider, Button, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import resume from '../../../utils/resume';
@@ -11,14 +11,6 @@ const useStyles = makeStyles((theme) => ({
         background: 'inherit',
         width: '100%'
     },
-    tag: {
-        background: theme.palette.primary.main,
-        cursor: 'pointer',
-        color: 'white',
-        padding: '10px 20px',
-        width: 'max-content',
-        borderRadius: '5px'
-    },
     lower_button: {
         width: '100%',
         textTransform: 'capitalize',
@@ -28,10 +20,7 @@ const useStyles = makeStyles((theme) => ({
             border: 'none'
         }
     },
-    website_link: {
-        color: theme.palette.primary.main,
-        cursor: 'pointer'
-    },
+
     profile_cover_img: {
         height: '160px',
         minWidth: '100%',
@@ -47,34 +36,31 @@ const useStyles = makeStyles((theme) => ({
             borderBottomRightRadius: '6px',
             borderBottomLeftRadius: '6px'
         }
-    },
-    picture_box_box: {
-        ...theme.typography.column,
-        justifyContent: 'center',
-        //  border: '1px solid red',
-        height: '70px',
-        paddingLeft: '10px',
-        '& > :nth-child(1)': {
-            fontSize: '1rem',
-            fontWeight: '600'
-        },
-        '& > :nth-child(2)': {
-            fontSize: '0.9rem'
-        }
     }
 }));
 
 const Tag = ({ text, index }) => {
     const { tag } = useStyles();
+    const theme = useTheme();
 
     return (
-        <div className={tag}>
+        <Box
+            sx={{
+                background: theme.palette.primary.main,
+                cursor: 'pointer',
+                color: 'white',
+                padding: '10px 20px',
+                width: 'max-content',
+                borderRadius: '5px'
+            }}
+        >
             <Typography>{text}</Typography>
-        </div>
+        </Box>
     );
 };
 const Picturebox = ({ title, path, year }) => {
     const { tag, profile_cover_img, picture_box_box } = useStyles();
+    const theme = useTheme();
 
     return (
         <div
@@ -89,7 +75,22 @@ const Picturebox = ({ title, path, year }) => {
             <Box className={profile_cover_img}>
                 <img alt="bio" src={path} />
             </Box>
-            <Box className={picture_box_box}>
+            <Box
+                sx={{
+                    ...theme.typography.column,
+                    justifyContent: 'center',
+                    //  border: '1px solid red',
+                    height: '70px',
+                    paddingLeft: '10px',
+                    '& > :nth-child(1)': {
+                        fontSize: '1rem',
+                        fontWeight: '600'
+                    },
+                    '& > :nth-child(2)': {
+                        fontSize: '0.9rem'
+                    }
+                }}
+            >
                 <Typography> {title} </Typography>
                 <Typography> {year} </Typography>
             </Box>
@@ -99,6 +100,7 @@ const Picturebox = ({ title, path, year }) => {
 
 const PortfolioTab = () => {
     const { root, lower_button, website_link } = useStyles();
+    const theme = useTheme();
     return (
         <Box className={root}>
             <Grid container>
@@ -107,7 +109,7 @@ const PortfolioTab = () => {
                         <Typography
                             href="rtttwww.notion.so/AdejolaPortfolio-be3ac78992b145ccb7e1d8d6dd6b06e2"
                             target="_blank"
-                            className={website_link}
+                            sx={{ color: theme.palette.primary.main, cursor: 'pointer' }}
                             component="a"
                         >
                             rtttwww.notion.so/AdejolaPortfolio-be3ac78992b145ccb7e1d8d6dd6b06e2

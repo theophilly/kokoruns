@@ -27,7 +27,6 @@ import {
     Typography,
     ButtonBase
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 // third-party
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -41,22 +40,12 @@ import User1 from '../../../../assets/images/users/user-round.svg';
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 
-const useStyles = makeStyles((theme) => ({
-    title1: {
-        ...theme.typography.heading,
-        fontWeight: 'bold',
-        marginRight: '6px',
-        cursor: 'pointer'
-    }
-}));
-
 // ==============================|| PROFILE MENU ||============================== //
 
 const ProfileSection = () => {
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
     const navigate = useNavigate();
-    const { title1 } = useStyles();
 
     const [sdm, setSdm] = useState(true);
     const [value, setValue] = useState('');
@@ -154,7 +143,7 @@ const ProfileSection = () => {
                 display="flex"
                 sx={{ ml: '10px' }}
             >
-                <Typography className={title1} sx={{ ...theme.typography.title1 }}>
+                <Typography sx={{ ...theme.typography.heading, fontWeight: 'bold', marginRight: '6px', cursor: 'pointer' }}>
                     Adejola
                 </Typography>
                 <Avatar

@@ -26,36 +26,15 @@ const useStyles = makeStyles((theme) => ({
             objectPosition: '10% 40%'
         }
     },
-    title: {
-        ...theme.typography.heading,
-        fontWeight: 'bold',
-        textAlign: 'center'
-    },
+
     title_sub: {
         textAlign: 'center',
         fontSize: '0.8rem'
-    },
-    bio_card: {
-        ...theme.typography.flex,
-        height: '240px',
-        background: '#0991FF',
-        border: 'none',
-        marginTop: '-8px',
-        color: 'white',
-        position: 'relative',
-        overFlow: 'visible !important',
-        borderBottomLeftRadius: '10px',
-        borderBottomRightRadius: '10px'
-    },
-    bio_avatar: {
-        position: 'absolute',
-        zIndex: '4 !important',
-        top: -50
     }
 }));
 
 const Profile = () => {
-    const { root, profile_cover_img, title, bio_card, title_sub, bio_avatar } = useStyles();
+    const { root, profile_cover_img, title_sub } = useStyles();
     const theme = useTheme();
     const matchDownMd = useMediaQuery('(min-width:600px)');
 
@@ -71,15 +50,29 @@ const Profile = () => {
                 <Grid item xs={12} sm={5} md={4} lg={3}>
                     <Grid container>
                         <Grid xs={7} sm={12} item>
-                            <Box className={bio_card}>
+                            <Box
+                                sx={{
+                                    ...theme.typography.flex,
+                                    height: '240px',
+                                    background: '#0991FF',
+                                    border: 'none',
+                                    marginTop: '-8px',
+                                    color: 'white',
+                                    position: 'relative',
+                                    overFlow: 'visible !important',
+                                    borderBottomLeftRadius: '10px',
+                                    borderBottomRightRadius: '10px'
+                                }}
+                            >
                                 <Avatar
-                                    // className={bio_avatar}
                                     alt="Remy Sharp"
                                     src="./register.png"
                                     sx={{ width: 150, height: 150, position: 'absolute', zIndex: 4, top: -60 }}
                                 />
                                 <Box mt="78px">
-                                    <Typography className={title}>Adejola Ademola</Typography>
+                                    <Typography sx={{ ...theme.typography.heading, fontWeight: 'bold', textAlign: 'center' }}>
+                                        Adejola Ademola
+                                    </Typography>
                                     <Typography className={title_sub}>UI/UX Designer at Kokoruns Ltd</Typography>
                                 </Box>
                             </Box>

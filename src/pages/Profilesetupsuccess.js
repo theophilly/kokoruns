@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // material-ui
-import { Box, Avatar, Typography, Button } from '@mui/material';
+import { Box, Avatar, Typography, Button, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import CheckIcon from '@mui/icons-material/Check';
 
@@ -16,10 +16,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    success: {
-        ...theme.typography.title1,
-        color: '#333333'
-    },
+
     success_subtitle: {
         textAlign: 'center',
         margin: '20px 0 30px 0 '
@@ -27,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profilesetupsuccess = () => {
-    const { root, success, success_subtitle } = useStyles();
+    const { root, success_subtitle } = useStyles();
+    const theme = useTheme();
 
     return (
         <Box className={root}>
@@ -60,7 +58,7 @@ const Profilesetupsuccess = () => {
                     </Avatar>
                 </Box>
             </Box>
-            <Typography className={success}> Successful</Typography>
+            <Typography sx={{ ...theme.typography.title1, color: '#333333' }}> Successful</Typography>
             <Typography className={success_subtitle}>
                 You have successfully set up your profile. <br /> You can go to your dashboard now.
             </Typography>

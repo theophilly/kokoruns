@@ -84,7 +84,7 @@ const NavItem = ({ item, level }) => {
                 ref={ref}
                 {...props}
                 //  to={`${config.basename}${item.url}`}
-                to="/home"
+                to={`${item.url}`}
                 target={itemTarget}
             />
         ))

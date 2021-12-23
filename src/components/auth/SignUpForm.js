@@ -5,69 +5,30 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 // material-ui
-import { Typography, Button, Grid, Box, CircularProgress } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Typography, Button, Grid, Box, CircularProgress, useTheme } from '@mui/material';
 
 //local import
 import Textfield from '../reusables/FormUI/Textfield';
 import Passwordfield from '../reusables/FormUI/Passwordfield';
 // import { login } from '../../store/actions/authActions';
 
-const useStyles = makeStyles((theme) => ({
-    root_left_lower: {
-        //border: '1px solid red',
-
-        '& > :nth-child(1)': {
-            fontFamily: 'Mulish',
-            fontSize: '1.6rem',
-            fontWeight: '700'
-        }
-    },
-
-    login_button: {
-        width: '100%',
-        marginTop: '20px',
-        letterSpacing: '1px',
-        borderRadius: '0px',
-        color: 'white',
-        '& :hover': {
-            color: 'black'
-            //  background: 'lightgreen',
-        }
-    },
-
-    recommendation: {
-        fontFamily: 'Mulish',
-        fontSize: '.9rem'
-    },
-    recommendation_link: {
-        fontFamily: 'Mulish',
-        fontWeight: '600',
-        fontSize: '.9rem',
-        cursor: 'pointer',
-        marginLeft: '5px'
-    },
-    sign_up_google: {
-        ...theme.typography.flex,
-        height: '50px',
-        borderRadius: '7px',
-        background: '#F0F0F0',
-        cursor: 'pointer'
-    },
-    google_img: {
-        width: '20px',
-        marginRight: '20px'
-    }
-}));
-
 const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
 export default function SignUpForm({ onclick, setClickData, showToast, path }) {
     const navigate = useNavigate();
+    const theme = useTheme();
     // const dispatch = useDispatch();
-    const { root_left_lower, login_button, recommendation, recommendation_link, google_img, sign_up_google } = useStyles();
+
     return (
-        <div className={root_left_lower}>
+        <Box
+            sx={{
+                '& > :nth-child(1)': {
+                    fontFamily: 'Mulish',
+                    fontSize: '1.6rem',
+                    fontWeight: '700'
+                }
+            }}
+        >
             <Typography variant="h1" component="h1">
                 Register
             </Typography>
@@ -117,7 +78,17 @@ export default function SignUpForm({ onclick, setClickData, showToast, path }) {
                                     <Box>
                                         <Button
                                             startIcon={isSubmitting ? <CircularProgress color="secondary" size="1rem" /> : null}
-                                            className={login_button}
+                                            sx={{
+                                                width: '100%',
+                                                marginTop: '20px',
+                                                letterSpacing: '1px',
+                                                borderRadius: '0px',
+                                                color: 'white',
+                                                '& :hover': {
+                                                    color: 'black'
+                                                    //  background: 'lightgreen',
+                                                }
+                                            }}
                                             disableElevation
                                             variant="contained"
                                             type="submit"
@@ -132,31 +103,24 @@ export default function SignUpForm({ onclick, setClickData, showToast, path }) {
                 </Formik>
             </Box>
 
-            <Box
-                alignItems="center"
-                justifyContent="center"
-                display="flex"
-                margin="40px 0"
-                //  border="1px solid red"
-            >
-                <Typography className={recommendation}>or continue with</Typography>
+            <Box alignItems="center" justifyContent="center" display="flex" margin="40px 0">
+                {/* use Styled component for the Typography */}
+                <Typography sx={{ fontFamily: 'Mulish', fontSize: '.9rem' }}>or continue with</Typography>
             </Box>
-            <Box className={sign_up_google}>
-                <img className={google_img} alt="google logo" src="./google.png" />
+            <Box sx={{ ...theme.typography.flex, height: '50px', borderRadius: '7px', background: '#F0F0F0', cursor: 'pointer' }}>
+                <Box component="img" sx={{ width: '20px', marginRight: '20px' }} alt="google logo" src="./google.png" />
                 <Typography>Sign up with Google</Typography>
             </Box>
-            <Box
-                alignItems="center"
-                justifyContent="center"
-                display="flex"
-                margin="20px 0"
-                // border="1px solid red"
-            >
-                <Typography className={recommendation}>Already have an account?</Typography>
-                <Typography onClick={() => navigate('/login')} color="primary" className={recommendation_link}>
+            <Box alignItems="center" justifyContent="center" display="flex" margin="20px 0">
+                <Typography sx={{ fontFamily: 'Mulish', fontSize: '.9rem' }}>Already have an account?</Typography>
+                <Typography
+                    onClick={() => navigate('/login')}
+                    color="primary"
+                    sx={{ fontFamily: 'Mulish', fontWeight: '600', fontSize: '.9rem', cursor: 'pointer', marginLeft: '5px' }}
+                >
                     Sign In
                 </Typography>
             </Box>
-        </div>
+        </Box>
     );
 }

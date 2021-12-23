@@ -22,6 +22,7 @@ export default function themePalette(theme) {
             lighter2: '#E97C7D'
         },
         background1: '#faf9f9',
-        background2: '#f0f0f0'
+        background2: '#f0f0f0',
+        jjj: '#fff'
     };
 }

@@ -3,8 +3,7 @@ import { useNavigate, Navigate } from 'react-router-dom';
 import { useFormikContext } from 'formik';
 
 // material-ui
-import { Box, Grid, Typography, OutlinedInput, Button } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Box, Grid, Typography, OutlinedInput, Button, useTheme } from '@mui/material';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import AddIcon from '@mui/icons-material/Add';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -22,78 +21,37 @@ import genderData from '../../../config/genderData.json';
 import employmentType from '../../../config/employmentType.json';
 import maritalStatusData from '../../../config/maritalStatusData.json';
 
-// styles
-const useStyles = makeStyles((theme) => ({
-    root: {
-        marginTop: '50px',
-        padding: '20px',
-        background: 'white'
-    },
-    customer_info: {
-        ...theme.typography.heading
-    },
-    language_input: {
-        height: '39px',
-        width: '100%',
-        marginRight: '5px',
-        background: 'white',
-        borderRadius: '0px',
-        '& ::placeholder': {
-            fontSize: '.9rem'
-        }
-    },
-    add_button: {
-        height: '39px',
-        textTransform: 'capitalize'
-    },
-    tag: {
-        background: theme.palette.primary.main,
-        cursor: 'pointer',
-        color: 'white',
-        padding: '10px 20px',
-        width: 'max-content',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        position: 'relative'
-    },
-    tag_icon: {
-        position: 'absolute',
-        fontSize: 17,
-        color: '#D92627',
-        top: 2,
-        right: 2,
-        zIndex: 2
-    },
-    field_cell_left: {
-        paddingRight: '40px',
-        '@media (max-width: 900px)': {
-            padding: '0px'
-        }
-    },
-    field_cell_right: {
-        paddingLeft: (props) => (props.matches ? '40px' : '0px')
-    }
-}));
-
 const Tag = ({ editTag, text, deleteTag, index }) => {
-    const { tag, tag_icon } = useStyles();
+    const theme = useTheme();
 
     return (
-        <div onClick={() => editTag(index)} className={tag}>
+        <Box
+            onClick={() => editTag(index)}
+            sx={{
+                background: theme.palette.primary.main,
+                cursor: 'pointer',
+                color: 'white',
+                padding: '10px 20px',
+                width: 'max-content',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                position: 'relative'
+            }}
+        >
             <Typography>{text}</Typography>
-            <div onClick={() => deleteTag(index)}>
-                <DeleteOutlineRoundedIcon className={tag_icon} />
-            </div>
-        </div>
+            <Box onClick={() => deleteTag(index)}>
+                <DeleteOutlineRoundedIcon sx={{ position: 'absolute', fontSize: 17, color: '#D92627', top: 2, right: 2, zIndex: 2 }} />
+            </Box>
+        </Box>
     );
 };
 
 const Setupprofile = ({ setDis_ability }) => {
     const matches = useMediaQuery('(min-width:900px)');
-    const { root, customer_info, language_input, add_button, field_cell_left, field_cell_right } = useStyles({ matches });
+    const theme = useTheme();
+
     const [input, setInput] = useState('');
-    console.log(matches);
 
     const { setFieldValue, getFieldMeta } = useFormikContext();
 
@@ -131,19 +89,29 @@ const Setupprofile = ({ setDis_ability }) => {
     };
 
     return (
-        <div className={root}>
+        <div sx={{ marginTop: '50px', padding: '20px', background: 'white' }}>
             <Grid container spacing={2}>
                 <Grid xs={12} item>
-                    <Typography className={customer_info}>Personal Information</Typography>
+                    <Typography sx={{ ...theme.typography.heading }}>Personal Information</Typography>
                 </Grid>
-                <Grid className={field_cell_left} item xs={12} md={6}>
+                <Grid
+                    sx={{
+                        paddingRight: '40px',
+                        '@media (max-width: 900px)': {
+                            padding: '0px'
+                        }
+                    }}
+                    item
+                    xs={12}
+                    md={6}
+                >
                     <Textfield
                         //  disabled={!!user.firstName}
                         name="firstName"
                         helpertext="First Name"
                     />
                 </Grid>
-                <Grid className={field_cell_right} item xs={12} md={6}>
+                <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <Textfield
                         //  disabled={!!user.lastName}
                         name="lastName"
@@ -152,39 +120,89 @@ const Setupprofile = ({ setDis_ability }) => {
                 </Grid>
                 {/* gender and marital status */}
 
-                <Grid className={field_cell_left} item xs={12} md={6}>
+                <Grid
+                    sx={{
+                        paddingRight: '40px',
+                        '@media (max-width: 900px)': {
+                            padding: '0px'
+                        }
+                    }}
+                    item
+                    xs={12}
+                    md={6}
+                >
                     <SelectWrapper name="gender" helpertext="Gender" options={genderData} />
                 </Grid>
-                <Grid className={field_cell_right} item xs={12} md={6}>
+                <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <SelectWrapper name="maritalStatus" helpertext="Marital Status" options={maritalStatusData} />
                 </Grid>
 
                 {/* email address and phone */}
-                <Grid className={field_cell_left} item xs={12} md={6}>
+                <Grid
+                    sx={{
+                        paddingRight: '40px',
+                        '@media (max-width: 900px)': {
+                            padding: '0px'
+                        }
+                    }}
+                    item
+                    xs={12}
+                    md={6}
+                >
                     <Textfield name="email" helpertext="Email Address" />
                 </Grid>
-                <Grid className={field_cell_right} item xs={12} md={6}>
+                <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <Textfield name="phone" helpertext="Phone Number" />
                 </Grid>
 
                 {/* date of birth and  profession*/}
 
-                <Grid className={field_cell_left} item xs={12} md={6}>
+                <Grid
+                    sx={{
+                        paddingRight: '40px',
+                        '@media (max-width: 900px)': {
+                            padding: '0px'
+                        }
+                    }}
+                    item
+                    xs={12}
+                    md={6}
+                >
                     <Datepicker name="dob" helpertext="Date of Birth" />
                 </Grid>
-                <Grid className={field_cell_right} item xs={12} md={6}>
+                <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <Textfield name="profession" helpertext="Profession" />
                 </Grid>
 
                 {/* academic level and location */}
-                <Grid className={field_cell_left} item xs={12} md={6}>
+                <Grid
+                    sx={{
+                        paddingRight: '40px',
+                        '@media (max-width: 900px)': {
+                            padding: '0px'
+                        }
+                    }}
+                    item
+                    xs={12}
+                    md={6}
+                >
                     <SelectWrapper name="academicLevel" helpertext="Academic Level" options={academicLevel} />
                 </Grid>
-                <Grid className={field_cell_right} item xs={12} md={6}>
+                <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <SelectWrapper name="state" helpertext="Current Location" options={stateData} />
                 </Grid>
                 {/* Lga and space */}
-                <Grid className={field_cell_left} item xs={12} md={6}>
+                <Grid
+                    sx={{
+                        paddingRight: '40px',
+                        '@media (max-width: 900px)': {
+                            padding: '0px'
+                        }
+                    }}
+                    item
+                    xs={12}
+                    md={6}
+                >
                     <SelectLGA dependentField="state" name="lga" helpertext="LGA" />
                 </Grid>
                 <Grid item xs={12} md={6}></Grid>
@@ -195,35 +213,65 @@ const Setupprofile = ({ setDis_ability }) => {
                 </Grid>
 
                 <Grid marginTop="40px" xs={12} item>
-                    <Typography className={customer_info}>Professional Information</Typography>
+                    <Typography sx={{ ...theme.typography.heading }}>Professional Information</Typography>
                 </Grid>
                 {/* current employer and address */}
-                <Grid className={field_cell_left} item xs={12} md={6}>
+                <Grid
+                    sx={{
+                        paddingRight: '40px',
+                        '@media (max-width: 900px)': {
+                            padding: '0px'
+                        }
+                    }}
+                    item
+                    xs={12}
+                    md={6}
+                >
                     <Textfield name="current_employer" helpertext="Current Employer" />
                 </Grid>
-                <Grid className={field_cell_right} item xs={12} md={6}>
+                <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <Textfield name="employer_address" helpertext="Address of Employer" />
                 </Grid>
 
                 {/* employment type and empolyment status */}
-                <Grid className={field_cell_left} item xs={12} md={6}>
+                <Grid
+                    sx={{
+                        paddingRight: '40px',
+                        '@media (max-width: 900px)': {
+                            padding: '0px'
+                        }
+                    }}
+                    item
+                    xs={12}
+                    md={6}
+                >
                     <SelectWrapper name="employment_type" helpertext="Employment Type*" options={employmentType} />
                 </Grid>
-                <Grid className={field_cell_right} item xs={12} md={6}>
+                <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <Textfield name="employment_status" helpertext="Present Employment Status*" />
                 </Grid>
 
                 {/* preferred job state and LGA */}
-                <Grid className={field_cell_left} item xs={12} md={6}>
+                <Grid
+                    sx={{
+                        paddingRight: '40px',
+                        '@media (max-width: 900px)': {
+                            padding: '0px'
+                        }
+                    }}
+                    item
+                    xs={12}
+                    md={6}
+                >
                     <SelectWrapper name="preffered_jl" helpertext="Preffered Job Location" options={stateData} />
                 </Grid>
-                <Grid className={field_cell_right} item xs={12} md={6}>
+                <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <SelectLGA dependentField="preffered_jl" name="preffered_jlga" helpertext="Preferred LGA" />
                 </Grid>
 
                 {/* languages spoken */}
                 <Grid marginTop="40px" xs={12} item>
-                    <Typography className={customer_info}>Languages Spoken</Typography>
+                    <Typography sx={{ ...theme.typography.heading }}>Languages Spoken</Typography>
                 </Grid>
                 <Grid xs={12} item>
                     <Box display="flex" gap="10px" flexWrap="wrap">
@@ -235,13 +283,28 @@ const Setupprofile = ({ setDis_ability }) => {
                 <Grid xs={12} md={6} item>
                     <Box alignItems="center" display="flex">
                         <OutlinedInput
-                            className={language_input}
+                            sx={{
+                                height: '39px',
+                                width: '100%',
+                                marginRight: '5px',
+                                background: 'white',
+                                borderRadius: '0px',
+                                '& ::placeholder': {
+                                    fontSize: '.9rem'
+                                }
+                            }}
                             value={input}
                             placeholder="Enter a Language"
                             onChange={onChange}
                             fullWidth
                         />
-                        <Button startIcon={<AddIcon />} disableElevation variant="contained" className={add_button} onClick={onAdd}>
+                        <Button
+                            startIcon={<AddIcon />}
+                            disableElevation
+                            variant="contained"
+                            sx={{ height: '39px', textTransform: 'capitalize' }}
+                            onClick={onAdd}
+                        >
                             Add
                         </Button>
                     </Box>
@@ -252,7 +315,7 @@ const Setupprofile = ({ setDis_ability }) => {
 
                 {/* disabilities */}
                 <Grid marginTop="40px" xs={12} item>
-                    <Typography className={customer_info}>Disability*</Typography>
+                    <Typography sx={{ ...theme.typography.heading }}>Disability*</Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <Checkbox name="disablility" helpertext="Do you have any disability?*" />

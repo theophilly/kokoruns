@@ -4,6 +4,9 @@ import { lazy } from 'react';
 import MainLayout from '../layout/MainLayout';
 import MinimalLayout from '../layout/MinimalLayout';
 import Profile from '../views/profile';
+import Teams from '../views/teams';
+import Createteam from '../views/Createteam';
+import DiscoverTeams from '../views/discover-team';
 // import Loadable from 'ui-component/Loadable';
 
 // dashboard routing
@@ -45,12 +48,20 @@ const Dashboardroutes = {
             )
         },
         {
-            path: '/home',
+            path: '/profile',
             element: <Profile />
         },
         {
-            path: '/test',
-            element: <div>text</div>
+            path: '/teams',
+            element: <Teams />
+        },
+        {
+            path: '/create-team',
+            element: <Createteam />
+        },
+        {
+            path: '/discover-team',
+            element: <DiscoverTeams />
         }
     ]
 };

@@ -20,7 +20,7 @@ const profile = {
             id: 'util-typography',
             title: 'Profile',
             type: 'item',
-            url: '/utils/util-typography',
+            url: '/profile',
             icon: icons.IconTypography,
             breadcrumbs: false
         },
@@ -34,14 +34,14 @@ const profile = {
                     id: 'your-teams',
                     title: 'Your Teams',
                     type: 'item',
-                    url: '/icons/tabler-icons',
+                    url: '/teams',
                     breadcrumbs: false
                 },
                 {
                     id: 'discover-teams',
                     title: 'Discover Teams',
                     type: 'item',
-                    url: '/icons/material-icons',
+                    url: '/discover-team',
                     breadcrumbs: false
                 }
             ]
@@ -50,7 +50,7 @@ const profile = {
             id: 'messages',
             title: 'Messages',
             type: 'item',
-            url: '/utils/util-color',
+            url: '/messages',
             icon: icons.IconPalette,
             breadcrumbs: false
         },
@@ -64,14 +64,14 @@ const profile = {
                     id: 'jobdash',
                     title: 'Jobdash',
                     type: 'item',
-                    url: '/icons/tabler-icons',
+                    url: '/jobs',
                     breadcrumbs: false
                 },
                 {
                     id: 'job-boards',
                     title: 'Job Boards',
                     type: 'item',
-                    url: '/icons/material-icons',
+                    url: '/job-boards',
                     breadcrumbs: false
                 }
             ]
@@ -86,7 +86,7 @@ const profile = {
                     id: 'your-pages1',
                     title: 'Jobdash',
                     type: 'item',
-                    url: '/icons/tabler-icons',
+                    url: '/your-pages1',
                     breadcrumbs: false
                 },
                 {
@@ -102,7 +102,7 @@ const profile = {
             id: 'recommendations',
             title: 'Recommendations',
             type: 'item',
-            url: '/utils/util-shadow',
+            url: '/recommendations',
             icon: icons.IconShadow,
             breadcrumbs: false
         },

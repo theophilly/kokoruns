@@ -1,7 +1,7 @@
 import React from 'react';
 
 // material-ui
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 // project imports
@@ -38,38 +38,7 @@ const useStyles = makeStyles((theme) => ({
             padding: '15px 15px 40px'
         }
     },
-    left: {
-        width: '50%',
-        height: '90%',
 
-        position: 'relative',
-        background: "url('login.png')",
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '700px',
-        backgroundPosition: 'center center',
-        padding: '60px 40px',
-        color: 'white',
-        '&::before': {
-            content: '""', // ::before and ::after both require content
-            position: 'absolute',
-            display: 'block',
-            top: '0',
-            left: '0',
-            width: '100%',
-            height: '100%',
-            background: theme.palette.primary.main,
-
-            opacity: 0.7,
-            zIndex: 1,
-            mixBlendMode: 'multiply'
-        },
-        '@media (max-width: 670px)': {
-            width: '100%'
-        },
-        '@media (max-width: 400px)': {
-            padding: '60px 15px'
-        }
-    },
     content: {
         position: 'relative',
         zIndex: 2
@@ -89,18 +58,49 @@ const useStyles = makeStyles((theme) => ({
             width: '100%',
             padding: '0px 20px 30px'
         }
-    },
-    heading: {
-        ...theme.typography.title2
     }
 }));
 
 export default function Login() {
     const { root, left, right, content, list_item } = useStyles();
+    const theme = useTheme();
     return (
         <Box className={root}>
             {/* left */}
-            <Box className={left}>
+            <Box
+                sx={{
+                    width: '50%',
+                    height: '90%',
+
+                    position: 'relative',
+                    background: "url('login.png')",
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: '700px',
+                    backgroundPosition: 'center center',
+                    padding: '60px 40px',
+                    color: 'white',
+                    '&::before': {
+                        content: '""', // ::before and ::after both require content
+                        position: 'absolute',
+                        display: 'block',
+                        top: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '100%',
+                        background: theme.palette.primary.main,
+
+                        opacity: 0.7,
+                        zIndex: 1,
+                        mixBlendMode: 'multiply'
+                    },
+                    '@media (max-width: 670px)': {
+                        width: '100%'
+                    },
+                    '@media (max-width: 400px)': {
+                        padding: '60px 15px'
+                    }
+                }}
+            >
                 {/* content */}
                 <Box className={content}>
                     {data.map((item) => (

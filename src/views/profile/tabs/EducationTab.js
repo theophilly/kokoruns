@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Typography, Divider, Button } from '@mui/material';
+import { Box, Grid, Typography, Divider, Button, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { BiEditAlt } from 'react-icons/bi';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -10,36 +10,7 @@ const useStyles = makeStyles((theme) => ({
         background: 'inherit',
         width: '100%'
     },
-    item: {
-        borderRadius: '10px',
-        //  border: '1px solid red',
-        background: 'white',
-        padding: '0 15px 13px',
 
-        '& > :nth-child(2)': {
-            fontSize: '0.8rem',
-            color: theme.palette.primary.main,
-            fontWeight: '500',
-            margin: '5px 0'
-        },
-        '& > :nth-child(3)': {
-            fontSize: '0.8rem',
-            fontWeight: '500',
-            marginBottom: '5px'
-        }
-    },
-    first_box: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        '& :nth-child(1)': {
-            fontSize: '0.8rem'
-        },
-        '& :nth-child(2)': {
-            fontSize: '0.9rem',
-            color: theme.palette.primary.main
-        }
-    },
     lower_button: {
         width: '100%',
         textTransform: 'capitalize',
@@ -52,10 +23,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Item = ({ year, title, sub }) => {
-    const { item, first_box } = useStyles();
+    const theme = useTheme();
     return (
-        <Box className={item}>
-            <Box className={first_box}>
+        <Box
+            sx={{
+                borderRadius: '10px',
+                //  border: '1px solid red',
+                background: 'white',
+                padding: '0 15px 13px',
+
+                '& > :nth-child(2)': {
+                    fontSize: '0.8rem',
+                    color: theme.palette.primary.main,
+                    fontWeight: '500',
+                    margin: '5px 0'
+                },
+                '& > :nth-child(3)': {
+                    fontSize: '0.8rem',
+                    fontWeight: '500',
+                    marginBottom: '5px'
+                }
+            }}
+        >
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    '& :nth-child(1)': {
+                        fontSize: '0.8rem'
+                    },
+                    '& :nth-child(2)': {
+                        fontSize: '0.9rem',
+                        color: theme.palette.primary.main
+                    }
+                }}
+            >
                 <Typography>{year} </Typography>
                 <BiEditAlt />
             </Box>
