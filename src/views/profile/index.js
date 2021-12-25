@@ -25,16 +25,11 @@ const useStyles = makeStyles((theme) => ({
             width: '100%',
             objectPosition: '10% 40%'
         }
-    },
-
-    title_sub: {
-        textAlign: 'center',
-        fontSize: '0.8rem'
     }
 }));
 
 const Profile = () => {
-    const { root, profile_cover_img, title_sub } = useStyles();
+    const { root, profile_cover_img } = useStyles();
     const theme = useTheme();
     const matchDownMd = useMediaQuery('(min-width:600px)');
 
@@ -73,7 +68,7 @@ const Profile = () => {
                                     <Typography sx={{ ...theme.typography.heading, fontWeight: 'bold', textAlign: 'center' }}>
                                         Adejola Ademola
                                     </Typography>
-                                    <Typography className={title_sub}>UI/UX Designer at Kokoruns Ltd</Typography>
+                                    <Typography sx={{ textAlign: 'center', fontSize: '0.8rem' }}>UI/UX Designer at Kokoruns Ltd</Typography>
                                 </Box>
                             </Box>
                         </Grid>

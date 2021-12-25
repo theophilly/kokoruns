@@ -7,6 +7,7 @@ import Profile from '../views/profile';
 import Teams from '../views/teams';
 import Createteam from '../views/Createteam';
 import DiscoverTeams from '../views/discover-team';
+import MessagesScreen from '../views/messages';
 // import Loadable from 'ui-component/Loadable';
 
 // dashboard routing
@@ -62,6 +63,10 @@ const Dashboardroutes = {
         {
             path: '/discover-team',
             element: <DiscoverTeams />
+        },
+        {
+            path: '/messages',
+            element: <MessagesScreen />
         }
     ]
 };

@@ -27,7 +27,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
     minHeight: 'calc(100vh - 88px)',
     flexGrow: 1,
     padding: '10px',
-    marginTop: '75px',
+    marginTop: '68px',
     marginRight: '20px',
 
     ...(!open && {
