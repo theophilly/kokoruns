@@ -61,7 +61,7 @@ export default function MessagesScreen() {
     return (
         <Box sx={{ overflow: 'hidden' }}>
             <Grid spacing={2} container>
-                <Grid lg={3.2} item>
+                <Grid xs={12} md={3.2} item>
                     <Box sx={{ minHeight: '100%', maxHeight: '100%' }}>
                         <Box
                             component="div"
@@ -183,70 +183,84 @@ export default function MessagesScreen() {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid lg={8.8} item>
-                    <Paper sx={{ minHeight: '100%', maxHeight: '100%' }}>
-                        <Paper
-                            elevation={0}
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                padding: '20px',
-                                height: 'max-content',
-                                borderBottom: '1px solid #C4C4C4'
-                            }}
-                        >
-                            <StyledBadge overlap="circular" anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant="dot">
-                                <Avatar sx={{ width: 65, height: 65 }} alt="Remy Sharp" src="./register.png" />
-                            </StyledBadge>
-                            <Typography sx={{ ...theme.typography.heading, fontWeight: '700', ml: '15px' }}> Julius Iyela </Typography>
-                        </Paper>
 
-                        <Box
-                            component="div"
-                            className="customscroll"
-                            style={{
-                                height: !matchUpMd ? 'calc(100vh - 300px)' : 'calc(100vh - 268px)',
-                                paddingLeft: '16px',
-                                paddingRight: '16px',
-                                scrollbarWidth: '5px',
-                                flex: 1,
-                                border: '1px solid'
-                            }}
-                        >
-                            {/* chats
+                {matchUpMd && (
+                    <Grid xs={12} md={8.8} item>
+                        <Paper sx={{ minHeight: '100%', maxHeight: '100%' }}>
+                            <Paper
+                                elevation={0}
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    padding: '20px',
+                                    height: 'max-content',
+                                    borderBottom: '1px solid #C4C4C4'
+                                }}
+                            >
+                                <StyledBadge overlap="circular" anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant="dot">
+                                    <Avatar sx={{ width: 65, height: 65 }} alt="Remy Sharp" src="./register.png" />
+                                </StyledBadge>
+                                <Typography sx={{ ...theme.typography.heading, fontWeight: '700', ml: '15px' }}> Julius Iyela </Typography>
+                            </Paper>
+
+                            <Box
+                                component="div"
+                                className="customscroll"
+                                style={{
+                                    height: !matchUpMd ? 'calc(100vh - 300px)' : 'calc(100vh - 268px)',
+                                    paddingLeft: '16px',
+                                    paddingRight: '16px',
+                                    scrollbarWidth: '5px',
+                                    flex: 1
+                                }}
+                            >
+                                {/* chats
                             <Box>
                                 {chats.map((item) => (
                                     <ChatItem {...item} />
                                 ))}
                             </Box>
                              */}
-                            <Box sx={{ display: 'flex', justifyContent: 'flex-end !important', flexDirection: 'column' }}>
-                                <Message />
-                                <Message />
+                                <Box sx={{ display: 'flex', justifyContent: 'flex-end !important', flexDirection: 'column' }}>
+                                    <Message />
+                                    <Message />
+                                    <Message />
+                                    <Message owner />
+                                    <Message owner />
+                                    <Message />
+                                    <Message owner />
+                                </Box>
                             </Box>
-                        </Box>
-                        <Paper
-                            elevation={0}
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                padding: '0 30px',
-                                //   border: '1px solid red',
-                                borderTop: '1px solid #C4C4C4',
-                                height: '70px'
-                            }}
-                        >
-                            <InputBase
-                                sx={{ flex: 1, background: '#EAEAEA', borderRadius: '10px', border: 'none', pl: '15px', height: '50px' }}
-                                placeholder="Type your message"
-                            />
-                            <Box sx={{ margin: '0 20px' }} component="img" src="./Vector.png"></Box>
-                            <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
-                                <SendIcon fontSize="small" />
-                            </Avatar>
+                            <Paper
+                                elevation={0}
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    padding: '0 30px',
+                                    //   border: '1px solid red',
+                                    borderTop: '1px solid #C4C4C4',
+                                    height: '70px'
+                                }}
+                            >
+                                <InputBase
+                                    sx={{
+                                        flex: 1,
+                                        background: '#EAEAEA',
+                                        borderRadius: '10px',
+                                        border: 'none',
+                                        pl: '15px',
+                                        height: '50px'
+                                    }}
+                                    placeholder="Type your message"
+                                />
+                                <Box sx={{ margin: '0 20px' }} component="img" src="./Vector.png"></Box>
+                                <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
+                                    <SendIcon fontSize="small" />
+                                </Avatar>
+                            </Paper>
                         </Paper>
-                    </Paper>
-                </Grid>
+                    </Grid>
+                )}
             </Grid>
         </Box>
     );
