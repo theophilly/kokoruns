@@ -56,7 +56,7 @@ const Quickmessage = ({ openModal }) => {
                         Thank you for your time yesterday. I'd like to inform you that we decided to go with someone else for this role.
                         This decision was made...
                     </Typography>
-                    <Box onClick={() => openModal()} sx={{ color: theme.palette.primary.main, cursor: 'pointer' }}>
+                    <Box onClick={() => openModal()} sx={{ color: theme.palette.primary.main, cursor: 'pointer', display: 'inline' }}>
                         Read more
                     </Box>
                 </Box>
