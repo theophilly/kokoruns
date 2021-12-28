@@ -6,8 +6,9 @@
 export default function themePalette(theme) {
     return {
         textColor: '#333333',
+        textColor1: '#C4C4C4',
         primary: {
-            main: '#0991FF !important',
+            main: '#0991FF',
             darker1: '#0076D6',
             darker2: '#005AA3',
             lighter1: '#3DA8FF',

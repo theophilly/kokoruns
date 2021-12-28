@@ -130,12 +130,12 @@ const DiscoverTeams = () => {
                             }
                         }}
                     >
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
                     </Box>
                 </Grid>
                 {/* Popular */}
@@ -154,16 +154,16 @@ const DiscoverTeams = () => {
                             }
                         }}
                     >
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
                     </Box>
                 </Grid>
 
@@ -183,12 +183,12 @@ const DiscoverTeams = () => {
                             }
                         }}
                     >
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
+                        <Teamsbox to="/discover-team-details" />
                     </Box>
                 </Grid>
             </Grid>

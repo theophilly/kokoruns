@@ -141,12 +141,12 @@ const Teams = () => {
                             }
                         }}
                     >
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
-                        <Teamsbox />
+                        <Teamsbox to="/your-teams" />
+                        <Teamsbox to="/your-teams" />
+                        <Teamsbox to="/your-teams" />
+                        <Teamsbox to="/your-teams" />
+                        <Teamsbox to="/your-teams" />
+                        <Teamsbox to="/your-teams" />
                     </Box>
                     {/* create team */}
                     <Box sx={{ marginTop: '20px' }}>

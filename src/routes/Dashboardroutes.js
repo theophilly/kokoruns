@@ -8,6 +8,10 @@ import Teams from '../views/teams';
 import Createteam from '../views/Createteam';
 import DiscoverTeams from '../views/discover-team';
 import MessagesScreen from '../views/messages';
+import Yourteams from '../views/teams/Yourteams';
+import Discoverteamdetails from '../views/discover-team/Discoverteamdetails';
+import Jobdash from '../views/job-dash';
+import Applicationdetails from '../views/job-dash/Applicationdetails';
 // import Loadable from 'ui-component/Loadable';
 
 // dashboard routing
@@ -67,6 +71,22 @@ const Dashboardroutes = {
         {
             path: '/messages',
             element: <MessagesScreen />
+        },
+        {
+            path: '/your-teams',
+            element: <Yourteams />
+        },
+        {
+            path: '/discover-team-details',
+            element: <Discoverteamdetails />
+        },
+        {
+            path: '/jobs',
+            element: <Jobdash />
+        },
+        {
+            path: '/job-details',
+            element: <Applicationdetails />
         }
     ]
 };

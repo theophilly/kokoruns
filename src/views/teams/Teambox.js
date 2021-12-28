@@ -1,10 +1,13 @@
 import React from 'react';
 import { Box, Avatar, Typography, useTheme, Paper } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-export default function Teamsbox() {
+export default function Teamsbox({ to = '/' }) {
     const theme = useTheme();
     return (
         <Paper
+            component={Link}
+            to={to}
             sx={{
                 ...theme.typography.column,
                 height: 'max-content',
@@ -13,7 +16,8 @@ export default function Teamsbox() {
                 gap: '8px',
                 padding: '13px 0',
                 margintop: '30px !important',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                textDecoration: 'none'
                 // [theme.breakpoints.down('sm')]: {
                 //     width: '80%'
                 // }
