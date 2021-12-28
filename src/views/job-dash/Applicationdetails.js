@@ -260,7 +260,7 @@ const Applicationdetails = () => {
                             width: '100%'
                         }}
                     >
-                        <Button sx={{ padding: '5px 70px', textTransform: 'capitalize' }} variant="contained" onClick={handleClose}>
+                        <Button sx={{ padding: '5px 70px', textTransform: 'capitalize' }} variant="contained" onClick={handleMessageClose}>
                             Back
                         </Button>
                     </Box>
