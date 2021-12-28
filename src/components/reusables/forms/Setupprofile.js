@@ -89,7 +89,7 @@ const Setupprofile = ({ setDis_ability }) => {
     };
 
     return (
-        <div sx={{ marginTop: '50px', padding: '20px', background: 'white' }}>
+        <Box sx={{ marginTop: '50px', padding: '20px', background: 'white' }}>
             <Grid container spacing={2}>
                 <Grid xs={12} item>
                     <Typography sx={{ ...theme.typography.heading }}>Personal Information</Typography>
@@ -328,7 +328,7 @@ const Setupprofile = ({ setDis_ability }) => {
                     </Grid>
                 )}
             </Grid>
-        </div>
+        </Box>
     );
 };
 
