@@ -79,25 +79,33 @@ const profile = {
         {
             id: 'your-pages',
             title: 'Your Pages',
-            type: 'collapse',
-            icon: icons.IconWindmill,
-            children: [
-                {
-                    id: 'your-pages1',
-                    title: 'Jobdash',
-                    type: 'item',
-                    url: '/your-pages1',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'job-boards',
-                    title: 'Job Boards',
-                    type: 'item',
-                    url: '/icons/material-icons',
-                    breadcrumbs: false
-                }
-            ]
+            type: 'item',
+            url: '/profile',
+            icon: icons.IconPalette,
+            breadcrumbs: false
         },
+        // {
+        //     id: 'your-pages',
+        //     title: 'Your Pages',
+        //     type: 'collapse',
+        //     icon: icons.IconWindmill,
+        //     children: [
+        //         {
+        //             id: 'your-pages1',
+        //             title: 'Jobdash',
+        //             type: 'item',
+        //             url: '/your-pages1',
+        //             breadcrumbs: false
+        //         },
+        //         {
+        //             id: 'job-boards',
+        //             title: 'Job Boards',
+        //             type: 'item',
+        //             url: '/icons/material-icons',
+        //             breadcrumbs: false
+        //         }
+        //     ]
+        // },
         {
             id: 'events',
             title: 'Events',
