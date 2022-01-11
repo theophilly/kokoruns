@@ -11,9 +11,12 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 const isEvent = (event) => event && (event instanceof Event || event.nativeEvent instanceof Event);
 
 const CustomTextfield = (props) => {
+    const newProps = { ...props, error: false };
     return (
         <OutlinedInput
-            {...props}
+            placeholder="dd/mm/yy"
+            error={false}
+            {...newProps}
             fullWidth="true"
             sx={{ height: '39px', width: '100%', marginTop: '5px', background: 'white', borderRadius: '0px' }}
             endAdornment={

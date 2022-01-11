@@ -12,6 +12,15 @@ import Yourteams from '../views/teams/Yourteams';
 import Discoverteamdetails from '../views/discover-team/Discoverteamdetails';
 import Jobdash from '../views/job-dash';
 import Applicationdetails from '../views/job-dash/Applicationdetails';
+import Jobboard from '../views/job-boards';
+import Myevents from '../views/Myevents';
+import Yourevents from '../views/Myevents/Yourevents';
+import Yourinvites from '../views/Myevents/Yourinvites';
+import Createevent from '../views/Createevent';
+import Recommendation from '../views/recommendation';
+import RequestRecommendation from '../views/recommendation/RequestRecommendation';
+import SendRecommendation from '../views/recommendation/SendRecommendation';
+import Settings from '../views/Settings';
 // import Loadable from 'ui-component/Loadable';
 
 // dashboard routing
@@ -87,6 +96,42 @@ const Dashboardroutes = {
         {
             path: '/job-details',
             element: <Applicationdetails />
+        },
+        {
+            path: '/job-boards',
+            element: <Jobboard />
+        },
+        {
+            path: '/my-events',
+            element: <Myevents />
+        },
+        {
+            path: '/your-events',
+            element: <Yourevents />
+        },
+        {
+            path: '/my-invites',
+            element: <Myevents />
+        },
+        {
+            path: '/create-event',
+            element: <Createevent />
+        },
+        {
+            path: '/recommendations',
+            element: <Recommendation />
+        },
+        {
+            path: '/request-recommendation',
+            element: <RequestRecommendation />
+        },
+        {
+            path: '/send-recommendation',
+            element: <SendRecommendation />
+        },
+        {
+            path: '/settings',
+            element: <Settings />
         }
     ]
 };

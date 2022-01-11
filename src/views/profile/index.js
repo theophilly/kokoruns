@@ -1,11 +1,29 @@
 import React from 'react';
-import { Box, Grid, Avatar, Typography, useTheme, Button } from '@mui/material';
+import {
+    Box,
+    Grid,
+    Avatar,
+    Typography,
+    useTheme,
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    Divider,
+    CircularProgress
+} from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from '@mui/styles';
 import SubCard from '../../ui-component/cards/SubCard';
 import MainCard from '../../ui-component/cards/MainCard';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 import { BiEditAlt } from 'react-icons/bi';
 import FullWidthTabs from './tabs';
+import Textfield from '../../components/reusables/FormUI/Textfield';
+import Textarea from '../../components/reusables/FormUI/Textarea';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,13 +50,27 @@ const Profile = () => {
     const { root, profile_cover_img } = useStyles();
     const theme = useTheme();
     const matchDownMd = useMediaQuery('(min-width:600px)');
+    const [open, setOpen] = React.useState(false);
+    const matches = useMediaQuery('(min-width:900px)');
+    const handleClose = () => {
+        setOpen(false);
+    };
 
+    const descriptionElementRef = React.useRef(null);
+    React.useEffect(() => {
+        if (open) {
+            const { current: descriptionElement } = descriptionElementRef;
+            if (descriptionElement !== null) {
+                descriptionElement.focus();
+            }
+        }
+    }, [open]);
     return (
         <Box className={root}>
             <Grid container>
                 <Grid item>
                     <Box className={profile_cover_img}>
-                        <img alt="bio" src="./dash.jpg" />
+                        <img alt="bio" src="./dashf.jpg" />
                     </Box>
                 </Grid>
                 {/* profile */}
@@ -179,6 +211,116 @@ const Profile = () => {
                     </Box>
                 </Grid>
             </Grid>
+
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                //   scroll={scroll}
+                aria-labelledby="scroll-dialog-title"
+                aria-describedby="scroll-dialog-description"
+            >
+                <DialogTitle id="scroll-dialog-title">Message</DialogTitle>
+                <DialogContent
+                //  dividers={scroll === 'paper'}
+                >
+                    <DialogContentText id="scroll-dialog-description" ref={descriptionElementRef} tabIndex={-1}>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <Formik
+                                    initialValues={{
+                                        title: '',
+                                        recievers_address: '',
+                                        message: ''
+                                    }}
+                                    onSubmit={async (values) => {
+                                        console.log(values);
+                                        // await dispatch(login(values));
+                                        // if (!window.store.getState().authReducer.authenticated) {
+                                        //   await setClickData({
+                                        //     type: 'error',
+                                        //     content: window.store.getState().authReducer.error,
+                                        //   });
+                                        //   showToast();
+                                        // }
+                                        //  await sleep(3000);
+                                        //navigate('/profile-setup');
+                                    }}
+                                    validationSchema={Yup.object().shape({
+                                        title: Yup.string().required('Title is Required'),
+                                        recievers_address: Yup.string().required('Recievers Address is Required'),
+                                        message: Yup.string().required('Message is Required')
+                                    })}
+                                >
+                                    {({ isSubmitting }) => (
+                                        <Form autoComplete="off">
+                                            <Grid container>
+                                                <Grid
+                                                    sx={{
+                                                        paddingRight: '20px',
+                                                        '@media (max-width: 900px)': {
+                                                            padding: '0px'
+                                                        }
+                                                    }}
+                                                    item
+                                                    xs={12}
+                                                    md={6}
+                                                >
+                                                    <Textfield
+                                                        //  disabled={!!user.firstName}
+                                                        name="title"
+                                                        helpertext="Title"
+                                                    />
+                                                </Grid>
+                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                    <Textfield
+                                                        //  disabled={!!user.lastName}
+                                                        name="recievers_address"
+                                                        helpertext="Recievers Address"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <Textarea num_of_rows={8} name="message" helpertext="Message" />
+                                                </Grid>
+
+                                                <Grid xs={12} item>
+                                                    <Box sx={{ ...theme.typography.flex }}>
+                                                        <DialogActions>
+                                                            <Button
+                                                                startIcon={
+                                                                    isSubmitting ? <CircularProgress color="secondary" size="1rem" /> : null
+                                                                }
+                                                                sx={{
+                                                                    width: '200px',
+                                                                    marginTop: '20px',
+                                                                    letterSpacing: '1px',
+                                                                    borderRadius: '0px',
+                                                                    color: 'white',
+                                                                    textTransform: 'capitalize',
+                                                                    '& :hover': {
+                                                                        color: 'black'
+                                                                    },
+                                                                    [theme.breakpoints.down('sm')]: {
+                                                                        marginTop: '30px'
+                                                                    }
+                                                                }}
+                                                                disableElevation
+                                                                variant="contained"
+                                                                type="submit"
+                                                            >
+                                                                Send Message
+                                                            </Button>
+                                                        </DialogActions>
+                                                    </Box>
+                                                </Grid>
+                                            </Grid>
+                                        </Form>
+                                    )}
+                                </Formik>
+                            </Grid>
+                        </Grid>
+                    </DialogContentText>
+                </DialogContent>
+            </Dialog>
         </Box>
     );
 };

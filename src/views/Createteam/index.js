@@ -113,7 +113,7 @@ export default function Createteam() {
                             <Form autoComplete="off">
                                 <Grid container>
                                     <Grid xs={12}>
-                                        <Teamimage ref={filesharhe_ref} />
+                                        <Teamimage name="teams_image" ref={filesharhe_ref} />
                                     </Grid>
 
                                     <Grid

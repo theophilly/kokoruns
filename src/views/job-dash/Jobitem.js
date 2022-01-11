@@ -34,9 +34,18 @@ export default function Jobitem() {
         >
             <Grid container>
                 <Grid xs={12} item>
-                    <Box sx={{ background: 'white', display: 'flex', justifyContent: 'space-between', padding: '5px 20px 5px 5px' }}>
+                    <Box
+                        sx={{
+                            background: 'white',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            padding: '5px 20px 5px 5px',
+                            '@media (max-width: 600px)': {
+                                flexDirection: 'column'
+                            }
+                        }}
+                    >
                         <Box sx={{ display: 'flex' }}>
-                            <Box></Box>
                             <Box
                                 component="img"
                                 src="./samantha.jpg"
@@ -54,9 +63,18 @@ export default function Jobitem() {
                                 </Box>
                             </Box>
                         </Box>
-                        <IconBox text="Lagos, Nigeria" icon={<PlaceIcon fontSize="small" sx={{ color: theme.palette.text }} />} />
-                        <IconBox text="2yrs Experience" icon={<WorkIcon fontSize="small" sx={{ color: theme.palette.text }} />} />
-                        <IconBox text="N250,000" icon={<CreditCardIcon fontSize="small" sx={{ color: theme.palette.text }} />} />
+                        <Box
+                            sx={{
+                                '@media (max-width: 600px)': {
+                                    display: 'flex',
+                                    m: '5px'
+                                }
+                            }}
+                        >
+                            <IconBox text="Lagos, Nigeria" icon={<PlaceIcon fontSize="small" sx={{ color: theme.palette.text }} />} />
+                            <IconBox text="2yrs Experience" icon={<WorkIcon fontSize="small" sx={{ color: theme.palette.text }} />} />
+                            <IconBox text="N250,000" icon={<CreditCardIcon fontSize="small" sx={{ color: theme.palette.text }} />} />
+                        </Box>
                     </Box>
                 </Grid>
             </Grid>

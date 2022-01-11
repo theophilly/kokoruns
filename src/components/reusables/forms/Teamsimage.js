@@ -5,8 +5,8 @@ import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 // material-ui
 import { Box, Grid, Typography, Button, useTheme } from '@mui/material';
 
-const Teamimage = React.forwardRef((props, ref) => {
-    const [field, mata] = useField('teams_image');
+const Teamimage = React.forwardRef(({ name }, ref) => {
+    const [field, mata] = useField(name);
     const theme = useTheme();
 
     const configTextfield = {

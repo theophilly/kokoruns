@@ -62,7 +62,8 @@ const Profilesetup = () => {
                 initialValues={{
                     firstName: '',
                     lastName: '',
-                    dob: new Date('2014-08-18T21:11:54'),
+                    //  dob: new Date('2014-08-18T21:11:54'),
+                    dob: '',
                     email: '',
                     phone: '',
                     gender: '',

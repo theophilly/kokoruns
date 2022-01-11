@@ -99,6 +99,28 @@ const profile = {
             ]
         },
         {
+            id: 'events',
+            title: 'Events',
+            type: 'collapse',
+            icon: icons.IconWindmill,
+            children: [
+                {
+                    id: 'my-events',
+                    title: 'My Events',
+                    type: 'item',
+                    url: '/my-events',
+                    breadcrumbs: false
+                },
+                {
+                    id: 'my-invites',
+                    title: 'My Invites',
+                    type: 'item',
+                    url: '/my-invites',
+                    breadcrumbs: false
+                }
+            ]
+        },
+        {
             id: 'recommendations',
             title: 'Recommendations',
             type: 'item',
@@ -133,7 +155,7 @@ const profile = {
             id: 'settings',
             title: 'Settings',
             type: 'item',
-            url: '/utils/util-shadow',
+            url: '/settings',
             icon: icons.IconShadow,
             breadcrumbs: false
         }
