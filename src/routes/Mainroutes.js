@@ -36,7 +36,7 @@ const Mainroutes = (authenticated, active, token) => {
             },
             {
                 path: '/profile-setup',
-                element: token ? active ? <Navigate to="/profile" /> : <Profilesetup /> : <Navigate to="/signup" />
+                element: token ? active ? <Navigate to="/profile" /> : <Profilesetup /> : <Navigate to="/login" />
             },
             {
                 path: '/profilesuccess',
