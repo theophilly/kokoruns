@@ -14,10 +14,10 @@ import {
     Divider,
     CircularProgress
 } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from '@mui/styles';
 import SubCard from '../../ui-component/cards/SubCard';
-import MainCard from '../../ui-component/cards/MainCard';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { BiEditAlt } from 'react-icons/bi';
@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = () => {
+    const { authenticated, user } = useSelector((state) => state.authReducer);
     const { root, profile_cover_img } = useStyles();
     const theme = useTheme();
     const matchDownMd = useMediaQuery('(min-width:600px)');
@@ -55,6 +56,8 @@ const Profile = () => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    console.log(user);
 
     const descriptionElementRef = React.useRef(null);
     React.useEffect(() => {
@@ -98,7 +101,7 @@ const Profile = () => {
                                 />
                                 <Box mt="78px">
                                     <Typography sx={{ ...theme.typography.heading, fontWeight: 'bold', textAlign: 'center' }}>
-                                        Adejola Ademola
+                                        {user.first_name} {user.last_name}
                                     </Typography>
                                     <Typography sx={{ textAlign: 'center', fontSize: '0.8rem' }}>UI/UX Designer at Kokoruns Ltd</Typography>
                                 </Box>
@@ -148,19 +151,19 @@ const Profile = () => {
                         <Box sx={{ display: 'flex', mt: '5px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Phone Number: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-                                0907 654 3210
+                                {user.phone}
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Email: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-                                adejolaofademola@mail.com
+                                {user.email}
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Location: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-                                Lagos, Nigeria
+                                {user.state}, Nigeria
                             </Typography>
                         </Box>
                     </SubCard>
@@ -197,13 +200,7 @@ const Profile = () => {
                         }}
                         title="Bio"
                     >
-                        <Typography sx={{ fontSize: '0.9rem', color: '#333333', ml: '5px' }}>
-                            I am an energetic user experience designer that believes users should have the ultimate experience with visually
-                            appealing interfaces. I have 3 years of experience in marketing communications and a year of user experience
-                            design. These years has helped me garnered real life experiences in dealing with users and achieving preferred
-                            goals. My skills set includes user research, wireframing, prototyping and brainstorming. I believe these will
-                            enable me add value to your firm and expand your customer base.
-                        </Typography>
+                        <Typography sx={{ fontSize: '0.9rem', color: '#333333', ml: '5px' }}>{user.about}</Typography>
                     </SubCard>
                     {/* tabs */}
                     <Box sx={{ width: '100%' }}>

@@ -1,23 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 // material-ui
-import { Typography, Button, Grid, Box, CircularProgress, useTheme } from '@mui/material';
+import {
+    Typography,
+    Button,
+    Grid,
+    Box,
+    CircularProgress,
+    useTheme,
+    Dialog,
+    DialogTitle,
+    DialogActions,
+    DialogContent,
+    DialogContentText
+} from '@mui/material';
 
 //local import
 import Textfield from '../reusables/FormUI/Textfield';
 import Passwordfield from '../reusables/FormUI/Passwordfield';
-// import { login } from '../../store/actions/authActions';
+import Success from '../../ui-component/modals/Success';
+import Snackbar from '../reusables/Snackbar';
+import { signup } from '../../store/actions/authActions';
 
 const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
 export default function SignUpForm({ onclick, setClickData, showToast, path }) {
     const navigate = useNavigate();
     const theme = useTheme();
-    // const dispatch = useDispatch();
+    const [recommendOpen, setRecommendOpen] = useState(false);
+    const dispatch = useDispatch();
+
+    const [alertContent, setAlertContent] = React.useState({
+        type: 'error',
+        content: ''
+    });
+
+    const [snack, setSnack] = React.useState(false);
+
+    const handleSnackClick = () => {
+        setSnack(true);
+    };
+    const handleSnackClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnack(false);
+    };
+
+    const handleRecommendOpen = () => {
+        setRecommendOpen(true);
+    };
+    const handleRecommendClose = () => {
+        setRecommendOpen(false);
+        navigate('/login');
+    };
 
     return (
         <Box
@@ -32,6 +73,7 @@ export default function SignUpForm({ onclick, setClickData, showToast, path }) {
             <Typography variant="h1" component="h1">
                 Register
             </Typography>
+            <Snackbar alertContent={alertContent} open={snack} handleClose={handleSnackClose} />
             {/* third */}
             <Box marginTop="20px">
                 <Formik
@@ -41,16 +83,18 @@ export default function SignUpForm({ onclick, setClickData, showToast, path }) {
                         confirmPassword: ''
                     }}
                     onSubmit={async (values) => {
-                        // await dispatch(login(values));
-                        // if (!window.store.getState().authReducer.authenticated) {
-                        //   await setClickData({
-                        //     type: 'error',
-                        //     content: window.store.getState().authReducer.error,
-                        //   });
-                        //   showToast();
-                        // }
-                        await sleep(3000);
-                        navigate('/profile-setup');
+                        await dispatch(signup(values));
+                        if (window.store.getState().authReducer.user_id) {
+                            handleRecommendOpen();
+                            ///  await sleep(3000);
+                            return;
+                        }
+
+                        await setAlertContent({
+                            type: 'warning',
+                            content: window.store.getState().authReducer.error
+                        });
+                        handleSnackClick();
                     }}
                     validationSchema={Yup.object().shape({
                         email: Yup.string().email('Invalid email format').required('Required'),
@@ -121,6 +165,12 @@ export default function SignUpForm({ onclick, setClickData, showToast, path }) {
                     Sign In
                 </Typography>
             </Box>
+            <Dialog open={recommendOpen} onClose={handleRecommendClose} aria-labelledby="responsive-dialog-title">
+                <Typography sx={{ fontWeight: '600', pl: '20px', pt: '10px' }}>Make Recommendations</Typography>
+                <DialogContent>
+                    <Success text="Login" to="/login" content="Your account has been successfully created, please login" />
+                </DialogContent>
+            </Dialog>
         </Box>
     );
 }

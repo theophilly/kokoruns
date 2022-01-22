@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
+import { useDispatch } from 'react-redux';
 
 // material-ui
 import { Box, Grid, Typography, CircularProgress, Button, useTheme } from '@mui/material';
@@ -10,6 +11,7 @@ import { makeStyles } from '@mui/styles';
 // project imports
 import Setupprofile from '../components/reusables/forms/Setupprofile';
 import Setupprofileimage from '../components/reusables/forms/Setupprofileimage';
+import { updateUserProfile } from '../store/actions/authActions';
 const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
 // styles
@@ -18,10 +20,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '15px calc((100vw - 1150px) / 2)',
         //   background: theme.palette.background1,
         background: '#faf9f9'
-    },
-    upper_bluebox: {},
-    red_text_info: {},
-    lower_buttons: {}
+    }
 }));
 
 const FILE_SIZE = 200000;
@@ -32,6 +31,7 @@ const Profilesetup = () => {
     const [dis_ability, setDis_ability] = useState(false);
     const filesharhe_ref = useRef();
     const theme = useTheme();
+    const dispatch = useDispatch();
 
     return (
         <Box className={root}>
@@ -86,19 +86,39 @@ const Profilesetup = () => {
                 }}
                 onSubmit={async (formvalues) => {
                     await sleep(3000);
-                    //    const cookie = getCookie(token);
-                    //    if (!cookie) {
-                    //      await setAlertContent({
-                    //        type: 'error',
-                    //        content: 'session expired',
-                    //      });
-                    //      handleClick();
-                    //      dispatch({ type: 'SIGN_OUT' });
-                    //      return;
-                    //    }
-                    //    values = formvalues;
-                    //    initializePayment(onSuccessWrapper, onClose);
-                    //  console.log(formvalues);
+                    // const cookie = getCookie(token);
+                    //  if (!cookie) {
+                    //   await setAlertContent({
+                    //     type: 'error',
+                    //     content: 'session expired',
+                    //   });
+                    //  handleClick();
+                    //  dispatch({ type: 'SIGN_OUT' });
+                    //   return;
+                    //   }
+                    //  values = formvalues;
+                    //  initializePayment(onSuccessWrapper, onClose);
+                    console.log(formvalues);
+                    const newFormValues = {
+                        marital_status: formvalues.maritalStatus,
+                        disabled: formvalues.disablility,
+                        educational_qualification: formvalues.academicLevel,
+                        preferred_job_location_state: formvalues.preffered_jl,
+                        preferred_job_location_lga: formvalues.preffered_jlga,
+                        first_name: formvalues.firstName,
+                        last_name: formvalues.lastName,
+                        about: formvalues.about,
+                        phone: formvalues.phone,
+                        gender: formvalues.gender,
+                        state: formvalues.state,
+                        lga: formvalues.lga,
+                        current_employer: formvalues.current_employer,
+                        employment_status: formvalues.employment_status,
+                        employment_type: formvalues.employment_type
+                    };
+                    await dispatch(updateUserProfile(newFormValues));
+
+                    // if user navigate to profile success
                 }}
             >
                 <Setupprofile

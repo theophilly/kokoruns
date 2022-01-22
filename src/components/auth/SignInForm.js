@@ -11,14 +11,33 @@ import { useTheme } from '@mui/material/styles';
 // local import
 import Textfield from '../reusables/FormUI/Textfield';
 import Passwordfield from '../reusables/FormUI/Passwordfield';
-// import { login } from '../../store/actions/authActions';
+import { login, fetchUserDetails } from '../../store/actions/authActions';
+import Snackbar from '../reusables/Snackbar';
 
 const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
-export default function SignInForm({ onclick, setClickData, showToast, path }) {
+export default function SignInForm() {
     const navigate = useNavigate();
     const theme = useTheme();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+
+    const [alertContent, setAlertContent] = React.useState({
+        type: 'error',
+        content: ''
+    });
+
+    const [snack, setSnack] = React.useState(false);
+
+    const handleSnackClick = () => {
+        setSnack(true);
+    };
+    const handleSnackClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnack(false);
+    };
 
     return (
         <Box
@@ -33,6 +52,7 @@ export default function SignInForm({ onclick, setClickData, showToast, path }) {
             <Typography variant="h1" component="h1">
                 Secure Member Log-in
             </Typography>
+            <Snackbar alertContent={alertContent} open={snack} handleClose={handleSnackClose} />
             {/* third */}
             <Box marginTop="20px">
                 <Formik
@@ -41,16 +61,26 @@ export default function SignInForm({ onclick, setClickData, showToast, path }) {
                         loginPassword: ''
                     }}
                     onSubmit={async (values) => {
-                        // await dispatch(login(values));
-                        // if (!window.store.getState().authReducer.authenticated) {
-                        //   await setClickData({
-                        //     type: 'error',
-                        //     content: window.store.getState().authReducer.error,
-                        //   });
-                        //   showToast();
-                        // }
-                        await sleep(3000);
-                        navigate('/profile-setup');
+                        await dispatch(login(values));
+                        if (window.store.getState().authReducer.error) {
+                            await setAlertContent({
+                                type: 'error',
+                                content: window.store.getState().authReducer.error
+                            });
+                            handleSnackClick();
+                            return;
+                        }
+
+                        if (window.store.getState().authReducer.active === 1) {
+                            await dispatch(fetchUserDetails());
+                            navigate('/profile');
+                        } else {
+                            await navigate('/profile-setup');
+                            await dispatch(fetchUserDetails());
+                        }
+
+                        //  await sleep(3000);
+                        //  navigate('/profile-setup');
                     }}
                     validationSchema={Yup.object().shape({
                         loginEmail: Yup.string().email('Invalid email format').required('Required'),

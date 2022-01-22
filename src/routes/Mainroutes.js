@@ -9,7 +9,7 @@ import Profilesetup from '../pages/Profilesetup';
 import Profilesetupsuccess from '../pages/Profilesetupsuccess';
 import MinimalLayout from '../layout/MinimalLayout';
 
-const Mainroutes = (isLoggedIn) => {
+const Mainroutes = (authenticated, active, token) => {
     return {
         path: '/',
         element: <MinimalLayout />,
@@ -20,11 +20,11 @@ const Mainroutes = (isLoggedIn) => {
             },
             {
                 path: '/login',
-                element: <Login />
+                element: authenticated ? <Navigate to="/profile" /> : <Login />
             },
             {
                 path: '/register',
-                element: <Signup />
+                element: authenticated ? <Navigate to="/profile" /> : <Signup />
             },
             {
                 path: '/about',
@@ -36,7 +36,7 @@ const Mainroutes = (isLoggedIn) => {
             },
             {
                 path: '/profile-setup',
-                element: <Profilesetup />
+                element: token ? active ? <Navigate to="/profile" /> : <Profilesetup /> : <Navigate to="/signup" />
             },
             {
                 path: '/profilesuccess',

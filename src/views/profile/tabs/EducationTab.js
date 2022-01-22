@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Box,
     Grid,
@@ -14,6 +14,7 @@ import {
     DialogContentText,
     CircularProgress
 } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { BiEditAlt } from 'react-icons/bi';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -23,6 +24,7 @@ import * as Yup from 'yup';
 import Textfield from '../../../components/reusables/FormUI/Textfield';
 import Textarea from '../../../components/reusables/FormUI/Textarea';
 import Datepicker from '../../../components/reusables/FormUI/Datepicker';
+import { fecthEducations, addEducation } from '../../../store/actions/userDataActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,7 +43,37 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Item = ({ year, title, sub, clicked }) => {
+const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+];
+
+const months = {
+    January: '01',
+    February: '02',
+    March: '03',
+    April: '04',
+    May: '05',
+    June: '06',
+    July: '07',
+    August: '08',
+    September: '09',
+    October: '10',
+    November: '11',
+    December: '12'
+};
+
+const Item = ({ year, title, sub, clicked, startYear }) => {
     const theme = useTheme();
 
     return (
@@ -80,7 +112,9 @@ const Item = ({ year, title, sub, clicked }) => {
                     }
                 }}
             >
-                <Typography>{year} </Typography>
+                <Typography>
+                    {startYear && startYear + ' - '} {year}{' '}
+                </Typography>
                 <BiEditAlt onClick={() => clicked(true)} />
             </Box>
             <Typography>{title}</Typography>
@@ -105,9 +139,19 @@ const Item = ({ year, title, sub, clicked }) => {
 };
 
 const EducationTab = () => {
+    const { educations } = useSelector((state) => state.userDataReducer);
+    React.useEffect(() => {
+        (async function () {
+            await dispatch(fecthEducations());
+        })();
+    }, []);
+
     const { root, lower_button } = useStyles();
     const theme = useTheme();
+    const dispatch = useDispatch();
     const matches = useMediaQuery('(min-width:900px)');
+
+    console.log(educations);
 
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
@@ -135,9 +179,14 @@ const EducationTab = () => {
             <Grid spacing={10} container>
                 <Grid xs={12} md={6} item>
                     <Box bgcolor="white" padding="20px 0" borderRadius="5px">
-                        {education.education.map((item) => (
+                        {/* {education.education.map((item) => (
                             <Item clicked={setOpen} year={item.duration} title={item.award} sub={item.school} />
-                        ))}
+                        ))} */}
+
+                        {educations.length > 0 &&
+                            educations.map((item) => (
+                                <Item clicked={setOpen} year={new Date(item.end).getUTCFullYear()} title={item.course} sub={item.school} />
+                            ))}
 
                         <Button onClick={() => setOpen(true)} className={lower_button} variant="outlined" startIcon={<AddCircleIcon />}>
                             Add Education
@@ -178,27 +227,40 @@ const EducationTab = () => {
                             <Grid item xs={12}>
                                 <Formik
                                     initialValues={{
-                                        title: '',
-                                        recievers_address: '',
+                                        degree: '',
+                                        name_of_institution: '',
                                         date_started: null,
                                         date_completed: null
                                     }}
                                     onSubmit={async (values) => {
                                         console.log(values);
-                                        // await dispatch(login(values));
-                                        // if (!window.store.getState().authReducer.authenticated) {
-                                        //   await setClickData({
-                                        //     type: 'error',
-                                        //     content: window.store.getState().authReducer.error,
-                                        //   });
-                                        //   showToast();
-                                        // }
-                                        //  await sleep(3000);
-                                        //navigate('/profile-setup');
+                                        await dispatch(
+                                            addEducation({
+                                                //  start_month: values.date_started.getUTCMonth() + 1,
+                                                start_month: months[monthNames[values.date_started.getMonth()]],
+                                                start_year: values.date_started.getUTCFullYear(),
+                                                end_month: months[monthNames[values.date_completed.getMonth()]],
+                                                // end_month: values.date_completed.getUTCMonth() + 1,
+                                                end_year: values.date_completed.getUTCFullYear(),
+                                                school: values.name_of_institution,
+                                                course: values.degree
+                                                //  skills: '[ {"skill_name": "Psychology"}, {"skill_name": "Human Relations"}]',
+                                                // class_of_degree: 'Imo'
+                                            })
+                                        );
+                                        //  if (!window.store.getState().authReducer.authenticated) {
+                                        //    await setClickData({
+                                        //      type: 'error',
+                                        //      content: window.store.getState().authReducer.error,
+                                        //    });
+                                        //    showToast();
+                                        //  }
+                                        //   await sleep(3000);
+                                        // navigate('/profile-setup');
                                     }}
                                     validationSchema={Yup.object().shape({
-                                        title: Yup.string().required('Title is Required'),
-                                        recievers_address: Yup.string().required('Recievers Address is Required'),
+                                        degree: Yup.string().required('Degree is Required'),
+                                        name_of_institution: Yup.string().required('Name of Institution is Required'),
                                         date_started: Yup.date().required('Starting Date is Required is Required'),
                                         date_completed: Yup.date().required('Date Completed is Required is Required')
                                     })}
@@ -209,6 +271,7 @@ const EducationTab = () => {
                                                 <Grid
                                                     sx={{
                                                         paddingRight: '20px',
+                                                        mt: '10px',
                                                         '@media (max-width: 900px)': {
                                                             padding: '0px'
                                                         }
@@ -223,10 +286,10 @@ const EducationTab = () => {
                                                         helpertext="Degree"
                                                     />
                                                 </Grid>
-                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
                                                     <Textfield
                                                         //  disabled={!!user.lastName}
-                                                        name="name_of_insitution"
+                                                        name="name_of_institution"
                                                         helpertext="Name of Insitution"
                                                     />
                                                 </Grid>
@@ -305,8 +368,8 @@ const EducationTab = () => {
                             <Grid item xs={12}>
                                 <Formik
                                     initialValues={{
-                                        title: '',
-                                        recievers_address: '',
+                                        degree: '',
+                                        name_of_institution: '',
                                         date_started: null,
                                         date_completed: null
                                     }}
@@ -324,8 +387,8 @@ const EducationTab = () => {
                                         //navigate('/profile-setup');
                                     }}
                                     validationSchema={Yup.object().shape({
-                                        title: Yup.string().required('Title is Required'),
-                                        recievers_address: Yup.string().required('Recievers Address is Required'),
+                                        degree: Yup.string().required('Degree is Required'),
+                                        name_of_institution: Yup.string().required('Name of Institution is Required'),
                                         date_started: Yup.date().required('Starting Date is Required is Required'),
                                         date_completed: Yup.date().required('Date Completed is Required is Required')
                                     })}
@@ -353,7 +416,7 @@ const EducationTab = () => {
                                                 <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
                                                     <Textfield
                                                         //  disabled={!!user.lastName}
-                                                        name="name_of_insitution"
+                                                        name="name_of_institution"
                                                         helpertext="Name of Insitution"
                                                     />
                                                 </Grid>
@@ -361,6 +424,8 @@ const EducationTab = () => {
                                                 <Grid
                                                     sx={{
                                                         paddingRight: '20px',
+                                                        mt: '10px',
+
                                                         '@media (max-width: 900px)': {
                                                             padding: '0px'
                                                         }
@@ -371,7 +436,7 @@ const EducationTab = () => {
                                                 >
                                                     <Datepicker name="date_started" helpertext="Date Started" />
                                                 </Grid>
-                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
                                                     <Datepicker name="date_completed" helpertext="Date Completed" />
                                                 </Grid>
 

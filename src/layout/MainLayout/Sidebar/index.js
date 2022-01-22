@@ -12,6 +12,7 @@ import { BrowserView, MobileView } from 'react-device-detect';
 import MenuList from './MenuList';
 import LogoSection from '../LogoSection';
 import MenuCard from './MenuCard';
+import LogoutItem from '../Sidebar/MenuList/NavItem/LogoutItem';
 import { drawerWidth } from '../../../store/constant';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
@@ -39,12 +40,14 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                     }}
                 >
                     <MenuList />
+                    <LogoutItem />
                     <MenuCard />
                 </Box>
             </BrowserView>
             <MobileView>
                 <Box sx={{ px: 2 }}>
                     <MenuList />
+                    <LogoutItem />
                     <MenuCard />
                 </Box>
             </MobileView>
