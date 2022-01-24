@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { AppBar, Toolbar, Button, IconButton, Drawer, Link, Box, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
@@ -35,6 +35,10 @@ const headersData = () => [
         href: '/register',
         class: 'signupButton',
         variant: 'contained'
+    },
+    {
+        label: 'Sign Out',
+        variant: 'outlined'
     }
 ];
 
@@ -96,13 +100,28 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'white',
         textTransform: 'capitalize',
         border: '1px solid #0991FF'
+    },
+    signOutButton: {
+        fontWeight: 'bold',
+        marginLeft: '20px',
+        borderRadius: '5px',
+        color: 'rgb(217, 38, 39)',
+        padding: '6px 60px',
+        backgroundColor: 'white',
+        textTransform: 'capitalize',
+        border: '1px solid rgb(217, 38, 39)',
+        '&:hover': {
+            border: '1px solid rgb(217, 38, 39)'
+        }
     }
 }));
 
 export default function Navbar() {
     const theme = useTheme();
+    const { authenticated, active, token } = useSelector((state) => state.authReducer);
+    const dispatch = useDispatch();
 
-    const { header, logo, menuButton, toolbar, drawerContainer, signupButton, loginButton } = useStyles({ theme });
+    const { header, logo, menuButton, toolbar, drawerContainer, signupButton, loginButton, signOutButton } = useStyles({ theme });
 
     const [state, setState] = useState({
         mobileView: true,
@@ -126,6 +145,10 @@ export default function Navbar() {
             window.removeEventListener('resize', () => setResponsiveness());
         };
     }, []);
+
+    const logoutHandler = (id) => {
+        dispatch({ type: 'SIGN_OUT' });
+    };
 
     const displayDesktop = () => {
         return (
@@ -213,6 +236,7 @@ export default function Navbar() {
                 return (
                     <Button
                         key={index}
+                        style={{ display: token && 'none' }}
                         {...{
                             key: label,
                             color: 'primary',
@@ -221,6 +245,23 @@ export default function Navbar() {
                             to: href,
                             component: RouterLink,
                             className: `${menuButton} ${label === 'Register' ? signupButton : ''} ${label === 'Sign In' ? loginButton : ''}`
+                        }}
+                    >
+                        {label}
+                    </Button>
+                );
+            } else if (['Sign Out'].includes(label)) {
+                return (
+                    <Button
+                        onClick={logoutHandler}
+                        style={{ display: !token && 'none' }}
+                        key={index}
+                        {...{
+                            key: label,
+                            color: 'primary',
+                            disableElevation: true,
+                            variant: variant,
+                            className: `${menuButton} ${signOutButton}`
                         }}
                     >
                         {label}
