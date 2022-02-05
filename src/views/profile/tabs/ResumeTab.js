@@ -299,10 +299,10 @@ const ResumeTab = () => {
                                                 updateResume(edit.experience_id, {
                                                     start: `${new Date(values.date_started).getFullYear()}-${
                                                         months[monthNames[new Date(values.date_started).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
+                                                    }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`,
                                                     end: `${new Date(values.date_completed).getFullYear()}-${
                                                         months[monthNames[new Date(values.date_completed).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_completed).getDate() + 1)).slice(-2)}`,
+                                                    }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`,
                                                     company_name: values.name_of_company,
                                                     role: values.role,
                                                     decription: values.responsibilities,
@@ -471,10 +471,10 @@ const ResumeTab = () => {
                                                 addResume({
                                                     start: `${new Date(values.date_started).getFullYear()}-${
                                                         months[monthNames[new Date(values.date_started).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
+                                                    }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`,
                                                     end: `${new Date(values.date_completed).getFullYear()}-${
                                                         months[monthNames[new Date(values.date_completed).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_completed).getDate() + 1)).slice(-2)}`,
+                                                    }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`,
                                                     company_name: values.name_of_company,
                                                     role: values.role,
                                                     decription: values.responsibilities,

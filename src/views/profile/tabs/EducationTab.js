@@ -321,10 +321,10 @@ const EducationTab = () => {
                                                     is_current: false,
                                                     start: `${new Date(values.date_started).getFullYear()}-${
                                                         months[monthNames[new Date(values.date_started).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
+                                                    }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`,
                                                     end: `${new Date(values.date_completed).getFullYear()}-${
                                                         months[monthNames[new Date(values.date_completed).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_completed).getDate() + 1)).slice(-2)}`
+                                                    }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
                                                 })
                                             );
                                             setEducationStep((step) => step + 2);
@@ -497,10 +497,10 @@ const EducationTab = () => {
                                                     is_current: false,
                                                     start: `${new Date(values.date_started).getFullYear()}-${
                                                         months[monthNames[new Date(values.date_started).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
+                                                    }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`,
                                                     end: `${new Date(values.date_completed).getFullYear()}-${
                                                         months[monthNames[new Date(values.date_completed).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_completed).getDate() + 1)).slice(-2)}`
+                                                    }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
                                                 })
                                             );
                                             setEducationStep((step) => step + 1);
@@ -638,10 +638,10 @@ const EducationTab = () => {
                                                     is_current: false,
                                                     start: `${new Date(values.date_started).getFullYear()}-${
                                                         months[monthNames[new Date(values.date_started).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
+                                                    }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`,
                                                     end: `${new Date(values.date_completed).getFullYear()}-${
                                                         months[monthNames[new Date(values.date_completed).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_completed).getDate() + 1)).slice(-2)}`
+                                                    }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
                                                 })
                                             );
                                             setCertificateStep((step) => step + 2);
