@@ -230,6 +230,36 @@ export const addSocial = (portfolio) => {
     };
 };
 
+export const updateSocial = (id, social) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        await api
+            .updateSocial(id, social)
+            .then((res) => {
+                dispatch(fetchUserDetails());
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    };
+};
+
+export const deleteSocial = (social) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        await api
+            .deleteSocial(social)
+            .then((res) => {
+                dispatch(fetchUserDetails());
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    };
+};
+
 // export const signup = (user) => {
 //     return async (dispatch) => {
 //         dispatch({ type: actionType.LOGIN_BEGIN });

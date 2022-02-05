@@ -24,7 +24,14 @@ import SubCard from '../../../ui-component/cards/SubCard';
 import pictures from '../../../utils/pictures';
 import { BiEditAlt } from 'react-icons/bi';
 import ResumeUpload from '../../../components/reusables/forms/ResumeUpload';
-import { addSocial, addPortfolio, deletePortfolio, updatePortfolio } from '../../../store/actions/userDataActions';
+import {
+    addSocial,
+    addPortfolio,
+    deletePortfolio,
+    updatePortfolio,
+    deleteSocial,
+    updateSocial
+} from '../../../store/actions/userDataActions';
 import Success from '../../../ui-component/modals/Success';
 import Warning from '../../../ui-component/modals/Warning';
 
@@ -194,7 +201,16 @@ const PortfolioTab = () => {
                 portfolio_name: edit.portfolio_title
             })
         );
-        handlePictures();
+
+        await setLoad(false);
+    };
+    const delSocial = async () => {
+        await setLoad(true);
+        await dispatch(
+            deleteSocial({
+                id: edit.online_link_id
+            })
+        );
         await setLoad(false);
     };
 
@@ -228,7 +244,7 @@ const PortfolioTab = () => {
                         {social_links.length > 0 && (
                             <Box sx={{ display: 'flex', height: 'auto', flexWrap: 'wrap', gap: '10px' }}>
                                 {social_links.map((item) => (
-                                    <Tag setEdit={setEdit} clicked={setSocialOpen} {...item} />
+                                    <Tag value={item} setEdit={setEdit} clicked={setSocialOpen} {...item} />
                                 ))}
                             </Box>
                         )}
@@ -286,7 +302,6 @@ const PortfolioTab = () => {
                 <DialogContent>
                     {edit.show ? (
                         // update
-
                         <PortfolioStepper portfolioStep={pictureStep} setPortfolioStep={setPictureStep}>
                             <Grid container>
                                 <Grid item xs={12}>
@@ -531,94 +546,240 @@ const PortfolioTab = () => {
             >
                 <DialogTitle id="scroll-dialog-title">Add Social Link</DialogTitle>
                 <DialogContent>
-                    <PortfolioStepper portfolioStep={socialStep} setPortfolioStep={setSocialStep}>
-                        <Grid container>
-                            <Grid item xs={12}>
-                                <Formik
-                                    initialValues={{
-                                        social: '',
-                                        social_link: ''
-                                    }}
-                                    onSubmit={async (values) => {
-                                        console.log(values);
+                    {edit.show ? (
+                        // update
 
-                                        await dispatch(
-                                            addSocial({
-                                                link_title: values.social,
-                                                link_address: values.social_link
-                                            })
-                                        );
-                                        setSocialStep((step) => step + 1);
-                                    }}
-                                    validationSchema={Yup.object().shape({
-                                        social: Yup.string().required('Name od social is Required'),
-                                        social_link: Yup.string().required('social link is Required')
-                                    })}
-                                >
-                                    {({ isSubmitting }) => (
-                                        <Form autoComplete="off">
-                                            <Grid container>
-                                                <Grid
-                                                    sx={{
-                                                        paddingRight: '20px',
-                                                        '@media (max-width: 900px)': {
-                                                            padding: '0px'
-                                                        }
-                                                    }}
-                                                    item
-                                                    xs={12}
-                                                    md={6}
-                                                >
-                                                    <Textfield name="social" helpertext="Social Media" placeholder="Facebook" />
-                                                </Grid>
-                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
-                                                    <Textfield name="social_link" helpertext="Link" />
-                                                </Grid>
+                        <PortfolioStepper portfolioStep={socialStep} setPortfolioStep={setSocialStep}>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Formik
+                                        initialValues={{
+                                            social: edit.link_title,
+                                            social_link: edit.link_address
+                                        }}
+                                        onSubmit={async (values) => {
+                                            console.log(values);
 
-                                                <Grid xs={12} item>
-                                                    <Box sx={{ ...theme.typography.flex }}>
-                                                        <DialogActions>
-                                                            <Button
-                                                                startIcon={
-                                                                    isSubmitting ? <CircularProgress color="secondary" size="1rem" /> : null
-                                                                }
+                                            await dispatch(
+                                                updateSocial(edit.online_link_id, {
+                                                    link_title: values.social,
+                                                    link_address: values.social_link
+                                                })
+                                            );
+
+                                            setSocialStep((step) => step + 2);
+                                        }}
+                                        validationSchema={Yup.object().shape({
+                                            social: Yup.string().required('Name od social is Required'),
+                                            social_link: Yup.string().required('social link is Required')
+                                        })}
+                                    >
+                                        {({ isSubmitting }) => (
+                                            <Form autoComplete="off">
+                                                <Grid container>
+                                                    <Grid
+                                                        sx={{
+                                                            paddingRight: '20px',
+                                                            '@media (max-width: 900px)': {
+                                                                padding: '0px'
+                                                            }
+                                                        }}
+                                                        item
+                                                        xs={12}
+                                                        md={6}
+                                                    >
+                                                        <Textfield name="social" helpertext="Social Media" placeholder="Facebook" />
+                                                    </Grid>
+                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                        <Textfield name="social_link" helpertext="Link" />
+                                                    </Grid>
+
+                                                    <Grid xs={12} item>
+                                                        <Box sx={{ ...theme.typography.flex }}>
+                                                            <DialogActions
                                                                 sx={{
-                                                                    width: '200px',
-                                                                    marginTop: '20px',
-                                                                    letterSpacing: '1px',
-                                                                    borderRadius: '0px',
-                                                                    color: 'white',
-                                                                    textTransform: 'capitalize',
-                                                                    '& :hover': {
-                                                                        color: 'black'
-                                                                    },
-                                                                    [theme.breakpoints.down('sm')]: {
-                                                                        marginTop: '30px'
+                                                                    display: 'flex',
+                                                                    gap: '20px',
+                                                                    '@media (max-width: 513px)': {
+                                                                        gap: '10px'
                                                                     }
                                                                 }}
-                                                                disableElevation
-                                                                variant="contained"
-                                                                type="submit"
                                                             >
-                                                                Save
-                                                            </Button>
-                                                        </DialogActions>
-                                                    </Box>
+                                                                <Button
+                                                                    startIcon={
+                                                                        load ? <CircularProgress color="secondary" size="1rem" /> : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'rgb(217, 38, 39)',
+                                                                        border: '1px solid rgb(217, 38, 39)',
+                                                                        textTransform: 'capitalize',
+                                                                        '&:hover': {
+                                                                            border: '1px solid rgb(217, 38, 39)'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        },
+                                                                        '@media (max-width: 513px)': {
+                                                                            width: '120px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="outlined"
+                                                                    onClick={() => setSocialStep((step) => step + 1)}
+                                                                >
+                                                                    Delete
+                                                                </Button>
+                                                                <Button
+                                                                    startIcon={
+                                                                        isSubmitting ? (
+                                                                            <CircularProgress color="secondary" size="1rem" />
+                                                                        ) : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'white',
+                                                                        textTransform: 'capitalize',
+                                                                        '& :hover': {
+                                                                            color: 'black'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        },
+                                                                        '@media (max-width: 513px)': {
+                                                                            width: '120px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="contained"
+                                                                    type="submit"
+                                                                >
+                                                                    Update
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Box>
+                                                    </Grid>
                                                 </Grid>
-                                            </Grid>
-                                        </Form>
-                                    )}
-                                </Formik>
+                                            </Form>
+                                        )}
+                                    </Formik>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                        <Success
-                            onclick={handleSocial}
-                            text="See All social Links"
-                            // to="/recommendations"
-                            content="You have successfully added a social link
+                            <Warning
+                                load={load}
+                                onNoClick={() => setSocialStep((step) => step - 1)}
+                                onYesClick={async () => {
+                                    delSocial();
+                                    setSocialStep((step) => step + 1);
+                                }}
+                                text="Are you sure you want to delete this social link?"
+                            />
+                            <Success
+                                onclick={handleSocial}
+                                text="See All social Links"
+                                // to="/recommendations"
+                                content="You have successfully added a social link
                             You can go to your dashboard now."
-                        />
-                    </PortfolioStepper>
+                            />
+                        </PortfolioStepper>
+                    ) : (
+                        <PortfolioStepper portfolioStep={socialStep} setPortfolioStep={setSocialStep}>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Formik
+                                        initialValues={{
+                                            social: '',
+                                            social_link: ''
+                                        }}
+                                        onSubmit={async (values) => {
+                                            console.log(values);
+
+                                            await dispatch(
+                                                addSocial({
+                                                    link_title: values.social,
+                                                    link_address: values.social_link
+                                                })
+                                            );
+                                            setSocialStep((step) => step + 1);
+                                        }}
+                                        validationSchema={Yup.object().shape({
+                                            social: Yup.string().required('Name od social is Required'),
+                                            social_link: Yup.string().required('social link is Required')
+                                        })}
+                                    >
+                                        {({ isSubmitting }) => (
+                                            <Form autoComplete="off">
+                                                <Grid container>
+                                                    <Grid
+                                                        sx={{
+                                                            paddingRight: '20px',
+                                                            '@media (max-width: 900px)': {
+                                                                padding: '0px'
+                                                            }
+                                                        }}
+                                                        item
+                                                        xs={12}
+                                                        md={6}
+                                                    >
+                                                        <Textfield name="social" helpertext="Social Media" placeholder="Facebook" />
+                                                    </Grid>
+                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                        <Textfield name="social_link" helpertext="Link" />
+                                                    </Grid>
+
+                                                    <Grid xs={12} item>
+                                                        <Box sx={{ ...theme.typography.flex }}>
+                                                            <DialogActions>
+                                                                <Button
+                                                                    startIcon={
+                                                                        isSubmitting ? (
+                                                                            <CircularProgress color="secondary" size="1rem" />
+                                                                        ) : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'white',
+                                                                        textTransform: 'capitalize',
+                                                                        '& :hover': {
+                                                                            color: 'black'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="contained"
+                                                                    type="submit"
+                                                                >
+                                                                    Save
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Box>
+                                                    </Grid>
+                                                </Grid>
+                                            </Form>
+                                        )}
+                                    </Formik>
+                                </Grid>
+                            </Grid>
+                            <Success
+                                onclick={handleSocial}
+                                text="See All social Links"
+                                // to="/recommendations"
+                                content="You have successfully added a social link
+                            You can go to your dashboard now."
+                            />
+                        </PortfolioStepper>
+                    )}
                 </DialogContent>
             </Dialog>
         </Box>

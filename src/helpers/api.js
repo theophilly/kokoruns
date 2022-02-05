@@ -118,6 +118,15 @@ class Api {
         return this.init().post('/addonlinelink', data);
     };
 
+    //update  social
+    updateSocial = (id, data) => {
+        return this.init().put(`/updateonlinelink/${id}`, data);
+    };
+    //delete  social
+    deleteSocial = (data) => {
+        return this.init().delete('/deleteonlinelink', { data: { ...data } });
+    };
+
     //user update
     update = (data) => {
         return this.init().post('/updateuser', data);
