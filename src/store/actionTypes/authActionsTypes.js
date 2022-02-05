@@ -1,0 +1,12 @@
+export const LOGIN_BEGIN = 'LOGIN_BEGIN';
+export const ON_LOGIN_SUCCESS = 'ON_LOGIN_SUCCESS';
+export const ON_SIGNUP_SUCCESS = 'ON_SIGNUP_SUCCESS';
+export const ON_SIGNUP_ERROR = 'ON_SIGNUP_ERROR';
+export const ON_LOGIN_ERROR = 'ON_LOGIN_ERROR';
+export const SIGN_OUT = 'SIGN_OUT';
+export const SESSION_EXPIRED = 'SESSION_EXPIRED';
+export const USER_UPDATE = 'USER_UPDATE';
+export const ON_FETCH_BEGIN = 'ON_FETCH_BEGIN';
+export const ON_UPDATE_SUCCESS = 'ON_UPDATE_SUCCESS';
+export const ON_UPDATE_ERROR = 'ON_UPDATE_ERROR';
+export const ADD_USER_DETAILS = 'ADD_USER_DETAILS';
