@@ -116,7 +116,7 @@ const Picturebox = ({ title, path, year, setEdit, value = {}, clicked }) => {
             }}
         >
             <Box className={profile_cover_img}>
-                <img alt="bio" src={path} />
+                <img alt="bio" src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userportfolios/images/${path}`} />
             </Box>
             <Box
                 sx={{
@@ -139,6 +139,7 @@ const Picturebox = ({ title, path, year, setEdit, value = {}, clicked }) => {
             </Box>
             <Box sx={{ position: 'absolute', top: 1, right: 5 }}>
                 <BiEditAlt
+                    style={{ color: theme.palette.secondary.main1 }}
                     onClick={async () => {
                         await setEdit(() => {
                             return { ...value, show: true };
