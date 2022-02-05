@@ -104,6 +104,7 @@ class Api {
 
     //update  portfolio
     updatePortfolio = (id, data) => {
+        console.log(data);
         return this.init().put(`/updateportfolio/${id}`, data);
     };
 

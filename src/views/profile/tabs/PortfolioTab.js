@@ -24,7 +24,7 @@ import SubCard from '../../../ui-component/cards/SubCard';
 import pictures from '../../../utils/pictures';
 import { BiEditAlt } from 'react-icons/bi';
 import ResumeUpload from '../../../components/reusables/forms/ResumeUpload';
-import { addSocial, addPortfolio, deletePortfolio } from '../../../store/actions/userDataActions';
+import { addSocial, addPortfolio, deletePortfolio, updatePortfolio } from '../../../store/actions/userDataActions';
 import Success from '../../../ui-component/modals/Success';
 import Warning from '../../../ui-component/modals/Warning';
 
@@ -173,6 +173,9 @@ const PortfolioTab = () => {
             left: 0,
             behavior: 'smooth'
         });
+        setEdit((prev) => {
+            return { ...prev, show: false };
+        });
         setPictureStep(0);
     };
 
@@ -187,7 +190,8 @@ const PortfolioTab = () => {
         await setLoad(true);
         await dispatch(
             deletePortfolio({
-                id: edit.portfolio_id
+                id: edit.portfolio_id,
+                portfolio_name: edit.portfolio_title
             })
         );
         handlePictures();
@@ -280,100 +284,6 @@ const PortfolioTab = () => {
             >
                 <DialogTitle id="scroll-dialog-title">Add Pictures</DialogTitle>
                 <DialogContent>
-                    <PortfolioStepper portfolioStep={pictureStep} setPortfolioStep={setPictureStep}>
-                        <Grid container>
-                            <Grid item xs={12}>
-                                <Formik
-                                    initialValues={{
-                                        portfolio_title: '',
-                                        portfolio_year: '',
-                                        portfolio_image: ''
-                                    }}
-                                    onSubmit={async (values) => {
-                                        console.log(values);
-
-                                        var formData = rebuildData(values, filesharhe_ref.current.files[0]);
-
-                                        await dispatch(addPortfolio(formData));
-                                        console.log(filesharhe_ref.current.files[0]);
-                                        setPictureStep((step) => step + 1);
-                                    }}
-                                    validationSchema={Yup.object().shape({
-                                        portfolio_title: Yup.string().required('Title is Required'),
-                                        portfolio_year: Yup.string().required('portfolio year is Required'),
-                                        portfolio_image: Yup.string().required('portfolio image Institution is Required')
-                                    })}
-                                >
-                                    {({ isSubmitting }) => (
-                                        <Form autoComplete="off">
-                                            <Grid container>
-                                                <Grid
-                                                    sx={{
-                                                        paddingRight: '20px',
-                                                        '@media (max-width: 900px)': {
-                                                            padding: '0px'
-                                                        }
-                                                    }}
-                                                    item
-                                                    xs={12}
-                                                    md={6}
-                                                >
-                                                    <Textfield name="portfolio_title" helpertext="Title" />
-                                                </Grid>
-                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
-                                                    <Textfield name="portfolio_year" helpertext="Year" />
-                                                </Grid>
-                                                <Grid mt="5px" xs={12}>
-                                                    <Typography variant="caption">Upload Image</Typography>
-                                                    <Box sx={{ mt: '5px' }}>
-                                                        <ResumeUpload name="portfolio_image" ref={filesharhe_ref} />
-                                                    </Box>
-                                                </Grid>
-
-                                                <Grid xs={12} item>
-                                                    <Box sx={{ ...theme.typography.flex }}>
-                                                        <DialogActions>
-                                                            <Button
-                                                                startIcon={
-                                                                    isSubmitting ? <CircularProgress color="secondary" size="1rem" /> : null
-                                                                }
-                                                                sx={{
-                                                                    width: '200px',
-                                                                    marginTop: '20px',
-                                                                    letterSpacing: '1px',
-                                                                    borderRadius: '0px',
-                                                                    color: 'white',
-                                                                    textTransform: 'capitalize',
-                                                                    '& :hover': {
-                                                                        color: 'black'
-                                                                    },
-                                                                    [theme.breakpoints.down('sm')]: {
-                                                                        marginTop: '30px'
-                                                                    }
-                                                                }}
-                                                                disableElevation
-                                                                variant="contained"
-                                                                type="submit"
-                                                            >
-                                                                Save
-                                                            </Button>
-                                                        </DialogActions>
-                                                    </Box>
-                                                </Grid>
-                                            </Grid>
-                                        </Form>
-                                    )}
-                                </Formik>
-                            </Grid>
-                        </Grid>
-                        <Success
-                            onclick={handlePictures}
-                            text="See All portfolios"
-                            content="You have successfully added a portfolio item
-                            You can go to your dashboard now."
-                        />
-                    </PortfolioStepper>
-
                     {edit.show ? (
                         // update
 
@@ -388,9 +298,13 @@ const PortfolioTab = () => {
                                         onSubmit={async (values) => {
                                             console.log(values);
 
-                                            await dispatch(addPortfolio(values));
-
-                                            setPictureStep((step) => step + 1);
+                                            await dispatch(
+                                                updatePortfolio(edit.portfolio_id, {
+                                                    portfolio_title: values.portfolio_title,
+                                                    year: values.portfolio_year
+                                                })
+                                            );
+                                            setPictureStep((step) => step + 2);
                                         }}
                                         validationSchema={Yup.object().shape({
                                             portfolio_title: Yup.string().required('Title is Required'),
@@ -419,7 +333,43 @@ const PortfolioTab = () => {
 
                                                     <Grid xs={12} item>
                                                         <Box sx={{ ...theme.typography.flex }}>
-                                                            <DialogActions>
+                                                            <DialogActions
+                                                                sx={{
+                                                                    display: 'flex',
+                                                                    gap: '20px',
+                                                                    '@media (max-width: 513px)': {
+                                                                        gap: '10px'
+                                                                    }
+                                                                }}
+                                                            >
+                                                                <Button
+                                                                    startIcon={
+                                                                        load ? <CircularProgress color="secondary" size="1rem" /> : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'rgb(217, 38, 39)',
+                                                                        border: '1px solid rgb(217, 38, 39)',
+                                                                        textTransform: 'capitalize',
+                                                                        '&:hover': {
+                                                                            border: '1px solid rgb(217, 38, 39)'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        },
+                                                                        '@media (max-width: 513px)': {
+                                                                            width: '120px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="outlined"
+                                                                    onClick={() => setPictureStep((step) => step + 1)}
+                                                                >
+                                                                    Delete
+                                                                </Button>
                                                                 <Button
                                                                     startIcon={
                                                                         isSubmitting ? (
@@ -438,13 +388,16 @@ const PortfolioTab = () => {
                                                                         },
                                                                         [theme.breakpoints.down('sm')]: {
                                                                             marginTop: '30px'
+                                                                        },
+                                                                        '@media (max-width: 513px)': {
+                                                                            width: '120px'
                                                                         }
                                                                     }}
                                                                     disableElevation
                                                                     variant="contained"
                                                                     type="submit"
                                                                 >
-                                                                    Save
+                                                                    Update
                                                                 </Button>
                                                             </DialogActions>
                                                         </Box>
