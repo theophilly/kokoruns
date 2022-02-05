@@ -1,5 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
 import {
     Box,
     Grid,
@@ -29,14 +28,6 @@ import resumes from '../../../utils/resume';
 import { addResume, updateResume, deleteResume } from '../../../store/actions/userDataActions';
 import Success from '../../../ui-component/modals/Success';
 import Warning from '../../../ui-component/modals/Warning';
-=======
-import { Box, Grid, Typography, Divider, Button, useTheme } from '@mui/material';
-import { BiEditAlt } from 'react-icons/bi';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { makeStyles } from '@mui/styles';
-import SubCard from '../../../ui-component/cards/SubCard';
-import resume from '../../../utils/resume';
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     tag: {}
 }));
 
-<<<<<<< HEAD
 const monthNames = [
     'January',
     'February',
@@ -89,8 +79,6 @@ const months = {
     December: '12'
 };
 
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 const Tag = ({ text, index }) => {
     const theme = useTheme();
 
@@ -110,11 +98,7 @@ const Tag = ({ text, index }) => {
     );
 };
 
-<<<<<<< HEAD
 const Item = ({ start_year, end_year, title, sub, experience, clicked, setEdit, value = {} }) => {
-=======
-const Item = ({ year, title, sub, experience }) => {
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     const theme = useTheme();
     return (
         <Box
@@ -152,7 +136,6 @@ const Item = ({ year, title, sub, experience }) => {
                     }
                 }}
             >
-<<<<<<< HEAD
                 <Typography>
                     {`${monthShortNames[new Date(start_year).getMonth()]} ${new Date(start_year).getUTCFullYear()} - ${
                         monthShortNames[new Date(end_year).getMonth()]
@@ -176,19 +159,6 @@ const Item = ({ year, title, sub, experience }) => {
                     ))}
                 </ul> */}
                 {experience}
-=======
-                <Typography>{year} </Typography>
-                <BiEditAlt />
-            </Box>
-            <Typography>{title}</Typography>
-            <Typography> {sub} </Typography>
-            <Box>
-                <ul>
-                    {experience.map((item) => (
-                        <li style={{ fontSize: '0.8rem' }}>{item}</li>
-                    ))}
-                </ul>
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
             </Box>
             <Box
                 sx={{
@@ -199,10 +169,7 @@ const Item = ({ year, title, sub, experience }) => {
             >
                 <Divider
                     sx={{
-<<<<<<< HEAD
                         mt: '15px',
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                         opacity: 1,
                         borderColor: '#CCCCCC',
                         width: '100%'
@@ -215,7 +182,6 @@ const Item = ({ year, title, sub, experience }) => {
 
 const ResumeTab = () => {
     const { root, lower_button } = useStyles();
-<<<<<<< HEAD
     const matches = useMediaQuery('(min-width:900px)');
     const theme = useTheme();
     const { resume } = useSelector((state) => state.authReducer.user);
@@ -250,15 +216,12 @@ const ResumeTab = () => {
 
         await setLoad(false);
     };
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
     return (
         <Box className={root}>
             <Grid container>
                 <Grid xs={12} item>
                     <SubCard divider={false} sx={{ bgcolor: 'white', boxShadow: 'none', padding: '0 5px' }} title="Job History">
-<<<<<<< HEAD
                         {resume.map((item) => (
                             <Item
                                 value={item}
@@ -282,13 +245,6 @@ const ResumeTab = () => {
                             variant="outlined"
                             startIcon={<AddCircleIcon />}
                         >
-=======
-                        {resume.experience.map((item) => (
-                            <Item year={item.title} title={item.company} sub={item.duration} experience={item.experience} />
-                        ))}
-
-                        <Button className={lower_button} variant="outlined" startIcon={<AddCircleIcon />}>
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                             Add Job to Resume
                         </Button>
                     </SubCard>
@@ -299,11 +255,7 @@ const ResumeTab = () => {
                 <Grid xs={12} item>
                     <SubCard divider={false} sx={{ bgcolor: 'white', boxShadow: 'none', padding: '0 5px', mt: '25px' }} title="Skills">
                         <Box sx={{ display: 'flex', height: 'auto', flexWrap: 'wrap', gap: '10px' }}>
-<<<<<<< HEAD
                             {resumes.skills.map((item) => (
-=======
-                            {resume.skills.map((item) => (
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                                 <Tag text={item} />
                             ))}
                         </Box>
@@ -314,7 +266,6 @@ const ResumeTab = () => {
                     </SubCard>
                 </Grid>
             </Grid>
-<<<<<<< HEAD
 
             {/* certificate dialog */}
             <Dialog
@@ -638,14 +589,11 @@ const ResumeTab = () => {
                     )}
                 </DialogContent>
             </Dialog>
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
         </Box>
     );
 };
 
 export default ResumeTab;
-<<<<<<< HEAD
 
 export function ResumeStepper({ children, resumeStep, setResumeStep, ...props }) {
     const childrenArray = React.Children.toArray(children);
@@ -653,5 +601,3 @@ export function ResumeStepper({ children, resumeStep, setResumeStep, ...props })
 
     return <Box>{currentChild}</Box>;
 }
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3

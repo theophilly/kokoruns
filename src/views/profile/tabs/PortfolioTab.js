@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useRef } from 'react';
 import {
     Box,
@@ -19,23 +18,15 @@ import { makeStyles } from '@mui/styles';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import Textfield from '../../../components/reusables/FormUI/Textfield';
-=======
-import React from 'react';
-import { Box, Grid, Typography, Divider, Button, useTheme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import resume from '../../../utils/resume';
 import SubCard from '../../../ui-component/cards/SubCard';
 import pictures from '../../../utils/pictures';
-<<<<<<< HEAD
 import { BiEditAlt } from 'react-icons/bi';
 import ResumeUpload from '../../../components/reusables/forms/ResumeUpload';
 import { addSocial, addPortfolio, deletePortfolio } from '../../../store/actions/userDataActions';
 import Success from '../../../ui-component/modals/Success';
 import Warning from '../../../ui-component/modals/Warning';
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -70,29 +61,20 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-<<<<<<< HEAD
 const Tag = ({ link_address, link_title, setEdit, value = {}, clicked }) => {
-=======
-const Tag = ({ text, index }) => {
-    const { tag } = useStyles();
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     const theme = useTheme();
 
     return (
         <Box
-<<<<<<< HEAD
             component="a"
             href={link_address}
             target="_blank"
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
             sx={{
                 background: theme.palette.primary.main,
                 cursor: 'pointer',
                 color: 'white',
                 padding: '10px 20px',
                 width: 'max-content',
-<<<<<<< HEAD
                 borderRadius: '5px',
                 textDecoration: 'none',
                 position: 'relative'
@@ -114,28 +96,13 @@ const Tag = ({ text, index }) => {
 };
 const Picturebox = ({ title, path, year, setEdit, value = {}, clicked }) => {
     const { profile_cover_img } = useStyles();
-=======
-                borderRadius: '5px'
-            }}
-        >
-            <Typography>{text}</Typography>
-        </Box>
-    );
-};
-const Picturebox = ({ title, path, year }) => {
-    const { tag, profile_cover_img, picture_box_box } = useStyles();
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     const theme = useTheme();
 
     return (
         <div
             style={{
                 background: '#F5F5F5',
-<<<<<<< HEAD
                 position: 'relative',
-=======
-                //  border: '1px solid red',
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                 height: '230px',
                 borderBottomRightRadius: '6px',
                 borderBottomLeftRadius: '6px'
@@ -163,7 +130,6 @@ const Picturebox = ({ title, path, year }) => {
                 <Typography> {title} </Typography>
                 <Typography> {year} </Typography>
             </Box>
-<<<<<<< HEAD
             <Box sx={{ position: 'absolute', top: 1, right: 5 }}>
                 <BiEditAlt
                     onClick={async () => {
@@ -174,13 +140,10 @@ const Picturebox = ({ title, path, year }) => {
                     }}
                 />
             </Box>
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
         </div>
     );
 };
 
-<<<<<<< HEAD
 const rebuildData = (data, file) => {
     let formData = new FormData();
     formData.append('portfolio_title', data.portfolio_title);
@@ -248,26 +211,6 @@ const PortfolioTab = () => {
                         </SubCard>
                     </Grid>
                 )}
-=======
-const PortfolioTab = () => {
-    const { root, lower_button, website_link } = useStyles();
-    const theme = useTheme();
-    return (
-        <Box className={root}>
-            <Grid container>
-                <Grid xs={12} item>
-                    <SubCard divider={false} sx={{ bgcolor: 'white', boxShadow: 'none', padding: '0 5px' }} title="Website link:">
-                        <Typography
-                            href="rtttwww.notion.so/AdejolaPortfolio-be3ac78992b145ccb7e1d8d6dd6b06e2"
-                            target="_blank"
-                            sx={{ color: theme.palette.primary.main, cursor: 'pointer' }}
-                            component="a"
-                        >
-                            rtttwww.notion.so/AdejolaPortfolio-be3ac78992b145ccb7e1d8d6dd6b06e2
-                        </Typography>
-                    </SubCard>
-                </Grid>
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
             </Grid>
 
             {/* socials */}
@@ -278,7 +221,6 @@ const PortfolioTab = () => {
                         sx={{ bgcolor: 'white', boxShadow: 'none', padding: '0 5px', mt: '25px' }}
                         title="Social Media Links:"
                     >
-<<<<<<< HEAD
                         {social_links.length > 0 && (
                             <Box sx={{ display: 'flex', height: 'auto', flexWrap: 'wrap', gap: '10px' }}>
                                 {social_links.map((item) => (
@@ -293,15 +235,6 @@ const PortfolioTab = () => {
                             variant="outlined"
                             startIcon={<AddCircleIcon />}
                         >
-=======
-                        <Box sx={{ display: 'flex', height: 'auto', flexWrap: 'wrap', gap: '10px' }}>
-                            {resume.skills.map((item) => (
-                                <Tag text={item} />
-                            ))}
-                        </Box>
-
-                        <Button className={lower_button} variant="outlined" startIcon={<AddCircleIcon />}>
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                             Add Social Media Link
                         </Button>
                     </SubCard>
@@ -312,7 +245,6 @@ const PortfolioTab = () => {
                 <Grid xs={12} item>
                     <SubCard divider={false} sx={{ bgcolor: 'white', boxShadow: 'none', padding: '0 5px', mt: '25px' }} title="Pictures:">
                         <Grid spacing={2} container>
-<<<<<<< HEAD
                             {portfolio.map((item) => (
                                 <Grid item md={4} sm={6} xs={12}>
                                     <Picturebox
@@ -323,31 +255,21 @@ const PortfolioTab = () => {
                                         year={item.date}
                                         title={item.portfolio_title}
                                     />
-=======
-                            {pictures.map((item) => (
-                                <Grid item md={4} sm={6} xs={12}>
-                                    <Picturebox {...item} />
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                                 </Grid>
                             ))}
                         </Grid>
 
-<<<<<<< HEAD
                         <Button
                             onClick={() => setPicturesOpen(true)}
                             className={lower_button}
                             variant="outlined"
                             startIcon={<AddCircleIcon />}
                         >
-=======
-                        <Button className={lower_button} variant="outlined" startIcon={<AddCircleIcon />}>
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                             Add Pictures
                         </Button>
                     </SubCard>
                 </Grid>
             </Grid>
-<<<<<<< HEAD
 
             {/* pictures dialog */}
             <Dialog
@@ -746,14 +668,11 @@ const PortfolioTab = () => {
                     </PortfolioStepper>
                 </DialogContent>
             </Dialog>
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
         </Box>
     );
 };
 
 export default PortfolioTab;
-<<<<<<< HEAD
 
 export function PortfolioStepper({ children, portfolioStep, setPortfolioStep, ...props }) {
     const childrenArray = React.Children.toArray(children);
@@ -761,5 +680,3 @@ export function PortfolioStepper({ children, portfolioStep, setPortfolioStep, ..
 
     return <Box>{currentChild}</Box>;
 }
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3

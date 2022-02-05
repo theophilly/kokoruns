@@ -105,17 +105,10 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         marginLeft: '20px',
         borderRadius: '5px',
-<<<<<<< HEAD
         padding: '6px 60px',
         backgroundColor: 'white',
         textTransform: 'capitalize',
         color: 'rgb(217, 38, 39)',
-=======
-        color: 'rgb(217, 38, 39)',
-        padding: '6px 60px',
-        backgroundColor: 'white',
-        textTransform: 'capitalize',
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
         border: '1px solid rgb(217, 38, 39)',
         '&:hover': {
             border: '1px solid rgb(217, 38, 39)'

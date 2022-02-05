@@ -24,10 +24,7 @@ import { BiEditAlt } from 'react-icons/bi';
 import FullWidthTabs from './tabs';
 import Textfield from '../../components/reusables/FormUI/Textfield';
 import Textarea from '../../components/reusables/FormUI/Textarea';
-<<<<<<< HEAD
 import { Link } from 'react-router-dom';
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,14 +48,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = () => {
-<<<<<<< HEAD
     const {
         authenticated,
         user: { bio }
     } = useSelector((state) => state.authReducer);
-=======
-    const { authenticated, user } = useSelector((state) => state.authReducer);
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     const { root, profile_cover_img } = useStyles();
     const theme = useTheme();
     const matchDownMd = useMediaQuery('(min-width:600px)');
@@ -68,13 +61,9 @@ const Profile = () => {
         setOpen(false);
     };
 
-<<<<<<< HEAD
     console.log(JSON.parse(JSON.stringify(bio.languages1)));
     console.log(Object.values(JSON.parse(bio.languages1))[0]);
     console.log(typeof lang);
-=======
-    console.log(user);
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
     const descriptionElementRef = React.useRef(null);
     React.useEffect(() => {
@@ -118,11 +107,7 @@ const Profile = () => {
                                 />
                                 <Box mt="78px">
                                     <Typography sx={{ ...theme.typography.heading, fontWeight: 'bold', textAlign: 'center' }}>
-<<<<<<< HEAD
                                         {bio.first_name} {bio.last_name}
-=======
-                                        {user.first_name} {user.last_name}
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                                     </Typography>
                                     <Typography sx={{ textAlign: 'center', fontSize: '0.8rem' }}>UI/UX Designer at Kokoruns Ltd</Typography>
                                 </Box>
@@ -132,11 +117,8 @@ const Profile = () => {
                             <Grid xs={5} item>
                                 <Box sx={{ display: 'flex', justifyContent: 'center', textTransform: 'capitalize', mt: '20px' }}>
                                     <Button
-<<<<<<< HEAD
                                         LinkComponent={Link}
                                         to="/update-profile"
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                                         startIcon={<BiEditAlt />}
                                         disableElevation
                                         variant="contained"
@@ -150,7 +132,6 @@ const Profile = () => {
                     </Grid>
 
                     <SubCard sx={{ marginTop: '30px' }} title="About">
-<<<<<<< HEAD
                         {bio.profession && (
                             <Box sx={{ display: 'flex' }}>
                                 <Typography sx={{ fontSize: '0.8rem' }}>Profession: </Typography>
@@ -171,66 +152,32 @@ const Profile = () => {
                             <Typography sx={{ fontSize: '0.8rem' }}> Education: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
                                 {bio.educational_qualification}
-=======
-                        <Box sx={{ display: 'flex' }}>
-                            <Typography sx={{ fontSize: '0.8rem' }}>Function: </Typography>
-                            <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-                                User Experience Designer
-                            </Typography>
-                        </Box>
-                        <Box sx={{ display: 'flex', mt: '5px' }}>
-                            <Typography sx={{ fontSize: '0.8rem' }}> Company: </Typography>
-                            <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-                                Kokoruns Ltd
-                            </Typography>
-                        </Box>
-                        <Box sx={{ display: 'flex', mt: '5px' }}>
-                            <Typography sx={{ fontSize: '0.8rem' }}> Education: </Typography>
-                            <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-                                B.Sc,Medcine
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Languages: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-<<<<<<< HEAD
                                 {/* {JSON.parse(JSON.stringify(bio.languages1)).map((item) => ({ item }))} */}
                                 {/* {Object.values(JSON.parse(bio.languages1)).map((item) => ({ item }))} */}
                                 {Object.values(JSON.parse(bio.languages1)).map((item) => item + ` `)}
-=======
-                                English, Yoruba, German
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Phone Number: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-<<<<<<< HEAD
                                 {bio.phone}
-=======
-                                {user.phone}
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Email: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-<<<<<<< HEAD
                                 {bio.email}
-=======
-                                {user.email}
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Location: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-<<<<<<< HEAD
                                 {bio.state}, Nigeria
-=======
-                                {user.state}, Nigeria
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                             </Typography>
                         </Box>
                     </SubCard>
@@ -240,11 +187,8 @@ const Profile = () => {
                         <Grid xs={12} item>
                             <Box sx={{ display: 'flex', justifyContent: 'center', textTransform: 'capitalize', mt: '20px' }}>
                                 <Button
-<<<<<<< HEAD
                                     LinkComponent={Link}
                                     to="/update-profile"
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                                     startIcon={<BiEditAlt />}
                                     disableElevation
                                     variant="contained"
@@ -272,11 +216,7 @@ const Profile = () => {
                         }}
                         title="Bio"
                     >
-<<<<<<< HEAD
                         <Typography sx={{ fontSize: '0.9rem', color: '#333333', ml: '5px' }}>{bio.about}</Typography>
-=======
-                        <Typography sx={{ fontSize: '0.9rem', color: '#333333', ml: '5px' }}>{user.about}</Typography>
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                     </SubCard>
                     {/* tabs */}
                     <Box sx={{ width: '100%' }}>

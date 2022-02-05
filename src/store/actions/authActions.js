@@ -16,7 +16,6 @@ export const login = (user) => {
                         ...res.data
                     }
                 });
-<<<<<<< HEAD
 
                 if (res.data.active === 1) {
                     console.log(res.data.user_id);
@@ -34,8 +33,6 @@ export const login = (user) => {
                             console.log(error);
                         });
                 }
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
             })
             .catch((error) => {
                 dispatch({
@@ -107,19 +104,12 @@ export const updateUser = (user) => {
 };
 
 export const fetchUserDetails = () => {
-<<<<<<< HEAD
     return async (dispatch, getState) => {
         const state = getState();
 
         //fetch user details
         await api
             .fetchUserDetails(state.authReducer.user.bio.user_id)
-=======
-    return async (dispatch) => {
-        //fetch user details
-        await api
-            .fetchUserDetails()
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
             .then((res) => {
                 console.log(res.data);
                 dispatch({

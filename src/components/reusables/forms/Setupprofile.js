@@ -21,10 +21,7 @@ import academicLevel from '../../../config/academicLevel.json';
 import genderData from '../../../config/genderData.json';
 import employmentType from '../../../config/employmentType.json';
 import maritalStatusData from '../../../config/maritalStatusData.json';
-<<<<<<< HEAD
 import EmploymentStatus from '../FormUI/EmploymentStatus';
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
 const Tag = ({ editTag, text, deleteTag, index }) => {
     const theme = useTheme();
@@ -52,45 +49,30 @@ const Tag = ({ editTag, text, deleteTag, index }) => {
     );
 };
 
-<<<<<<< HEAD
 const Setupprofile = ({ setDis_ability, setEmployment }) => {
-=======
-const Setupprofile = ({ setDis_ability }) => {
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     const matches = useMediaQuery('(min-width:900px)');
     const theme = useTheme();
 
     const [input, setInput] = useState('');
-<<<<<<< HEAD
     const [profInput, setProfInput] = useState('');
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
     const { setFieldValue, getFieldMeta } = useFormikContext();
 
     const tagField = getFieldMeta('languages');
-<<<<<<< HEAD
     const profField = getFieldMeta('other_professions');
     const disablilityField = getFieldMeta('disablility');
     const employmentStatus = getFieldMeta('employment_status');
     setDis_ability(disablilityField.value);
     setEmployment(employmentStatus.value);
-=======
-    const disablilityField = getFieldMeta('disablility');
-    setDis_ability(disablilityField.value);
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
     const onChange = (e) => {
         const { value } = e.target;
         setInput(value);
     };
-<<<<<<< HEAD
     const onProfChange = (e) => {
         const { value } = e.target;
         setProfInput(value);
     };
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
     const deleteTag = async (index) => {
         const tagsCopy = [...tagField.value];
@@ -98,15 +80,12 @@ const Setupprofile = ({ setDis_ability }) => {
         await setFieldValue('languages', tagsCopy);
     };
 
-<<<<<<< HEAD
     const deleteProfTag = async (index) => {
         const tagsCopy = [...profField.value];
         tagsCopy.splice(index, 1);
         await setFieldValue('other_professions', tagsCopy);
     };
 
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     const editTag = async (id) => {
         const tagsCopy = [...tagField.value];
         const poppedTag = tagsCopy[id];
@@ -115,7 +94,6 @@ const Setupprofile = ({ setDis_ability }) => {
         setInput(poppedTag);
         await setFieldValue('languages', tagsCopy);
     };
-<<<<<<< HEAD
     const editProfTag = async (id) => {
         const tagsCopy = [...profField.value];
         const poppedTag = tagsCopy[id];
@@ -124,8 +102,6 @@ const Setupprofile = ({ setDis_ability }) => {
         setProfInput(poppedTag);
         await setFieldValue('other_professions', tagsCopy);
     };
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
     const onAdd = async (e) => {
         const trimmedInput = input.trim();
@@ -136,7 +112,6 @@ const Setupprofile = ({ setDis_ability }) => {
         }
     };
 
-<<<<<<< HEAD
     const onProfAdd = async (e) => {
         const trimmedInput = profInput.trim();
 
@@ -146,8 +121,6 @@ const Setupprofile = ({ setDis_ability }) => {
         }
     };
 
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     return (
         <Box sx={{ marginTop: '50px', padding: '20px', background: 'white' }}>
             <Grid container spacing={2}>
@@ -265,13 +238,9 @@ const Setupprofile = ({ setDis_ability }) => {
                 >
                     <SelectLGA dependentField="state" name="lga" helpertext="LGA" />
                 </Grid>
-<<<<<<< HEAD
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <Textfield name="website" helpertext="Website" />
                 </Grid>
-=======
-                <Grid item xs={12} md={6}></Grid>
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
                 {/* about */}
                 <Grid item xs={12}>
@@ -279,7 +248,6 @@ const Setupprofile = ({ setDis_ability }) => {
                 </Grid>
 
                 <Grid marginTop="40px" xs={12} item>
-<<<<<<< HEAD
                     <Typography sx={{ ...theme.typography.heading }}>Occupational Information</Typography>
                 </Grid>
                 {/* languages spoken */}
@@ -400,75 +368,6 @@ const Setupprofile = ({ setDis_ability }) => {
                         </Box>
                     </Grid>
                 )}
-=======
-                    <Typography sx={{ ...theme.typography.heading }}>Professional Information</Typography>
-                </Grid>
-                {/* current employer and address */}
-                <Grid
-                    sx={{
-                        paddingRight: '40px',
-                        '@media (max-width: 900px)': {
-                            padding: '0px'
-                        }
-                    }}
-                    item
-                    xs={12}
-                    md={6}
-                >
-                    <Textfield name="current_employer" helpertext="Current Employer" />
-                </Grid>
-                <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <Textfield name="employer_address" helpertext="Address of Employer" />
-                </Grid>
-
-                {/* employment type and empolyment status */}
-                <Grid
-                    sx={{
-                        paddingRight: '40px',
-                        '@media (max-width: 900px)': {
-                            padding: '0px'
-                        }
-                    }}
-                    item
-                    xs={12}
-                    md={6}
-                >
-                    <SelectWrapper name="employment_type" helpertext="Employment Type*" options={employmentType} />
-                </Grid>
-                <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <Textfield name="employment_status" helpertext="Present Employment Status*" />
-                </Grid>
-
-                {/* preferred job state and LGA */}
-                <Grid
-                    sx={{
-                        paddingRight: '40px',
-                        '@media (max-width: 900px)': {
-                            padding: '0px'
-                        }
-                    }}
-                    item
-                    xs={12}
-                    md={6}
-                >
-                    <SelectWrapper name="preffered_jl" helpertext="Preffered Job Location" options={stateData} />
-                </Grid>
-                <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <SelectLGA dependentField="preffered_jl" name="preffered_jlga" helpertext="Preferred LGA" />
-                </Grid>
-
-                {/* languages spoken */}
-                <Grid marginTop="40px" xs={12} item>
-                    <Typography sx={{ ...theme.typography.heading }}>Languages Spoken</Typography>
-                </Grid>
-                <Grid xs={12} item>
-                    <Box display="flex" gap="10px" flexWrap="wrap">
-                        {tagField.value.map((item, index) => (
-                            <Tag index={index} editTag={editTag} deleteTag={deleteTag} text={item} />
-                        ))}
-                    </Box>
-                </Grid>
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                 <Grid xs={12} md={6} item>
                     <Box alignItems="center" display="flex">
                         <OutlinedInput

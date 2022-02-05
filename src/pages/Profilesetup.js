@@ -2,11 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
-<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux';
-=======
-import { useDispatch } from 'react-redux';
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
 // material-ui
 import { Box, Grid, Typography, CircularProgress, Button, useTheme } from '@mui/material';
@@ -33,15 +29,10 @@ const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 const Profilesetup = () => {
     const { root, upper_bluebox, red_text_info } = useStyles();
     const [dis_ability, setDis_ability] = useState(false);
-<<<<<<< HEAD
     const [employment, setEmployment] = useState({});
     const filesharhe_ref = useRef();
     const theme = useTheme();
     const user = useSelector((state) => state.authReducer.user);
-=======
-    const filesharhe_ref = useRef();
-    const theme = useTheme();
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     const dispatch = useDispatch();
 
     return (
@@ -58,11 +49,7 @@ const Profilesetup = () => {
                     }
                 }}
             >
-<<<<<<< HEAD
                 <Typography component="h1">{user?.bio ? 'Update Your Profile' : 'Profile Set Up'} </Typography>
-=======
-                <Typography component="h1">Profile Set Up</Typography>
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
             </Box>
             {/* red box information */}
             <Box marginTop="14px">
@@ -75,7 +62,6 @@ const Profilesetup = () => {
             {/* profile setup form */}
             <FormikStepper
                 initialValues={{
-<<<<<<< HEAD
                     firstName: user?.bio.first_name || '',
                     lastName: user?.bio.last_name || '',
                     //  dob: new Date('2014-08-18T21:11:54'),
@@ -91,34 +77,14 @@ const Profilesetup = () => {
                     academicLevel: '',
                     about: user?.bio.about || '',
                     website: user?.bio.website || '',
-=======
-                    firstName: '',
-                    lastName: '',
-                    //  dob: new Date('2014-08-18T21:11:54'),
-                    dob: '',
-                    email: '',
-                    phone: '',
-                    gender: '',
-                    state: '',
-                    maritalStatus: '',
-                    employment_status: '',
-                    lga: '',
-                    profession: '',
-                    academicLevel: '',
-                    about: '',
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                     preffered_jl: '',
                     preffered_jlga: '',
                     employment_type: '',
                     current_employer: '',
                     employer_address: '',
                     disablility: false,
-<<<<<<< HEAD
                     other_professions: user?.bio.other_professions1 ? Object.values(JSON.parse(user?.bio.other_professions1)) : [],
                     languages: ['English'],
-=======
-                    languages: ['english'],
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                     disability_details: '',
                     file: null
                 }}
@@ -136,7 +102,6 @@ const Profilesetup = () => {
                     //   }
                     //  values = formvalues;
                     //  initializePayment(onSuccessWrapper, onClose);
-<<<<<<< HEAD
 
                     console.log(formvalues);
                     const newFormValues = {
@@ -161,25 +126,6 @@ const Profilesetup = () => {
                         selectedLGA2: formvalues.preffered_jlga,
                         about: formvalues.about,
                         website: formvalues.website
-=======
-                    console.log(formvalues);
-                    const newFormValues = {
-                        marital_status: formvalues.maritalStatus,
-                        disabled: formvalues.disablility,
-                        educational_qualification: formvalues.academicLevel,
-                        preferred_job_location_state: formvalues.preffered_jl,
-                        preferred_job_location_lga: formvalues.preffered_jlga,
-                        first_name: formvalues.firstName,
-                        last_name: formvalues.lastName,
-                        about: formvalues.about,
-                        phone: formvalues.phone,
-                        gender: formvalues.gender,
-                        state: formvalues.state,
-                        lga: formvalues.lga,
-                        current_employer: formvalues.current_employer,
-                        employment_status: formvalues.employment_status,
-                        employment_type: formvalues.employment_type
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                     };
                     await dispatch(updateUserProfile(newFormValues));
 
@@ -200,21 +146,12 @@ const Profilesetup = () => {
                         state: Yup.string().required('state is required'),
                         lga: Yup.string().required('city is Required'),
                         about: Yup.string().required('about is required'),
-<<<<<<< HEAD
                         current_employer: employment === 'employed' ? Yup.string().required('current employer is required') : '',
                         employer_address: employment === 'employed' ? Yup.string().required('employer address is required') : '',
                         employment_type: employment === 'unemployed' ? Yup.string().required('employment type is required') : '',
                         employment_status: Yup.string().required('present employment Status is required'),
                         preffered_jlga: employment === 'unemployed' ? Yup.string().required('preffered Job LGA is required') : '',
                         preffered_jl: employment === 'unemployed' ? Yup.string().required('preffered job Location is required') : '',
-=======
-                        current_employer: Yup.string().required('current employer is required'),
-                        employer_address: Yup.string().required('employer address is required'),
-                        employment_type: Yup.string().required('employment type is required'),
-                        employment_status: Yup.string().required('present employment Status is required'),
-                        preffered_jlga: Yup.string().required('preffered Job LGA is required'),
-                        preffered_jl: Yup.string().required('preffered job Location is required'),
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
                         languages: Yup.array(Yup.string())
                             .test({
@@ -226,10 +163,7 @@ const Profilesetup = () => {
                         disability_details: dis_ability ? Yup.string().required('About is required') : ''
                     })}
                     setDis_ability={setDis_ability}
-<<<<<<< HEAD
                     setEmployment={setEmployment}
-=======
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                 />
                 <Setupprofileimage
                     validationSchema={Yup.object().shape({

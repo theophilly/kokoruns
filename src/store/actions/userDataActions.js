@@ -1,6 +1,5 @@
 import * as actionType from '../actionTypes/userDataActionTypes';
 import api from '../../helpers/api.js';
-<<<<<<< HEAD
 import { fetchUserDetails } from './authActions';
 
 // export const fecthEducations = (user) => {
@@ -32,45 +31,20 @@ import { fetchUserDetails } from './authActions';
 
 // education
 export const addEducation = (education) => {
-=======
-
-export const fecthEducations = (user) => {
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     return async (dispatch) => {
         dispatch({ type: actionType.ON_FETCH_BEGIN });
 
         await api
-<<<<<<< HEAD
             .addEducation(education)
             .then((res) => {
                 dispatch(fetchUserDetails());
             })
             .catch((error) => {
-=======
-            .fetchEducations()
-            .then((res) => {
-                console.log(res.data);
-                dispatch({
-                    type: actionType.ON_EDUCATION_FETCH_SUCCESS,
-                    payload: {
-                        ...res.data
-                    }
-                });
-            })
-            .catch((error) => {
-                // dispatch({
-                //     type: actionType.ON_EDUCATION_FETCH_ERROR,
-                //     payload: {
-                //         error: error.response.data.error
-                //     }
-                // });
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                 console.log(error.response);
             });
     };
 };
 
-<<<<<<< HEAD
 export const updateEducation = (id, education) => {
     return async (dispatch) => {
         dispatch({ type: actionType.ON_FETCH_BEGIN });
@@ -226,14 +200,10 @@ export const updatePortfolio = (id, portfolio) => {
 };
 
 export const deletePortfolio = (portfolio) => {
-=======
-export const addEducation = (education) => {
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     return async (dispatch) => {
         dispatch({ type: actionType.ON_FETCH_BEGIN });
 
         await api
-<<<<<<< HEAD
             .deletePortfolio(portfolio)
             .then((res) => {
                 dispatch(fetchUserDetails());
@@ -256,41 +226,6 @@ export const addSocial = (portfolio) => {
             })
             .catch((error) => {
                 console.log(error.response);
-=======
-            .addEducation(education)
-            .then((res) => {
-                // console.log(res.data);
-            })
-            .catch((error) => {
-                // dispatch({
-                //     type: actionType.ON_EDUCATION_FETCH_ERROR,
-                //     payload: {
-                //         error: error.response.data.error
-                //     }
-                // });
-                console.log(error.response);
-            });
-
-        await api
-            .fetchEducations()
-            .then((res) => {
-                console.log(res.data);
-                dispatch({
-                    type: actionType.ON_EDUCATION_FETCH_SUCCESS,
-                    payload: {
-                        ...res.data
-                    }
-                });
-            })
-            .catch((error) => {
-                // dispatch({
-                //     type: actionType.ON_EDUCATION_FETCH_ERROR,
-                //     payload: {
-                //         error: error.response.data.error
-                //     }
-                // });
-                console.log(error.response.data);
->>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
             });
     };
 };
