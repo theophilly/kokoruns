@@ -62,7 +62,11 @@ const Profilesetupsuccess = () => {
             <Typography className={success_subtitle}>
                 You have successfully set up your profile. <br /> You can go to your dashboard now.
             </Typography>
+<<<<<<< HEAD
             <Button LinkComponent={Link} to="/profile" variant="contained" disableElevation>
+=======
+            <Button LinkComponent={Link} to="/home" variant="contained" disableElevation>
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                 Go to Dashboard
             </Button>
         </Box>

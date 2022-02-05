@@ -24,6 +24,7 @@ import * as Yup from 'yup';
 import Textfield from '../../../components/reusables/FormUI/Textfield';
 import Textarea from '../../../components/reusables/FormUI/Textarea';
 import Datepicker from '../../../components/reusables/FormUI/Datepicker';
+<<<<<<< HEAD
 import {
     addEducation,
     addCertification,
@@ -35,6 +36,9 @@ import {
 import { fetchUserDetails } from '../../../store/actions/authActions';
 import Success from '../../../ui-component/modals/Success';
 import Warning from '../../../ui-component/modals/Warning';
+=======
+import { fecthEducations, addEducation } from '../../../store/actions/userDataActions';
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -83,13 +87,21 @@ const months = {
     December: '12'
 };
 
+<<<<<<< HEAD
 const Item = ({ year, title, sub, clicked, startYear, setEdit, value = {} }) => {
+=======
+const Item = ({ year, title, sub, clicked, startYear }) => {
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     const theme = useTheme();
 
     return (
         <Box
             sx={{
                 borderRadius: '10px',
+<<<<<<< HEAD
+=======
+                //  border: '1px solid red',
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                 background: 'white',
                 padding: '0 15px 13px',
 
@@ -124,6 +136,7 @@ const Item = ({ year, title, sub, clicked, startYear, setEdit, value = {} }) => 
                 <Typography>
                     {startYear && startYear + ' - '} {year}{' '}
                 </Typography>
+<<<<<<< HEAD
                 <BiEditAlt
                     onClick={async () => {
                         await setEdit(() => {
@@ -132,6 +145,9 @@ const Item = ({ year, title, sub, clicked, startYear, setEdit, value = {} }) => 
                         clicked(true);
                     }}
                 />
+=======
+                <BiEditAlt onClick={() => clicked(true)} />
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
             </Box>
             <Typography>{title}</Typography>
             <Typography> {sub} </Typography>
@@ -139,6 +155,10 @@ const Item = ({ year, title, sub, clicked, startYear, setEdit, value = {} }) => 
                 sx={{
                     display: 'flex',
                     justifyContent: 'center'
+<<<<<<< HEAD
+=======
+                    //  padding: '0 10px'
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                 }}
             >
                 <Divider
@@ -154,6 +174,7 @@ const Item = ({ year, title, sub, clicked, startYear, setEdit, value = {} }) => 
 };
 
 const EducationTab = () => {
+<<<<<<< HEAD
     const { education: educations, certifications } = useSelector((state) => state.authReducer.user);
     const dispatch = useDispatch();
     const [edit, setEdit] = React.useState({ show: false });
@@ -177,10 +198,30 @@ const EducationTab = () => {
             behavior: 'smooth'
         });
         setEducationStep(0);
+=======
+    const { educations } = useSelector((state) => state.userDataReducer);
+    React.useEffect(() => {
+        (async function () {
+            await dispatch(fecthEducations());
+        })();
+    }, []);
+
+    const { root, lower_button } = useStyles();
+    const theme = useTheme();
+    const dispatch = useDispatch();
+    const matches = useMediaQuery('(min-width:900px)');
+
+    console.log(educations);
+
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     };
 
     // certificate
     const [certificateOpen, setCertificateOpen] = React.useState(false);
+<<<<<<< HEAD
     const handleCertificate = async () => {
         await setCertificateOpen(() => false);
         window.scrollTo({
@@ -192,6 +233,10 @@ const EducationTab = () => {
             return { ...prev, show: false };
         });
         setCertificateStep(0);
+=======
+    const handleCertificate = () => {
+        setCertificateOpen(false);
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     };
 
     const descriptionElementRef = React.useRef(null);
@@ -204,6 +249,7 @@ const EducationTab = () => {
         }
     }, [open]);
 
+<<<<<<< HEAD
     const delEducation = async () => {
         console.log(edit.education_id);
         await setLoad(true);
@@ -228,6 +274,8 @@ const EducationTab = () => {
         await setLoad(false);
     };
 
+=======
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     return (
         <Box className={root}>
             <Grid spacing={10} container>
@@ -239,6 +287,7 @@ const EducationTab = () => {
 
                         {educations.length > 0 &&
                             educations.map((item) => (
+<<<<<<< HEAD
                                 <Item
                                     value={item}
                                     setEdit={setEdit}
@@ -258,12 +307,19 @@ const EducationTab = () => {
                             variant="outlined"
                             startIcon={<AddCircleIcon />}
                         >
+=======
+                                <Item clicked={setOpen} year={new Date(item.end).getUTCFullYear()} title={item.course} sub={item.school} />
+                            ))}
+
+                        <Button onClick={() => setOpen(true)} className={lower_button} variant="outlined" startIcon={<AddCircleIcon />}>
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                             Add Education
                         </Button>
                     </Box>
                 </Grid>
                 <Grid xs={12} md={6} item>
                     <Box bgcolor="white" padding="20px 0" borderRadius="5px">
+<<<<<<< HEAD
                         {certifications.map((item) => (
                             <Item
                                 value={item}
@@ -280,6 +336,14 @@ const EducationTab = () => {
                                 setCertificateOpen(true);
                                 setCertificateStep(0);
                             }}
+=======
+                        {education.certification.map((item) => (
+                            <Item clicked={setCertificateOpen} year={item.duration} title={item.certificate} sub={item.platform} />
+                        ))}
+
+                        <Button
+                            onClick={() => setCertificateOpen(true)}
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                             className={lower_button}
                             variant="outlined"
                             startIcon={<AddCircleIcon />}
@@ -290,6 +354,7 @@ const EducationTab = () => {
                 </Grid>
             </Grid>
 
+<<<<<<< HEAD
             <Dialog open={open} onClose={handleClose} aria-labelledby="scroll-dialog-title" aria-describedby="scroll-dialog-description">
                 <DialogTitle id="scroll-dialog-title">Educational Information</DialogTitle>
                 <DialogContent>
@@ -598,6 +663,145 @@ const EducationTab = () => {
                             />
                         </EducationStepper>
                     )}
+=======
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                //   scroll={scroll}
+                aria-labelledby="scroll-dialog-title"
+                aria-describedby="scroll-dialog-description"
+            >
+                <DialogTitle id="scroll-dialog-title">Educational Information</DialogTitle>
+                <DialogContent
+                //  dividers={scroll === 'paper'}
+                >
+                    <DialogContentText id="scroll-dialog-description" ref={descriptionElementRef} tabIndex={-1}>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <Formik
+                                    initialValues={{
+                                        degree: '',
+                                        name_of_institution: '',
+                                        date_started: null,
+                                        date_completed: null
+                                    }}
+                                    onSubmit={async (values) => {
+                                        console.log(values);
+                                        await dispatch(
+                                            addEducation({
+                                                //  start_month: values.date_started.getUTCMonth() + 1,
+                                                start_month: months[monthNames[values.date_started.getMonth()]],
+                                                start_year: values.date_started.getUTCFullYear(),
+                                                end_month: months[monthNames[values.date_completed.getMonth()]],
+                                                // end_month: values.date_completed.getUTCMonth() + 1,
+                                                end_year: values.date_completed.getUTCFullYear(),
+                                                school: values.name_of_institution,
+                                                course: values.degree
+                                                //  skills: '[ {"skill_name": "Psychology"}, {"skill_name": "Human Relations"}]',
+                                                // class_of_degree: 'Imo'
+                                            })
+                                        );
+                                        //  if (!window.store.getState().authReducer.authenticated) {
+                                        //    await setClickData({
+                                        //      type: 'error',
+                                        //      content: window.store.getState().authReducer.error,
+                                        //    });
+                                        //    showToast();
+                                        //  }
+                                        //   await sleep(3000);
+                                        // navigate('/profile-setup');
+                                    }}
+                                    validationSchema={Yup.object().shape({
+                                        degree: Yup.string().required('Degree is Required'),
+                                        name_of_institution: Yup.string().required('Name of Institution is Required'),
+                                        date_started: Yup.date().required('Starting Date is Required is Required'),
+                                        date_completed: Yup.date().required('Date Completed is Required is Required')
+                                    })}
+                                >
+                                    {({ isSubmitting }) => (
+                                        <Form autoComplete="off">
+                                            <Grid container>
+                                                <Grid
+                                                    sx={{
+                                                        paddingRight: '20px',
+                                                        mt: '10px',
+                                                        '@media (max-width: 900px)': {
+                                                            padding: '0px'
+                                                        }
+                                                    }}
+                                                    item
+                                                    xs={12}
+                                                    md={6}
+                                                >
+                                                    <Textfield
+                                                        //  disabled={!!user.firstName}
+                                                        name="degree"
+                                                        helpertext="Degree"
+                                                    />
+                                                </Grid>
+                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
+                                                    <Textfield
+                                                        //  disabled={!!user.lastName}
+                                                        name="name_of_institution"
+                                                        helpertext="Name of Insitution"
+                                                    />
+                                                </Grid>
+                                                {/* below */}
+                                                <Grid
+                                                    sx={{
+                                                        paddingRight: '20px',
+                                                        '@media (max-width: 900px)': {
+                                                            padding: '0px'
+                                                        }
+                                                    }}
+                                                    item
+                                                    xs={12}
+                                                    md={6}
+                                                >
+                                                    <Datepicker name="date_started" helpertext="Date Started" />
+                                                </Grid>
+                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                    <Datepicker name="date_completed" helpertext="Date Completed" />
+                                                </Grid>
+
+                                                <Grid xs={12} item>
+                                                    <Box sx={{ ...theme.typography.flex }}>
+                                                        <DialogActions>
+                                                            <Button
+                                                                startIcon={
+                                                                    isSubmitting ? <CircularProgress color="secondary" size="1rem" /> : null
+                                                                }
+                                                                sx={{
+                                                                    width: '200px',
+                                                                    marginTop: '20px',
+                                                                    letterSpacing: '1px',
+                                                                    borderRadius: '0px',
+                                                                    color: 'white',
+                                                                    textTransform: 'capitalize',
+                                                                    '& :hover': {
+                                                                        color: 'black'
+                                                                    },
+                                                                    [theme.breakpoints.down('sm')]: {
+                                                                        marginTop: '30px'
+                                                                    }
+                                                                }}
+                                                                disableElevation
+                                                                variant="contained"
+                                                                type="submit"
+                                                            >
+                                                                Save
+                                                            </Button>
+                                                        </DialogActions>
+                                                    </Box>
+                                                </Grid>
+                                            </Grid>
+                                        </Form>
+                                    )}
+                                </Formik>
+                            </Grid>
+                        </Grid>
+                    </DialogContentText>
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                 </DialogContent>
             </Dialog>
 
@@ -605,10 +809,15 @@ const EducationTab = () => {
             <Dialog
                 open={certificateOpen}
                 onClose={handleCertificate}
+<<<<<<< HEAD
+=======
+                //   scroll={scroll}
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
                 <DialogTitle id="scroll-dialog-title">Certification Information</DialogTitle>
+<<<<<<< HEAD
                 <DialogContent>
                     {edit.show ? (
                         // update
@@ -911,6 +1120,125 @@ const EducationTab = () => {
                             />
                         </EducationStepper>
                     )}
+=======
+                <DialogContent
+                //  dividers={scroll === 'paper'}
+                >
+                    <DialogContentText id="scroll-dialog-description" ref={descriptionElementRef} tabIndex={-1}>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <Formik
+                                    initialValues={{
+                                        degree: '',
+                                        name_of_institution: '',
+                                        date_started: null,
+                                        date_completed: null
+                                    }}
+                                    onSubmit={async (values) => {
+                                        console.log(values);
+                                        // await dispatch(login(values));
+                                        // if (!window.store.getState().authReducer.authenticated) {
+                                        //   await setClickData({
+                                        //     type: 'error',
+                                        //     content: window.store.getState().authReducer.error,
+                                        //   });
+                                        //   showToast();
+                                        // }
+                                        //  await sleep(3000);
+                                        //navigate('/profile-setup');
+                                    }}
+                                    validationSchema={Yup.object().shape({
+                                        degree: Yup.string().required('Degree is Required'),
+                                        name_of_institution: Yup.string().required('Name of Institution is Required'),
+                                        date_started: Yup.date().required('Starting Date is Required is Required'),
+                                        date_completed: Yup.date().required('Date Completed is Required is Required')
+                                    })}
+                                >
+                                    {({ isSubmitting }) => (
+                                        <Form autoComplete="off">
+                                            <Grid container>
+                                                <Grid
+                                                    sx={{
+                                                        paddingRight: '20px',
+                                                        '@media (max-width: 900px)': {
+                                                            padding: '0px'
+                                                        }
+                                                    }}
+                                                    item
+                                                    xs={12}
+                                                    md={6}
+                                                >
+                                                    <Textfield
+                                                        //  disabled={!!user.firstName}
+                                                        name="degree"
+                                                        helpertext="Degree"
+                                                    />
+                                                </Grid>
+                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                    <Textfield
+                                                        //  disabled={!!user.lastName}
+                                                        name="name_of_institution"
+                                                        helpertext="Name of Insitution"
+                                                    />
+                                                </Grid>
+                                                {/* below */}
+                                                <Grid
+                                                    sx={{
+                                                        paddingRight: '20px',
+                                                        mt: '10px',
+
+                                                        '@media (max-width: 900px)': {
+                                                            padding: '0px'
+                                                        }
+                                                    }}
+                                                    item
+                                                    xs={12}
+                                                    md={6}
+                                                >
+                                                    <Datepicker name="date_started" helpertext="Date Started" />
+                                                </Grid>
+                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
+                                                    <Datepicker name="date_completed" helpertext="Date Completed" />
+                                                </Grid>
+
+                                                <Grid xs={12} item>
+                                                    <Box sx={{ ...theme.typography.flex }}>
+                                                        <DialogActions>
+                                                            <Button
+                                                                startIcon={
+                                                                    isSubmitting ? <CircularProgress color="secondary" size="1rem" /> : null
+                                                                }
+                                                                sx={{
+                                                                    width: '200px',
+                                                                    marginTop: '20px',
+                                                                    letterSpacing: '1px',
+                                                                    borderRadius: '0px',
+                                                                    color: 'white',
+                                                                    textTransform: 'capitalize',
+                                                                    '& :hover': {
+                                                                        color: 'black'
+                                                                    },
+                                                                    [theme.breakpoints.down('sm')]: {
+                                                                        marginTop: '30px'
+                                                                    }
+                                                                }}
+                                                                disableElevation
+                                                                variant="contained"
+                                                                type="submit"
+                                                            >
+                                                                Save
+                                                            </Button>
+                                                        </DialogActions>
+                                                    </Box>
+                                                </Grid>
+                                            </Grid>
+                                        </Form>
+                                    )}
+                                </Formik>
+                            </Grid>
+                        </Grid>
+                    </DialogContentText>
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                 </DialogContent>
             </Dialog>
         </Box>
@@ -918,6 +1246,7 @@ const EducationTab = () => {
 };
 
 export default EducationTab;
+<<<<<<< HEAD
 
 export function EducationStepper({ children, resumeStep, setResumeStep, ...props }) {
     const childrenArray = React.Children.toArray(children);
@@ -925,3 +1254,5 @@ export function EducationStepper({ children, resumeStep, setResumeStep, ...props
 
     return <Box>{currentChild}</Box>;
 }
+=======
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3

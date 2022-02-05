@@ -1,0 +1,10 @@
+.customscroll {
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* scrollbar-width: thin; */
+    scrollbar-color: red !important;
+}
+.customscroll::-webkit-scrollbar {
+    width: 5px;
+    scrollbar-color: red;
+}

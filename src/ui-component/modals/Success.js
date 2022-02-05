@@ -24,7 +24,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+<<<<<<< HEAD
 const Success = ({ text, to = '/', content, onclick }) => {
+=======
+const Success = ({ text, to = '/', content }) => {
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     const { root, success_subtitle } = useStyles();
     const theme = useTheme();
 
@@ -65,10 +69,16 @@ const Success = ({ text, to = '/', content, onclick }) => {
                 sx={{ borderRadius: '0px', width: '80%', fontSize: '0.8rem', mt: '15px' }}
                 LinkComponent={Link}
                 //  onClick={() => window.location.reload()}
+<<<<<<< HEAD
                 to={!onclick ? to : ''}
                 variant="contained"
                 disableElevation
                 onClick={() => onclick()}
+=======
+                to={to}
+                variant="contained"
+                disableElevation
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
             >
                 {text}
             </Button>

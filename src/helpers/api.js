@@ -9,11 +9,19 @@ class Api {
         // this.api_url = process.env.REACT_APP_API_ENDPOINT;
     }
 
+<<<<<<< HEAD
     init = (formdata) => {
         this.api_token = getCookie(window.store.getState().authReducer.token);
         const accept = formdata ? 'multipart/form-data; boundary=<calculated when request is sent>' : 'application/json';
         let headers = {
             Accept: accept
+=======
+    init = () => {
+        this.api_token = getCookie(window.store.getState().authReducer.token);
+
+        let headers = {
+            Accept: 'application/json'
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
         };
 
         if (this.api_token) {
@@ -42,6 +50,7 @@ class Api {
     fetchEducations = () => {
         return this.init().get('/educations');
     };
+<<<<<<< HEAD
 
     //add  education
     addEducation = (data) => {
@@ -115,6 +124,20 @@ class Api {
     //add  social link
     addSocial = (data) => {
         return this.init().post('/addonlinelink', data);
+=======
+    //fetch  user details
+    fetchUserDetails = () => {
+        return this.init().get('/userdetails');
+    };
+    //set up profile
+    setUpProfile = (data) => {
+        return this.init().post('/updatebio', data);
+    };
+
+    //add  education
+    addEducation = (data) => {
+        return this.init().post('/addeducation', data);
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
     };
 
     //user update

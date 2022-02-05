@@ -72,10 +72,18 @@ export default function SignInForm() {
                         }
 
                         if (window.store.getState().authReducer.active === 1) {
+<<<<<<< HEAD
                             navigate('/profile');
                         } else {
                             await navigate('/profile-setup');
                             //     await dispatch(fetchUserDetails());
+=======
+                            await dispatch(fetchUserDetails());
+                            navigate('/profile');
+                        } else {
+                            await navigate('/profile-setup');
+                            await dispatch(fetchUserDetails());
+>>>>>>> 1ae6ba18804ecdfae7a7a41fa63ef3aebcd1d0b3
                         }
 
                         //  await sleep(3000);
