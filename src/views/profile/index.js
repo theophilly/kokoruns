@@ -122,6 +122,7 @@ const Profile = () => {
                                         startIcon={<BiEditAlt />}
                                         disableElevation
                                         variant="contained"
+                                        state={{ from: 'profile' }}
                                         sx={{ textTransform: 'capitalize', background: '#0991FF' }}
                                     >
                                         Edit
@@ -192,6 +193,7 @@ const Profile = () => {
                                     startIcon={<BiEditAlt />}
                                     disableElevation
                                     variant="contained"
+                                    state={{ from: 'profile' }}
                                     sx={{ textTransform: 'capitalize', background: '#0991FF', width: '100%', padding: '15px 0' }}
                                 >
                                     Edit Profile

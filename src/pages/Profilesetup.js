@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate, Navigate, useLocation } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -54,6 +54,9 @@ const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
 const Profilesetup = () => {
     const { root, upper_bluebox, red_text_info } = useStyles();
+    const location = useLocation();
+    const { from } = location.state;
+    console.log(from, 'location');
     const [dis_ability, setDis_ability] = useState(false);
     const [employment, setEmployment] = useState({});
     const filesharhe_ref = useRef();

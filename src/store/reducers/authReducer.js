@@ -50,7 +50,7 @@ export default function authReducer(state = initialState, action) {
     } else if (action.type === actionType.SESSION_EXPIRED) {
         return { ...initialState };
     } else if (action.type === actionType.ADD_USER_DETAILS) {
-        return { ...state, user: action.payload, authenticated: true };
+        return { ...state, user: action.payload, authenticated: true, active: 1 };
     } else if (action.type === actionType.SIGN_OUT) {
         return { ...initialState };
     } else if (action.type === actionType.USER_UPDATE) {

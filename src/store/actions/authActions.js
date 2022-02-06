@@ -132,16 +132,20 @@ export const fetchUserDetails = () => {
 };
 
 export const updateUserProfile = (profile) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
+        const state = getState();
         dispatch({ type: actionType.ON_FETCH_BEGIN });
 
         await api
             .setUpProfile(profile)
             .then(async (res) => {
-                // console.log(res.data);
+                console.log(res.data);
+                //fetch user details
+                //   dispatch(fetchUserDetails());
+
                 //fetch user details
                 await api
-                    .fetchUserDetails()
+                    .fetchUserDetails(state.authReducer.user_id)
                     .then((res) => {
                         console.log(res.data);
                         dispatch({
@@ -160,14 +164,13 @@ export const updateUserProfile = (profile) => {
                         });
                         console.log(error.response.data.error);
                     });
-
-                //turn active to 1
-                dispatch({
-                    type: actionType.USER_UPDATE,
-                    payload: {
-                        ...res.data
-                    }
-                });
+                // //turn active to 1
+                // dispatch({
+                //     type: actionType.USER_UPDATE,
+                //     payload: {
+                //         ...res.data
+                //     }
+                // });
             })
             .catch((error) => {
                 // dispatch({
