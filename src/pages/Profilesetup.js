@@ -54,9 +54,9 @@ const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
 const Profilesetup = () => {
     const { root, upper_bluebox, red_text_info } = useStyles();
-    let location = useLocation();
-    let from = location.state?.from;
-    console.log(from, 'location');
+    // let location = useLocation();
+    // let from = location.state?.from;
+    // console.log(from, 'location');
     const [dis_ability, setDis_ability] = useState(false);
     const [employment, setEmployment] = useState({});
     const filesharhe_ref = useRef();
