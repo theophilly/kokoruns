@@ -54,8 +54,8 @@ const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
 const Profilesetup = () => {
     const { root, upper_bluebox, red_text_info } = useStyles();
-    const location = useLocation();
-    const { from } = location.state;
+    let location = useLocation();
+    let from = location.state?.from;
     console.log(from, 'location');
     const [dis_ability, setDis_ability] = useState(false);
     const [employment, setEmployment] = useState({});
