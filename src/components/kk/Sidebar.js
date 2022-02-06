@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-start',
         textTransform: 'capitalize',
         background: 'transparent',
+        fontWeight: '600',
         fontSize: '.93rem',
         color: 'rgb(99, 115, 129)',
         alignItems: 'left',
