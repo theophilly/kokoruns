@@ -43,11 +43,12 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         borderRadius: '0',
-        padding: '10px 8px 10px 20px',
+        padding: '13px 8px 13px 20px',
         display: 'flex',
         justifyContent: 'flex-start',
         textTransform: 'capitalize',
         background: 'transparent',
+        fontSize: '.93rem',
         color: 'rgb(99, 115, 129)',
         alignItems: 'left',
         width: '280px',
