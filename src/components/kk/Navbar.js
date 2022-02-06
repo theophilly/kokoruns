@@ -6,6 +6,7 @@ import { makeStyles } from '@mui/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link as RouterLink } from 'react-router-dom';
 import LogoSection from '../../layout/MainLayout/LogoSection';
+import Sidedrawer from './Sidebar';
 
 // import Notification from '../layout/MainLayout/Header/NotificationSection.js';
 // import Profile from '../layout/MainLayout/Header/ProfileSection.js';
@@ -81,7 +82,8 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerContainer: {
         padding: '5px 0px',
-        width: '280px'
+        width: '280px',
+        margin: '0 5px'
     },
 
     signupButton: {
@@ -200,6 +202,7 @@ export default function Navbar() {
                                         <LogoSection />
                                     </Box>
                                 </Box>
+                                <Sidedrawer />
                             </>
                         </div>
                     </Drawer>

@@ -108,11 +108,14 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
 
         if (
             trimmedInput.length &&
-            !tagField.value.includes(trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1)) &&
+            !tagField.value.includes(trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1).toLowerCase()) &&
             tagField.value.length < 4
         ) {
             setInput('');
-            await setFieldValue('languages', [...tagField.value, trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1)]);
+            await setFieldValue('languages', [
+                ...tagField.value,
+                trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1).toLowerCase()
+            ]);
         }
     };
 
@@ -121,11 +124,14 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
 
         if (
             trimmedInput.length &&
-            !profField.value.includes(trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1)) &&
+            !profField.value.includes(trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1).toLowerCase()) &&
             profField.value.length < 4
         ) {
             setProfInput('');
-            await setFieldValue('other_professions', [...profField.value, trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1)]);
+            await setFieldValue('other_professions', [
+                ...profField.value,
+                trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1).toLowerCase()
+            ]);
         }
     };
 
