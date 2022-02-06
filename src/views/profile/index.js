@@ -102,7 +102,7 @@ const Profile = () => {
                             >
                                 <Avatar
                                     alt="Remy Sharp"
-                                    src="./register.png"
+                                    src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
                                     sx={{ width: 150, height: 150, position: 'absolute', zIndex: 4, top: -60 }}
                                 />
                                 <Box mt="78px">

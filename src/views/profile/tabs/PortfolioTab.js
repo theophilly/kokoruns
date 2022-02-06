@@ -454,7 +454,7 @@ const PortfolioTab = () => {
                                             console.log(values);
                                             var formData = rebuildData(values, filesharhe_ref.current.files[0]);
                                             await dispatch(addPortfolio(formData));
-                                            console.log(filesharhe_ref.current.files[0]);
+                                            //   console.log(filesharhe_ref.current.files[0]);
                                             setPictureStep((step) => step + 1);
                                         }}
                                         validationSchema={Yup.object().shape({

@@ -23,6 +23,32 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const rebuildData = (formvalues, file) => {
+    let formData = new FormData();
+    formData.append('first_name', formvalues.firstName);
+    formData.append('last_name', formvalues.lastName);
+    formData.append('user_phonenum', formvalues.phone);
+    formData.append('user_email', formvalues.email);
+    formData.append('marital_status', formvalues.maritalStatus);
+    formData.append('profession', formvalues.profession);
+    formData.append('employment_type', formvalues.employment_type);
+    formData.append('employment_status', formvalues.employment_status);
+    formData.append('educational_qualification', formvalues.academicLevel);
+    formData.append('gender', formvalues.gender);
+    formData.append('disabled', formvalues.disablility);
+    formData.append('current_employer', formvalues.current_employer);
+    formData.append('languages[]', formvalues.languages);
+    formData.append('other_professions[]', formvalues.other_professions);
+    formData.append('selectedState', formvalues.state);
+    formData.append('selectedLGA', formvalues.lga);
+    formData.append('selectedState2', formvalues.preffered_jl);
+    formData.append('selectedLGA2', formvalues.preffered_jlga);
+    formData.append('about', formvalues.about);
+    formData.append('website', formvalues.website);
+    formData.append('profilepic', file);
+    return formData;
+};
+
 const FILE_SIZE = 200000;
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
@@ -103,7 +129,6 @@ const Profilesetup = () => {
                     //  values = formvalues;
                     //  initializePayment(onSuccessWrapper, onClose);
 
-                    console.log(formvalues);
                     const newFormValues = {
                         first_name: formvalues.firstName,
                         last_name: formvalues.lastName,
@@ -125,9 +150,13 @@ const Profilesetup = () => {
                         selectedState2: formvalues.preffered_jl,
                         selectedLGA2: formvalues.preffered_jlga,
                         about: formvalues.about,
-                        website: formvalues.website
+                        website: formvalues.website,
+                        profilepic: filesharhe_ref.current.files[0]
                     };
-                    await dispatch(updateUserProfile(newFormValues));
+                    var formData = rebuildData(formvalues, filesharhe_ref.current.files[0]);
+                    console.log(formData, 'formdata');
+                    console.log(formvalues, 'formvalues');
+                    await dispatch(updateUserProfile(formData));
 
                     // if user navigate to profile success
                 }}
