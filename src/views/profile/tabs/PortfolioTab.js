@@ -192,6 +192,9 @@ const PortfolioTab = () => {
     const handleSocial = () => {
         setSocialOpen(false);
         setSocialStep(0);
+        setEdit((prev) => {
+            return { ...prev, show: false };
+        });
     };
 
     const delPortfolio = async () => {
