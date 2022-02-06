@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppBar, Toolbar, Button, IconButton, Drawer, Link, Box, useTheme } from '@mui/material';
+import { AppBar, Toolbar, Button, IconButton, Drawer, Link, Box, useTheme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link as RouterLink } from 'react-router-dom';
+import LogoSection from '../../layout/MainLayout/LogoSection';
 
 // import Notification from '../layout/MainLayout/Header/NotificationSection.js';
 // import Profile from '../layout/MainLayout/Header/ProfileSection.js';
@@ -190,7 +191,17 @@ export default function Navbar() {
                             onClose: handleDrawerClose
                         }}
                     >
-                        <div className={drawerContainer}>{/* <Sidedrawer onClose={handleDrawerClose} /> */}</div>
+                        <div className={drawerContainer}>
+                            {/* <Sidedrawer onClose={handleDrawerClose} /> */}
+
+                            <>
+                                <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+                                    <Box sx={{ display: 'flex', p: 2, mx: 'auto' }}>
+                                        <LogoSection />
+                                    </Box>
+                                </Box>
+                            </>
+                        </div>
                     </Drawer>
 
                     <IconButton

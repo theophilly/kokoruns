@@ -106,18 +106,26 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
     const onAdd = async (e) => {
         const trimmedInput = input.trim();
 
-        if (trimmedInput.length && !tagField.value.includes(trimmedInput.toLowerCase())) {
+        if (
+            trimmedInput.length &&
+            !tagField.value.includes(trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1)) &&
+            tagField.value.length < 4
+        ) {
             setInput('');
-            await setFieldValue('languages', [...tagField.value, trimmedInput.toLowerCase()]);
+            await setFieldValue('languages', [...tagField.value, trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1)]);
         }
     };
 
     const onProfAdd = async (e) => {
         const trimmedInput = profInput.trim();
 
-        if (trimmedInput.length && !profField.value.includes(trimmedInput.toLowerCase())) {
+        if (
+            trimmedInput.length &&
+            !profField.value.includes(trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1)) &&
+            profField.value.length < 4
+        ) {
             setProfInput('');
-            await setFieldValue('other_professions', [...profField.value, trimmedInput.toLowerCase()]);
+            await setFieldValue('other_professions', [...profField.value, trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1)]);
         }
     };
 
