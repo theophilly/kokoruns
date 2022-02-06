@@ -7,6 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link as RouterLink } from 'react-router-dom';
 import LogoSection from '../../layout/MainLayout/LogoSection';
 import Sidedrawer from './Sidebar';
+import { FaTimes } from 'react-icons/fa';
 
 // import Notification from '../layout/MainLayout/Header/NotificationSection.js';
 // import Profile from '../layout/MainLayout/Header/ProfileSection.js';
@@ -198,8 +199,19 @@ export default function Navbar() {
 
                             <>
                                 <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-                                    <Box sx={{ display: 'flex', p: 2, mx: 'auto' }}>
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            p: 2,
+                                            mx: 'auto',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between'
+                                        }}
+                                    >
                                         <LogoSection />
+                                        <IconButton onClick={handleDrawerClose} sx={{ fontSize: '1rem' }} aria-label="Example">
+                                            <FaTimes />
+                                        </IconButton>
                                     </Box>
                                 </Box>
                                 <Sidedrawer />
