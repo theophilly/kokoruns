@@ -117,18 +117,6 @@ export default function Sidedrawer(props) {
                         {link.title}
                     </Button>
                 ))}
-                <Button
-                    classes={{ startIcon: label }}
-                    end="true"
-                    disableElevation
-                    className={button}
-                    variant="contained"
-                    autoCapitalize="none"
-                    startIcon={<MdContacts />}
-                    onClick={() => (window.location.href = 'https://myreactprofile.netlify.app/')}
-                >
-                    About Me
-                </Button>
             </ListStyle>
         </>
     );
