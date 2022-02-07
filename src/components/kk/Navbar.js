@@ -96,6 +96,18 @@ const useStyles = makeStyles((theme) => ({
             background: 'rgb(6, 101, 178)'
         }
     },
+    signupButton2: {
+        borderRadius: '5px',
+        textTransform: 'capitalize',
+        fontWeight: 'bold',
+        padding: '6px 60px',
+        width: '100%',
+        marginLeft: '0px',
+        marginTop: '20px',
+        '&:hover': {
+            background: 'rgb(6, 101, 178)'
+        }
+    },
     loginButton: {
         fontWeight: 'bold',
         marginLeft: '20px',
@@ -104,6 +116,17 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'white',
         textTransform: 'capitalize',
         border: '1px solid #0991FF'
+    },
+    loginButton2: {
+        fontWeight: 'bold',
+        borderRadius: '5px',
+        padding: '6px 60px',
+        backgroundColor: 'white',
+        textTransform: 'capitalize',
+        border: '1px solid #0991FF',
+        width: '100%',
+        marginLeft: '0px',
+        marginTop: '35px'
     },
     signOutButton: {
         fontWeight: 'bold',
@@ -117,6 +140,20 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             border: '1px solid rgb(217, 38, 39)'
         }
+    },
+    signOutButton2: {
+        fontWeight: 'bold',
+        borderRadius: '5px',
+        padding: '6px 60px',
+        backgroundColor: 'white',
+        textTransform: 'capitalize',
+        color: 'rgb(217, 38, 39)',
+        border: '1px solid rgb(217, 38, 39)',
+        width: '100%',
+        marginLeft: '0px',
+        '&:hover': {
+            border: '1px solid rgb(217, 38, 39)'
+        }
     }
 }));
 
@@ -125,7 +162,19 @@ export default function Navbar() {
     const { authenticated, active, token } = useSelector((state) => state.authReducer);
     const dispatch = useDispatch();
 
-    const { header, logo, menuButton, toolbar, drawerContainer, signupButton, loginButton, signOutButton } = useStyles({ theme });
+    const {
+        header,
+        logo,
+        menuButton,
+        toolbar,
+        drawerContainer,
+        signupButton,
+        loginButton,
+        signOutButton,
+        signupButton2,
+        loginButton2,
+        signOutButton2
+    } = useStyles({ theme });
 
     const [state, setState] = useState({
         mobileView: true,
@@ -215,6 +264,82 @@ export default function Navbar() {
                                     </Box>
                                 </Box>
                                 <Sidedrawer />
+                                {[
+                                    {
+                                        label: 'Sign In',
+                                        href: '/login',
+                                        class: 'loginButton',
+                                        variant: 'outlined'
+                                    },
+                                    {
+                                        label: 'Register',
+                                        href: '/register',
+                                        class: 'signupButton',
+                                        variant: 'contained'
+                                    },
+                                    {
+                                        label: 'Sign Out',
+                                        variant: 'outlined'
+                                    }
+                                ].map(({ label, href, variant }, index) => {
+                                    if (['Register', 'Sign In'].includes(label)) {
+                                        return (
+                                            <Button
+                                                key={index}
+                                                onClick={handleDrawerClose}
+                                                style={{ display: token && 'none' }}
+                                                {...{
+                                                    key: label,
+                                                    color: 'primary',
+                                                    disableElevation: true,
+                                                    variant: variant,
+                                                    to: href,
+                                                    component: RouterLink,
+                                                    className: `${menuButton} ${label === 'Register' ? signupButton2 : ''} ${
+                                                        label === 'Sign In' ? loginButton2 : ''
+                                                    }`
+                                                }}
+                                            >
+                                                {label}
+                                            </Button>
+                                        );
+                                    } else if (['Sign Out'].includes(label)) {
+                                        return (
+                                            <Button
+                                                onClick={() => {
+                                                    logoutHandler();
+                                                    handleDrawerClose();
+                                                }}
+                                                style={{ display: !token && 'none' }}
+                                                key={index}
+                                                {...{
+                                                    key: label,
+                                                    color: 'primary',
+                                                    disableElevation: true,
+                                                    variant: variant,
+                                                    className: `${menuButton} ${signOutButton2}`
+                                                }}
+                                            >
+                                                {label}
+                                            </Button>
+                                        );
+                                    } else {
+                                        return (
+                                            <Button
+                                                key={index}
+                                                {...{
+                                                    key: label,
+                                                    color: 'inherit',
+                                                    to: href,
+                                                    component: RouterLink,
+                                                    className: menuButton
+                                                }}
+                                            >
+                                                {label}
+                                            </Button>
+                                        );
+                                    }
+                                })}
                             </>
                         </div>
                     </Drawer>
