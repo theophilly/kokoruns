@@ -145,7 +145,7 @@ export const updateUserProfile = (profile) => {
 
                 //fetch user details
                 await api
-                    .fetchUserDetails(state.authReducer.user_id)
+                    .fetchUserDetails(state.authReducer.user_id || state.authReducer.user.bio.user_id)
                     .then((res) => {
                         console.log(res.data);
                         dispatch({

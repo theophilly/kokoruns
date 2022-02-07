@@ -19,6 +19,7 @@ import SelectLGA from '../FormUI/SelectLGA';
 import stateData from '../../../config/stateData.json';
 import academicLevel from '../../../config/academicLevel.json';
 import genderData from '../../../config/genderData.json';
+import age_range from '../../../config/age_range.json';
 import employmentType from '../../../config/employmentType.json';
 import maritalStatusData from '../../../config/maritalStatusData.json';
 import EmploymentStatus from '../FormUI/EmploymentStatus';
@@ -112,10 +113,12 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
             tagField.value.length < 4
         ) {
             setInput('');
+
             await setFieldValue('languages', [
                 ...tagField.value,
                 trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1).toLowerCase()
             ]);
+            console.log(tagField.value);
         }
     };
 
@@ -215,7 +218,8 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                     xs={12}
                     md={6}
                 >
-                    <Datepicker name="dob" helpertext="Date of Birth" />
+                    {/* <Datepicker name="dob" helpertext="Date of Birth" /> */}
+                    <SelectWrapper name="age_range" helpertext="Age Range" options={age_range} />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <Textfield name="profession" helpertext="Profession" />
