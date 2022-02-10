@@ -354,7 +354,7 @@ const EducationTab = () => {
                                                         <Textfield
                                                             //  disabled={!!user.firstName}
                                                             name="degree"
-                                                            helpertext="Degree"
+                                                            helpertext="Certificate"
                                                         />
                                                     </Grid>
                                                     <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
@@ -506,7 +506,7 @@ const EducationTab = () => {
                                             setEducationStep((step) => step + 1);
                                         }}
                                         validationSchema={Yup.object().shape({
-                                            degree: Yup.string().required('Degree is Required'),
+                                            degree: Yup.string().required('Type of certificate is Required'),
                                             name_of_institution: Yup.string().required('Name of Institution is Required'),
                                             date_started: Yup.date().required('Starting Date is Required is Required'),
                                             date_completed: Yup.date().required('Date Completed is Required is Required')
@@ -527,7 +527,11 @@ const EducationTab = () => {
                                                         xs={12}
                                                         md={6}
                                                     >
-                                                        <Textfield name="degree" helpertext="Degree" />
+                                                        <Textfield
+                                                            placeholder="eg: Bsc or Junior School leaving Certificate"
+                                                            name="degree"
+                                                            helpertext="Degree"
+                                                        />
                                                     </Grid>
                                                     <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
                                                         <Textfield name="name_of_institution" helpertext="Name of Insitution" />
