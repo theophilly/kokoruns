@@ -13,6 +13,7 @@ const CheckboxWrapper = ({ name, label, legend, ...otherProps }) => {
 
     const configCheckbox = {
         ...field,
+        checked: meta.value,
         onChange: handleChange
     };
 

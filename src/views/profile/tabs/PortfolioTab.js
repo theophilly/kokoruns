@@ -574,8 +574,13 @@ const PortfolioTab = () => {
                                             setSocialStep((step) => step + 2);
                                         }}
                                         validationSchema={Yup.object().shape({
-                                            social: Yup.string().required('Name od social is Required'),
-                                            social_link: Yup.string().required('social link is Required')
+                                            social: Yup.string().required('Name of social is Required'),
+                                            social_link: Yup.string()
+                                                .matches(
+                                                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                                                    'Enter correct url!'
+                                                )
+                                                .required('Please valid social media link(url)')
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -713,8 +718,13 @@ const PortfolioTab = () => {
                                             setSocialStep((step) => step + 1);
                                         }}
                                         validationSchema={Yup.object().shape({
-                                            social: Yup.string().required('Name od social is Required'),
-                                            social_link: Yup.string().required('social link is Required')
+                                            social: Yup.string().required('Name of social is Required'),
+                                            social_link: Yup.string()
+                                                .matches(
+                                                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                                                    'Enter correct url!'
+                                                )
+                                                .required('Please valid social media link(url)')
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -731,10 +741,14 @@ const PortfolioTab = () => {
                                                         xs={12}
                                                         md={6}
                                                     >
-                                                        <Textfield name="social" helpertext="Social Media" placeholder="Facebook" />
+                                                        <Textfield name="social" helpertext="Social Media Name" placeholder="eg Facebook" />
                                                     </Grid>
                                                     <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
-                                                        <Textfield name="social_link" helpertext="Link" />
+                                                        <Textfield
+                                                            name="social_link"
+                                                            helpertext="Link"
+                                                            placeholder="https://web.facebook.com/user/"
+                                                        />
                                                     </Grid>
 
                                                     <Grid xs={12} item>

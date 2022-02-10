@@ -14,6 +14,7 @@ import Textfield from '../FormUI/Textfield';
 import SelectWrapper from '../FormUI/SelectWrapper';
 import Datepicker from '../FormUI/Datepicker';
 import Textarea from '../FormUI/Textarea';
+import AboutTextarea from '../FormUI/AboutTextarea';
 import Checkbox from '../FormUI/Checkbox';
 import SelectLGA from '../FormUI/SelectLGA';
 import stateData from '../../../config/stateData.json';
@@ -240,7 +241,7 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                     <SelectWrapper name="academicLevel" helpertext="Academic Level" options={academicLevel} />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <SelectWrapper name="state" helpertext="Current Location" options={stateData} />
+                    <SelectWrapper name="state" helpertext="Current State of Residence" options={stateData} />
                 </Grid>
                 {/* Lga and space */}
                 <Grid
@@ -254,7 +255,7 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                     xs={12}
                     md={6}
                 >
-                    <SelectLGA dependentField="state" name="lga" helpertext="LGA" />
+                    <SelectLGA dependentField="state" name="lga" helpertext="Current Local Government of Residence" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <Textfield name="website" helpertext="Website" />
@@ -262,7 +263,7 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
 
                 {/* about */}
                 <Grid item xs={12}>
-                    <Textarea num_of_rows={8} name="about" helpertext="About" />
+                    <AboutTextarea num_of_rows={8} name="about" helpertext="About" />
                 </Grid>
 
                 <Grid marginTop="40px" xs={12} item>
@@ -270,7 +271,7 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                 </Grid>
                 {/* languages spoken */}
                 <Grid marginTop="10px" xs={12} item>
-                    <Typography sx={{ fontWeight: '500' }}>add other occupations</Typography>
+                    <Typography sx={{ fontWeight: '500' }}>Add Other Occupations</Typography>
                 </Grid>
                 {profField.value.length > 0 && (
                     <Grid xs={12} item>

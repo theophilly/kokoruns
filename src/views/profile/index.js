@@ -109,7 +109,10 @@ const Profile = () => {
                                     <Typography sx={{ ...theme.typography.heading, fontWeight: 'bold', textAlign: 'center' }}>
                                         {bio.first_name} {bio.last_name}
                                     </Typography>
-                                    <Typography sx={{ textAlign: 'center', fontSize: '0.8rem' }}>UI/UX Designer at Kokoruns Ltd</Typography>
+                                    <Typography sx={{ textAlign: 'center', fontSize: '0.8rem' }}>
+                                        {bio.profession} {bio.employment_status === 'self_employed' && 'at Self Employed'}{' '}
+                                        {bio.employment_status === 'employed' && `at ${bio.current_employer}`}
+                                    </Typography>
                                 </Box>
                             </Box>
                         </Grid>
@@ -135,20 +138,14 @@ const Profile = () => {
                     <SubCard sx={{ marginTop: '30px' }} title="About">
                         {bio.profession && (
                             <Box sx={{ display: 'flex' }}>
-                                <Typography sx={{ fontSize: '0.8rem' }}>Profession: </Typography>
+                                <Typography sx={{ fontSize: '0.8rem' }}>Occupation: </Typography>
                                 <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
                                     {bio.profession}
+                                    {Object.values(JSON.parse(bio.other_professions1)).map((item) => `, ` + item)}
                                 </Typography>
                             </Box>
                         )}
-                        {bio.current_employer && (
-                            <Box sx={{ display: 'flex', mt: '5px' }}>
-                                <Typography sx={{ fontSize: '0.8rem' }}> Company: </Typography>
-                                <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-                                    {bio.current_employer}
-                                </Typography>
-                            </Box>
-                        )}
+
                         <Box sx={{ display: 'flex', mt: '5px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Education: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
@@ -178,7 +175,7 @@ const Profile = () => {
                         <Box sx={{ display: 'flex', mt: '5px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Location: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-                                {bio.state}, Nigeria
+                                {bio.lga}, {bio.state} State.
                             </Typography>
                         </Box>
                     </SubCard>

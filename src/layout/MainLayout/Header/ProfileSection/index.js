@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 // material-ui
@@ -45,6 +45,10 @@ import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 const ProfileSection = () => {
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
+    const {
+        authenticated,
+        user: { bio }
+    } = useSelector((state) => state.authReducer);
     const navigate = useNavigate();
 
     const [sdm, setSdm] = useState(true);
@@ -135,6 +139,8 @@ const ProfileSection = () => {
             /> */}
             <ButtonBase
                 // onClick={handleToggle}
+                component={Link}
+                to="/profile"
                 ref={anchorRef}
                 aria-controls={open ? 'menu-list-grow' : undefined}
                 aria-haspopup="true"
@@ -144,10 +150,10 @@ const ProfileSection = () => {
                 sx={{ ml: '10px' }}
             >
                 <Typography sx={{ ...theme.typography.heading, fontWeight: 'bold', marginRight: '6px', cursor: 'pointer' }}>
-                    Adejola
+                    {bio.first_name.charAt(0).toUpperCase() + bio.first_name.slice(1).toLowerCase()}
                 </Typography>
                 <Avatar
-                    src={User1}
+                    src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
                     sx={{
                         ...theme.typography.mediumAvatar,
                         margin: '8px 0 8px 8px !important',

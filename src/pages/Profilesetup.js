@@ -203,7 +203,7 @@ const Profilesetup = () => {
                         lga: Yup.string().required('city is Required'),
                         about: Yup.string().required('about is required'),
                         current_employer: employment === 'employed' ? Yup.string().required('current employer is required') : '',
-                        employer_address: employment === 'employed' ? Yup.string().required('employer address is required') : '',
+                        // employer_address: employment === 'employed' ? Yup.string().required('employer address is required') : '',
                         employment_type: employment === 'unemployed' ? Yup.string().required('employment type is required') : '',
                         employment_status: Yup.string().required('present employment Status is required'),
                         preffered_jlga: employment === 'unemployed' ? Yup.string().required('preffered Job LGA is required') : '',

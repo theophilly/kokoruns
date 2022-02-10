@@ -10,14 +10,13 @@ import {
     DialogTitle,
     DialogActions,
     DialogContent,
-    DialogContentText,
     CircularProgress,
     useMediaQuery
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { BiEditAlt } from 'react-icons/bi';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Formik, Form } from 'formik';
+import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import Textfield from '../../../components/reusables/FormUI/Textfield';
 import Textarea from '../../../components/reusables/FormUI/Textarea';
@@ -28,6 +27,7 @@ import resumes from '../../../utils/resume';
 import { addResume, updateResume, deleteResume } from '../../../store/actions/userDataActions';
 import Success from '../../../ui-component/modals/Success';
 import Warning from '../../../ui-component/modals/Warning';
+import CheckboxWrapper from '../../../components/reusables/FormUI/CheckBoxWrapper';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -98,7 +98,7 @@ const Tag = ({ text, index }) => {
     );
 };
 
-const Item = ({ start_year, end_year, title, sub, experience, clicked, setEdit, value = {} }) => {
+const Item = ({ is_current, start_year, end_year, title, sub, experience, clicked, setEdit, value = {} }) => {
     const theme = useTheme();
     return (
         <Box
@@ -137,9 +137,8 @@ const Item = ({ start_year, end_year, title, sub, experience, clicked, setEdit, 
                 }}
             >
                 <Typography>
-                    {`${monthShortNames[new Date(start_year).getMonth()]} ${new Date(start_year).getUTCFullYear()} - ${
-                        monthShortNames[new Date(end_year).getMonth()]
-                    } ${new Date(end_year).getUTCFullYear()}`}{' '}
+                    {`${monthShortNames[new Date(start_year).getMonth()]} ${new Date(start_year).getUTCFullYear()} - `}{' '}
+                    {is_current ? 'Present' : `${monthShortNames[new Date(end_year).getMonth()]} ${new Date(end_year).getUTCFullYear()}`}
                 </Typography>
                 <BiEditAlt
                     onClick={async () => {
@@ -189,6 +188,25 @@ const ResumeTab = () => {
     const [resumeStep, setResumeStep] = React.useState(0);
     const [edit, setEdit] = React.useState({ show: false });
     const [load, setLoad] = React.useState(false);
+    const [checkIsCurrent, setCheckIsCurrent] = React.useState(false);
+
+    const EndDate = () => {
+        const [field, meta] = useField('is_current');
+        setCheckIsCurrent(meta.value);
+
+        return (
+            <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
+                <Datepicker disabled={meta.value} name="date_completed" helpertext="Date Completed" />
+            </Grid>
+        );
+    };
+    const ValidateEndDate = () => {
+        if (checkIsCurrent === true) {
+            return '';
+        } else {
+            return Yup.date().required('Date Completed is Required');
+        }
+    };
 
     // certificate
     const [resumeOpen, setResumeOpen] = React.useState(false);
@@ -233,6 +251,7 @@ const ResumeTab = () => {
                                 sub={item.duration}
                                 experience={item.roles}
                                 clicked={setResumeOpen}
+                                is_current={item.is_current}
                             />
                         ))}
 
@@ -291,7 +310,8 @@ const ResumeTab = () => {
                                             name_of_company: edit?.company_name,
                                             date_started: edit?.start,
                                             date_completed: edit?.end,
-                                            responsibilities: edit?.roles
+                                            responsibilities: edit?.roles,
+                                            is_current: !!edit?.is_current
                                         }}
                                         onSubmit={async (values) => {
                                             console.log(values);
@@ -307,15 +327,18 @@ const ResumeTab = () => {
                                                     role: values.role,
                                                     decription: values.responsibilities,
                                                     responsibities: values.responsibilities,
-                                                    is_current: false
+                                                    is_current: values.is_current
                                                 })
                                             );
 
                                             setResumeStep((step) => step + 2);
                                         }}
                                         validationSchema={Yup.object().shape({
-                                            date_started: Yup.date().required('Starting Date is Required is Required'),
-                                            date_completed: Yup.date().required('Date Completed is Required is Required')
+                                            date_started: Yup.date().required('Starting Date is Required'),
+                                            date_completed: Yup.date().required('Date Completed is Required'),
+                                            role: Yup.string().required('role is Required'),
+                                            name_of_company: Yup.string().required('name of company is Required'),
+                                            responsibilities: Yup.string().required('responsibilities is Required')
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -337,6 +360,9 @@ const ResumeTab = () => {
                                                     <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
                                                         <Textfield name="name_of_company" helpertext="Name of Company" />
                                                     </Grid>
+                                                    <Grid mt="10px" mb="0px" item xs={12}>
+                                                        <CheckboxWrapper name="is_current" label="still works here" />
+                                                    </Grid>
                                                     {/* below */}
                                                     <Grid
                                                         sx={{
@@ -353,9 +379,9 @@ const ResumeTab = () => {
                                                     >
                                                         <Datepicker name="date_started" helpertext="Date Started" />
                                                     </Grid>
-                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
-                                                        <Datepicker name="date_completed" helpertext="Date Completed" />
-                                                    </Grid>
+
+                                                    <EndDate />
+
                                                     <Grid mt="10px" xs={12}>
                                                         <Textarea num_of_rows={5} name="responsibilities" helpertext="Responsibilities" />
                                                     </Grid>
@@ -463,7 +489,8 @@ const ResumeTab = () => {
                                             name_of_company: '',
                                             date_started: null,
                                             date_completed: null,
-                                            responsibilities: ''
+                                            responsibilities: '',
+                                            is_current: null
                                         }}
                                         onSubmit={async (values) => {
                                             console.log(values);
@@ -479,15 +506,18 @@ const ResumeTab = () => {
                                                     role: values.role,
                                                     decription: values.responsibilities,
                                                     responsibities: values.responsibilities,
-                                                    is_current: false
+                                                    is_current: values.is_current
                                                 })
                                             );
 
                                             setResumeStep((step) => step + 1);
                                         }}
                                         validationSchema={Yup.object().shape({
-                                            date_started: Yup.date().required('Starting Date is Required is Required'),
-                                            date_completed: Yup.date().required('Date Completed is Required is Required')
+                                            date_started: Yup.date().required('Starting Date is Required'),
+                                            date_completed: ValidateEndDate(),
+                                            role: Yup.string().required('role is Required'),
+                                            name_of_company: Yup.string().required('name of company is Required'),
+                                            responsibilities: Yup.string().required('responsibilities is Required')
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -517,6 +547,9 @@ const ResumeTab = () => {
                                                             helpertext="Name of Company"
                                                         />
                                                     </Grid>
+                                                    <Grid mt="10px" mb="0px" item xs={12}>
+                                                        <CheckboxWrapper name="is_current" label="still works here" />
+                                                    </Grid>
                                                     {/* below */}
                                                     <Grid
                                                         sx={{
@@ -533,9 +566,7 @@ const ResumeTab = () => {
                                                     >
                                                         <Datepicker name="date_started" helpertext="Date Started" />
                                                     </Grid>
-                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
-                                                        <Datepicker name="date_completed" helpertext="Date Completed" />
-                                                    </Grid>
+                                                    <EndDate />
                                                     <Grid mt="10px" xs={12}>
                                                         <Textarea num_of_rows={5} name="responsibilities" helpertext="Responsibilities" />
                                                     </Grid>

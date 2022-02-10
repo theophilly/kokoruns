@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 const Checkbox = ({ name, helpertext, options, ...otherProps }) => {
     const theme = useTheme();
     const { switch_class, switch_container } = useStyles({ theme });
-    const { setFieldValue, getFieldMeta } = useFormikContext();
+    const { getFieldMeta } = useFormikContext();
     const [field, meta] = useField(name);
     const field_meta = getFieldMeta(name);
 
