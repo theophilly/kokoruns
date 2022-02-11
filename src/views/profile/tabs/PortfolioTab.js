@@ -20,6 +20,7 @@ import * as Yup from 'yup';
 import Textfield from '../../../components/reusables/FormUI/Textfield';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import resume from '../../../utils/resume';
+import CloseIcon from '@mui/icons-material/Close';
 import SubCard from '../../../ui-component/cards/SubCard';
 import pictures from '../../../utils/pictures';
 import { BiEditAlt } from 'react-icons/bi';
@@ -302,8 +303,15 @@ const PortfolioTab = () => {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <DialogTitle id="scroll-dialog-title">Add Pictures</DialogTitle>
                 <DialogContent>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography sx={{ fontSize: '1.2rem' }}>Add Pictures</Typography>
+                                <CloseIcon sx={{ cursor: 'pointer' }} onClick={handlePictures} />
+                            </Box>
+                        </Grid>
+                    </Grid>
                     {edit.show ? (
                         // update
                         <PortfolioStepper portfolioStep={pictureStep} setPortfolioStep={setPictureStep}>
@@ -548,8 +556,16 @@ const PortfolioTab = () => {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <DialogTitle id="scroll-dialog-title">Add Social Link</DialogTitle>
                 <DialogContent>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography sx={{ fontSize: '1.2rem' }}>Add Social Link</Typography>
+                                <CloseIcon sx={{ cursor: 'pointer' }} onClick={handleSocial} />
+                            </Box>
+                        </Grid>
+                    </Grid>
+
                     {edit.show ? (
                         // update
 

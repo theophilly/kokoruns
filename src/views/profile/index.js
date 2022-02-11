@@ -25,6 +25,7 @@ import FullWidthTabs from './tabs';
 import Textfield from '../../components/reusables/FormUI/Textfield';
 import Textarea from '../../components/reusables/FormUI/Textarea';
 import { Link } from 'react-router-dom';
+import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -100,11 +101,13 @@ const Profile = () => {
                                     borderBottomRightRadius: '10px'
                                 }}
                             >
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
-                                    sx={{ width: 150, height: 150, position: 'absolute', zIndex: 4, top: -60 }}
-                                />
+                                <Box>
+                                    <Avatar
+                                        alt="Remy Sharp"
+                                        src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
+                                        sx={{ width: 150, height: 150, position: 'absolute', zIndex: 4, top: -60 }}
+                                    />
+                                </Box>
                                 <Box mt="78px">
                                     <Typography sx={{ ...theme.typography.heading, fontWeight: 'bold', textAlign: 'center' }}>
                                         {bio.first_name} {bio.last_name}

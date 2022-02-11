@@ -17,6 +17,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { BiEditAlt } from 'react-icons/bi';
+import CloseIcon from '@mui/icons-material/Close';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import education from '../../../utils/education';
 import { Formik, Form } from 'formik';
@@ -291,8 +292,15 @@ const EducationTab = () => {
             </Grid>
 
             <Dialog open={open} onClose={handleClose} aria-labelledby="scroll-dialog-title" aria-describedby="scroll-dialog-description">
-                <DialogTitle id="scroll-dialog-title">Educational Information</DialogTitle>
                 <DialogContent>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography sx={{ fontSize: '1.2rem' }}>Educational Information</Typography>
+                                <CloseIcon sx={{ cursor: 'pointer' }} onClick={handleClose} />
+                            </Box>
+                        </Grid>
+                    </Grid>
                     {edit.show ? (
                         // update
 
@@ -612,8 +620,15 @@ const EducationTab = () => {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <DialogTitle id="scroll-dialog-title">Certification Information</DialogTitle>
                 <DialogContent>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography sx={{ fontSize: '1.2rem' }}>Certification Information</Typography>
+                                <CloseIcon sx={{ cursor: 'pointer' }} onClick={handleCertificate} />
+                            </Box>
+                        </Grid>
+                    </Grid>
                     {edit.show ? (
                         // update
 

@@ -21,6 +21,7 @@ import * as Yup from 'yup';
 import Textfield from '../../../components/reusables/FormUI/Textfield';
 import Textarea from '../../../components/reusables/FormUI/Textarea';
 import Datepicker from '../../../components/reusables/FormUI/Datepicker';
+import CloseIcon from '@mui/icons-material/Close';
 import { makeStyles } from '@mui/styles';
 import SubCard from '../../../ui-component/cards/SubCard';
 import resumes from '../../../utils/resume';
@@ -294,10 +295,17 @@ const ResumeTab = () => {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <DialogTitle id="scroll-dialog-title">Professional Information</DialogTitle>
                 <DialogContent
                 //  dividers={scroll === 'paper'}
                 >
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography sx={{ fontSize: '1.2rem' }}>Professional Information</Typography>
+                                <CloseIcon sx={{ cursor: 'pointer' }} onClick={handleResume} />
+                            </Box>
+                        </Grid>
+                    </Grid>
                     {edit.show ? (
                         // update
 

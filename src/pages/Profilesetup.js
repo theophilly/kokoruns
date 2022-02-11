@@ -94,13 +94,15 @@ const Profilesetup = () => {
                 <Typography component="h1">{user?.bio ? 'Update Your Profile' : 'Profile Set Up'} </Typography>
             </Box>
             {/* red box information */}
-            <Box marginTop="14px">
-                <Typography sx={{ color: theme.palette.secondary.main1, textAlign: 'center' }}>
-                    You are required to set up your profile. This is a one-time initial set up and you can always change
-                    <br />
-                    them later in future from your dashboard. All fields marked * are mandatory
-                </Typography>
-            </Box>
+            {!from && (
+                <Box marginTop="14px">
+                    <Typography sx={{ color: theme.palette.secondary.main1, textAlign: 'center' }}>
+                        You are required to set up your profile. This is a one-time initial set up and you can always change
+                        <br />
+                        them later in future from your dashboard. All fields marked * are mandatory
+                    </Typography>
+                </Box>
+            )}
             {/* profile setup form */}
             <FormikStepper
                 from={from}
