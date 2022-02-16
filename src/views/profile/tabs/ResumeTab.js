@@ -369,7 +369,7 @@ const ResumeTab = () => {
                                                         <Textfield name="name_of_company" helpertext="Name of Company" />
                                                     </Grid>
                                                     <Grid mt="10px" mb="0px" item xs={12}>
-                                                        <CheckboxWrapper name="is_current" label="still works here" />
+                                                        <CheckboxWrapper name="is_current" label="still work here" />
                                                     </Grid>
                                                     {/* below */}
                                                     <Grid
@@ -542,21 +542,13 @@ const ResumeTab = () => {
                                                         xs={12}
                                                         md={6}
                                                     >
-                                                        <Textfield
-                                                            //  disabled={!!user.firstName}
-                                                            name="role"
-                                                            helpertext="Role"
-                                                        />
+                                                        <Textfield name="role" helpertext="Role" />
                                                     </Grid>
                                                     <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
-                                                        <Textfield
-                                                            //  disabled={!!user.lastName}
-                                                            name="name_of_company"
-                                                            helpertext="Name of Company"
-                                                        />
+                                                        <Textfield name="name_of_company" helpertext="Name of Company" />
                                                     </Grid>
                                                     <Grid mt="10px" mb="0px" item xs={12}>
-                                                        <CheckboxWrapper name="is_current" label="still works here" />
+                                                        <CheckboxWrapper name="is_current" label="still work here" />
                                                     </Grid>
                                                     {/* below */}
                                                     <Grid

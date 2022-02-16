@@ -30,6 +30,7 @@ import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import ResumeUpload from '../../components/reusables/forms/ResumeUpload';
 import { updateProfilePicture, updateCoverPicture } from '../../store/actions/userDataActions';
+import LimitTags from './tabs/LimitTags';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -209,7 +210,7 @@ const Profile = () => {
                         )}
                     </Grid>
 
-                    <SubCard sx={{ marginTop: '30px' }} title="About">
+                    <SubCard sx={{ marginTop: '30px' }} title="Bio">
                         {bio.profession && (
                             <Box sx={{ display: 'flex' }}>
                                 <Typography sx={{ fontSize: '0.8rem' }}>Occupation: </Typography>
@@ -287,10 +288,11 @@ const Profile = () => {
                                 ml: '0px'
                             }
                         }}
-                        title="Bio"
+                        title="About"
                     >
                         <Typography sx={{ fontSize: '0.9rem', color: '#333333', ml: '5px' }}>{bio.about}</Typography>
                     </SubCard>
+
                     {/* tabs */}
                     <Box sx={{ width: '100%' }}>
                         <FullWidthTabs />

@@ -359,18 +359,10 @@ const EducationTab = () => {
                                                         xs={12}
                                                         md={6}
                                                     >
-                                                        <Textfield
-                                                            //  disabled={!!user.firstName}
-                                                            name="degree"
-                                                            helpertext="Certificate"
-                                                        />
+                                                        <Textfield name="degree" helpertext="Certificate" />
                                                     </Grid>
                                                     <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
-                                                        <Textfield
-                                                            //  disabled={!!user.lastName}
-                                                            name="name_of_institution"
-                                                            helpertext="Name of Insitution"
-                                                        />
+                                                        <Textfield name="name_of_institution" helpertext="Name of Insitution" />
                                                     </Grid>
                                                     {/* below */}
                                                     <Grid

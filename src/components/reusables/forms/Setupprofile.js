@@ -7,6 +7,7 @@ import { Box, Grid, Typography, OutlinedInput, Button, useTheme } from '@mui/mat
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import AddIcon from '@mui/icons-material/Add';
 import Transi from '../../../ui-component/extended/Transitions';
+import LimitTags from '../../../views/profile/tabs/LimitTags';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 // project imports
@@ -266,6 +267,11 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                     <AboutTextarea num_of_rows={8} name="about" helpertext="About" />
                 </Grid>
 
+                {/* about */}
+                <Grid item xs={12}>
+                    <AboutTextarea num_of_rows={8} name="about" helpertext="About" />
+                </Grid>
+
                 <Grid marginTop="40px" xs={12} item>
                     <Typography sx={{ ...theme.typography.heading }}>Occupational Information</Typography>
                 </Grid>
@@ -376,6 +382,12 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
 
                 {/* languages spoken */}
                 <Grid marginTop="10px" xs={12} item>
+                    <Typography mb="10px" sx={{ ...theme.typography.heading }}>
+                        Languages Spoken
+                    </Typography>
+                    <LimitTags />
+                </Grid>
+                {/* <Grid marginTop="10px" xs={12} item>
                     <Typography sx={{ ...theme.typography.heading }}>Languages Spoken</Typography>
                 </Grid>
                 {tagField.value.length > 0 && (
@@ -418,10 +430,10 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                     <Typography style={{ color: '#f44336' }} variant="caption">
                         {tagField.error}
                     </Typography>
-                </Grid>
+                </Grid> */}
 
                 {/* disabilities */}
-                <Grid marginTop="40px" xs={12} item>
+                <Grid marginTop="0px" xs={12} item>
                     <Typography sx={{ ...theme.typography.heading }}>Disability*</Typography>
                 </Grid>
                 <Grid item xs={12}>
