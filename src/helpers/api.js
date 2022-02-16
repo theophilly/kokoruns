@@ -67,6 +67,16 @@ class Api {
         return this.init().post('/profilesetup', data);
     };
 
+    //update profile picture
+    updateProfilePicture = (data) => {
+        return this.init().post('/changeprofilepic', data);
+    };
+
+    //update cover picture
+    updateCoverPicture = (data) => {
+        return this.init().post('/changecoverimage', data);
+    };
+
     //add  certification
     addCertification = (data) => {
         return this.init().post('/addcertification', data);

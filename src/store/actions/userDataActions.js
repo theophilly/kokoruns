@@ -245,6 +245,36 @@ export const updateSocial = (id, social) => {
     };
 };
 
+export const updateProfilePicture = (picture) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        await api
+            .updateProfilePicture(picture)
+            .then((res) => {
+                dispatch(fetchUserDetails());
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    };
+};
+
+export const updateCoverPicture = (picture) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        await api
+            .updateCoverPicture(picture)
+            .then((res) => {
+                dispatch(fetchUserDetails());
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    };
+};
+
 export const deleteSocial = (social) => {
     return async (dispatch) => {
         dispatch({ type: actionType.ON_FETCH_BEGIN });

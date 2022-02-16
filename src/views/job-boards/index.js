@@ -203,6 +203,7 @@ const Jobboard = () => {
                     </Box>
                 </Grid>
             </Grid>
+
             <Dialog
                 open={message}
                 onClose={handleMessageClose}
