@@ -25,6 +25,9 @@ import age_range from '../../../config/age_range.json';
 import employmentType from '../../../config/employmentType.json';
 import maritalStatusData from '../../../config/maritalStatusData.json';
 import EmploymentStatus from '../FormUI/EmploymentStatus';
+import MultipleSelect from '../FormUI/MultipleSelect';
+import languages from '../../../config/languages';
+import professions from '../../../config/professions';
 
 const Tag = ({ editTag, text, deleteTag, index }) => {
     const theme = useTheme();
@@ -157,18 +160,10 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                     xs={12}
                     md={6}
                 >
-                    <Textfield
-                        //  disabled={!!user.firstName}
-                        name="firstName"
-                        helpertext="First Name"
-                    />
+                    <Textfield name="firstName" helpertext="First Name" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <Textfield
-                        //  disabled={!!user.lastName}
-                        name="lastName"
-                        helpertext="Last Name"
-                    />
+                    <Textfield name="lastName" helpertext="Last Name" />
                 </Grid>
                 {/* gender and marital status */}
 
@@ -264,21 +259,21 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
 
                 {/* about */}
                 <Grid item xs={12}>
-                    <AboutTextarea num_of_rows={8} name="about" helpertext="About" />
-                </Grid>
-
-                {/* about */}
-                <Grid item xs={12}>
-                    <AboutTextarea num_of_rows={8} name="about" helpertext="About" />
+                    <AboutTextarea num_of_rows={5} name="about" helpertext="About" />
                 </Grid>
 
                 <Grid marginTop="40px" xs={12} item>
                     <Typography sx={{ ...theme.typography.heading }}>Occupational Information</Typography>
                 </Grid>
+
                 {/* languages spoken */}
-                <Grid marginTop="10px" xs={12} item>
-                    <Typography sx={{ fontWeight: '500' }}>Add Other Occupations</Typography>
+
+                <Grid xs={12} item>
+                    {/* <LimitTags /> */}
+                    <MultipleSelect num={2} data={professions} label="Select Other Professions" name="other_professions" />
                 </Grid>
+
+                {/*                 
                 {profField.value.length > 0 && (
                     <Grid xs={12} item>
                         <Box display="flex" gap="10px" flexWrap="wrap">
@@ -316,7 +311,7 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                             Add
                         </Button>
                     </Box>
-                </Grid>
+                </Grid> */}
 
                 <Grid mt="10px" xs={12} item>
                     <Typography variant="caption">Present Employment Status*</Typography>
@@ -385,7 +380,8 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                     <Typography mb="10px" sx={{ ...theme.typography.heading }}>
                         Languages Spoken
                     </Typography>
-                    <LimitTags />
+                    {/* <LimitTags /> */}
+                    <MultipleSelect num={0} data={languages} label="Select Languages" name="languages" />
                 </Grid>
                 {/* <Grid marginTop="10px" xs={12} item>
                     <Typography sx={{ ...theme.typography.heading }}>Languages Spoken</Typography>

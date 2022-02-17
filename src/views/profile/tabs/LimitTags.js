@@ -5,10 +5,13 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { styled } from '@mui/material/styles';
 
+import languages from '../../../config/languages';
+
 const Root = styled('div')(
     ({ theme }) => `
   color: ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,.85)'};
   font-size: 14px;
+  position: relative;
 `
 );
 
@@ -20,10 +23,11 @@ const Label = styled('label')`
 
 const InputWrapper = styled('div')(
     ({ theme }) => `
-  width: 300px;
+width: 100%;
+//width:  ${theme.breakpoints.down('md') ? '90vw' : '100px !important'}; 
   border: 1px solid ${theme.palette.mode === 'dark' ? '#434343' : '#d9d9d9'};
   background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
-  border-radius: 4px;
+//   border-radius: 4px;
   padding: 1px;
   display: flex;
   flex-wrap: wrap;
@@ -104,7 +108,8 @@ const StyledTag = styled(Tag)(
 
 const Listbox = styled('ul')(
     ({ theme }) => `
-  width: 300px;
+  width: 100%;
+  //width: ${theme.breakpoints.down('md') ? '90vw' : '100px !important'}; 
   margin: 2px 0 0;
   padding: 0;
   position: absolute;
@@ -150,6 +155,8 @@ const Listbox = styled('ul')(
 );
 
 export default function CustomizedHook() {
+    const [inputValue, setinputValue] = React.useState('');
+
     const {
         getRootProps,
         getInputLabelProps,
@@ -163,11 +170,15 @@ export default function CustomizedHook() {
         setAnchorEl
     } = useAutocomplete({
         id: 'customized-hook-demo',
-        defaultValue: [top100Films2[1]],
+        defaultValue: [languages[1]],
         multiple: true,
-        options: top100Films2,
+        options: languages,
         getOptionLabel: (option) => option.name,
-        onChange: (event, value) => console.log(value)
+        onChange: (event, value) => console.log(value),
+        open: inputValue.length > 2,
+        inputValue: inputValue,
+        onInputChange: (e, value) => setinputValue(value)
+
         // onChange: (e) => console.log(e.target.value)
     });
 
@@ -180,7 +191,7 @@ export default function CustomizedHook() {
                         <StyledTag label={option.name} {...getTagProps({ index })} />
                     ))}
 
-                    <input {...getInputProps()} />
+                    <input disabled={value.length > 3} {...getInputProps()} />
                 </InputWrapper>
             </div>
             {groupedOptions.length > 0 ? (

@@ -42,10 +42,10 @@ const rebuildData = (formvalues, file) => {
     //  formData.append('other_professions[]', formvalues.other_professions);
 
     for (var i = 0; i < formvalues.other_professions.length; i++) {
-        formData.append('other_professions[]', formvalues.other_professions[i]);
+        formData.append('other_professions[]', formvalues.other_professions[i].name);
     }
     for (var b = 0; b < formvalues.languages.length; b++) {
-        formData.append('languages[]', formvalues.languages[b]);
+        formData.append('languages[]', formvalues.languages[b].name);
     }
     formData.append('selectedState', formvalues.state);
     formData.append('selectedLGA', formvalues.lga);
@@ -183,7 +183,7 @@ const Profilesetup = () => {
                     }
                     //  console.log(formData, 'formdata');
                     // console.log(formvalues, 'formvalues');
-                    console.log(formvalues.languages);
+                    //   console.log(formData.values, 'kkkkkkkk');
                     await dispatch(updateUserProfile(formData));
 
                     // if user navigate to profile success
@@ -199,7 +199,7 @@ const Profilesetup = () => {
                         phone: Yup.number().integer().typeError('Please enter a valid phone number').required('Phone is Required'),
                         //  dob: Yup.date().required('city is Required'),
                         age_range: Yup.string().required('select an age range'),
-                        profession: Yup.string().required('profession is Required'),
+                        //    profession: Yup.string().required('profession is Required'),
                         academicLevel: Yup.string().required('academic level is Required'),
                         state: Yup.string().required('state is required'),
                         lga: Yup.string().required('city is Required'),
@@ -209,13 +209,13 @@ const Profilesetup = () => {
                         employment_type: employment === 'unemployed' ? Yup.string().required('employment type is required') : '',
                         employment_status: Yup.string().required('present employment Status is required'),
                         preffered_jlga: employment === 'unemployed' ? Yup.string().required('preffered Job LGA is required') : '',
-                        preffered_jl: employment === 'unemployed' ? Yup.string().required('preffered job Location is required') : '',
-                        languages: Yup.array(Yup.string())
-                            .test({
-                                message: 'select atleast one language',
-                                test: (arr) => arr.length >= 1
-                            })
-                            .required('select atleast one language')
+                        preffered_jl: employment === 'unemployed' ? Yup.string().required('preffered job Location is required') : ''
+                        // languages: Yup.array(Yup.string())
+                        //     .test({
+                        //         message: 'select atleast one language',
+                        //         test: (arr) => arr.length >= 1
+                        //     })
+                        //     .required('select atleast one language')
                         //   disablility: Yup.boolean().required('please tell us your status'),
                         // disability_details: dis_ability ? Yup.string().required('About is required') : ''
                     })}
