@@ -80,6 +80,40 @@ const months = {
     December: '12'
 };
 
+const NTag = ({ link_address, link_title, setEdit, value = {}, clicked }) => {
+    const theme = useTheme();
+
+    return (
+        <Box
+            component="a"
+            href={link_address}
+            target="_blank"
+            sx={{
+                background: theme.palette.primary.main,
+                cursor: 'pointer',
+                color: 'white',
+                padding: '10px 20px',
+                width: 'max-content',
+                borderRadius: '5px',
+                textDecoration: 'none',
+                position: 'relative'
+            }}
+        >
+            <Typography>{link_title}</Typography>
+            <Box sx={{ position: 'absolute', top: 1, right: 5 }}>
+                <BiEditAlt
+                    onClick={async () => {
+                        await setEdit(() => {
+                            return { ...value, show: true };
+                        });
+                        clicked(true);
+                    }}
+                />
+            </Box>
+        </Box>
+    );
+};
+
 const Tag = ({ text, index }) => {
     const theme = useTheme();
 
@@ -191,6 +225,42 @@ const ResumeTab = () => {
     const [load, setLoad] = React.useState(false);
     const [checkIsCurrent, setCheckIsCurrent] = React.useState(false);
 
+    // social
+    const [proOpen, setProOpen] = React.useState(false);
+    const [otherOpen, setOtherOpen] = React.useState(false);
+    const handlePro = () => {
+        setProOpen(false);
+        setResumeStep(0);
+        setEdit((prev) => {
+            return { ...prev, show: false };
+        });
+    };
+
+    const delPro = async () => {
+        await setLoad(true);
+        await dispatch();
+        // deleteSocial({
+        //     id: edit.online_link_id
+        // })
+        await setLoad(false);
+    };
+    const handleOther = () => {
+        setOtherOpen(false);
+        setResumeStep(0);
+        setEdit((prev) => {
+            return { ...prev, show: false };
+        });
+    };
+
+    const delOther = async () => {
+        await setLoad(true);
+        await dispatch();
+        // deleteSocial({
+        //     id: edit.online_link_id
+        // })
+        await setLoad(false);
+    };
+
     const EndDate = () => {
         const [field, meta] = useField('is_current');
         setCheckIsCurrent(meta.value);
@@ -270,18 +340,59 @@ const ResumeTab = () => {
                     </SubCard>
                 </Grid>
             </Grid>
-            {/* skills */}
+            {/* Profesional skills */}
             <Grid container>
                 <Grid xs={12} item>
-                    <SubCard divider={false} sx={{ bgcolor: 'white', boxShadow: 'none', padding: '0 5px', mt: '25px' }} title="Skills">
+                    <SubCard
+                        divider={false}
+                        sx={{ bgcolor: 'white', boxShadow: 'none', padding: '0 5px', mt: '25px' }}
+                        title="Professional Skills"
+                    >
                         <Box sx={{ display: 'flex', height: 'auto', flexWrap: 'wrap', gap: '10px' }}>
                             {resumes.skills.map((item) => (
                                 <Tag text={item} />
                             ))}
                         </Box>
 
-                        <Button className={lower_button} variant="outlined" startIcon={<AddCircleIcon />}>
-                            Add Skils
+                        <Button
+                            onClick={() => {
+                                setResumeStep(0);
+                                setProOpen(true);
+                            }}
+                            className={lower_button}
+                            variant="outlined"
+                            startIcon={<AddCircleIcon />}
+                        >
+                            Add Pro Skills
+                        </Button>
+                    </SubCard>
+                </Grid>
+            </Grid>
+
+            {/*Other skills */}
+            <Grid container>
+                <Grid xs={12} item>
+                    <SubCard
+                        divider={false}
+                        sx={{ bgcolor: 'white', boxShadow: 'none', padding: '0 5px', mt: '25px' }}
+                        title="Other Skills"
+                    >
+                        <Box sx={{ display: 'flex', height: 'auto', flexWrap: 'wrap', gap: '10px' }}>
+                            {resumes.skills.map((item) => (
+                                <Tag text={item} />
+                            ))}
+                        </Box>
+
+                        <Button
+                            onClick={() => {
+                                setResumeStep(0);
+                                setOtherOpen(true);
+                            }}
+                            className={lower_button}
+                            variant="outlined"
+                            startIcon={<AddCircleIcon />}
+                        >
+                            Add Other Skills
                         </Button>
                     </SubCard>
                 </Grid>
@@ -615,6 +726,533 @@ const ResumeTab = () => {
                                 // to="/recommendations"
                                 content="You have successfully added a professional
                             information. You can go to your dashboard now"
+                            />
+                        </ResumeStepper>
+                    )}
+                </DialogContent>
+            </Dialog>
+
+            {/* pro skill dialog */}
+            <Dialog open={proOpen} onClose={handlePro} aria-labelledby="scroll-dialog-title" aria-describedby="scroll-dialog-description">
+                <DialogContent>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography sx={{ fontSize: '1.2rem' }}>Add Pro Skill</Typography>
+                                <CloseIcon sx={{ cursor: 'pointer' }} onClick={handlePro} />
+                            </Box>
+                        </Grid>
+                    </Grid>
+
+                    {edit.show ? (
+                        // update
+
+                        <ResumeStepper resumeStep={resumeStep} setResumeStep={setResumeStep}>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Formik
+                                        initialValues={{
+                                            social: edit.link_title,
+                                            social_link: edit.link_address
+                                        }}
+                                        onSubmit={async (values) => {
+                                            console.log(values);
+
+                                            await dispatch();
+                                            // updateSocial(edit.online_link_id, {
+                                            //     link_title: values.social,
+                                            //     link_address: values.social_link
+                                            // })
+
+                                            setResumeStep((step) => step + 2);
+                                        }}
+                                        validationSchema={Yup.object().shape({
+                                            social: Yup.string().required('Name of social is Required'),
+                                            social_link: Yup.string()
+                                                .matches(
+                                                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                                                    'Enter correct url!'
+                                                )
+                                                .required('Please valid social media link(url)')
+                                        })}
+                                    >
+                                        {({ isSubmitting }) => (
+                                            <Form autoComplete="off">
+                                                <Grid container>
+                                                    <Grid
+                                                        sx={{
+                                                            paddingRight: '20px',
+                                                            '@media (max-width: 900px)': {
+                                                                padding: '0px'
+                                                            }
+                                                        }}
+                                                        item
+                                                        xs={12}
+                                                        md={6}
+                                                    >
+                                                        <Textfield name="social" helpertext="Social Media" placeholder="Facebook" />
+                                                    </Grid>
+                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                        <Textfield name="social_link" helpertext="Link" />
+                                                    </Grid>
+
+                                                    <Grid xs={12} item>
+                                                        <Box sx={{ ...theme.typography.flex }}>
+                                                            <DialogActions
+                                                                sx={{
+                                                                    display: 'flex',
+                                                                    gap: '20px',
+                                                                    '@media (max-width: 513px)': {
+                                                                        gap: '10px'
+                                                                    }
+                                                                }}
+                                                            >
+                                                                <Button
+                                                                    startIcon={
+                                                                        load ? <CircularProgress color="secondary" size="1rem" /> : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'rgb(217, 38, 39)',
+                                                                        border: '1px solid rgb(217, 38, 39)',
+                                                                        textTransform: 'capitalize',
+                                                                        '&:hover': {
+                                                                            border: '1px solid rgb(217, 38, 39)'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        },
+                                                                        '@media (max-width: 513px)': {
+                                                                            width: '120px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="outlined"
+                                                                    onClick={() => setResumeStep((step) => step + 1)}
+                                                                >
+                                                                    Delete
+                                                                </Button>
+                                                                <Button
+                                                                    startIcon={
+                                                                        isSubmitting ? (
+                                                                            <CircularProgress color="secondary" size="1rem" />
+                                                                        ) : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'white',
+                                                                        textTransform: 'capitalize',
+                                                                        '& :hover': {
+                                                                            color: 'black'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        },
+                                                                        '@media (max-width: 513px)': {
+                                                                            width: '120px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="contained"
+                                                                    type="submit"
+                                                                >
+                                                                    Update
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Box>
+                                                    </Grid>
+                                                </Grid>
+                                            </Form>
+                                        )}
+                                    </Formik>
+                                </Grid>
+                            </Grid>
+                            <Warning
+                                load={load}
+                                onNoClick={() => setResumeStep((step) => step - 1)}
+                                onYesClick={async () => {
+                                    delPro();
+                                    setResumeStep((step) => step + 1);
+                                }}
+                                text="Are you sure you want to delete this social link?"
+                            />
+                            <Success
+                                onclick={handlePro}
+                                text="See All social Links"
+                                // to="/recommendations"
+                                content="You have successfully added a social link
+                            You can go to your dashboard now."
+                            />
+                        </ResumeStepper>
+                    ) : (
+                        <ResumeStepper resumeStep={resumeStep} setResumeStep={setResumeStep}>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Formik
+                                        initialValues={{
+                                            social: '',
+                                            social_link: ''
+                                        }}
+                                        onSubmit={async (values) => {
+                                            console.log(values);
+
+                                            await dispatch();
+                                            // addSocial({
+                                            //     link_title: values.social,
+                                            //     link_address: values.social_link
+                                            // })
+                                            setResumeStep((step) => step + 1);
+                                        }}
+                                        validationSchema={Yup.object().shape({
+                                            social: Yup.string().required('Name of social is Required'),
+                                            social_link: Yup.string()
+                                                .matches(
+                                                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                                                    'Enter correct url!'
+                                                )
+                                                .required('Please valid social media link(url)')
+                                        })}
+                                    >
+                                        {({ isSubmitting }) => (
+                                            <Form autoComplete="off">
+                                                <Grid container>
+                                                    <Grid
+                                                        sx={{
+                                                            paddingRight: '20px',
+                                                            '@media (max-width: 900px)': {
+                                                                padding: '0px'
+                                                            }
+                                                        }}
+                                                        item
+                                                        xs={12}
+                                                        md={6}
+                                                    >
+                                                        <Textfield name="social" helpertext="Social Media Name" placeholder="eg Facebook" />
+                                                    </Grid>
+                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                        <Textfield
+                                                            name="social_link"
+                                                            helpertext="Link"
+                                                            placeholder="https://web.facebook.com/user/"
+                                                        />
+                                                    </Grid>
+
+                                                    <Grid xs={12} item>
+                                                        <Box sx={{ ...theme.typography.flex }}>
+                                                            <DialogActions>
+                                                                <Button
+                                                                    startIcon={
+                                                                        isSubmitting ? (
+                                                                            <CircularProgress color="secondary" size="1rem" />
+                                                                        ) : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'white',
+                                                                        textTransform: 'capitalize',
+                                                                        '& :hover': {
+                                                                            color: 'black'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="contained"
+                                                                    type="submit"
+                                                                >
+                                                                    Save
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Box>
+                                                    </Grid>
+                                                </Grid>
+                                            </Form>
+                                        )}
+                                    </Formik>
+                                </Grid>
+                            </Grid>
+                            <Success
+                                onclick={handlePro}
+                                text="See All social Links"
+                                // to="/recommendations"
+                                content="You have successfully added a social link
+                            You can go to your dashboard now."
+                            />
+                        </ResumeStepper>
+                    )}
+                </DialogContent>
+            </Dialog>
+
+            {/* social other skill */}
+            <Dialog
+                open={otherOpen}
+                onClose={handleOther}
+                aria-labelledby="scroll-dialog-title"
+                aria-describedby="scroll-dialog-description"
+            >
+                <DialogContent>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography sx={{ fontSize: '1.2rem' }}>Add Other Skills</Typography>
+                                <CloseIcon sx={{ cursor: 'pointer' }} onClick={handleOther} />
+                            </Box>
+                        </Grid>
+                    </Grid>
+
+                    {edit.show ? (
+                        // update
+
+                        <ResumeStepper resumeStep={resumeStep} setResumeStep={setResumeStep}>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Formik
+                                        initialValues={{
+                                            social: edit.link_title,
+                                            social_link: edit.link_address
+                                        }}
+                                        onSubmit={async (values) => {
+                                            console.log(values);
+
+                                            await dispatch();
+                                            // updateSocial(edit.online_link_id, {
+                                            //     link_title: values.social,
+                                            //     link_address: values.social_link
+                                            // })
+
+                                            setResumeStep((step) => step + 2);
+                                        }}
+                                        validationSchema={Yup.object().shape({
+                                            social: Yup.string().required('Name of social is Required'),
+                                            social_link: Yup.string()
+                                                .matches(
+                                                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                                                    'Enter correct url!'
+                                                )
+                                                .required('Please valid social media link(url)')
+                                        })}
+                                    >
+                                        {({ isSubmitting }) => (
+                                            <Form autoComplete="off">
+                                                <Grid container>
+                                                    <Grid
+                                                        sx={{
+                                                            paddingRight: '20px',
+                                                            '@media (max-width: 900px)': {
+                                                                padding: '0px'
+                                                            }
+                                                        }}
+                                                        item
+                                                        xs={12}
+                                                        md={6}
+                                                    >
+                                                        <Textfield name="social" helpertext="Social Media" placeholder="Facebook" />
+                                                    </Grid>
+                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                        <Textfield name="social_link" helpertext="Link" />
+                                                    </Grid>
+
+                                                    <Grid xs={12} item>
+                                                        <Box sx={{ ...theme.typography.flex }}>
+                                                            <DialogActions
+                                                                sx={{
+                                                                    display: 'flex',
+                                                                    gap: '20px',
+                                                                    '@media (max-width: 513px)': {
+                                                                        gap: '10px'
+                                                                    }
+                                                                }}
+                                                            >
+                                                                <Button
+                                                                    startIcon={
+                                                                        load ? <CircularProgress color="secondary" size="1rem" /> : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'rgb(217, 38, 39)',
+                                                                        border: '1px solid rgb(217, 38, 39)',
+                                                                        textTransform: 'capitalize',
+                                                                        '&:hover': {
+                                                                            border: '1px solid rgb(217, 38, 39)'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        },
+                                                                        '@media (max-width: 513px)': {
+                                                                            width: '120px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="outlined"
+                                                                    onClick={() => setResumeStep((step) => step + 1)}
+                                                                >
+                                                                    Delete
+                                                                </Button>
+                                                                <Button
+                                                                    startIcon={
+                                                                        isSubmitting ? (
+                                                                            <CircularProgress color="secondary" size="1rem" />
+                                                                        ) : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'white',
+                                                                        textTransform: 'capitalize',
+                                                                        '& :hover': {
+                                                                            color: 'black'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        },
+                                                                        '@media (max-width: 513px)': {
+                                                                            width: '120px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="contained"
+                                                                    type="submit"
+                                                                >
+                                                                    Update
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Box>
+                                                    </Grid>
+                                                </Grid>
+                                            </Form>
+                                        )}
+                                    </Formik>
+                                </Grid>
+                            </Grid>
+                            <Warning
+                                load={load}
+                                onNoClick={() => setResumeStep((step) => step - 1)}
+                                onYesClick={async () => {
+                                    delOther();
+                                    setResumeStep((step) => step + 1);
+                                }}
+                                text="Are you sure you want to delete this social link?"
+                            />
+                            <Success
+                                onclick={handleOther}
+                                text="See All social Links"
+                                // to="/recommendations"
+                                content="You have successfully added a social link
+                            You can go to your dashboard now."
+                            />
+                        </ResumeStepper>
+                    ) : (
+                        <ResumeStepper resumeStep={resumeStep} setResumeStep={setResumeStep}>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Formik
+                                        initialValues={{
+                                            social: '',
+                                            social_link: ''
+                                        }}
+                                        onSubmit={async (values) => {
+                                            console.log(values);
+
+                                            await dispatch();
+                                            // addSocial({
+                                            //     link_title: values.social,
+                                            //     link_address: values.social_link
+                                            // })
+                                            setResumeStep((step) => step + 1);
+                                        }}
+                                        validationSchema={Yup.object().shape({
+                                            social: Yup.string().required('Name of social is Required'),
+                                            social_link: Yup.string()
+                                                .matches(
+                                                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                                                    'Enter correct url!'
+                                                )
+                                                .required('Please valid social media link(url)')
+                                        })}
+                                    >
+                                        {({ isSubmitting }) => (
+                                            <Form autoComplete="off">
+                                                <Grid container>
+                                                    <Grid
+                                                        sx={{
+                                                            paddingRight: '20px',
+                                                            '@media (max-width: 900px)': {
+                                                                padding: '0px'
+                                                            }
+                                                        }}
+                                                        item
+                                                        xs={12}
+                                                        md={6}
+                                                    >
+                                                        <Textfield name="social" helpertext="Social Media Name" placeholder="eg Facebook" />
+                                                    </Grid>
+                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                        <Textfield
+                                                            name="social_link"
+                                                            helpertext="Link"
+                                                            placeholder="https://web.facebook.com/user/"
+                                                        />
+                                                    </Grid>
+
+                                                    <Grid xs={12} item>
+                                                        <Box sx={{ ...theme.typography.flex }}>
+                                                            <DialogActions>
+                                                                <Button
+                                                                    startIcon={
+                                                                        isSubmitting ? (
+                                                                            <CircularProgress color="secondary" size="1rem" />
+                                                                        ) : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'white',
+                                                                        textTransform: 'capitalize',
+                                                                        '& :hover': {
+                                                                            color: 'black'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="contained"
+                                                                    type="submit"
+                                                                >
+                                                                    Save
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Box>
+                                                    </Grid>
+                                                </Grid>
+                                            </Form>
+                                        )}
+                                    </Formik>
+                                </Grid>
+                            </Grid>
+                            <Success
+                                onclick={handleOther}
+                                text="See All social Links"
+                                // to="/recommendations"
+                                content="You have successfully added a social link
+                            You can go to your dashboard now."
                             />
                         </ResumeStepper>
                     )}

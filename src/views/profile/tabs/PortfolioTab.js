@@ -102,6 +102,7 @@ const Tag = ({ link_address, link_title, setEdit, value = {}, clicked }) => {
         </Box>
     );
 };
+
 const Picturebox = ({ title, path, year, setEdit, value = {}, clicked }) => {
     const { profile_cover_img } = useStyles();
     const theme = useTheme();

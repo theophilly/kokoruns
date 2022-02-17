@@ -166,7 +166,7 @@ export default function SignUpForm({ onclick, setClickData, showToast, path }) {
                 </Typography>
             </Box>
             <Dialog open={recommendOpen} onClose={handleRecommendClose} aria-labelledby="responsive-dialog-title">
-                <Typography sx={{ fontWeight: '600', pl: '20px', pt: '10px' }}>Make Recommendations</Typography>
+                <Typography sx={{ fontWeight: '600', pl: '20px', pt: '10px' }}>Sign Up With Us</Typography>
                 <DialogContent>
                     <Success text="Login" to="/login" content="Your account has been successfully created, please login" />
                 </DialogContent>
