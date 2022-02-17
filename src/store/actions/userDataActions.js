@@ -245,6 +245,53 @@ export const updateSocial = (id, social) => {
     };
 };
 
+export const deleteSocial = (social) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        await api
+            .deleteSocial(social)
+            .then((res) => {
+                dispatch(fetchUserDetails());
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    };
+};
+
+//add social
+export const addPro = (skill) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        await api
+            .addPro(skill)
+            .then((res) => {
+                dispatch(fetchUserDetails());
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    };
+};
+
+//add social
+export const addOther = (skill) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        await api
+            .addOther(skill)
+            .then((res) => {
+                dispatch(fetchUserDetails());
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    };
+};
+
 export const updateProfilePicture = (picture) => {
     return async (dispatch) => {
         dispatch({ type: actionType.ON_FETCH_BEGIN });
@@ -266,21 +313,6 @@ export const updateCoverPicture = (picture) => {
 
         await api
             .updateCoverPicture(picture)
-            .then((res) => {
-                dispatch(fetchUserDetails());
-            })
-            .catch((error) => {
-                console.log(error.response);
-            });
-    };
-};
-
-export const deleteSocial = (social) => {
-    return async (dispatch) => {
-        dispatch({ type: actionType.ON_FETCH_BEGIN });
-
-        await api
-            .deleteSocial(social)
             .then((res) => {
                 dispatch(fetchUserDetails());
             })

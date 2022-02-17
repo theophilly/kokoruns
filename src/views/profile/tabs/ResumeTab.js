@@ -7,7 +7,6 @@ import {
     Button,
     useTheme,
     Dialog,
-    DialogTitle,
     DialogActions,
     DialogContent,
     CircularProgress,
@@ -24,8 +23,7 @@ import Datepicker from '../../../components/reusables/FormUI/Datepicker';
 import CloseIcon from '@mui/icons-material/Close';
 import { makeStyles } from '@mui/styles';
 import SubCard from '../../../ui-component/cards/SubCard';
-import resumes from '../../../utils/resume';
-import { addResume, updateResume, deleteResume } from '../../../store/actions/userDataActions';
+import { addResume, updateResume, deleteResume, addOther, addPro } from '../../../store/actions/userDataActions';
 import Success from '../../../ui-component/modals/Success';
 import Warning from '../../../ui-component/modals/Warning';
 import CheckboxWrapper from '../../../components/reusables/FormUI/CheckBoxWrapper';
@@ -218,7 +216,7 @@ const ResumeTab = () => {
     const { root, lower_button } = useStyles();
     const matches = useMediaQuery('(min-width:900px)');
     const theme = useTheme();
-    const { resume } = useSelector((state) => state.authReducer.user);
+    const { resume, otherskills, proskills } = useSelector((state) => state.authReducer.user);
     const dispatch = useDispatch();
     const [resumeStep, setResumeStep] = React.useState(0);
     const [edit, setEdit] = React.useState({ show: false });
@@ -349,8 +347,8 @@ const ResumeTab = () => {
                         title="Professional Skills"
                     >
                         <Box sx={{ display: 'flex', height: 'auto', flexWrap: 'wrap', gap: '10px' }}>
-                            {resumes.skills.map((item) => (
-                                <Tag text={item} />
+                            {proskills.map((item) => (
+                                <Tag text={item.pro_skill} />
                             ))}
                         </Box>
 
@@ -378,8 +376,8 @@ const ResumeTab = () => {
                         title="Other Skills"
                     >
                         <Box sx={{ display: 'flex', height: 'auto', flexWrap: 'wrap', gap: '10px' }}>
-                            {resumes.skills.map((item) => (
-                                <Tag text={item} />
+                            {otherskills.map((item) => (
+                                <Tag text={item.other_skill} />
                             ))}
                         </Box>
 
@@ -896,27 +894,17 @@ const ResumeTab = () => {
                                 <Grid item xs={12}>
                                     <Formik
                                         initialValues={{
-                                            social: '',
-                                            social_link: ''
+                                            pro_skill: ''
                                         }}
                                         onSubmit={async (values) => {
                                             console.log(values);
 
-                                            await dispatch();
-                                            // addSocial({
-                                            //     link_title: values.social,
-                                            //     link_address: values.social_link
-                                            // })
+                                            await dispatch(addPro(values));
+
                                             setResumeStep((step) => step + 1);
                                         }}
                                         validationSchema={Yup.object().shape({
-                                            social: Yup.string().required('Name of social is Required'),
-                                            social_link: Yup.string()
-                                                .matches(
-                                                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-                                                    'Enter correct url!'
-                                                )
-                                                .required('Please valid social media link(url)')
+                                            pro_skill: Yup.string().required('Name of Skill is Required')
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -931,16 +919,9 @@ const ResumeTab = () => {
                                                         }}
                                                         item
                                                         xs={12}
-                                                        md={6}
+                                                        //    md={6}
                                                     >
-                                                        <Textfield name="social" helpertext="Social Media Name" placeholder="eg Facebook" />
-                                                    </Grid>
-                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
-                                                        <Textfield
-                                                            name="social_link"
-                                                            helpertext="Link"
-                                                            placeholder="https://web.facebook.com/user/"
-                                                        />
+                                                        <Textfield name="pro_skill" helpertext="Name of Skill" placeholder="" />
                                                     </Grid>
 
                                                     <Grid xs={12} item>
@@ -1162,27 +1143,17 @@ const ResumeTab = () => {
                                 <Grid item xs={12}>
                                     <Formik
                                         initialValues={{
-                                            social: '',
-                                            social_link: ''
+                                            other_skill: ''
                                         }}
                                         onSubmit={async (values) => {
                                             console.log(values);
 
-                                            await dispatch();
-                                            // addSocial({
-                                            //     link_title: values.social,
-                                            //     link_address: values.social_link
-                                            // })
+                                            await dispatch(addOther(values));
+
                                             setResumeStep((step) => step + 1);
                                         }}
                                         validationSchema={Yup.object().shape({
-                                            social: Yup.string().required('Name of social is Required'),
-                                            social_link: Yup.string()
-                                                .matches(
-                                                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-                                                    'Enter correct url!'
-                                                )
-                                                .required('Please valid social media link(url)')
+                                            other_skill: Yup.string().required('Name of Other skill is Required')
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -1197,16 +1168,8 @@ const ResumeTab = () => {
                                                         }}
                                                         item
                                                         xs={12}
-                                                        md={6}
                                                     >
-                                                        <Textfield name="social" helpertext="Social Media Name" placeholder="eg Facebook" />
-                                                    </Grid>
-                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
-                                                        <Textfield
-                                                            name="social_link"
-                                                            helpertext="Link"
-                                                            placeholder="https://web.facebook.com/user/"
-                                                        />
+                                                        <Textfield name="other_skill" helpertext="Name of Other Skill is required" />
                                                     </Grid>
 
                                                     <Grid xs={12} item>

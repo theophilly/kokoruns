@@ -137,6 +137,36 @@ class Api {
         return this.init().delete('/deleteonlinelink', { data: { ...data } });
     };
 
+    //Pro skill
+    //add  professional skill
+    addPro = (data) => {
+        return this.init().post('/addproskill', data);
+    };
+
+    //update  professional skill
+    updatePro = (id, data) => {
+        return this.init().put(`/updatePro/${id}`, data);
+    };
+    //delete  professional skill
+    deletePro = (data) => {
+        return this.init().delete('/deletePro', { data: { ...data } });
+    };
+
+    //Other skills
+    //add  Other skills
+    addOther = (data) => {
+        return this.init().post('/addotherskill', data);
+    };
+
+    //update  Other skills
+    updateOther = (id, data) => {
+        return this.init().put(`/updateOther/${id}`, data);
+    };
+    //delete  Other skills
+    deleteOther = (data) => {
+        return this.init().delete('/deleteOther', { data: { ...data } });
+    };
+
     //user update
     update = (data) => {
         return this.init().post('/updateuser', data);
