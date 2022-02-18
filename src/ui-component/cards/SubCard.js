@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, Divider, Typography, Box } from '@mui/ma
 // ==============================|| CUSTOM SUB CARD ||============================== //
 
 const SubCard = forwardRef(
-    ({ children, content, contentClass, divider = true, darkTitle, secondary, sx = {}, contentSX = {}, title, ...others }, ref) => {
+    ({ children, content, contentClass, divider = true, darkTitle, secondary, sx = {}, contentSX = {}, p, title, ...others }, ref) => {
         const theme = useTheme();
 
         return (
@@ -72,7 +72,7 @@ const SubCard = forwardRef(
                 {content && (
                     <CardContent
                         sx={{
-                            px: 1.5,
+                            px: p ? 0 : 1.5,
                             pt: '6px',
                             // border: '1px solid red',
                             ...contentSX

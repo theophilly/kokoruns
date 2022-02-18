@@ -62,6 +62,17 @@ const rebuildData = (formvalues, file) => {
     return formData;
 };
 
+const initiaValforLanandPro = (val) => {
+    let valArray = Object.values(JSON.parse(val));
+    let returnedArray = [];
+
+    for (var i = 0; i < valArray.length; i++) {
+        returnedArray.push({ name: valArray[i] });
+    }
+    console.log(returnedArray, 'valarray');
+    return returnedArray;
+};
+
 const FILE_SIZE = 200000;
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
@@ -77,6 +88,7 @@ const Profilesetup = () => {
     const user = useSelector((state) => state.authReducer.user);
     const dispatch = useDispatch();
 
+    console.log(user);
     return (
         <Box className={root}>
             {/* upper blue box */}
@@ -129,8 +141,10 @@ const Profilesetup = () => {
                     employer_address: user?.bio.employers_address || '',
                     age_range: user?.bio.age_range || '',
                     disablility: user?.bio ? JSON.parse(user?.bio.disabled) : false,
-                    other_professions: user?.bio.other_professions1 ? Object.values(JSON.parse(user?.bio.other_professions1)) : [],
-                    languages: user?.bio.languages1 ? Object.values(JSON.parse(user?.bio.languages1)) : [],
+                    other_professions: user?.bio.other_professions1 ? initiaValforLanandPro(user.bio.other_professions1) : [],
+                    //other_professions: user?.bio.other_professions1 ? Object.values(JSON.parse(user?.bio.other_professions1)) : [],
+                    languages: user?.bio.languages1 ? initiaValforLanandPro(user.bio.languages1) : [],
+                    // languages: user?.bio.languages1 ? Object.values(JSON.parse(user?.bio.languages1)) : [],
                     disability_details: user?.bio.disability_details || '',
                     file: null
                 }}
@@ -199,7 +213,19 @@ const Profilesetup = () => {
                         phone: Yup.number().integer().typeError('Please enter a valid phone number').required('Phone is Required'),
                         //  dob: Yup.date().required('city is Required'),
                         age_range: Yup.string().required('select an age range'),
-                        //    profession: Yup.string().required('profession is Required'),
+                        profession: Yup.string().required('profession is Required'),
+                        languages: Yup.array(Yup.object())
+                            .test({
+                                message: 'select atleast one language',
+                                test: (arr) => arr.length >= 1
+                            })
+                            .required('select atleast one language'),
+                        //    other_professions: Yup.array(Yup.object())
+                        //         .test({
+                        //             message: 'select atleast one language',
+                        //             test: (arr) => arr.length >= 1
+                        //         })
+                        //         .required('select atleast one language'),
                         academicLevel: Yup.string().required('academic level is Required'),
                         state: Yup.string().required('state is required'),
                         lga: Yup.string().required('city is Required'),

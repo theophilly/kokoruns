@@ -259,7 +259,7 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
 
                 {/* about */}
                 <Grid item xs={12}>
-                    <AboutTextarea num_of_rows={5} name="about" helpertext="About" />
+                    <AboutTextarea num_of_rows={7} name="about" helpertext="About" />
                 </Grid>
 
                 <Grid marginTop="40px" xs={12} item>

@@ -173,6 +173,7 @@ const PortfolioTab = () => {
     const [socialStep, setSocialStep] = React.useState(0);
     const [edit, setEdit] = React.useState({ show: false });
     const [load, setLoad] = React.useState(false);
+    const [modalMessage, setModalMessage] = React.useState('');
 
     // pictures
     const [picturesOpen, setPicturesOpen] = React.useState(false);
@@ -332,6 +333,9 @@ const PortfolioTab = () => {
                                                     year: values.portfolio_year
                                                 })
                                             );
+                                            await setModalMessage(
+                                                'You have successfully update this portfolio item You can go to your dashboard now'
+                                            );
                                             setPictureStep((step) => step + 2);
                                         }}
                                         validationSchema={Yup.object().shape({
@@ -441,16 +445,13 @@ const PortfolioTab = () => {
                                 onNoClick={() => setPictureStep((step) => step - 1)}
                                 onYesClick={async () => {
                                     delPortfolio();
+                                    await setModalMessage('You have successfully delete a portfolio item You can go to your dashboard now');
+
                                     setPictureStep((step) => step + 1);
                                 }}
                                 text="Are you sure you want to delete this Portfolio information from your portfolio list."
                             />
-                            <Success
-                                onclick={handlePictures}
-                                text="See All portfolios"
-                                content="You have successfully delete a portfolio item
-                            You can go to your dashboard now"
-                            />
+                            <Success onclick={handlePictures} text="See All portfolios" content={modalMessage} />
                         </PortfolioStepper>
                     ) : (
                         <PortfolioStepper portfolioStep={pictureStep} setPortfolioStep={setPictureStep}>
@@ -587,7 +588,9 @@ const PortfolioTab = () => {
                                                     link_address: values.social_link
                                                 })
                                             );
-
+                                            await setModalMessage(
+                                                'You have successfully update this social link You can go to your dashboard now.'
+                                            );
                                             setSocialStep((step) => step + 2);
                                         }}
                                         validationSchema={Yup.object().shape({
@@ -702,6 +705,9 @@ const PortfolioTab = () => {
                                 onNoClick={() => setSocialStep((step) => step - 1)}
                                 onYesClick={async () => {
                                     delSocial();
+                                    await setModalMessage(
+                                        'You have successfully deleted this social link You can go to your dashboard now.'
+                                    );
                                     setSocialStep((step) => step + 1);
                                 }}
                                 text="Are you sure you want to delete this social link?"
@@ -710,8 +716,7 @@ const PortfolioTab = () => {
                                 onclick={handleSocial}
                                 text="See All social Links"
                                 // to="/recommendations"
-                                content="You have successfully added a social link
-                            You can go to your dashboard now."
+                                content={modalMessage}
                             />
                         </PortfolioStepper>
                     ) : (

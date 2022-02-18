@@ -1,4 +1,9 @@
 {
-  "Full-Time": "full-Time",
-  "Part-Time": "Part-Time"
+    "Full Time": "full-Time",
+    "Part Time": "Part-Time",
+    "Remote": "Remote",
+    "Contract": "Contract",
+    "Volunteer": "Volunteer",
+    "Internship": "Internship",
+    "Apprentice/Trainee": "Apprentice/Trainee"
 }

@@ -159,6 +159,7 @@ const EducationTab = () => {
     const dispatch = useDispatch();
     const [edit, setEdit] = React.useState({ show: false });
     const [load, setLoad] = React.useState(false);
+    const [modalMessage, setModalMessage] = React.useState('');
     const [educationStep, setEducationStep] = React.useState(0);
     const [certificateStep, setCertificateStep] = React.useState(0);
 
@@ -335,6 +336,9 @@ const EducationTab = () => {
                                                     }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
                                                 })
                                             );
+                                            await setModalMessage(
+                                                'You have successfully updated this educational information. You can go to your dashboard now.'
+                                            );
                                             setEducationStep((step) => step + 2);
                                         }}
                                         validationSchema={Yup.object().shape({
@@ -465,6 +469,9 @@ const EducationTab = () => {
                                 onNoClick={() => setEducationStep((step) => step - 1)}
                                 onYesClick={async () => {
                                     await delEducation();
+                                    await setModalMessage(
+                                        'You have successfully delete this educational information. You can go to your dashboard now.'
+                                    );
                                     setEducationStep((step) => step + 1);
                                 }}
                                 text="Are you sure you want to delete this educational information from your education list."
@@ -473,8 +480,7 @@ const EducationTab = () => {
                                 onclick={handleClose}
                                 text="See All Education"
                                 // to="/recommendations"
-                                content="You have successfully delete this educational 
-                            information. You can go to your dashboard now."
+                                content={modalMessage}
                             />
                         </EducationStepper>
                     ) : (
@@ -503,6 +509,7 @@ const EducationTab = () => {
                                                     }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
                                                 })
                                             );
+
                                             setEducationStep((step) => step + 1);
                                         }}
                                         validationSchema={Yup.object().shape({
@@ -655,6 +662,9 @@ const EducationTab = () => {
                                                     }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
                                                 })
                                             );
+                                            await setModalMessage(
+                                                'You have successfully updated this certification. You can go to your dashboard now.'
+                                            );
                                             setCertificateStep((step) => step + 2);
                                         }}
                                         validationSchema={Yup.object().shape({
@@ -785,6 +795,9 @@ const EducationTab = () => {
                                 onNoClick={() => setCertificateStep((step) => step - 1)}
                                 onYesClick={async () => {
                                     await delCertification();
+                                    await setModalMessage(
+                                        'You have successfully delete this certification. You can go to your dashboard now.'
+                                    );
                                     setCertificateStep((step) => step + 1);
                                 }}
                                 text="Are you sure you want to delete this certificate information from your education list."
@@ -793,7 +806,8 @@ const EducationTab = () => {
                                 onclick={handleCertificate}
                                 text="See All Certifications"
                                 // to="/recommendations"
-                                content="You have successfully delete this certification. You can go to your dashboard now."
+                                content={modalMessage}
+                                //   content="You have successfully delete this certification. You can go to your dashboard now."
                             />
                         </EducationStepper>
                     ) : (

@@ -5,6 +5,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useField, useFormikContext } from 'formik';
 import { styled } from '@mui/material/styles';
+import { Typography } from '@mui/material';
 
 const Root = styled('div')(
     ({ theme }) => `
@@ -157,14 +158,6 @@ export default function MultipleSelect({ data, name, label, languages, num }) {
     const [inputValue, setinputValue] = React.useState('');
     const { setFieldValue } = useFormikContext();
     const [field, meta] = useField(name);
-    let id = [];
-
-    for (var i = 0; i < meta.value.length; i++) {
-        console.log(meta.value[i]);
-        id.push({ name: meta.value[i] });
-    }
-
-    console.log(id);
 
     const handleChange = (newVal) => {
         setFieldValue(name, newVal);
@@ -185,7 +178,7 @@ export default function MultipleSelect({ data, name, label, languages, num }) {
         languages
             ? {
                   id: 'customized-hook-demo',
-                  defaultValue: [...id],
+                  defaultValue: [...meta.value],
 
                   multiple: true,
                   options: data,
@@ -194,7 +187,7 @@ export default function MultipleSelect({ data, name, label, languages, num }) {
               }
             : {
                   id: 'customized-hook-demo',
-                  defaultValue: [...id],
+                  defaultValue: [...meta.value],
 
                   multiple: true,
                   options: data,
@@ -231,6 +224,9 @@ export default function MultipleSelect({ data, name, label, languages, num }) {
                     ))}
                 </Listbox>
             ) : null}
+            <Typography style={{ color: '#f44336' }} variant="caption">
+                {meta.error}
+            </Typography>
         </Root>
     );
 }

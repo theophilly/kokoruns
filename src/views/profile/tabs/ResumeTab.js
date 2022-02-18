@@ -219,6 +219,7 @@ const ResumeTab = () => {
     const { resume, otherskills, proskills } = useSelector((state) => state.authReducer.user);
     const dispatch = useDispatch();
     const [resumeStep, setResumeStep] = React.useState(0);
+    const [modalMessage, setModalMessage] = React.useState('');
     const [edit, setEdit] = React.useState({ show: false });
     const [load, setLoad] = React.useState(false);
     const [checkIsCurrent, setCheckIsCurrent] = React.useState(false);
@@ -396,17 +397,14 @@ const ResumeTab = () => {
                 </Grid>
             </Grid>
 
-            {/* certificate dialog */}
+            {/* resume dialog */}
             <Dialog
                 open={resumeOpen}
                 onClose={handleResume}
-                //   scroll={scroll}
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <DialogContent
-                //  dividers={scroll === 'paper'}
-                >
+                <DialogContent>
                     <Grid container>
                         <Grid item xs={12}>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -432,27 +430,45 @@ const ResumeTab = () => {
                                         }}
                                         onSubmit={async (values) => {
                                             console.log(values);
-                                            await dispatch(
-                                                updateResume(edit.experience_id, {
-                                                    start: `${new Date(values.date_started).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_started).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
-                                                    end: `${new Date(values.date_completed).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_completed).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_completed).getDate() + 1)).slice(-2)}`,
-                                                    company_name: values.name_of_company,
-                                                    role: values.role,
-                                                    decription: values.responsibilities,
-                                                    responsibities: values.responsibilities,
-                                                    is_current: values.is_current
-                                                })
-                                            );
+                                            if (values.is_current) {
+                                                await dispatch(
+                                                    updateResume(edit.experience_id, {
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
 
+                                                        company_name: values.name_of_company,
+                                                        role: values.role,
+                                                        decription: values.responsibilities,
+                                                        responsibities: values.responsibilities,
+                                                        is_current: values.is_current
+                                                    })
+                                                );
+                                            } else {
+                                                await dispatch(
+                                                    updateResume(edit.experience_id, {
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
+                                                        end: `${new Date(values.date_completed).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_completed).getMonth()]]
+                                                        }-${('0' + (new Date(values.date_completed).getDate() + 1)).slice(-2)}`,
+                                                        company_name: values.name_of_company,
+                                                        role: values.role,
+                                                        decription: values.responsibilities,
+                                                        responsibities: values.responsibilities,
+                                                        is_current: values.is_current
+                                                    })
+                                                );
+                                            }
+                                            await setModalMessage(
+                                                'You have successfully updated this resume information. You can go to your dashboard now'
+                                            );
                                             setResumeStep((step) => step + 2);
                                         }}
                                         validationSchema={Yup.object().shape({
                                             date_started: Yup.date().required('Starting Date is Required'),
-                                            date_completed: Yup.date().required('Date Completed is Required'),
+                                            date_completed: ValidateEndDate(),
                                             role: Yup.string().required('role is Required'),
                                             name_of_company: Yup.string().required('name of company is Required'),
                                             responsibilities: Yup.string().required('responsibilities is Required')
@@ -585,6 +601,9 @@ const ResumeTab = () => {
                                 onNoClick={() => setResumeStep((step) => step - 1)}
                                 onYesClick={async () => {
                                     delResume();
+                                    await setModalMessage(
+                                        'You have successfully deleted this resume information. You can go to your dashboard now'
+                                    );
                                     setResumeStep((step) => step + 1);
                                 }}
                                 text="Are you sure you want to delete this job experience from your experience list."
@@ -593,7 +612,7 @@ const ResumeTab = () => {
                                 onclick={handleResume}
                                 text="Go to Job History"
                                 // to="/recommendations"
-                                content="You have successfully updated this resume information. You can go to your dashboard now"
+                                content={modalMessage}
                             />
                         </ResumeStepper>
                     ) : (
@@ -611,21 +630,37 @@ const ResumeTab = () => {
                                         }}
                                         onSubmit={async (values) => {
                                             console.log(values);
-                                            await dispatch(
-                                                addResume({
-                                                    start: `${new Date(values.date_started).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_started).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
-                                                    end: `${new Date(values.date_completed).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_completed).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_completed).getDate() + 1)).slice(-2)}`,
-                                                    company_name: values.name_of_company,
-                                                    role: values.role,
-                                                    decription: values.responsibilities,
-                                                    responsibities: values.responsibilities,
-                                                    is_current: values.is_current
-                                                })
-                                            );
+
+                                            if (values.is_current) {
+                                                await dispatch(
+                                                    addResume({
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
+                                                        company_name: values.name_of_company,
+                                                        role: values.role,
+                                                        decription: values.responsibilities,
+                                                        responsibities: values.responsibilities,
+                                                        is_current: values.is_current
+                                                    })
+                                                );
+                                            } else {
+                                                await dispatch(
+                                                    addResume({
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
+                                                        end: `${new Date(values.date_completed).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_completed).getMonth()]]
+                                                        }-${('0' + (new Date(values.date_completed).getDate() + 1)).slice(-2)}`,
+                                                        company_name: values.name_of_company,
+                                                        role: values.role,
+                                                        decription: values.responsibilities,
+                                                        responsibities: values.responsibilities,
+                                                        is_current: values.is_current
+                                                    })
+                                                );
+                                            }
 
                                             setResumeStep((step) => step + 1);
                                         }}
