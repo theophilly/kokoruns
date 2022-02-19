@@ -20,7 +20,7 @@ import { BiEditAlt } from 'react-icons/bi';
 import CloseIcon from '@mui/icons-material/Close';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import education from '../../../utils/education';
-import { Formik, Form } from 'formik';
+import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import Textfield from '../../../components/reusables/FormUI/Textfield';
 import Textarea from '../../../components/reusables/FormUI/Textarea';
@@ -36,6 +36,7 @@ import {
 import { fetchUserDetails } from '../../../store/actions/authActions';
 import Success from '../../../ui-component/modals/Success';
 import Warning from '../../../ui-component/modals/Warning';
+import CheckboxWrapper from '../../../components/reusables/FormUI/CheckBoxWrapper';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -162,6 +163,7 @@ const EducationTab = () => {
     const [modalMessage, setModalMessage] = React.useState('');
     const [educationStep, setEducationStep] = React.useState(0);
     const [certificateStep, setCertificateStep] = React.useState(0);
+    const [checkIsCurrent, setCheckIsCurrent] = React.useState(false);
 
     const { root, lower_button } = useStyles();
     const theme = useTheme();
@@ -205,6 +207,25 @@ const EducationTab = () => {
             }
         }
     }, [open]);
+
+    const EndDate = () => {
+        const [field, meta] = useField('is_current');
+        setCheckIsCurrent(meta.value);
+
+        return (
+            <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
+                <Datepicker disabled={meta.value} name="date_completed" helpertext="Date Completed" />
+            </Grid>
+        );
+    };
+
+    const ValidateEndDate = () => {
+        if (checkIsCurrent === true) {
+            return '';
+        } else {
+            return Yup.date().required('Date Completed is Required');
+        }
+    };
 
     const delEducation = async () => {
         console.log(edit.education_id);
@@ -292,6 +313,7 @@ const EducationTab = () => {
                 </Grid>
             </Grid>
 
+            {/* education dialog */}
             <Dialog open={open} onClose={handleClose} aria-labelledby="scroll-dialog-title" aria-describedby="scroll-dialog-description">
                 <DialogContent>
                     <Grid container>
@@ -313,29 +335,49 @@ const EducationTab = () => {
                                             degree: edit?.course,
                                             name_of_institution: edit?.school,
                                             date_started: edit?.start,
-                                            date_completed: edit?.end
+                                            date_completed: edit?.end,
+                                            is_current: edit?.is_current
                                         }}
                                         onSubmit={async (values) => {
                                             console.log(values);
 
-                                            await dispatch(
-                                                updateEducation(edit.education_id, {
-                                                    // start_month: months[monthNames[values.date_started.getMonth()]],
-                                                    // start_year: values.date_started.getUTCFullYear(),
-                                                    // end_month: months[monthNames[values.date_completed.getMonth()]],
-                                                    // end_year: values.date_completed.getUTCFullYear(),
-                                                    school: values.name_of_institution,
-                                                    course: values.degree,
-                                                    class_of_degree: 'j',
-                                                    is_current: false,
-                                                    start: `${new Date(values.date_started).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_started).getMonth()]]
-                                                    }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`,
-                                                    end: `${new Date(values.date_completed).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_completed).getMonth()]]
-                                                    }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
-                                                })
-                                            );
+                                            if (values.is_current) {
+                                                await dispatch(
+                                                    updateEducation(edit.education_id, {
+                                                        // start_month: months[monthNames[values.date_started.getMonth()]],
+                                                        // start_year: values.date_started.getUTCFullYear(),
+                                                        // end_month: months[monthNames[values.date_completed.getMonth()]],
+                                                        // end_year: values.date_completed.getUTCFullYear(),
+                                                        school: values.name_of_institution,
+                                                        course: values.degree,
+                                                        class_of_degree: 'j',
+                                                        is_current: values.is_current,
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`
+                                                    })
+                                                );
+                                            } else {
+                                                await dispatch(
+                                                    updateEducation(edit.education_id, {
+                                                        // start_month: months[monthNames[values.date_started.getMonth()]],
+                                                        // start_year: values.date_started.getUTCFullYear(),
+                                                        // end_month: months[monthNames[values.date_completed.getMonth()]],
+                                                        // end_year: values.date_completed.getUTCFullYear(),
+                                                        school: values.name_of_institution,
+                                                        course: values.degree,
+                                                        class_of_degree: 'j',
+                                                        is_current: values.is_current,
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`,
+                                                        end: `${new Date(values.date_completed).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_completed).getMonth()]]
+                                                        }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
+                                                    })
+                                                );
+                                            }
+
                                             await setModalMessage(
                                                 'You have successfully updated this educational information. You can go to your dashboard now.'
                                             );
@@ -345,7 +387,7 @@ const EducationTab = () => {
                                             degree: Yup.string().required('Degree is Required'),
                                             name_of_institution: Yup.string().required('Name of Institution is Required'),
                                             date_started: Yup.date().required('Starting Date is Required is Required'),
-                                            date_completed: Yup.date().required('Date Completed is Required is Required')
+                                            date_completed: ValidateEndDate()
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -363,10 +405,13 @@ const EducationTab = () => {
                                                         xs={12}
                                                         md={6}
                                                     >
-                                                        <Textfield name="degree" helpertext="Certificate" />
+                                                        <Textfield name="degree" helpertext="Name of Certificate Awarded" />
                                                     </Grid>
                                                     <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
                                                         <Textfield name="name_of_institution" helpertext="Name of Insitution" />
+                                                    </Grid>
+                                                    <Grid mt="10px" mb="0px" item xs={12}>
+                                                        <CheckboxWrapper name="is_current" label="Ongoing" />
                                                     </Grid>
                                                     {/* below */}
                                                     <Grid
@@ -383,9 +428,12 @@ const EducationTab = () => {
                                                     >
                                                         <Datepicker name="date_started" helpertext="Date Started" />
                                                     </Grid>
-                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
+
+                                                    <EndDate />
+
+                                                    {/* <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
                                                         <Datepicker name="date_completed" helpertext="Date Completed" />
-                                                    </Grid>
+                                                    </Grid> */}
 
                                                     <Grid xs={12} item>
                                                         <Box sx={{ ...theme.typography.flex }}>
@@ -492,23 +540,38 @@ const EducationTab = () => {
                                             degree: '',
                                             name_of_institution: '',
                                             date_started: null,
-                                            date_completed: null
+                                            date_completed: null,
+                                            is_current: null
                                         }}
                                         onSubmit={async (values) => {
-                                            await dispatch(
-                                                addEducation({
-                                                    school: values.name_of_institution,
-                                                    course: values.degree,
-                                                    class_of_degree: 'j',
-                                                    is_current: false,
-                                                    start: `${new Date(values.date_started).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_started).getMonth()]]
-                                                    }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`,
-                                                    end: `${new Date(values.date_completed).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_completed).getMonth()]]
-                                                    }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
-                                                })
-                                            );
+                                            if (values.is_current) {
+                                                await dispatch(
+                                                    addEducation({
+                                                        school: values.name_of_institution,
+                                                        course: values.degree,
+                                                        class_of_degree: 'j',
+                                                        is_current: values.is_current,
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`
+                                                    })
+                                                );
+                                            } else {
+                                                await dispatch(
+                                                    addEducation({
+                                                        school: values.name_of_institution,
+                                                        course: values.degree,
+                                                        class_of_degree: 'j',
+                                                        is_current: false,
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`,
+                                                        end: `${new Date(values.date_completed).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_completed).getMonth()]]
+                                                        }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
+                                                    })
+                                                );
+                                            }
 
                                             setEducationStep((step) => step + 1);
                                         }}
@@ -516,7 +579,7 @@ const EducationTab = () => {
                                             degree: Yup.string().required('Type of certificate is Required'),
                                             name_of_institution: Yup.string().required('Name of Institution is Required'),
                                             date_started: Yup.date().required('Starting Date is Required is Required'),
-                                            date_completed: Yup.date().required('Date Completed is Required is Required')
+                                            date_completed: ValidateEndDate()
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -537,11 +600,14 @@ const EducationTab = () => {
                                                         <Textfield
                                                             placeholder="eg: Bsc or Junior School leaving Certificate"
                                                             name="degree"
-                                                            helpertext="Degree"
+                                                            helpertext="Name of Certificate Awarded"
                                                         />
                                                     </Grid>
                                                     <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
                                                         <Textfield name="name_of_institution" helpertext="Name of Insitution" />
+                                                    </Grid>
+                                                    <Grid mt="10px" mb="0px" item xs={12}>
+                                                        <CheckboxWrapper name="is_current" label="Ongoing" />
                                                     </Grid>
                                                     {/* below */}
                                                     <Grid
@@ -558,9 +624,11 @@ const EducationTab = () => {
                                                     >
                                                         <Datepicker name="date_started" helpertext="Date Started" />
                                                     </Grid>
-                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
+
+                                                    <EndDate />
+                                                    {/* <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
                                                         <Datepicker name="date_completed" helpertext="Date Completed" />
-                                                    </Grid>
+                                                    </Grid> */}
 
                                                     <Grid xs={12} item>
                                                         <Box sx={{ ...theme.typography.flex }}>
@@ -639,29 +707,41 @@ const EducationTab = () => {
                                             certificate: edit?.course,
                                             certificate_body: edit?.school,
                                             date_started: edit?.start,
-                                            date_completed: edit?.end
+                                            date_completed: edit?.end,
+                                            is_current: edit?.is_current
                                         }}
                                         onSubmit={async (values) => {
                                             console.log(values);
 
-                                            await dispatch(
-                                                updateCertification(edit.certification_id, {
-                                                    // start_month: months[monthNames[values.date_started.getMonth()]],
-                                                    // start_year: values.date_started.getUTCFullYear(),
-                                                    // end_month: months[monthNames[values.date_completed.getMonth()]],
-                                                    // end_year: values.date_completed.getUTCFullYear(),
-                                                    school: values.certificate_body,
-                                                    course: values.certificate,
-                                                    class_of_degree: 'j',
-                                                    is_current: false,
-                                                    start: `${new Date(values.date_started).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_started).getMonth()]]
-                                                    }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`,
-                                                    end: `${new Date(values.date_completed).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_completed).getMonth()]]
-                                                    }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
-                                                })
-                                            );
+                                            if (values.is_current) {
+                                                await dispatch(
+                                                    updateCertification(edit.certification_id, {
+                                                        school: values.certificate_body,
+                                                        course: values.certificate,
+                                                        class_of_degree: 'j',
+                                                        is_current: values.is_current,
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`
+                                                    })
+                                                );
+                                            } else {
+                                                await dispatch(
+                                                    updateCertification(edit.certification_id, {
+                                                        school: values.certificate_body,
+                                                        course: values.certificate,
+                                                        class_of_degree: 'j',
+                                                        is_current: values.is_current,
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + new Date(values.date_started).getDate()).slice(-2)}`,
+                                                        end: `${new Date(values.date_completed).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_completed).getMonth()]]
+                                                        }-${('0' + new Date(values.date_completed).getDate()).slice(-2)}`
+                                                    })
+                                                );
+                                            }
+
                                             await setModalMessage(
                                                 'You have successfully updated this certification. You can go to your dashboard now.'
                                             );
@@ -671,7 +751,7 @@ const EducationTab = () => {
                                             certificate: Yup.string().required('certificate is Required'),
                                             certificate_body: Yup.string().required('certification body is Required'),
                                             date_started: Yup.date().required('Starting Date is Required is Required'),
-                                            date_completed: Yup.date().required('Date Completed is Required is Required')
+                                            date_completed: ValidateEndDate()
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -694,6 +774,9 @@ const EducationTab = () => {
                                                     <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
                                                         <Textfield name="certificate_body" helpertext="Certificate Body" />
                                                     </Grid>
+                                                    <Grid mt="10px" mb="0px" item xs={12}>
+                                                        <CheckboxWrapper name="is_current" label="Ongoing" />
+                                                    </Grid>
                                                     {/* below */}
                                                     <Grid
                                                         sx={{
@@ -709,9 +792,7 @@ const EducationTab = () => {
                                                     >
                                                         <Datepicker name="date_started" helpertext="Date Started" />
                                                     </Grid>
-                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
-                                                        <Datepicker name="date_completed" helpertext="Date Completed" />
-                                                    </Grid>
+                                                    <EndDate />
 
                                                     <Grid xs={12} item>
                                                         <Box sx={{ ...theme.typography.flex }}>
@@ -819,35 +900,48 @@ const EducationTab = () => {
                                             certificate: '',
                                             certificate_body: '',
                                             date_started: null,
-                                            date_completed: null
+                                            date_completed: null,
+                                            is_current: null
                                         }}
                                         onSubmit={async (values) => {
                                             console.log(values);
-                                            await dispatch(
-                                                addCertification({
-                                                    // start_month: months[monthNames[values.date_started.getMonth()]],
-                                                    //  start_year: values.date_started.getUTCFullYear(),
-                                                    //   end_month: months[monthNames[values.date_completed.getMonth()]],
-                                                    // end_year: values.date_completed.getUTCFullYear(),
-                                                    school: values.certificate_body,
-                                                    course: values.certificate,
-                                                    class_of_degree: 'j',
-                                                    is_current: false,
-                                                    start: `${new Date(values.date_started).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_started).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
-                                                    end: `${new Date(values.date_completed).getFullYear()}-${
-                                                        months[monthNames[new Date(values.date_completed).getMonth()]]
-                                                    }-${('0' + (new Date(values.date_completed).getDate() + 1)).slice(-2)}`
-                                                })
-                                            );
+
+                                            if (values.is_current) {
+                                                await dispatch(
+                                                    addCertification({
+                                                        school: values.certificate_body,
+                                                        course: values.certificate,
+                                                        class_of_degree: 'j',
+                                                        is_current: values.is_current,
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`
+                                                    })
+                                                );
+                                            } else {
+                                                await dispatch(
+                                                    addCertification({
+                                                        school: values.certificate_body,
+                                                        course: values.certificate,
+                                                        class_of_degree: 'j',
+                                                        is_current: values.is_current,
+                                                        start: `${new Date(values.date_started).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_started).getMonth()]]
+                                                        }-${('0' + (new Date(values.date_started).getDate() + 1)).slice(-2)}`,
+                                                        end: `${new Date(values.date_completed).getFullYear()}-${
+                                                            months[monthNames[new Date(values.date_completed).getMonth()]]
+                                                        }-${('0' + (new Date(values.date_completed).getDate() + 1)).slice(-2)}`
+                                                    })
+                                                );
+                                            }
+
                                             setCertificateStep((step) => step + 1);
                                         }}
                                         validationSchema={Yup.object().shape({
                                             certificate: Yup.string().required('certificate is Required'),
                                             certificate_body: Yup.string().required('Certification body is Required'),
                                             date_started: Yup.date().required('Starting Date is Required is Required'),
-                                            date_completed: Yup.date().required('Date Completed is Required is Required')
+                                            date_completed: ValidateEndDate()
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -869,6 +963,9 @@ const EducationTab = () => {
                                                     <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
                                                         <Textfield name="certificate_body" helpertext="Certification Body" />
                                                     </Grid>
+                                                    <Grid mt="10px" mb="0px" item xs={12}>
+                                                        <CheckboxWrapper name="is_current" label="Ongoing" />
+                                                    </Grid>
                                                     {/* below */}
                                                     <Grid
                                                         sx={{
@@ -885,9 +982,7 @@ const EducationTab = () => {
                                                     >
                                                         <Datepicker name="date_started" helpertext="Date Started" />
                                                     </Grid>
-                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '10px' }} item xs={12} md={6}>
-                                                        <Datepicker name="date_completed" helpertext="Date Completed" />
-                                                    </Grid>
+                                                    <EndDate />
 
                                                     <Grid xs={12} item>
                                                         <Box sx={{ ...theme.typography.flex }}>

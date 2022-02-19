@@ -145,11 +145,11 @@ class Api {
 
     //update  professional skill
     updatePro = (id, data) => {
-        return this.init().put(`/updatePro/${id}`, data);
+        return this.init().put(`/updateproskill/${id}`, data);
     };
     //delete  professional skill
     deletePro = (data) => {
-        return this.init().delete('/deletePro', { data: { ...data } });
+        return this.init().delete('/deleteproskill', { data: { ...data } });
     };
 
     //Other skills
@@ -160,11 +160,11 @@ class Api {
 
     //update  Other skills
     updateOther = (id, data) => {
-        return this.init().put(`/updateOther/${id}`, data);
+        return this.init().put(`/updateotherskill/${id}`, data);
     };
     //delete  Other skills
     deleteOther = (data) => {
-        return this.init().delete('/deleteOther', { data: { ...data } });
+        return this.init().delete('/deleteotherskill', { data: { ...data } });
     };
 
     //user update

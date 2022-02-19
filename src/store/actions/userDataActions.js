@@ -276,6 +276,36 @@ export const addPro = (skill) => {
     };
 };
 
+export const updatePro = (id, skill) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        await api
+            .updatePro(id, skill)
+            .then((res) => {
+                dispatch(fetchUserDetails());
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    };
+};
+
+export const deletePro = (skill) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        await api
+            .deletePro(skill)
+            .then((res) => {
+                dispatch(fetchUserDetails());
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    };
+};
+
 //add social
 export const addOther = (skill) => {
     return async (dispatch) => {
@@ -283,6 +313,36 @@ export const addOther = (skill) => {
 
         await api
             .addOther(skill)
+            .then((res) => {
+                dispatch(fetchUserDetails());
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    };
+};
+
+export const updateOther = (id, skill) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        await api
+            .updateOther(id, skill)
+            .then((res) => {
+                dispatch(fetchUserDetails());
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    };
+};
+
+export const deleteOther = (skill) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        await api
+            .deleteOther(skill)
             .then((res) => {
                 dispatch(fetchUserDetails());
             })

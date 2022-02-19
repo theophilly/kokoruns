@@ -23,7 +23,17 @@ import Datepicker from '../../../components/reusables/FormUI/Datepicker';
 import CloseIcon from '@mui/icons-material/Close';
 import { makeStyles } from '@mui/styles';
 import SubCard from '../../../ui-component/cards/SubCard';
-import { addResume, updateResume, deleteResume, addOther, addPro } from '../../../store/actions/userDataActions';
+import {
+    addResume,
+    updateResume,
+    deleteResume,
+    addOther,
+    addPro,
+    deletePro,
+    deleteOther,
+    updatePro,
+    updateOther
+} from '../../../store/actions/userDataActions';
 import Success from '../../../ui-component/modals/Success';
 import Warning from '../../../ui-component/modals/Warning';
 import CheckboxWrapper from '../../../components/reusables/FormUI/CheckBoxWrapper';
@@ -78,17 +88,14 @@ const months = {
     December: '12'
 };
 
-const NTag = ({ link_address, link_title, setEdit, value = {}, clicked }) => {
+const NTag = ({ text, setEdit, value = {}, clicked }) => {
     const theme = useTheme();
 
     return (
         <Box
-            component="a"
-            href={link_address}
-            target="_blank"
             sx={{
                 background: theme.palette.primary.main,
-                cursor: 'pointer',
+
                 color: 'white',
                 padding: '10px 20px',
                 width: 'max-content',
@@ -97,9 +104,10 @@ const NTag = ({ link_address, link_title, setEdit, value = {}, clicked }) => {
                 position: 'relative'
             }}
         >
-            <Typography>{link_title}</Typography>
+            <Typography>{text}</Typography>
             <Box sx={{ position: 'absolute', top: 1, right: 5 }}>
                 <BiEditAlt
+                    style={{ cursor: 'pointer' }}
                     onClick={async () => {
                         await setEdit(() => {
                             return { ...value, show: true };
@@ -174,6 +182,7 @@ const Item = ({ is_current, start_year, end_year, title, sub, experience, clicke
                     {is_current ? 'Present' : `${monthShortNames[new Date(end_year).getMonth()]} ${new Date(end_year).getUTCFullYear()}`}
                 </Typography>
                 <BiEditAlt
+                    style={{ cursor: 'pointer' }}
                     onClick={async () => {
                         await setEdit(() => {
                             return { ...value, show: true };
@@ -237,10 +246,12 @@ const ResumeTab = () => {
 
     const delPro = async () => {
         await setLoad(true);
-        await dispatch();
-        // deleteSocial({
-        //     id: edit.online_link_id
-        // })
+        await dispatch(
+            deletePro({
+                id: edit.pro_skill_id
+            })
+        );
+
         await setLoad(false);
     };
     const handleOther = () => {
@@ -253,10 +264,12 @@ const ResumeTab = () => {
 
     const delOther = async () => {
         await setLoad(true);
-        await dispatch();
-        // deleteSocial({
-        //     id: edit.online_link_id
-        // })
+        await dispatch(
+            deleteOther({
+                id: edit.other_skill_id
+            })
+        );
+
         await setLoad(false);
     };
 
@@ -349,7 +362,7 @@ const ResumeTab = () => {
                     >
                         <Box sx={{ display: 'flex', height: 'auto', flexWrap: 'wrap', gap: '10px' }}>
                             {proskills.map((item) => (
-                                <Tag text={item.pro_skill} />
+                                <NTag value={item} setEdit={setEdit} clicked={setProOpen} text={item.pro_skill} />
                             ))}
                         </Box>
 
@@ -378,7 +391,7 @@ const ResumeTab = () => {
                     >
                         <Box sx={{ display: 'flex', height: 'auto', flexWrap: 'wrap', gap: '10px' }}>
                             {otherskills.map((item) => (
-                                <Tag text={item.other_skill} />
+                                <NTag value={item} setEdit={setEdit} clicked={setOtherOpen} {...item} text={item.other_skill} />
                             ))}
                         </Box>
 
@@ -757,8 +770,7 @@ const ResumeTab = () => {
                                 onclick={handleResume}
                                 text="Go to Job History"
                                 // to="/recommendations"
-                                content="You have successfully added a professional
-                            information. You can go to your dashboard now"
+                                content="You have successfully added this professional skill. You can go to your dashboard now"
                             />
                         </ResumeStepper>
                     )}
@@ -785,28 +797,23 @@ const ResumeTab = () => {
                                 <Grid item xs={12}>
                                     <Formik
                                         initialValues={{
-                                            social: edit.link_title,
-                                            social_link: edit.link_address
+                                            pro_skill: edit.pro_skill
                                         }}
                                         onSubmit={async (values) => {
                                             console.log(values);
 
-                                            await dispatch();
-                                            // updateSocial(edit.online_link_id, {
-                                            //     link_title: values.social,
-                                            //     link_address: values.social_link
-                                            // })
-
+                                            await dispatch(
+                                                updatePro(edit.pro_skill_id, {
+                                                    ...values
+                                                })
+                                            );
+                                            await setModalMessage(
+                                                'You have successfully updated this professional skill. You can go to your dashboard now'
+                                            );
                                             setResumeStep((step) => step + 2);
                                         }}
                                         validationSchema={Yup.object().shape({
-                                            social: Yup.string().required('Name of social is Required'),
-                                            social_link: Yup.string()
-                                                .matches(
-                                                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-                                                    'Enter correct url!'
-                                                )
-                                                .required('Please valid social media link(url)')
+                                            pro_skill: Yup.string().required('Name of Skill is Required')
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -821,12 +828,9 @@ const ResumeTab = () => {
                                                         }}
                                                         item
                                                         xs={12}
-                                                        md={6}
+                                                        //    md={6}
                                                     >
-                                                        <Textfield name="social" helpertext="Social Media" placeholder="Facebook" />
-                                                    </Grid>
-                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
-                                                        <Textfield name="social_link" helpertext="Link" />
+                                                        <Textfield name="pro_skill" helpertext="Name of Skill" placeholder="" />
                                                     </Grid>
 
                                                     <Grid xs={12} item>
@@ -911,16 +915,18 @@ const ResumeTab = () => {
                                 onNoClick={() => setResumeStep((step) => step - 1)}
                                 onYesClick={async () => {
                                     delPro();
+                                    await setModalMessage(
+                                        'You have successfully deleted this professional skill. You can go to your dashboard now'
+                                    );
                                     setResumeStep((step) => step + 1);
                                 }}
-                                text="Are you sure you want to delete this social link?"
+                                text="Are you sure you want to delete this professional skill?"
                             />
                             <Success
                                 onclick={handlePro}
-                                text="See All social Links"
+                                text="See All Skills"
                                 // to="/recommendations"
-                                content="You have successfully added a social link
-                            You can go to your dashboard now."
+                                content={modalMessage}
                             />
                         </ResumeStepper>
                     ) : (
@@ -999,9 +1005,9 @@ const ResumeTab = () => {
                             </Grid>
                             <Success
                                 onclick={handlePro}
-                                text="See All social Links"
+                                text="See All Skills"
                                 // to="/recommendations"
-                                content="You have successfully added a social link
+                                content="You have successfully added this professional skill
                             You can go to your dashboard now."
                             />
                         </ResumeStepper>
@@ -1034,28 +1040,23 @@ const ResumeTab = () => {
                                 <Grid item xs={12}>
                                     <Formik
                                         initialValues={{
-                                            social: edit.link_title,
-                                            social_link: edit.link_address
+                                            other_skill: edit.other_skill
                                         }}
                                         onSubmit={async (values) => {
                                             console.log(values);
 
-                                            await dispatch();
-                                            // updateSocial(edit.online_link_id, {
-                                            //     link_title: values.social,
-                                            //     link_address: values.social_link
-                                            // })
-
+                                            await dispatch(
+                                                updateOther(edit.other_skill_id, {
+                                                    ...values
+                                                })
+                                            );
+                                            await setModalMessage(
+                                                'You have successfully added this other skill. You can go to your dashboard now'
+                                            );
                                             setResumeStep((step) => step + 2);
                                         }}
                                         validationSchema={Yup.object().shape({
-                                            social: Yup.string().required('Name of social is Required'),
-                                            social_link: Yup.string()
-                                                .matches(
-                                                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-                                                    'Enter correct url!'
-                                                )
-                                                .required('Please valid social media link(url)')
+                                            other_skill: Yup.string().required('Name of Other skill is Required')
                                         })}
                                     >
                                         {({ isSubmitting }) => (
@@ -1070,12 +1071,8 @@ const ResumeTab = () => {
                                                         }}
                                                         item
                                                         xs={12}
-                                                        md={6}
                                                     >
-                                                        <Textfield name="social" helpertext="Social Media" placeholder="Facebook" />
-                                                    </Grid>
-                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
-                                                        <Textfield name="social_link" helpertext="Link" />
+                                                        <Textfield name="other_skill" helpertext="Name of Other Skill is required" />
                                                     </Grid>
 
                                                     <Grid xs={12} item>
@@ -1160,16 +1157,18 @@ const ResumeTab = () => {
                                 onNoClick={() => setResumeStep((step) => step - 1)}
                                 onYesClick={async () => {
                                     delOther();
+                                    await setModalMessage(
+                                        'You have successfully deleted this other skill. You can go to your dashboard now'
+                                    );
                                     setResumeStep((step) => step + 1);
                                 }}
-                                text="Are you sure you want to delete this social link?"
+                                text="Are you sure you want to delete this other skill?"
                             />
                             <Success
                                 onclick={handleOther}
-                                text="See All social Links"
+                                text="See All Other Skills"
                                 // to="/recommendations"
-                                content="You have successfully added a social link
-                            You can go to your dashboard now."
+                                content={modalMessage}
                             />
                         </ResumeStepper>
                     ) : (
@@ -1247,10 +1246,9 @@ const ResumeTab = () => {
                             </Grid>
                             <Success
                                 onclick={handleOther}
-                                text="See All social Links"
+                                text="See All Professional Skills"
                                 // to="/recommendations"
-                                content="You have successfully added a social link
-                            You can go to your dashboard now."
+                                content="You have successfully added this Professional skill. You can go to your dashboard now"
                             />
                         </ResumeStepper>
                     )}
