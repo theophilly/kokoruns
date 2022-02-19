@@ -230,9 +230,13 @@ const Profile = () => {
                         <Box sx={{ display: 'flex', mt: '5px', background: '#CEE9FF', padding: '5px 10px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Languages: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-                                {/* {JSON.parse(JSON.stringify(bio.languages1)).map((item) => ({ item }))} */}
-                                {/* {Object.values(JSON.parse(bio.languages1)).map((item) => ({ item }))} */}
-                                {Object.values(JSON.parse(bio.languages1)).map((item) => item + ` `)}
+                                {Object.values(JSON.parse(bio.languages1)).map((item, index) => {
+                                    if (index === 0) {
+                                        return item;
+                                    }
+
+                                    return `, ` + item;
+                                })}
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px', padding: '5px 10px' }}>
