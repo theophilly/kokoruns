@@ -75,7 +75,8 @@ const Tag = ({ link_address, link_title, setEdit, value = {}, clicked }) => {
     return (
         <Box
             component="a"
-            href={link_address}
+            // href={link_address}
+            onClick={() => (window.location.href = { link_address })}
             target="_blank"
             sx={{
                 background: theme.palette.primary.main,
