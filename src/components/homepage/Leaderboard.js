@@ -41,9 +41,9 @@ export default function Leaderboard() {
                         width: '100vw'
                     },
                     '@media (max-width: 400px)': {
-                        backgroundPosition: '45% 100px',
+                        backgroundPosition: '45% 80px',
                         height: '100vh',
-                        backgroundSize: '1200px',
+                        backgroundSize: '1400px',
                         backgroundRepeat: 'no-repeat'
                     }
                 }}
