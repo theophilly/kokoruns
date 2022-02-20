@@ -34,7 +34,7 @@ export default function Leaderboard() {
                         left: 0,
                         width: '100%',
                         height: '100%',
-                        background: 'rgba(0,0,0,0.2)'
+                        background: 'rgba(0,0,0,0.3)'
                     },
                     '@media (max-width: 1075px)': {
                         height: '90vh',
