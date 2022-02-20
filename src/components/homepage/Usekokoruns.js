@@ -36,8 +36,6 @@ export default function Usekokoruns() {
                 ...theme.typography.flex,
                 flexDirection: 'column',
                 background: '#faf9f9',
-                // background: theme.palette.background1,
-                //  border: '1px solid red',
                 paddingTop: '30px',
                 paddingBottom: '60px',
                 '@media (max-width: 500px)': {
@@ -47,8 +45,6 @@ export default function Usekokoruns() {
         >
             <Box
                 sx={{
-                    // height: '160px',
-                    // border: '1px solid red',
                     '@media (max-width: 500px)': {
                         marginTop: '40px'
                     }
@@ -76,7 +72,6 @@ export default function Usekokoruns() {
                                 ...theme.typography.flex,
                                 flexDirection: 'column',
                                 alignItems: 'center',
-                                // border: '1px solid red',
                                 marginTop: '-40px'
                             }
                         }}

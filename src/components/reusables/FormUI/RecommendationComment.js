@@ -1,9 +1,8 @@
 import React from 'react';
-import { Typography, RadioGroup, FormControlLabel, Radio, Box, useMediaQuery } from '@mui/material';
+import { Typography, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import { useField, useFormikContext } from 'formik';
 
 const RecommendationComment = ({ name, options, ...otherProps }) => {
-    const matches = useMediaQuery('(min-width:430px)');
     const { setFieldValue } = useFormikContext();
     const [field, meta] = useField(name);
 

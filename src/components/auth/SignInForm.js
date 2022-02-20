@@ -11,10 +11,8 @@ import { useTheme } from '@mui/material/styles';
 // local import
 import Textfield from '../reusables/FormUI/Textfield';
 import Passwordfield from '../reusables/FormUI/Passwordfield';
-import { login, fetchUserDetails } from '../../store/actions/authActions';
+import { login } from '../../store/actions/authActions';
 import Snackbar from '../reusables/Snackbar';
-
-const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
 export default function SignInForm() {
     const navigate = useNavigate();
@@ -75,11 +73,7 @@ export default function SignInForm() {
                             navigate('/profile');
                         } else {
                             await navigate('/profile-setup');
-                            //     await dispatch(fetchUserDetails());
                         }
-
-                        //  await sleep(3000);
-                        //  navigate('/profile-setup');
                     }}
                     validationSchema={Yup.object().shape({
                         loginEmail: Yup.string().email('Invalid email format').required('Required'),
@@ -125,13 +119,7 @@ export default function SignInForm() {
                 </Formik>
             </Box>
 
-            <Box
-                alignItems="center"
-                justifyContent="center"
-                display="flex"
-                margin="40px 0"
-                //  border="1px solid red"
-            >
+            <Box alignItems="center" justifyContent="center" display="flex" margin="40px 0">
                 <Typography sx={{ fontFamily: 'Mulish', fontSize: '.9rem' }}>or continue with</Typography>
             </Box>
             <Box sx={{ ...theme.typography.flex, height: '50px', borderRadius: '7px', background: '#F0F0F0', cursor: 'pointer' }}>

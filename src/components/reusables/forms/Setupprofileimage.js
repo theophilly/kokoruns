@@ -1,26 +1,15 @@
-import React, { useRef } from 'react';
-import { useField, useFormikContext } from 'formik';
+import React from 'react';
+import { useField } from 'formik';
 
 // material-ui
 import { Box, Grid, Typography, Button, useTheme } from '@mui/material';
 
 const Setupprofileimage = React.forwardRef((props, ref) => {
     const [field, mata] = useField('file');
-    const { setFieldValue } = useFormikContext();
     const theme = useTheme();
-
-    const handleChange = (evt) => {
-        //console.log(evt.currentTarget.value);
-        console.log(evt.currentTarget.files[0]);
-        setFieldValue('file', evt.currentTarget.files[0]);
-    };
 
     const configTextfield = {
         ...field
-        // onChange: handleChange,
-        // ...otherProps,
-        //  fullWidth: true,
-        //  color: 'secondary',
     };
 
     if (mata && mata.touched && mata.error) {

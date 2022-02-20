@@ -65,7 +65,6 @@ const Datepicker = ({ name, helpertext, ...otherProps }) => {
         ...field,
         ...otherProps,
         type: 'date'
-        //  color: 'secondary',
     };
 
     if (mata && mata.touched && mata.error) {

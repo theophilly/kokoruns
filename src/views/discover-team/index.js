@@ -1,32 +1,12 @@
 import React from 'react';
-import {
-    Box,
-    Grid,
-    Avatar,
-    Typography,
-    useTheme,
-    Button,
-    Select,
-    FormControl,
-    OutlinedInput,
-    MenuItem,
-    InputBase,
-    Paper
-} from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { Box, Grid, Avatar, Typography, useTheme, Button, Select, MenuItem, InputBase } from '@mui/material';
 
-import SubCard from '../../ui-component/cards/SubCard';
-import MainCard from '../../ui-component/cards/MainCard';
 import SearchIcon from '@mui/icons-material/Search';
-import AddIcon from '@mui/icons-material/Add';
 
-import { Link } from 'react-router-dom';
-import Teammember from '../teams/Teammember';
 import Teamsbox from '../teams/Teambox';
 
 const DiscoverTeams = () => {
     const theme = useTheme();
-    const matchDownMd = useMediaQuery('(min-width:600px)');
 
     const [age, setAge] = React.useState('');
 

@@ -22,7 +22,6 @@ export default function Footer() {
         <Box
             sx={{
                 height: 'auto',
-                // background: theme.palette.background1,
                 background: '#faf9f9',
                 padding: ' 50px calc((100vw - 1300px) / 2)',
 

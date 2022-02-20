@@ -1,18 +1,5 @@
 import React from 'react';
-import {
-    Box,
-    Grid,
-    Avatar,
-    Typography,
-    useTheme,
-    Button,
-    Select,
-    FormControl,
-    OutlinedInput,
-    MenuItem,
-    InputBase,
-    Paper
-} from '@mui/material';
+import { Box, Grid, Avatar, Typography, useTheme, Button, Paper } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { BiEditAlt } from 'react-icons/bi';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -22,7 +9,6 @@ import MainCard from '../../ui-component/cards/MainCard';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 
-import { Link } from 'react-router-dom';
 import Teammember from '../teams/Teammember';
 import Teamsbox from '../teams/Teambox';
 
@@ -53,7 +39,6 @@ const Createteambox = ({ onClick }) => {
 
 const Discoverteamdetails = () => {
     const theme = useTheme();
-    const matchDownMd = useMediaQuery('(min-width:600px)');
 
     return (
         <Box

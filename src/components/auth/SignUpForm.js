@@ -5,19 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 // material-ui
-import {
-    Typography,
-    Button,
-    Grid,
-    Box,
-    CircularProgress,
-    useTheme,
-    Dialog,
-    DialogTitle,
-    DialogActions,
-    DialogContent,
-    DialogContentText
-} from '@mui/material';
+import { Typography, Button, Grid, Box, CircularProgress, useTheme, Dialog, DialogContent } from '@mui/material';
 
 //local import
 import Textfield from '../reusables/FormUI/Textfield';
@@ -25,8 +13,6 @@ import Passwordfield from '../reusables/FormUI/Passwordfield';
 import Success from '../../ui-component/modals/Success';
 import Snackbar from '../reusables/Snackbar';
 import { signup } from '../../store/actions/authActions';
-
-const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
 export default function SignUpForm({ onclick, setClickData, showToast, path }) {
     const navigate = useNavigate();
@@ -86,7 +72,7 @@ export default function SignUpForm({ onclick, setClickData, showToast, path }) {
                         await dispatch(signup(values));
                         if (window.store.getState().authReducer.user_id) {
                             handleRecommendOpen();
-                            ///  await sleep(3000);
+
                             return;
                         }
 
@@ -130,7 +116,6 @@ export default function SignUpForm({ onclick, setClickData, showToast, path }) {
                                                 color: 'white',
                                                 '& :hover': {
                                                     color: 'black'
-                                                    //  background: 'lightgreen',
                                                 }
                                             }}
                                             disableElevation

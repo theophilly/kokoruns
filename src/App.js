@@ -5,11 +5,11 @@ import './App.css';
 
 import theme from './theme';
 import ScrollToTop from './components/reusables/ScrollToTop';
-import Navbar from './components/kk/Navbar';
+import Navbar from './components/common/Navbar';
 // import Footer from './components/reusables/Footer';
 
 import Routes from './routes';
-import Footer from './components/kk/Footer';
+import Footer from './components/common/Footer';
 
 function App() {
     return (

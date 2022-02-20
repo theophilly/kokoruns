@@ -10,7 +10,7 @@ const Single = () => {
                 height: '185px',
                 width: '320px',
                 borderRadius: '5px',
-                //  border: '1px solid red',
+
                 padding: '10px',
                 cursor: 'pointer',
                 '@media (max-width: 750px)': {
@@ -91,15 +91,11 @@ export default function Sponsoredevents() {
                 height: 'auto',
                 display: 'flex',
                 alignItems: 'center',
-                // border: '1px solid red',
-                // background: theme.palette.background1,
                 background: '#faf9f9',
                 flexDirection: 'column',
-                //  paddingBottom: '70px',
                 padding: ' 15px calc((100vw - 1300px) / 2) 70px !important',
                 '@media (max-width: 500px)': {
                     lineHeight: '2rem',
-                    // padding: '20px',
                     height: 'auto'
                 }
             }}
@@ -108,7 +104,6 @@ export default function Sponsoredevents() {
                 sx={{
                     ...theme.typography.flex,
                     height: '200px',
-                    // border: '1px solid red',
                     flexDirection: 'column',
                     width: '100%',
                     '@media (max-width: 500px)': {
@@ -137,7 +132,6 @@ export default function Sponsoredevents() {
                     sx={{
                         ...theme.typography.subtitle1,
                         textAlign: 'center'
-                        //margin: '25px 0'
                     }}
                 >
                     Register for career-focused sponsored events here.

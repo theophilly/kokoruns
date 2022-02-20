@@ -91,16 +91,6 @@ export default function Createteam() {
                         }}
                         onSubmit={async (values) => {
                             console.log(values);
-                            // await dispatch(login(values));
-                            // if (!window.store.getState().authReducer.authenticated) {
-                            //   await setClickData({
-                            //     type: 'error',
-                            //     content: window.store.getState().authReducer.error,
-                            //   });
-                            //   showToast();
-                            // }
-                            //  await sleep(3000);
-                            //navigate('/profile-setup');
                         }}
                         validationSchema={Yup.object().shape({
                             team_name: Yup.string().required('Team Name is Required'),
@@ -127,18 +117,10 @@ export default function Createteam() {
                                         xs={12}
                                         md={6}
                                     >
-                                        <Textfield
-                                            //  disabled={!!user.firstName}
-                                            name="team_name"
-                                            helpertext="Team Name"
-                                        />
+                                        <Textfield name="team_name" helpertext="Team Name" />
                                     </Grid>
                                     <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                        <Textfield
-                                            //  disabled={!!user.lastName}
-                                            name="team_purpose"
-                                            helpertext="Team Purpose"
-                                        />
+                                        <Textfield name="team_purpose" helpertext="Team Purpose" />
                                     </Grid>
 
                                     <Grid
@@ -153,11 +135,7 @@ export default function Createteam() {
                                         xs={12}
                                         md={6}
                                     >
-                                        <Textfield
-                                            //  disabled={!!user.firstName}
-                                            name="team_bio"
-                                            helpertext="Team Bio"
-                                        />
+                                        <Textfield name="team_bio" helpertext="Team Bio" />
                                     </Grid>
                                     <Grid sx={{ paddingLeft: matches ? '40px' : '0px', marginTop: '10px' }} item xs={12} md={6}>
                                         <SelectWrapper name="team_policy" helpertext="Team Policy" options={maritalStatusData} />

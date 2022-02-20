@@ -1,32 +1,15 @@
 import React, { useRef } from 'react';
-import {
-    Box,
-    Grid,
-    Typography,
-    useTheme,
-    Paper,
-    CircularProgress,
-    Button,
-    useMediaQuery,
-    Avatar,
-    Dialog,
-    DialogTitle,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    InputBase
-} from '@mui/material';
 import { Formik, Form, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+
+import { Box, Grid, Typography, useTheme, Paper, CircularProgress, Button, useMediaQuery, Dialog, DialogContent } from '@mui/material';
+
+// local import
 import Textfield from '../../components/reusables/FormUI/Textfield';
 import SelectWrapper from '../../components/reusables/FormUI/SelectWrapper';
 import maritalStatusData from '../../config/maritalStatusData.json';
 import Teamimage from '../../components/reusables/forms/Teamsimage';
-import AddIcon from '@mui/icons-material/Add';
-import SearchIcon from '@mui/icons-material/Search';
-import Teammember from '../teams/Teammember';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import Datepicker from '../../components/reusables/FormUI/Datepicker';
 import SelectLGA from '../../components/reusables/FormUI/SelectLGA';
 import stateData from '../../config/stateData.json';
@@ -36,38 +19,12 @@ import Success from '../../ui-component/modals/Success';
 
 const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
-const Createteambox = ({ onClick }) => {
-    const theme = useTheme();
-    return (
-        <Paper
-            onClick={onClick}
-            sx={{
-                ...theme.typography.flex,
-                height: '200px',
-                width: '200px',
-                flexDirection: 'column',
-                gap: '8px',
-                mt: '20px',
-                padding: '13px 0',
-                margintop: '30px !important',
-                cursor: 'pointer'
-            }}
-        >
-            <Avatar sx={{ bgcolor: theme.palette.primary.main, height: '50px', width: '50px', cursor: 'pointer' }}>
-                <AddIcon fontSize="large" />
-            </Avatar>
-            <Typography sx={{ fontWeight: '600', marginTop: '10px' }}>Add Member</Typography>
-        </Paper>
-    );
-};
-
 export default function Createevent() {
     const matches = useMediaQuery('(min-width:900px)');
     const navigate = useNavigate();
     const theme = useTheme();
     const filesharhe_ref = useRef();
     const [open, setOpen] = React.useState(false);
-    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const handleClickOpen = () => {
         setOpen(true);

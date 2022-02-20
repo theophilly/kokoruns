@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
-import { useField, useFormikContext } from 'formik';
+import React from 'react';
+import { useField } from 'formik';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 // material-ui
-import { Box, Grid, Typography, Button, useTheme } from '@mui/material';
+import { Box, Grid, Typography, useTheme } from '@mui/material';
 
 const ResumeUpload = React.forwardRef(({ name }, ref) => {
     const [field, mata] = useField(name);
@@ -11,10 +11,6 @@ const ResumeUpload = React.forwardRef(({ name }, ref) => {
 
     const configTextfield = {
         ...field
-        // onChange: handleChange,
-        // ...otherProps,
-        //  fullWidth: true,
-        //  color: 'secondary',
     };
 
     if (mata && mata.touched && mata.error) {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 // material-ui
-import { Box, Typography, Button, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 // project imports
@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
         padding: ' 15px calc((100vw - 1200px) / 2) !important',
         gap: '20px',
         background: '#faf9f9',
-        // background: theme.palette.background1,
 
         '@media (max-width: 1200px)': {
             padding: '15px'
@@ -62,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
-    const { root, left, right, content, list_item } = useStyles();
+    const { root, right, content, list_item } = useStyles();
     const theme = useTheme();
     return (
         <Box className={root}>

@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { useField, useFormikContext } from 'formik';
+import React from 'react';
+import { useField } from 'formik';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 
 // material-ui
@@ -11,10 +11,6 @@ const Teamimage = React.forwardRef(({ name }, ref) => {
 
     const configTextfield = {
         ...field
-        // onChange: handleChange,
-        // ...otherProps,
-        //  fullWidth: true,
-        //  color: 'secondary',
     };
 
     if (mata && mata.touched && mata.error) {
@@ -28,7 +24,7 @@ const Teamimage = React.forwardRef(({ name }, ref) => {
                 marginTop: '30px',
                 padding: '20px',
                 background: 'white',
-                //   border: '1px solid red',
+
                 '@media (max-width: 500px)': {
                     marginTop: '20px',
                     padding: '20px'

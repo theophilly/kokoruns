@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
 import { useFormikContext } from 'formik';
 
 // material-ui
@@ -59,89 +58,12 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
     const matches = useMediaQuery('(min-width:900px)');
     const theme = useTheme();
 
-    const [input, setInput] = useState('');
-    const [profInput, setProfInput] = useState('');
+    const { getFieldMeta } = useFormikContext();
 
-    const { setFieldValue, getFieldMeta } = useFormikContext();
-
-    const tagField = getFieldMeta('languages');
-    const profField = getFieldMeta('other_professions');
     const disablilityField = getFieldMeta('disablility');
     const employmentStatus = getFieldMeta('employment_status');
     setDis_ability(disablilityField.value);
     setEmployment(employmentStatus.value);
-
-    const onChange = (e) => {
-        const { value } = e.target;
-        setInput(value);
-    };
-    const onProfChange = (e) => {
-        const { value } = e.target;
-        setProfInput(value);
-    };
-
-    const deleteTag = async (index) => {
-        const tagsCopy = [...tagField.value];
-        tagsCopy.splice(index, 1);
-        await setFieldValue('languages', tagsCopy);
-    };
-
-    const deleteProfTag = async (index) => {
-        const tagsCopy = [...profField.value];
-        tagsCopy.splice(index, 1);
-        await setFieldValue('other_professions', tagsCopy);
-    };
-
-    const editTag = async (id) => {
-        const tagsCopy = [...tagField.value];
-        const poppedTag = tagsCopy[id];
-        tagsCopy.splice(id, 1);
-
-        setInput(poppedTag);
-        await setFieldValue('languages', tagsCopy);
-    };
-    const editProfTag = async (id) => {
-        const tagsCopy = [...profField.value];
-        const poppedTag = tagsCopy[id];
-        tagsCopy.splice(id, 1);
-
-        setProfInput(poppedTag);
-        await setFieldValue('other_professions', tagsCopy);
-    };
-
-    const onAdd = async (e) => {
-        const trimmedInput = input.trim();
-
-        if (
-            trimmedInput.length &&
-            !tagField.value.includes(trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1).toLowerCase()) &&
-            tagField.value.length < 4
-        ) {
-            setInput('');
-
-            await setFieldValue('languages', [
-                ...tagField.value,
-                trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1).toLowerCase()
-            ]);
-            console.log(tagField.value);
-        }
-    };
-
-    const onProfAdd = async (e) => {
-        const trimmedInput = profInput.trim();
-
-        if (
-            trimmedInput.length &&
-            !profField.value.includes(trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1).toLowerCase()) &&
-            profField.value.length < 4
-        ) {
-            setProfInput('');
-            await setFieldValue('other_professions', [
-                ...profField.value,
-                trimmedInput.charAt(0).toUpperCase() + trimmedInput.slice(1).toLowerCase()
-            ]);
-        }
-    };
 
     return (
         <Box sx={{ marginTop: '50px', padding: '20px', background: 'white' }}>
@@ -273,46 +195,6 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                     <MultipleSelect num={2} data={professions} label="Select Other Professions" name="other_professions" />
                 </Grid>
 
-                {/*                 
-                {profField.value.length > 0 && (
-                    <Grid xs={12} item>
-                        <Box display="flex" gap="10px" flexWrap="wrap">
-                            {profField.value.map((item, index) => (
-                                <Tag index={index} editTag={editProfTag} deleteTag={deleteProfTag} text={item} />
-                            ))}
-                        </Box>
-                    </Grid>
-                )}
-                <Grid xs={12} md={6} item>
-                    <Box alignItems="center" display="flex">
-                        <OutlinedInput
-                            sx={{
-                                height: '39px',
-                                width: '100%',
-                                marginRight: '5px',
-                                background: 'white',
-                                borderRadius: '0px',
-                                '& ::placeholder': {
-                                    fontSize: '.9rem'
-                                }
-                            }}
-                            value={profInput}
-                            placeholder="Enter an ocupation"
-                            onChange={onProfChange}
-                            fullWidth
-                        />
-                        <Button
-                            startIcon={<AddIcon />}
-                            disableElevation
-                            variant="contained"
-                            sx={{ height: '39px', textTransform: 'capitalize' }}
-                            onClick={onProfAdd}
-                        >
-                            Add
-                        </Button>
-                    </Box>
-                </Grid> */}
-
                 <Grid mt="10px" xs={12} item>
                     <Typography variant="caption">Present Employment Status*</Typography>
                     <EmploymentStatus helpertext="Present Employment Status*" name="employment_status" />
@@ -383,50 +265,6 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                     {/* <LimitTags /> */}
                     <MultipleSelect num={0} data={languages} label="Select Languages" name="languages" />
                 </Grid>
-                {/* <Grid marginTop="10px" xs={12} item>
-                    <Typography sx={{ ...theme.typography.heading }}>Languages Spoken</Typography>
-                </Grid>
-                {tagField.value.length > 0 && (
-                    <Grid xs={12} item>
-                        <Box display="flex" gap="10px" flexWrap="wrap">
-                            {tagField.value.map((item, index) => (
-                                <Tag index={index} editTag={editTag} deleteTag={deleteTag} text={item} />
-                            ))}
-                        </Box>
-                    </Grid>
-                )}
-                <Grid xs={12} md={6} item>
-                    <Box alignItems="center" display="flex">
-                        <OutlinedInput
-                            sx={{
-                                height: '39px',
-                                width: '100%',
-                                marginRight: '5px',
-                                background: 'white',
-                                borderRadius: '0px',
-                                '& ::placeholder': {
-                                    fontSize: '.9rem'
-                                }
-                            }}
-                            value={input}
-                            placeholder="Enter a Language"
-                            onChange={onChange}
-                            fullWidth
-                        />
-                        <Button
-                            startIcon={<AddIcon />}
-                            disableElevation
-                            variant="contained"
-                            sx={{ height: '39px', textTransform: 'capitalize' }}
-                            onClick={onAdd}
-                        >
-                            Add
-                        </Button>
-                    </Box>
-                    <Typography style={{ color: '#f44336' }} variant="caption">
-                        {tagField.error}
-                    </Typography>
-                </Grid> */}
 
                 {/* disabilities */}
                 <Grid marginTop="0px" xs={12} item>

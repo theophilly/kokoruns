@@ -11,7 +11,6 @@ import { FaTimes } from 'react-icons/fa';
 
 // import Notification from '../layout/MainLayout/Header/NotificationSection.js';
 // import Profile from '../layout/MainLayout/Header/ProfileSection.js';
-// import Sidedrawer from './Sidedrawer.js';
 // import CartSection from '../layout/MainLayout/Header/CartSection.js';
 
 const headersData = () => [
@@ -56,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
             padding: ' 15px calc((100vw - 1300px) / 2) !important',
             '@media (max-width: 900px)': {
                 paddingLeft: 0
+            },
+            '@media (max-width: 1100px)': {
+                paddingLeft: 0,
+                padding: ' 15px calc((100vw - 1300px) / 2) 5px !important'
             }
         };
     },

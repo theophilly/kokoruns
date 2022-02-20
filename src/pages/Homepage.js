@@ -2,7 +2,6 @@ import React from 'react';
 
 // material-ui
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 // project imports
 import Leaderboard from '../components/homepage/Leaderboard';

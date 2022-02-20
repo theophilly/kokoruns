@@ -10,8 +10,7 @@ export default function Leaderboard() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 background: '#faf9f9',
-                // background: theme.palette.background1,
-                //  border: '1px solid red',
+
                 '@media (max-width: 1075px)': {
                     height: '60.3vh !important',
                     marginBottom: '100px !important'
@@ -31,6 +30,12 @@ export default function Leaderboard() {
                         '@media (max-width: 1075px)': {
                             height: '90vh',
                             width: '100vw'
+                        },
+                        '@media (max-width: 400px)': {
+                            objectPosition: '45% 100px',
+                            // height: '100vh',
+                            //  maxWidth: '100%',
+                            height: '100vh'
                         }
                     }}
                     src="hero.png"

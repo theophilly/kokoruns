@@ -39,9 +39,6 @@ const Textfield = ({ name, helpertext, startIcon, ...otherProps }) => {
                         </InputAdornment>
                     )
                 }
-                // InputProps={{
-                //     startAdornment: <InputAdornment position="start">`# `</InputAdornment>
-                // }}
                 sx={{ height: '39px', width: '100%', marginTop: '5px', background: 'white', borderRadius: '0px' }}
                 {...configTextfield}
             />

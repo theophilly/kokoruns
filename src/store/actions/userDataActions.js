@@ -2,33 +2,6 @@ import * as actionType from '../actionTypes/userDataActionTypes';
 import api from '../../helpers/api.js';
 import { fetchUserDetails } from './authActions';
 
-// export const fecthEducations = (user) => {
-//     return async (dispatch) => {
-//         dispatch({ type: actionType.ON_FETCH_BEGIN });
-
-//         await api
-//             .fetchEducations()
-//             .then((res) => {
-//                 console.log(res.data);
-//                 dispatch({
-//                     type: actionType.ON_EDUCATION_FETCH_SUCCESS,
-//                     payload: {
-//                         ...res.data
-//                     }
-//                 });
-//             })
-//             .catch((error) => {
-//                 // dispatch({
-//                 //     type: actionType.ON_EDUCATION_FETCH_ERROR,
-//                 //     payload: {
-//                 //         error: error.response.data.error
-//                 //     }
-//                 // });
-//                 console.log(error.response);
-//             });
-//     };
-// };
-
 // education
 export const addEducation = (education) => {
     return async (dispatch) => {

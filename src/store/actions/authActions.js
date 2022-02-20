@@ -140,8 +140,6 @@ export const updateUserProfile = (profile) => {
             .setUpProfile(profile)
             .then(async (res) => {
                 console.log(res.data);
-                //fetch user details
-                //   dispatch(fetchUserDetails());
 
                 //fetch user details
                 await api
@@ -164,13 +162,6 @@ export const updateUserProfile = (profile) => {
                         });
                         console.log(error.response.data.error);
                     });
-                // //turn active to 1
-                // dispatch({
-                //     type: actionType.USER_UPDATE,
-                //     payload: {
-                //         ...res.data
-                //     }
-                // });
             })
             .catch((error) => {
                 // dispatch({

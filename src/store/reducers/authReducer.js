@@ -29,7 +29,6 @@ export default function authReducer(state = initialState, action) {
         return {
             ...state,
             loading: false,
-            // user: action.payload.user,
             token: action.payload.access_token,
             active: action.payload.active,
             error: ''

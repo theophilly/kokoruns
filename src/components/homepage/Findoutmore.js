@@ -1,7 +1,9 @@
 import React from 'react';
-import { Box, Typography, Button, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
+
+// material-ui
+import { Box, Typography, Button, useTheme } from '@mui/material';
 
 export default function Findoutmore(props) {
     const theme = useTheme();
@@ -10,7 +12,6 @@ export default function Findoutmore(props) {
         <Box
             sx={{
                 height: props.heigth ? `${props.heigth}` : '90vh',
-                // border: '1px solid red',
                 background: `url(${props.bg})`,
                 backgroundRepeat: 'no-repeat',
                 objectFit: 'contain',

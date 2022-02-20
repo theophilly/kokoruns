@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextareaAutosize, Box, Typography, OutlinedInput, useTheme } from '@mui/material';
+import { Box, Typography, OutlinedInput, useTheme } from '@mui/material';
 import { useField } from 'formik';
 
 const Textarea = ({ num_of_rows, name, helpertext, ...otherProps }) => {

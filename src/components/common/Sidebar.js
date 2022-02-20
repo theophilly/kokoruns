@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Toolbar, Avatar, Button, List, Box, Typography } from '@mui/material';
+import { Avatar, Button, List, Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/system';
 
+//icons
 import { BiHomeCircle } from 'react-icons/bi';
 import { IoFastFood } from 'react-icons/io5';
-import { MdContacts } from 'react-icons/md';
 import { AiOutlineUser } from 'react-icons/ai';
 
 // links for the side nav

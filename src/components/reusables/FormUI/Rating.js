@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useField, useFormikContext } from 'formik';
-import { Box, Typography, Divider } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 export default function Rating({ name, helperText, ...otherProps }) {
     const { setFieldValue } = useFormikContext();
