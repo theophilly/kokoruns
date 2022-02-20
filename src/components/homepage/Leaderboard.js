@@ -17,36 +17,43 @@ export default function Leaderboard() {
                 }
             }}
         >
-            <Box position="relative">
-                <Box
-                    component="img"
-                    alt="leaderboard"
-                    sx={{
-                        width: '1150px',
-                        height: '500px',
-                        objectFit: 'cover',
-                        objectPosition: '10% 40%',
-                        position: 'relative',
-                        '@media (max-width: 1075px)': {
-                            height: '90vh',
-                            width: '100vw'
-                        },
-                        '@media (max-width: 400px)': {
-                            objectPosition: '45% 100px',
-                            // height: '100vh',
-                            //  maxWidth: '100%',
-                            height: '100vh'
-                        }
-                    }}
-                    src="hero.png"
-                />
+            <Box
+                sx={{
+                    width: '1150px',
+                    height: '500px',
+                    objectFit: 'cover',
+                    backgroundPosition: '10% 40%',
+                    position: 'relative',
+                    backgroundRepeat: 'no-repeat',
+                    background: "url('hero.png')",
+                    '&::before': {
+                        content: '""',
+                        color: 'red',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        background: 'rgba(0,0,0,0.2)'
+                    },
+                    '@media (max-width: 1075px)': {
+                        height: '90vh',
+                        width: '100vw'
+                    },
+                    '@media (max-width: 400px)': {
+                        backgroundPosition: '45% 100px',
+                        height: '100vh',
+                        backgroundSize: '1000px'
+                    }
+                }}
+            >
                 <Box
                     sx={{
                         top: 150,
                         left: 30,
                         color: 'white',
                         position: 'absolute',
-                        // border: '1px solid red',
+                        height: '100%',
                         '@media (max-width: 400px)': {
                             top: '45vh !important',
                             left: 20
