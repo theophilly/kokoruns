@@ -177,7 +177,15 @@ const Profile = () => {
                                         onClick={handleClickOpen}
                                         alt="Remy Sharp"
                                         src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
-                                        sx={{ cursor: 'pointer', width: 150, height: 150, position: 'absolute', zIndex: 4, top: -60 }}
+                                        sx={{
+                                            cursor: 'pointer',
+                                            width: 150,
+                                            height: 150,
+                                            position: 'absolute',
+                                            zIndex: 4,
+                                            top: -60,
+                                            left: 60
+                                        }}
                                     />
                                 </Box>
                                 <Box mt="78px">

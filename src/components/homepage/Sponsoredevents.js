@@ -1,5 +1,8 @@
 import React from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, Typography, useTheme, Grid, Button, CircularProgress } from '@mui/material';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import Textfield from '../reusables/FormUI/Textfield';
 
 const Single = () => {
     const theme = useTheme();
@@ -106,6 +109,7 @@ export default function Sponsoredevents() {
                     height: '200px',
                     flexDirection: 'column',
                     width: '100%',
+                    //  border: '1px solid red',
                     '@media (max-width: 500px)': {
                         marginTop: '20px',
                         height: 'auto',
@@ -121,7 +125,7 @@ export default function Sponsoredevents() {
                         '@media (max-width: 500px)': {
                             lineHeight: '2.2rem',
                             textAlign: 'center',
-                            marginBottom: '15px'
+                            marginBottom: '0px'
                         }
                     }}
                     component="h1"
@@ -137,7 +141,7 @@ export default function Sponsoredevents() {
                     Register for career-focused sponsored events here.
                 </Typography>
             </Box>
-            <Box
+            {/* <Box
                 sx={{
                     display: 'flex',
                     flexWrap: 'wrap',
@@ -148,12 +152,134 @@ export default function Sponsoredevents() {
                     }
                 }}
             >
+
+
+                
                 <Single />
                 <Single />
                 <Single />
                 <Single />
                 <Single />
-                <Single />
+                <Single /> 
+            </Box> */}
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    background: 'white',
+                    //   padding: '20px 10px',
+                    //    justifyContent: 'center',
+                    //   border: '1px solid red',
+                    width: '70%',
+                    borderRadius: '3px',
+                    padding: '20px 0 50px',
+                    '@media (max-width: 750px)': {
+                        gap: '10px'
+                    },
+                    '@media (max-width: 449px)': {
+                        width: '100%'
+                    }
+                }}
+            >
+                <Typography
+                    sx={{
+                        ...theme.typography.title3,
+                        textAlign: 'center',
+                        mb: '20px',
+                        '@media (max-width: 449px)': {
+                            ...theme.typography.heading,
+                            fontWeight: '700'
+                        }
+                    }}
+                >
+                    No Events are available for now
+                </Typography>
+                <Typography
+                    sx={{
+                        textAlign: 'center',
+                        fontSize: '0.9rem',
+                        '@media (max-width: 449px)': {
+                            padding: '0 15px'
+                        }
+                    }}
+                >
+                    stay up to date on sponsored events by subscribing to our newsletter. You get notified of events as as they come up
+                </Typography>
+                <Box marginTop="20px">
+                    <Box>
+                        <Formik
+                            initialValues={{
+                                email: ''
+                            }}
+                            onSubmit={async (values) => {
+                                console.log(values);
+                            }}
+                            validationSchema={Yup.object().shape({
+                                email: Yup.string().email('Invalid email format').required('Required')
+                            })}
+                        >
+                            {({ isSubmitting }) => (
+                                <Form autoComplete="off">
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            gap: '10px',
+                                            alignItems: 'flex-end',
+                                            //  border: '1px solid red',
+                                            '@media (max-width: 449px)': {
+                                                flexDirection: 'column',
+                                                padding: '0 15px'
+                                            }
+                                        }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                width: '60%',
+                                                '@media (max-width: 449px)': {
+                                                    width: '100%'
+                                                }
+                                            }}
+                                        >
+                                            <Box>
+                                                <Textfield subscribe={true} name="email" helpertext="Email Address" />
+                                            </Box>
+                                        </Box>
+                                        <Box
+                                            sx={{
+                                                width: '20%',
+                                                '@media (max-width: 449px)': {
+                                                    width: '100%'
+                                                }
+                                            }}
+                                        >
+                                            <Box>
+                                                <Button
+                                                    startIcon={isSubmitting ? <CircularProgress color="secondary" size="1rem" /> : null}
+                                                    sx={{
+                                                        width: '100%',
+                                                        marginTop: '20px',
+                                                        letterSpacing: '1px',
+
+                                                        color: 'white',
+                                                        '& :hover': {
+                                                            color: 'black'
+                                                        }
+                                                    }}
+                                                    disableElevation
+                                                    variant="contained"
+                                                    type="submit"
+                                                >
+                                                    Subscribe
+                                                </Button>
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                </Form>
+                            )}
+                        </Formik>
+                    </Box>
+                </Box>
             </Box>
         </Box>
     );

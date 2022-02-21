@@ -21,8 +21,9 @@ export default function Leaderboard() {
                 sx={{
                     width: '1150px',
                     height: '500px',
-                    objectFit: 'cover',
-                    backgroundPosition: '10% 40%',
+                    objectFit: 'contain',
+                    backgroundSize: '100px',
+                    //  backgroundPosition: '0% 40%',
                     position: 'relative',
                     backgroundRepeat: 'no-repeat',
                     background: "url('hero.png')",
@@ -79,7 +80,7 @@ export default function Leaderboard() {
                     </Typography>
                     <Typography>
                         We’ve got you. Let’s brand you. <br />
-                        Kokoma has got you the best of services. sign in or register to <br /> access them.
+                        Kokoruns has got you the best of services. sign in or register to <br /> access them.
                     </Typography>
                     <Box marginTop="30px">
                         <Button sx={{ borderRadius: '0px', marginRight: '30px', textTransform: 'capitalize' }} variant="contained">

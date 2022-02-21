@@ -13,7 +13,7 @@ const NairaIcon = () => {
     );
 };
 
-const Textfield = ({ name, helpertext, startIcon, ...otherProps }) => {
+const Textfield = ({ name, helpertext, subscribe, startIcon, ...otherProps }) => {
     const [field, mata] = useField(name);
 
     const configTextfield = {
@@ -42,9 +42,11 @@ const Textfield = ({ name, helpertext, startIcon, ...otherProps }) => {
                 sx={{ height: '39px', width: '100%', marginTop: '5px', background: 'white', borderRadius: '0px' }}
                 {...configTextfield}
             />
-            <Typography style={{ color: '#f44336' }} variant="caption">
-                {configTextfield.helperText}
-            </Typography>
+            {!subscribe && (
+                <Typography style={{ color: '#f44336' }} variant="caption">
+                    {configTextfield.helperText}
+                </Typography>
+            )}
         </Box>
     );
 };

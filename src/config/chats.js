@@ -17,7 +17,7 @@ const chats = [
     },
     {
         name: 'Umar Abacha',
-        src: './team.jpg',
+        src: './student.png',
         time: '9:20',
         active: true
     },
@@ -51,7 +51,7 @@ const chats = [
 
     {
         name: 'Umar Abacha',
-        src: './team.jpg',
+        src: './student.png',
         time: '9:20'
     },
 
