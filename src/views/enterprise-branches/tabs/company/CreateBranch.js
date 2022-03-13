@@ -26,7 +26,7 @@ export default function CreateBranch({ onSubmit }) {
 
     const handleClose = () => {
         setOpen(false);
-        navigate.replace('/branches');
+        navigate('/branches');
 
         //  await navigate.replace('/branches');
         //  window.location.reload();
