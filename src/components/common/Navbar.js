@@ -41,6 +41,11 @@ const headersData = () => [
     {
         label: 'Sign Out',
         variant: 'outlined'
+    },
+    {
+        label: 'Dashboard',
+        variant: 'outlined',
+        href: '/profile'
     }
 ];
 
@@ -98,6 +103,17 @@ const useStyles = makeStyles((theme) => ({
             background: 'rgb(6, 101, 178)'
         }
     },
+    signupButtonSide: {
+        fontWeight: 'bold',
+        marginLeft: '10px',
+        width: '250px',
+        borderRadius: '5px',
+        padding: '6px 80px',
+        backgroundColor: 'white',
+        textTransform: 'capitalize',
+        color: 'rgb(217, 38, 39)',
+        border: '1px solid rgb(217, 38, 39)'
+    },
     signupButton2: {
         borderRadius: '5px',
         textTransform: 'capitalize',
@@ -115,6 +131,15 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: '20px',
         borderRadius: '5px',
         padding: '6px 60px',
+        backgroundColor: 'white',
+        textTransform: 'capitalize',
+        border: '1px solid #0991FF'
+    },
+    loginButtonSide: {
+        fontWeight: 'bold',
+        marginLeft: '10px',
+        borderRadius: '5px',
+        width: '250px',
         backgroundColor: 'white',
         textTransform: 'capitalize',
         border: '1px solid #0991FF'
@@ -176,7 +201,9 @@ export default function Navbar() {
         signOutButton,
         signupButton2,
         loginButton2,
-        signOutButton2
+        signOutButton2,
+        signupButtonSide,
+        loginButtonSide
     } = useStyles({ theme });
 
     const [state, setState] = useState({
@@ -283,6 +310,11 @@ export default function Navbar() {
                                     {
                                         label: 'Sign Out',
                                         variant: 'outlined'
+                                    },
+                                    {
+                                        label: 'Dashboard',
+                                        variant: 'outlined',
+                                        href: '/profile'
                                     }
                                 ].map(({ label, href, variant }, index) => {
                                     if (['Register', 'Sign In'].includes(label)) {
@@ -306,21 +338,46 @@ export default function Navbar() {
                                                 {label}
                                             </Button>
                                         );
-                                    } else if (['Sign Out'].includes(label)) {
+                                    } else if (['Sign Out', 'Dashboard'].includes(label)) {
                                         return (
+                                            // <Button
+                                            //     onClick={() => {
+                                            //         logoutHandler();
+                                            //         handleDrawerClose();
+                                            //     }}
+                                            //     style={{ display: !token && 'none' }}
+                                            //     key={index}
+                                            //     {...{
+                                            //         key: label,
+                                            //         color: 'primary',
+                                            //         disableElevation: true,
+                                            //         variant: variant,
+                                            //         className: `${menuButton} ${signOutButton2}`
+                                            //     }}
+                                            // >
+                                            //     {label}
+                                            // </Button>
                                             <Button
-                                                onClick={() => {
-                                                    logoutHandler();
-                                                    handleDrawerClose();
-                                                }}
-                                                style={{ display: !token && 'none' }}
+                                                onClick={
+                                                    !href
+                                                        ? () => {
+                                                              handleDrawerClose();
+                                                              logoutHandler();
+                                                          }
+                                                        : null
+                                                }
+                                                style={{ display: !token && 'none', marginTop: '10px' }}
                                                 key={index}
                                                 {...{
                                                     key: label,
                                                     color: 'primary',
+                                                    to: href ? href : '/',
+                                                    component: RouterLink,
                                                     disableElevation: true,
                                                     variant: variant,
-                                                    className: `${menuButton} ${signOutButton2}`
+                                                    className: `${label === 'Sign Out' ? signupButtonSide : ''} ${
+                                                        label === 'Dashboard' ? loginButtonSide : ''
+                                                    }`
                                                 }}
                                             >
                                                 {label}
@@ -404,18 +461,22 @@ export default function Navbar() {
                         {label}
                     </Button>
                 );
-            } else if (['Sign Out'].includes(label)) {
+            } else if (['Sign Out', 'Dashboard'].includes(label, href)) {
                 return (
                     <Button
-                        onClick={logoutHandler}
+                        onClick={!href ? logoutHandler : null}
                         style={{ display: !token && 'none' }}
                         key={index}
                         {...{
                             key: label,
                             color: 'primary',
+                            to: href ? href : '/',
+                            component: RouterLink,
                             disableElevation: true,
                             variant: variant,
-                            className: `${menuButton} ${signOutButton}`
+                            className: `${menuButton} ${label === 'Sign Out' ? signOutButton : ''} ${
+                                label === 'Dashboard' ? loginButton : ''
+                            }`
                         }}
                     >
                         {label}

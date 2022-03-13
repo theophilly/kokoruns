@@ -7,7 +7,8 @@ import {
     GalleryIcon,
     AdvertiseIcon,
     WalletIcon,
-    SettingsIcon
+    SettingsIcon,
+    ReturnIcon
 } from '../../assets/images/icons/svg_icons';
 
 // constant
@@ -78,6 +79,14 @@ const enterprise = {
             type: 'item',
             url: '/enterprise-settings',
             icon: SettingsIcon,
+            breadcrumbs: false
+        },
+        {
+            id: 'return',
+            title: 'Return',
+            type: 'item',
+            url: '/profile',
+            icon: ReturnIcon,
             breadcrumbs: false
         }
         // {
