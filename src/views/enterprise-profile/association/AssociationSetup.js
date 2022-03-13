@@ -9,7 +9,6 @@ import { Box, Grid, CircularProgress, Button, useTheme, DialogContent, Dialog } 
 
 // project imports
 import EmptyPages from '../../../components/common/EmptyPages';
-import SetupSchool from '../../../components/reusables/forms/SetupSchool';
 import Setupprofileimage from '../../../components/reusables/forms/Setupprofileimage';
 import sleep from '../../../helpers/sleep';
 import api from '../../../helpers/api';
@@ -180,11 +179,7 @@ const AssociationSetup = () => {
             </FormikStepper>
             <Dialog open={open} onClose={handleClose} aria-labelledby="responsive-dialog-title">
                 <DialogContent>
-                    <Success
-                        text="Go to EVENTS"
-                        content="You have successfully created an event. You can go to your events now."
-                        to="/my-events"
-                    ></Success>
+                    <Success text="See Page" content="You have successfully created your page. View page now" to="/enterprise"></Success>
                 </DialogContent>
             </Dialog>
         </Box>
