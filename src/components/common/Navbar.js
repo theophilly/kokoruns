@@ -46,7 +46,6 @@ const headersData = () => [
 
 const useStyles = makeStyles((theme) => ({
     header: (props) => {
-        console.log(props.theme.palette);
         return {
             background: '#faf9f9 !important',
             position: 'static',
@@ -163,7 +162,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
     const theme = useTheme();
-    const { authenticated, active, token } = useSelector((state) => state.authReducer);
+    const { authenticated, token } = useSelector((state) => state.authReducer);
     const dispatch = useDispatch();
 
     const {

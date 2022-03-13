@@ -7,10 +7,8 @@ import {
     useTheme,
     useMediaQuery,
     Dialog,
-    DialogTitle,
     DialogActions,
     DialogContent,
-    DialogContentText,
     CircularProgress
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,10 +17,8 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import Textfield from '../../../components/reusables/FormUI/Textfield';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import resume from '../../../utils/resume';
 import CloseIcon from '@mui/icons-material/Close';
 import SubCard from '../../../ui-component/cards/SubCard';
-import pictures from '../../../utils/pictures';
 import { BiEditAlt } from 'react-icons/bi';
 import ResumeUpload from '../../../components/reusables/forms/ResumeUpload';
 import {
@@ -71,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Tag = ({ link_address, link_title, setEdit, value = {}, clicked }) => {
     const theme = useTheme();
-    console.log(link_address);
+
     return (
         <Box
             component="a"
@@ -104,7 +100,7 @@ const Tag = ({ link_address, link_title, setEdit, value = {}, clicked }) => {
     );
 };
 
-const Picturebox = ({ title, path, year, setEdit, value = {}, clicked }) => {
+export const Picturebox = ({ title, path, year, setEdit, value = {}, clicked }) => {
     const { profile_cover_img } = useStyles();
     const theme = useTheme();
 
@@ -167,9 +163,9 @@ const PortfolioTab = () => {
     const { root, lower_button } = useStyles();
     const theme = useTheme();
     const filesharhe_ref = useRef();
+    const matches = useMediaQuery('(min-width:900px)');
     const dispatch = useDispatch();
     const { bio, portfolio, social_links } = useSelector((state) => state.authReducer.user);
-    const matches = useMediaQuery('(min-width:900px)');
     const [pictureStep, setPictureStep] = React.useState(0);
     const [socialStep, setSocialStep] = React.useState(0);
     const [edit, setEdit] = React.useState({ show: false });
@@ -326,8 +322,6 @@ const PortfolioTab = () => {
                                             portfolio_year: edit.date
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
-
                                             await dispatch(
                                                 updatePortfolio(edit.portfolio_id, {
                                                     portfolio_title: values.portfolio_title,
@@ -465,10 +459,9 @@ const PortfolioTab = () => {
                                             portfolio_image: ''
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
                                             var formData = rebuildData(values, filesharhe_ref.current.files[0]);
                                             await dispatch(addPortfolio(formData));
-                                            //   console.log(filesharhe_ref.current.files[0]);
+
                                             setPictureStep((step) => step + 1);
                                         }}
                                         validationSchema={Yup.object().shape({
@@ -581,8 +574,6 @@ const PortfolioTab = () => {
                                             social_link: edit.link_address
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
-
                                             await dispatch(
                                                 updateSocial(edit.online_link_id, {
                                                     link_title: values.social,
@@ -730,8 +721,6 @@ const PortfolioTab = () => {
                                             social_link: ''
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
-
                                             await dispatch(
                                                 addSocial({
                                                     link_title: values.social,

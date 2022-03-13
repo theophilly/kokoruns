@@ -18,7 +18,7 @@ const middleware = [thunk];
 const persistConfig = {
     key: 'root',
     storage: storage,
-    whitelist: ['authReducer']
+    whitelist: ['authReducer', 'userDataReducer']
 };
 
 const PersistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,33 +1,12 @@
 import React, { useState } from 'react';
-import {
-    Box,
-    Grid,
-    Avatar,
-    Typography,
-    useTheme,
-    Button,
-    Select,
-    FormControl,
-    OutlinedInput,
-    MenuItem,
-    InputBase,
-    Dialog,
-    DialogTitle,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    Paper
-} from '@mui/material';
+import { Box, Grid, Avatar, Typography, useTheme, Button, InputBase, Dialog, DialogContent } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { BiEditAlt } from 'react-icons/bi';
 import LogoutIcon from '@mui/icons-material/Logout';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
-import MainCard from '../../ui-component/cards/MainCard';
 import SearchIcon from '@mui/icons-material/Search';
-import AddIcon from '@mui/icons-material/Add';
 
-import { Link } from 'react-router-dom';
 import SubCard from '../../ui-component/cards/SubCard';
 import Warning from '../../ui-component/modals/Warning';
 import Success from '../../ui-component/modals/Success';
@@ -35,19 +14,16 @@ import Teammember from '../teams/Teammember';
 
 const Yourevents = () => {
     const theme = useTheme();
-    const matchDownMd = useMediaQuery('(min-width:600px)');
+    // const matchDownMd = useMediaQuery('(min-width:600px)');
 
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-    const [open, setOpen] = useState(false);
+
     const [rejectOpen, setRejectOpen] = useState(false);
     const [rejectStep, setRejectStep] = useState(0);
 
     const [shareOpen, setShareOpen] = useState(false);
     const [shareStep, setShareStep] = useState(0);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
     const handleRejectOpen = () => {
         setRejectOpen(true);
     };
@@ -55,9 +31,6 @@ const Yourevents = () => {
         setShareOpen(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
     const handleRejectClose = () => {
         setRejectOpen(false);
     };

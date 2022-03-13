@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const rebuildData = (formvalues, file) => {
-    console.log(formvalues.other_professions, 'other');
     let formData = new FormData();
     formData.append('first_name', formvalues.firstName);
     formData.append('last_name', formvalues.lastName);
@@ -68,7 +67,7 @@ const initiaValforLanandPro = (val) => {
     for (var i = 0; i < valArray.length; i++) {
         returnedArray.push({ name: valArray[i] });
     }
-    console.log(returnedArray, 'valarray');
+
     return returnedArray;
 };
 
@@ -87,7 +86,6 @@ const Profilesetup = () => {
     const user = useSelector((state) => state.authReducer.user);
     const dispatch = useDispatch();
 
-    console.log(user);
     return (
         <Box className={root}>
             {/* upper blue box */}
@@ -217,6 +215,7 @@ const Profilesetup = () => {
                             : ''
                     })}
                     ref={filesharhe_ref}
+                    name="file"
                 />
             </FormikStepper>
         </Box>
@@ -242,8 +241,6 @@ export function FormikStepper({ children, from, ...props }) {
             {...props}
             validationSchema={currentChild.props.validationSchema}
             onSubmit={async (values, helpers) => {
-                console.log(values);
-
                 //new addition
                 if (from) {
                     await props.onSubmit(values);

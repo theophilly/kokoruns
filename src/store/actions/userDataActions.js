@@ -18,6 +18,28 @@ export const addEducation = (education) => {
     };
 };
 
+// education
+export const addEnterpriseEvents = ({ schools, companies, associations }) => {
+    return async (dispatch) => {
+        dispatch({ type: actionType.ON_FETCH_BEGIN });
+
+        const [schoolss, companiess, associationss] = await Promise.all([
+            api.fetchSchoolEvents(schools[0]?.school_id).catch((error) => console.log(error)),
+            api.fetchCompanyEvents(companies[0]?.company_id).catch((error) => console.log(error)),
+            api.fetchAssociationEvents(associations[0]?.association_id).catch((error) => console.log(error))
+        ]);
+
+        dispatch({
+            type: actionType.ADD_ENTERPRISE_EVENTS,
+            payload: {
+                companyevents: companiess?.data?.companyevents,
+                associationevents: associationss?.data?.associationevents,
+                schoolevents: schoolss?.data?.schoolevents
+            }
+        });
+    };
+};
+
 export const updateEducation = (id, education) => {
     return async (dispatch) => {
         dispatch({ type: actionType.ON_FETCH_BEGIN });

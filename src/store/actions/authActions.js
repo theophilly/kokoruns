@@ -3,13 +3,11 @@ import api from '../../helpers/api.js';
 
 export const login = (user) => {
     return async (dispatch) => {
-        console.log(user);
         dispatch({ type: actionType.LOGIN_BEGIN });
 
         await api
             .signIn({ email: user.loginEmail, password: user.loginPassword })
             .then(async (res) => {
-                console.log(res.data);
                 await dispatch({
                     type: actionType.ON_LOGIN_SUCCESS,
                     payload: {
@@ -18,7 +16,6 @@ export const login = (user) => {
                 });
 
                 if (res.data.active === 1) {
-                    console.log(res.data.user_id);
                     await api
                         .fetchUserDetails(res.data.user_id)
                         .then(async (res) => {
@@ -30,7 +27,7 @@ export const login = (user) => {
                             });
                         })
                         .catch((error) => {
-                            console.log(error);
+                            // console.log(error);
                         });
                 }
             })
@@ -111,7 +108,6 @@ export const fetchUserDetails = () => {
         await api
             .fetchUserDetails(state.authReducer.user.bio.user_id)
             .then((res) => {
-                console.log(res.data);
                 dispatch({
                     type: actionType.ADD_USER_DETAILS,
                     payload: {
@@ -139,13 +135,10 @@ export const updateUserProfile = (profile) => {
         await api
             .setUpProfile(profile)
             .then(async (res) => {
-                console.log(res.data);
-
                 //fetch user details
                 await api
                     .fetchUserDetails(state.authReducer.user_id || state.authReducer.user.bio.user_id)
                     .then((res) => {
-                        console.log(res.data);
                         dispatch({
                             type: actionType.ADD_USER_DETAILS,
                             payload: {

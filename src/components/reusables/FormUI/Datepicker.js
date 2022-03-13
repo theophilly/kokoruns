@@ -74,9 +74,7 @@ const Datepicker = ({ name, helpertext, ...otherProps }) => {
 
     return (
         <Box>
-            <Typography style={{ display: 'block' }} variant="caption">
-                {helpertext}
-            </Typography>
+            <Typography variant="caption">{helpertext}</Typography>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <MobileDatePicker
                     {...configTextfield}

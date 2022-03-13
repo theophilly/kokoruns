@@ -4,8 +4,8 @@ import { useField } from 'formik';
 // material-ui
 import { Box, Grid, Typography, Button, useTheme } from '@mui/material';
 
-const Setupprofileimage = React.forwardRef((props, ref) => {
-    const [field, mata] = useField('file');
+const Setupprofileimage = React.forwardRef(({ name }, ref) => {
+    const [field, mata] = useField(name);
     const theme = useTheme();
 
     const configTextfield = {

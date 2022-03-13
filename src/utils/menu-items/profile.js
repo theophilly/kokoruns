@@ -80,7 +80,7 @@ const profile = {
             id: 'your-pages',
             title: 'Your Pages',
             type: 'item',
-            url: '/profile',
+            url: '/enterprise',
             icon: icons.IconPalette,
             breadcrumbs: false
         },

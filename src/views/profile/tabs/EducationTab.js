@@ -228,7 +228,6 @@ const EducationTab = () => {
     };
 
     const delEducation = async () => {
-        console.log(edit.education_id);
         await setLoad(true);
         await dispatch(
             deleteEducation({
@@ -240,7 +239,6 @@ const EducationTab = () => {
     };
 
     const delCertification = async () => {
-        console.log(edit.certification_id);
         await setLoad(true);
         await dispatch(
             deleteCertification({
@@ -339,8 +337,6 @@ const EducationTab = () => {
                                             is_current: edit?.is_current
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
-
                                             if (values.is_current) {
                                                 await dispatch(
                                                     updateEducation(edit.education_id, {
@@ -711,8 +707,6 @@ const EducationTab = () => {
                                             is_current: edit?.is_current
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
-
                                             if (values.is_current) {
                                                 await dispatch(
                                                     updateCertification(edit.certification_id, {
@@ -904,8 +898,6 @@ const EducationTab = () => {
                                             is_current: null
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
-
                                             if (values.is_current) {
                                                 await dispatch(
                                                     addCertification({

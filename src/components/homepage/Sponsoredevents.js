@@ -212,7 +212,7 @@ export default function Sponsoredevents() {
                                 email: ''
                             }}
                             onSubmit={async (values) => {
-                                console.log(values);
+                                //  console.log(values);
                             }}
                             validationSchema={Yup.object().shape({
                                 email: Yup.string().email('Invalid email format').required('Required')

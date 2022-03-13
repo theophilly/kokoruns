@@ -1,9 +1,13 @@
 import profile from './profile';
+import enterprise from './enterprise';
 
 // Menu Items
 
-const menuItems = {
+export const menuItems = {
     items: [profile]
 };
+export const menuItems2 = {
+    items: [enterprise]
+};
 
-export default menuItems;
+// export default menuItems;

@@ -1,34 +1,18 @@
 import React from 'react';
-import {
-    Box,
-    Grid,
-    Avatar,
-    Typography,
-    useTheme,
-    Button,
-    Select,
-    FormControl,
-    OutlinedInput,
-    MenuItem,
-    InputBase,
-    Paper
-} from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { Box, Grid, Avatar, Typography, useTheme, Button, InputBase, Paper } from '@mui/material';
 
-import SubCard from '../../ui-component/cards/SubCard';
-import MainCard from '../../ui-component/cards/MainCard';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import Singleevent from './Singleevent';
 
 import { Link } from 'react-router-dom';
 
-const Createteam = () => {
+export const Createteam = ({ text = 'Create Team', to = '/create-event' }) => {
     const theme = useTheme();
     return (
         <Paper
             component={Link}
-            to="/create-event"
+            to={to}
             sx={{
                 ...theme.typography.flex,
                 height: '210px',
@@ -44,20 +28,13 @@ const Createteam = () => {
             <Avatar sx={{ bgcolor: theme.palette.primary.main, height: '60px', width: '60px' }}>
                 <AddIcon fontSize="large" />
             </Avatar>
-            <Typography sx={{ fontWeight: '600', marginTop: '10px' }}>Create Team</Typography>
+            <Typography sx={{ fontWeight: '600', marginTop: '10px' }}> {text} </Typography>
         </Paper>
     );
 };
 
 const Myevents = () => {
     const theme = useTheme();
-    const matchDownMd = useMediaQuery('(min-width:600px)');
-
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
 
     return (
         <Box

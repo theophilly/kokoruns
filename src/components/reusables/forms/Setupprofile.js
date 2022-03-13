@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormikContext } from 'formik';
 
 // material-ui
 import { Box, Grid, Typography, OutlinedInput, Button, useTheme } from '@mui/material';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import AddIcon from '@mui/icons-material/Add';
-import Transi from '../../../ui-component/extended/Transitions';
-import LimitTags from '../../../views/profile/tabs/LimitTags';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 // project imports
@@ -191,7 +189,6 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                 {/* languages spoken */}
 
                 <Grid xs={12} item>
-                    {/* <LimitTags /> */}
                     <MultipleSelect num={2} data={professions} label="Select Other Professions" name="other_professions" />
                 </Grid>
 
@@ -262,7 +259,7 @@ const Setupprofile = ({ setDis_ability, setEmployment }) => {
                     <Typography mb="10px" sx={{ ...theme.typography.heading }}>
                         Languages Spoken
                     </Typography>
-                    {/* <LimitTags /> */}
+
                     <MultipleSelect num={0} data={languages} label="Select Languages" name="languages" />
                 </Grid>
 

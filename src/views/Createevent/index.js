@@ -1,14 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import { Formik, Form, useFormikContext } from 'formik';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Box, Grid, Typography, useTheme, Paper, CircularProgress, Button, useMediaQuery, Dialog, DialogContent } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 // local import
 import Textfield from '../../components/reusables/FormUI/Textfield';
 import SelectWrapper from '../../components/reusables/FormUI/SelectWrapper';
-import maritalStatusData from '../../config/maritalStatusData.json';
 import Teamimage from '../../components/reusables/forms/Teamsimage';
 import Datepicker from '../../components/reusables/FormUI/Datepicker';
 import SelectLGA from '../../components/reusables/FormUI/SelectLGA';
@@ -16,12 +16,15 @@ import stateData from '../../config/stateData.json';
 import Textarea from '../../components/reusables/FormUI/Textarea';
 import EventPrice from '../../components/reusables/FormUI/EventPrice';
 import Success from '../../ui-component/modals/Success';
+import api from '../../helpers/api';
+import dateFormatter from '../../helpers/dateFormatter';
 
-const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
-
-export default function Createevent() {
+export default function Createevent({ onSubmit }) {
+    // const navigate = useNavigate();
+    const { enterprise_ids } = useSelector((state) => state.userDataReducer);
+    console.log(enterprise_ids.schools);
     const matches = useMediaQuery('(min-width:900px)');
-    const navigate = useNavigate();
+    let { pathname } = useLocation();
     const theme = useTheme();
     const filesharhe_ref = useRef();
     const [open, setOpen] = React.useState(false);
@@ -32,6 +35,48 @@ export default function Createevent() {
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const rebuildData = (formvalues, file) => {
+        let formData = new FormData();
+        console.log('file event', file);
+        //     {
+        //         "from": "23323",
+        //         "to" : "swswsw",
+        //         "event_title": "swdw",
+        //         "event_link": "swd",
+        //         "event_description": "swsw",
+        //         "event_type": "swsw",
+        //         "event_industry": "swsw",
+        //         "event_price1": 4343,
+        //         "event_price2": 3242,
+        //         "event_address": "3d3d",
+        //         "event_state": "iduedi",
+        //         "event_lga": "Shswj",
+        //         "event_image1": "ewdueiu",
+        //         "event_logo": "deyvdedgeu"
+        //    }
+
+        formData.append('event_start', dateFormatter(formvalues.start_date));
+        formData.append('event_end', dateFormatter(formvalues.end_date));
+        formData.append('event_title', formvalues.event_title);
+        formData.append('event_link', 'kjhjj');
+        formData.append('event_description', formvalues.event_description);
+        formData.append('event_type', formvalues.event_type);
+        formData.append('event_industry', formvalues.industry);
+        formData.append('event_price1', 122);
+        formData.append('event_price2', 34554);
+        // formData.append('event_price1', formvalues.event_ticket_price);
+        // formData.append('event_price2', formvalues.event_min_ticket);
+        formData.append('event_address', formvalues.address);
+        formData.append('event_state', formvalues.event_state);
+        formData.append('event_lga', formvalues.event_lga);
+
+        if (file) {
+            formData.append('event_image', file);
+            formData.append('event_logo', file);
+        }
+        return formData;
     };
 
     return (
@@ -62,11 +107,19 @@ export default function Createevent() {
                         }}
                         onSubmit={async (values) => {
                             console.log(values);
+                            console.log('idss', enterprise_ids.schools[0].school_id);
+                            let formData = await rebuildData(values, filesharhe_ref.current.files[0]);
+                            if (pathname === '/create-school-event') {
+                                await api.createSchoolEvents(enterprise_ids.schools[0].school_id, formData);
+                            } else if (pathname === '/create-assocition-event') {
+                            } else if (pathname === '/create-company-event') {
+                                await api.createCompanyEvents(enterprise_ids.companies[0].company_id, formData);
+                            }
                             handleClickOpen();
                             // await dispatch(login(values));
                             // if (!window.store.getState().authReducer.authenticated) {
                             //   await setClickData({
-                            //     type: 'error',
+                            //     type: 'error',s
                             //     content: window.store.getState().authReducer.error,
                             //   });
                             //   showToast();
@@ -140,7 +193,7 @@ export default function Createevent() {
                                     <Grid sx={{ paddingLeft: matches ? '40px' : '0px', marginTop: '10px' }} item xs={12} md={6}>
                                         <Textfield name="address" helpertext="Address" />
                                     </Grid>
-
+                                    {/* 
                                     <Grid
                                         sx={{
                                             paddingRight: '40px',
@@ -159,7 +212,7 @@ export default function Createevent() {
 
                                     <Grid sx={{ paddingLeft: matches ? '40px' : '0px', marginTop: '10px' }} item xs={12} md={6}>
                                         <SelectWrapper name="team_policy" helpertext="Team Policy" options={maritalStatusData} />
-                                    </Grid>
+                                    </Grid> */}
 
                                     {/* preferred job state and LGA */}
                                     <Grid
@@ -234,7 +287,7 @@ export default function Createevent() {
                     <Success
                         text="Go to EVENTS"
                         content="You have successfully created an event. You can go to your events now."
-                        to="/my-events"
+                        to="/enterprise"
                     ></Success>
                 </DialogContent>
             </Dialog>
@@ -264,7 +317,7 @@ const PriceWrapper = () => {
                     <Textfield startIcon name="event_ticket_price" helpertext="Ticket Price" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px', mt: '10px' }} item xs={12} md={6}>
-                    <Textfield name="event_min_ticket" helpertext="Min Ticket" />
+                    <Textfield startIcon name="event_min_ticket" helpertext="Min Ticket" />
                 </Grid>
             </>
         );

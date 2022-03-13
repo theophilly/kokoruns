@@ -307,7 +307,6 @@ const ResumeTab = () => {
     };
 
     const delResume = async () => {
-        console.log(edit.experience_id);
         await setLoad(true);
         await dispatch(
             deleteResume({
@@ -442,7 +441,6 @@ const ResumeTab = () => {
                                             is_current: !!edit?.is_current
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
                                             if (values.is_current) {
                                                 await dispatch(
                                                     updateResume(edit.experience_id, {
@@ -642,8 +640,6 @@ const ResumeTab = () => {
                                             is_current: null
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
-
                                             if (values.is_current) {
                                                 await dispatch(
                                                     addResume({
@@ -800,8 +796,6 @@ const ResumeTab = () => {
                                             pro_skill: edit.pro_skill
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
-
                                             await dispatch(
                                                 updatePro(edit.pro_skill_id, {
                                                     ...values
@@ -938,8 +932,6 @@ const ResumeTab = () => {
                                             pro_skill: ''
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
-
                                             await dispatch(addPro(values));
 
                                             setResumeStep((step) => step + 1);
@@ -1043,8 +1035,6 @@ const ResumeTab = () => {
                                             other_skill: edit.other_skill
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
-
                                             await dispatch(
                                                 updateOther(edit.other_skill_id, {
                                                     ...values
@@ -1180,8 +1170,6 @@ const ResumeTab = () => {
                                             other_skill: ''
                                         }}
                                         onSubmit={async (values) => {
-                                            console.log(values);
-
                                             await dispatch(addOther(values));
 
                                             setResumeStep((step) => step + 1);

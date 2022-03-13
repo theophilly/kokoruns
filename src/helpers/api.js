@@ -114,7 +114,6 @@ class Api {
 
     //update  portfolio
     updatePortfolio = (id, data) => {
-        console.log(data);
         return this.init().put(`/updateportfolio/${id}`, data);
     };
 
@@ -174,6 +173,114 @@ class Api {
     //user password
     updatepassword = (data) => {
         return this.init().post('/updatepassword', data);
+    };
+
+    //enterprise pages
+
+    //fetch  associations
+    fetchAssociations = () => {
+        return this.init().get('/associations');
+    };
+
+    //fetch  schools
+    fetchSchools = () => {
+        return this.init().get('/schools');
+    };
+
+    //fetch  companies
+    fetchCompanies = () => {
+        return this.init().get('/companies');
+    };
+
+    //add school
+    addSchool = (data) => {
+        return this.init().post('/sregister', data);
+    };
+    //add school
+    addCompany = (data) => {
+        return this.init().post('/cregister', data);
+    };
+    //add school
+    addAssociation = (data) => {
+        return this.init().post('/aregister', data);
+    };
+
+    //fetch school events
+    fetchSchoolEvents = (id) => {
+        return this.init().get(`/schoolevents/${id}`);
+    };
+    //fetch association events
+    fetchAssociationEvents = (id) => {
+        return this.init().get(`/associationevents/${id}`);
+    };
+    //fetch company events
+    fetchCompanyEvents = (id) => {
+        return this.init().get(`/companyevents/${id}`);
+    };
+
+    //fetch school branch
+    fetchSchoolBranches = (id) => {
+        return this.init().get(`/schoolbranches/${id}`);
+    };
+    //fetch association branch
+    fetchAssociationBranches = (id) => {
+        return this.init().get(`/associationbranches/${id}`);
+    };
+    //fetch company branch
+    fetchCompanyBranches = (id) => {
+        return this.init().get(`/companybranches/${id}`);
+    };
+
+    //create school events
+    createSchoolEvents = (id, data) => {
+        return this.init().post(`/createschoolevent/${id}`, data);
+    };
+    //create association events
+    createAssociationEvents = (id, data) => {
+        return this.init().post(`/createassociationevent/${id}`, data);
+    };
+    //create association events
+    createCompanyEvents = (id, data) => {
+        return this.init().post(`/createcompanyevent/${id}`, data);
+    };
+
+    //create school branch
+    createSchoolBranch = (id, data) => {
+        return this.init().post(`/createschoolbranch/${id}`, data);
+    };
+    //create association branch
+    createAssociationBranch = (id, data) => {
+        return this.init().post(`/createassociationbranch/${id}`, data);
+    };
+    //create association branch
+    createCompanyBranch = (id, data) => {
+        return this.init().post(`/createcompanybranch/${id}`, data);
+    };
+
+    //create school gallery
+    createSchoolGallery = (id, data) => {
+        return this.init().post(`/addschoolgallery/${id}`, data);
+    };
+    //create association gallery
+    createAssociationGallery = (id, data) => {
+        return this.init().post(`/addassociationgallery/${id}`, data);
+    };
+    //create company branch
+    createCompanyGallery = (id, data) => {
+        return this.init().post(`/addcompanygallery/${id}`, data);
+    };
+
+    //fetch school Gallery
+    fetchSchoolGalleries = (id) => {
+        return this.init().get(`/schoolgalleries/${id}`);
+    };
+    //fetch association Gallery
+    fetchAssociationGalleries = (id) => {
+        return this.init().get(`/associationgalleries/${id}`);
+    };
+    //fetch company Gallery
+    fetchCompanyGalleries = (id) => {
+        return this.init().get(`/companygalleries/${id}`);
     };
 }
 

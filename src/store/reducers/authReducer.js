@@ -19,7 +19,7 @@ export default function authReducer(state = initialState, action) {
         if (!cookie) {
             return { ...initialState };
         }
-        console.log('okajdjjdhdh');
+
         return { ...action.payload.authReducer };
     } else if (action.type === actionType.LOGIN_BEGIN) {
         return { ...state, loading: true };

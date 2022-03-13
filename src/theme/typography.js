@@ -25,6 +25,14 @@ export default function themeTypography(theme) {
             fontSize: 'clamp(1.2rem, 1.5vw, 50px)',
             fontWeight: '600'
         },
+        caption: {
+            margin: 0,
+            fontWeight: 400,
+            fontSize: '0.70rem',
+            //   fontSize: '0.75rem',
+            lineHeight: 1.66,
+            textAlign: ' center !important'
+        },
         heading: {
             fontWeight: '600',
             fontSize: '1.2rem',

@@ -4,10 +4,8 @@ import { Box, Typography } from '@mui/material';
 
 export default function Rating({ name, helperText, ...otherProps }) {
     const { setFieldValue } = useFormikContext();
-    const [field, meta] = useField(name);
+    // const [field, meta] = useField(name);
     const [rating, setRating] = useState(0);
-
-    console.log(field.value);
 
     const handleChange = (value) => {
         setFieldValue(name, value);

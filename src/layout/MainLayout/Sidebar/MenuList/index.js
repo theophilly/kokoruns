@@ -5,10 +5,8 @@ import { Typography } from '@mui/material';
 import NavGroup from './NavGroup';
 import menuItem from '../../../../utils/menu-items';
 
-// ==============================|| SIDEBAR MENU LIST ||============================== //
-
-const MenuList = () => {
-    const navItems = menuItem.items.map((item) => {
+const MenuList = ({ menuList }) => {
+    const navItems = menuList.items.map((item) => {
         switch (item.type) {
             case 'group':
                 return <NavGroup key={item.id} item={item} />;

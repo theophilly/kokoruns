@@ -25,12 +25,9 @@ import FullWidthTabs from './tabs';
 import Textfield from '../../components/reusables/FormUI/Textfield';
 import Textarea from '../../components/reusables/FormUI/Textarea';
 import { Link } from 'react-router-dom';
-import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import ResumeUpload from '../../components/reusables/forms/ResumeUpload';
 import { updateProfilePicture, updateCoverPicture } from '../../store/actions/userDataActions';
-import LimitTags from './tabs/LimitTags';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -91,9 +88,6 @@ const Profile = () => {
         setStep(0);
         //setScroll(scrollType);
     };
-    console.log(JSON.parse(JSON.stringify(bio.languages1)));
-    console.log(Object.values(JSON.parse(bio.languages1))[0]);
-    console.log(typeof lang);
 
     const descriptionElementRef = React.useRef(null);
     React.useEffect(() => {
