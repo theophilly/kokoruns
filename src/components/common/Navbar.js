@@ -308,13 +308,13 @@ export default function Navbar() {
                                         variant: 'contained'
                                     },
                                     {
-                                        label: 'Sign Out',
-                                        variant: 'outlined'
-                                    },
-                                    {
                                         label: 'Dashboard',
                                         variant: 'outlined',
                                         href: '/profile'
+                                    },
+                                    {
+                                        label: 'Sign Out',
+                                        variant: 'outlined'
                                     }
                                 ].map(({ label, href, variant }, index) => {
                                     if (['Register', 'Sign In'].includes(label)) {
