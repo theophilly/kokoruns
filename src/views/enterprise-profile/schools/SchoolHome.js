@@ -181,7 +181,10 @@ const SchoolHome = () => {
                                             position: 'absolute',
                                             zIndex: 4,
                                             top: -60,
-                                            left: 60
+                                            left: 60,
+                                            [theme.breakpoints.down('sm')]: {
+                                                left: '16%'
+                                            }
                                         }}
                                     />
                                 </Box>
