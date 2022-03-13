@@ -45,7 +45,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window, menuList }) => {
                 </Box>
             </BrowserView>
             <MobileView>
-                <Box sx={{ px: 2 }}>
+                <Box sx={{ px: 0 }}>
                     <MenuList menuList={menuList} />
                     <LogoutItem />
                     <MenuCard />

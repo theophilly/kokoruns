@@ -9,7 +9,6 @@ const SelectLGA = ({ name, dependentField, options, helpertext, ...otherProps })
     const [field, meta] = useField(name);
     const { setFieldValue, getFieldMeta } = useFormikContext();
     const state = getFieldMeta(dependentField);
-    console.log(state.value);
 
     const [stateValues, setStateValues] = useState([]);
 

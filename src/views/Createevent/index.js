@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef } from 'react';
 import { Formik, Form, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -19,22 +19,21 @@ import Success from '../../ui-component/modals/Success';
 import api from '../../helpers/api';
 import dateFormatter from '../../helpers/dateFormatter';
 
-export default function Createevent({ onSubmit }) {
-    // const navigate = useNavigate();
+export default function Createevent() {
+    const navigate = useNavigate();
     const { enterprise_ids } = useSelector((state) => state.userDataReducer);
-    console.log(enterprise_ids.schools);
     const matches = useMediaQuery('(min-width:900px)');
     let { pathname } = useLocation();
     const theme = useTheme();
     const filesharhe_ref = useRef();
     const [open, setOpen] = React.useState(false);
-
     const handleClickOpen = () => {
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
+        navigate('/enterprise');
     };
 
     const rebuildData = (formvalues, file) => {
@@ -106,26 +105,15 @@ export default function Createevent({ onSubmit }) {
                             event_min_ticket: ''
                         }}
                         onSubmit={async (values) => {
-                            console.log(values);
-                            console.log('idss', enterprise_ids.schools[0].school_id);
                             let formData = await rebuildData(values, filesharhe_ref.current.files[0]);
                             if (pathname === '/create-school-event') {
                                 await api.createSchoolEvents(enterprise_ids.schools[0].school_id, formData);
-                            } else if (pathname === '/create-assocition-event') {
+                            } else if (pathname === '/create-association-event') {
+                                await api.createSchoolEvents(enterprise_ids.associations[0].association_id, formData);
                             } else if (pathname === '/create-company-event') {
                                 await api.createCompanyEvents(enterprise_ids.companies[0].company_id, formData);
                             }
                             handleClickOpen();
-                            // await dispatch(login(values));
-                            // if (!window.store.getState().authReducer.authenticated) {
-                            //   await setClickData({
-                            //     type: 'error',s
-                            //     content: window.store.getState().authReducer.error,
-                            //   });
-                            //   showToast();
-                            // }
-                            //  await sleep(3000);
-                            //navigate('/profile-setup');
                         }}
                         // validationSchema={Yup.object().shape({
                         //     team_name: Yup.string().required('Team Name is Required'),
