@@ -239,7 +239,7 @@ export default function CompanyBranchesTab({ data }) {
                     ))}
                 </Box>
             ) : (
-                <Box sx={{ ...theme.typography.flex, fontWeight: '600', height: '200px' }}> No Galleries yet </Box>
+                <Box sx={{ ...theme.typography.flex, fontWeight: '600', height: '200px' }}> No Branches added yet </Box>
             )}
         </Box>
     );
