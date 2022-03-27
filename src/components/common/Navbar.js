@@ -293,7 +293,7 @@ export default function Navbar() {
                                         </IconButton>
                                     </Box>
                                 </Box>
-                                <Sidedrawer />
+                                <Sidedrawer onClose={handleDrawerClose} />
                                 {[
                                     {
                                         label: 'Sign In',

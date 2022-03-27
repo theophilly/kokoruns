@@ -9,17 +9,18 @@ import { styled } from '@mui/system';
 import { BiHomeCircle } from 'react-icons/bi';
 import { IoFastFood } from 'react-icons/io5';
 import { AiOutlineUser } from 'react-icons/ai';
+import { GrContact } from 'react-icons/gr';
 
 // links for the side nav
 const links = [
     {
         id: 'L0',
-        path: '/',
+        path: '/about',
         icon: <BiHomeCircle />,
         title: 'About Us'
     },
-    { id: 'L1', path: '#', icon: <IoFastFood />, title: 'Contact Us' },
-    { id: 'L1', path: '#', icon: <IoFastFood />, title: 'Help' }
+    { id: 'L1', path: '/contact-us', icon: <GrContact />, title: 'Contact Us' },
+    { id: 'L1', path: '/', icon: <IoFastFood />, title: 'Help' }
 ];
 
 // style const
