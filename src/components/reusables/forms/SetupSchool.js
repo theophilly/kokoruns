@@ -12,6 +12,7 @@ import Datepicker from '../FormUI/Datepicker';
 import Textarea from '../FormUI/Textarea';
 import SelectLGA from '../FormUI/SelectLGA';
 import stateData from '../../../config/stateData.json';
+import company_size from '../../../config/company_size.json';
 
 const SetupSchool = ({ setDis_ability, setEmployment }) => {
     const matches = useMediaQuery('(min-width:900px)');
@@ -123,7 +124,7 @@ const SetupSchool = ({ setDis_ability, setEmployment }) => {
                     <Textfield name="cac" helpertext="CAC Registration Number" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <Textfield name="school_size" helpertext="Student Population" />
+                    <SelectWrapper name="school_size" helpertext="School Size" options={company_size} />
                 </Grid>
                 <Grid
                     sx={{

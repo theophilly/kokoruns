@@ -88,7 +88,7 @@ const SchoolSetup = () => {
                     school_industry2: '3d3d',
                     school_industry3: 'd3d',
                     school_type: '',
-                    school_size: 122,
+                    school_size: '',
                     linkedin: '',
                     facebook: '',
                     twitter: '',

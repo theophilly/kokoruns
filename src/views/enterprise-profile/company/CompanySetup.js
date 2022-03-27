@@ -90,7 +90,7 @@ const CompanySetup = () => {
                     company_industry2: '3d3d',
                     company_industry3: 'd3d',
                     company_type: '',
-                    company_size: 122,
+                    company_size: '',
                     linkedin: '',
                     facebook: '',
                     twitter: '',

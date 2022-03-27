@@ -88,7 +88,7 @@ const AssociationSetup = () => {
                     association_industry2: '3d3d',
                     association_industry3: 'd3d',
                     association_type: '',
-                    association_size: 122,
+                    association_size: '',
                     linkedin: '',
                     facebook: '',
                     twitter: '',
