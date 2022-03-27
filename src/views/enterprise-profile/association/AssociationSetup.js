@@ -17,7 +17,6 @@ import Success from '../../../ui-component/modals/Success';
 import SetupAssociation from '../../../components/reusables/forms/SetupAssociation';
 
 const rebuildData = (formvalues, file) => {
-    console.log(formvalues.other_professions, 'other');
     let formData = new FormData();
 
     formData.append('association_name', formvalues.association_name);

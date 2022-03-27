@@ -113,7 +113,7 @@ export default function SchoolBranchesTab({ data }) {
                     }}
                 >
                     {data.map((item) => (
-                        <BranchBox from="schools" {...item} />
+                        <BranchBox item={item} from="schools" {...item} />
                     ))}
                 </Box>
             ) : (

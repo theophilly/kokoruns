@@ -56,7 +56,6 @@ export const updateEducation = (id, education) => {
 };
 
 export const deleteEducation = (education) => {
-    console.log(education);
     return async (dispatch) => {
         dispatch({ type: actionType.ON_FETCH_BEGIN });
 

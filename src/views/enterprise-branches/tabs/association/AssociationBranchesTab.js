@@ -113,7 +113,7 @@ export default function AssociationBranchesTab({ data }) {
                     }}
                 >
                     {data.map((item) => (
-                        <BranchBox from="associations" {...item} />
+                        <BranchBox item={item} from="associations" {...item} />
                     ))}
                 </Box>
             ) : (

@@ -9,6 +9,7 @@ import EventDetails from '../views/Myevents/EventDetails';
 import Branches from '../views/enterprise-branches';
 import Gallery from '../views/enterprise-gallery';
 import CreateBranch from '../views/enterprise-branches/tabs/company/CreateBranch';
+import UpdateBranch from '../views/enterprise-branches/tabs/company/UpdateBranch';
 
 // ==============================|| MAIN ROUTING ||============================== //
 const EnterpriseRoutes = (token, active) => {
@@ -71,6 +72,18 @@ const EnterpriseRoutes = (token, active) => {
             {
                 path: '/enterprise-settings',
                 element: <div>enterprise wallet</div>
+            },
+            {
+                path: '/update-company-branch/:id',
+                element: <UpdateBranch />
+            },
+            {
+                path: '/update-association-branch/:id',
+                element: <UpdateBranch />
+            },
+            {
+                path: '/update-school-branch/:id',
+                element: <UpdateBranch />
             }
         ]
     };

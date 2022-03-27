@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, useTheme, InputBase, Avatar, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 //icons
@@ -14,6 +14,8 @@ import PhoneIcon from '@mui/icons-material/Phone';
 //local imports
 import EmptyPages from '../../../../components/common/EmptyPages';
 import { LowerButton } from '../../../enterprise-gallery/tabs/SchoolGalleryTab';
+import { BiEditAlt } from 'react-icons/bi';
+import { timeString } from '../../../../helpers/timeFormater';
 
 const useStyles = makeStyles((theme) => ({
     profile_cover_img: {
@@ -54,21 +56,31 @@ export const BranchBox = ({
     closing_time,
     branch_phone,
     from,
-    value = {},
-    clicked
+    item
 }) => {
     const { profile_cover_img } = useStyles();
     const theme = useTheme();
+    const navigate = useNavigate();
+
+    const urls = {
+        companies: `/update-company-branch/${item?.branch_id}`,
+        schools: `/update-school-branch/${item?.branch_id}`,
+        associations: `/update-association-branch/${item?.branch_id}`
+    };
 
     // Prepend any date.
     const opening_time12hr = new Date('1970-01-01T' + opening_time + 'Z').toLocaleTimeString('en-US', {
         hour12: true,
         hour: 'numeric'
     });
+
     const closing_time12hr = new Date('1970-01-01T' + closing_time + 'Z').toLocaleTimeString('en-US', {
         hour12: true,
         hour: 'numeric'
     });
+
+    console.log('closing time before', closing_time);
+    console.log('closing time edited', closing_time12hr);
 
     return (
         <div
@@ -111,22 +123,14 @@ export const BranchBox = ({
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <IconsText
                         icon={<AccessTimeIcon sx={{ height: '12px', width: '12px' }} />}
-                        text={`${opening_time12hr.trim().toLowerCase()} - ${closing_time12hr.trim().toLowerCase()}`}
+                        text={`${timeString[opening_time.slice(-8, -6)]} - ${timeString[closing_time.slice(-8, -6)]}`}
                     />
                     <IconsText icon={<PhoneIcon sx={{ height: '12px', width: '12px' }} />} text={branch_phone} />
                 </Box>
             </Box>
-            {/* <Box sx={{ position: 'absolute', top: 1, right: 5 }}>
-                <BiEditAlt
-                    style={{ color: theme.palette.secondary.main1 }}
-                    onClick={async () => {
-                        await setEdit(() => {
-                            return { ...value, show: true };
-                        });
-                        clicked(true);
-                    }}
-                />
-            </Box> */}
+            <Box sx={{ position: 'absolute', top: 1, right: 5 }}>
+                <BiEditAlt style={{ color: theme.palette.secondary.main1 }} onClick={() => navigate(urls[from])} />
+            </Box>
         </div>
     );
 };
@@ -235,7 +239,7 @@ export default function CompanyBranchesTab({ data }) {
                     }}
                 >
                     {data.map((item) => (
-                        <BranchBox from="companies" {...item} />
+                        <BranchBox item={item} from="companies" {...item} />
                     ))}
                 </Box>
             ) : (

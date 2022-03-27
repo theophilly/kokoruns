@@ -26,6 +26,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SubCard from '../../../ui-component/cards/SubCard';
 import { updateProfilePicture, updateCoverPicture } from '../../../store/actions/userDataActions';
 import ResumeUpload from '../../../components/reusables/forms/ResumeUpload';
+import api from '../../../helpers/api';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 const FILE_SIZE = 500000;
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
-const SchoolHome = () => {
+const SchoolHome = ({ setReload }) => {
     const {
         authenticated,
         user: { bio }
@@ -65,13 +66,10 @@ const SchoolHome = () => {
     const matchDownMd = useMediaQuery('(min-width:600px)');
     const [open, setOpen] = React.useState(false);
     const [step, setStep] = React.useState(0);
+    const [refresh, setRefresh] = React.useState(0);
     const [school, setSchool] = React.useState({});
     const [message, setMessage] = React.useState(false);
     const [cover, setCover] = React.useState(false);
-    const matches = useMediaQuery('(min-width:900px)');
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     const handleMessageClose = () => {
         setMessage(false);
@@ -102,7 +100,7 @@ const SchoolHome = () => {
 
     React.useEffect(() => {
         setSchool(schools[0]);
-    }, []);
+    }, [refresh]);
 
     return (
         <Box className={root}>
@@ -113,7 +111,6 @@ const SchoolHome = () => {
                 >
                     <Avatar
                         alt="Remy Sharp"
-                        //  src="./dashf.jpg"
                         src={`https://kokoruns.s3.eu-west-3.amazonaws.com/usercoverimages/${bio.cover_image}`}
                         sx={{
                             height: '25vh',
@@ -316,8 +313,6 @@ const SchoolHome = () => {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                {/* <DialogTitle id="scroll-dialog-title">Message</DialogTitle> */}
-                {/* <Box sx={{ ...theme.typography.flex, flexDirection: 'column' }}> */}
                 <DialogContent sx={{ paddingTop: '20vh' }}>
                     <Stepper step={step} setStep={setStep}>
                         <>
@@ -332,7 +327,7 @@ const SchoolHome = () => {
                                         <Typography sx={{ fontWeight: '600', mb: '10px' }}>Profile Picture</Typography>
                                         <Avatar
                                             alt="Remy Sharp"
-                                            src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
+                                            src={`https://kokoruns.s3.eu-west-3.amazonaws.com/schools/logos/${school.logo}`}
                                             sx={{
                                                 cursor: 'pointer',
                                                 width: 250,
@@ -359,7 +354,7 @@ const SchoolHome = () => {
                                             // onClick={handleMessageClose}
                                             onClick={() => setStep(step + 1)}
                                         >
-                                            Change Profile Picture
+                                            Change School Logo
                                         </Button>
                                     </Box>
                                 </Grid>
@@ -378,10 +373,14 @@ const SchoolHome = () => {
                                             console.log(values);
 
                                             let formData = new FormData();
-                                            formData.append('profilepic', filesharhe_ref.current.files[0]);
+                                            formData.append('logo', filesharhe_ref.current.files[0]);
 
-                                            await dispatch(updateProfilePicture(formData));
-                                            handleMessageClose();
+                                            await api.changeSchoolLogo(school.school_id, formData).then(async () => {
+                                                await setReload((prev) => prev + 1);
+                                                handleMessageClose();
+                                                setRefresh((prev) => prev + 1);
+                                                //   window.location.reload();
+                                            });
                                             // await dispatch(login(values));
                                             // if (!window.store.getState().authReducer.authenticated) {
                                             //   await setClickData({
@@ -433,10 +432,9 @@ const SchoolHome = () => {
                                                                         ) : null
                                                                     }
                                                                     sx={{
-                                                                        //  width: '200px',
                                                                         marginTop: '20px',
                                                                         letterSpacing: '1px',
-                                                                        // borderRadius: '0px',
+
                                                                         padding: '8px 60px',
                                                                         color: 'white',
                                                                         textTransform: 'capitalize',
@@ -556,6 +554,7 @@ const SchoolHome = () => {
 
                                             await dispatch(updateCoverPicture(formData));
                                             handleCoverClose();
+
                                             // await dispatch(login(values));
                                             // if (!window.store.getState().authReducer.authenticated) {
                                             //   await setClickData({

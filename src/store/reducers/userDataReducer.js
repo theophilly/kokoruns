@@ -30,8 +30,6 @@ export default function userDataReducer(state = intialState, action) {
             loading: false
         };
     } else if (action.type === actionType.ADD_ENTERPRISE_EVENTS) {
-        console.log('i got here');
-        console.log(action.payload);
         return { ...state, events: action.payload, loading: false };
     } else if (action.type === actionType.SIGN_OUT) {
         return { ...intialState };

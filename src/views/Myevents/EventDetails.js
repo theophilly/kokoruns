@@ -19,8 +19,6 @@ const EventDetails = () => {
     const { id, page } = useParams();
     const { events } = useSelector((state) => state.userDataReducer);
 
-    console.log('ids', events);
-
     useEffect(() => {
         const event = searchEvent();
         setState(event);

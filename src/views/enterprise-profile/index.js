@@ -10,11 +10,12 @@ import { ADD_ENTERPRISE_IDS } from '../../store/actionTypes/userDataActionTypes'
 import { addEnterpriseEvents } from '../../store/actions/userDataActions';
 
 const EnterpriseProfile = () => {
+    const [reload, setReload] = useState(0);
     const dispatch = useDispatch();
     const [state, setState] = useState({ empty: 1, associations: [], companies: [], schools: [] });
     useEffect(() => {
         getData();
-    }, []);
+    }, [reload]);
 
     async function getData() {
         const [associations, companies, schools] = await Promise.all([api.fetchAssociations(), api.fetchCompanies(), api.fetchSchools()]);
@@ -55,7 +56,7 @@ const EnterpriseProfile = () => {
                     Tab2Label="School"
                     Tab3Label="Association"
                     Tab1={<Company />}
-                    Tab2={<Schools />}
+                    Tab2={<Schools setReload={setReload} />}
                     Tab3={<FullWidthTabs />}
                 />
             )}

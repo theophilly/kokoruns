@@ -53,7 +53,7 @@ const AssociationHome = () => {
     const [association, setAssociation] = React.useState({});
     const [message, setMessage] = React.useState(false);
     const [cover, setCover] = React.useState(false);
-    const matches = useMediaQuery('(min-width:900px)');
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -566,7 +566,6 @@ const AssociationHome = () => {
                                                         : true
                                                 )
                                                 .test('fileFormat', 'Unsupported Format', (value) => {
-                                                    //  console.log(filesharhe_ref.current.files[0].size);
                                                     return value && filesharhe_ref.current
                                                         ? SUPPORTED_FORMATS.includes(filesharhe_ref.current.files[0].type)
                                                             ? true

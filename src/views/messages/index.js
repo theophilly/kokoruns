@@ -1,19 +1,5 @@
 import React from 'react';
-import {
-    Grid,
-    Paper,
-    Avatar,
-    Typography,
-    useTheme,
-    InputBase,
-    Select,
-    MenuItem,
-    Box,
-    useMediaQuery,
-    styled,
-    Badge,
-    OutlinedInput
-} from '@mui/material';
+import { Grid, Paper, Avatar, Typography, useTheme, InputBase, Select, MenuItem, Box, useMediaQuery, styled, Badge } from '@mui/material';
 import SubCard from '../../ui-component/cards/SubCard';
 import SearchIcon from '@mui/icons-material/Search';
 import SendIcon from '@mui/icons-material/Send';

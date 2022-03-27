@@ -282,6 +282,68 @@ class Api {
     fetchCompanyGalleries = (id) => {
         return this.init().get(`/companygalleries/${id}`);
     };
+
+    //fetch Individual branch
+    fetchSchoolBranch = (school_id, id) => {
+        return this.init().get(`/schoolbranch/${school_id}/${id}`);
+    };
+    //fetch association Branch
+    fetchAssociationBranch = (association_id, id) => {
+        return this.init().get(`/associationbranch/${association_id}/${id}`);
+    };
+    //fetch company Branch
+    fetchCompanyBranch = (company_id, id) => {
+        return this.init().get(`/companybranch/${company_id}/${id}`);
+    };
+
+    //delete school gallery
+    deleteAssociationGallery = (data) => {
+        return this.init().delete('/deleteassociationgallery', { data: { ...data } });
+    };
+    deleteCompanyGallery = (data) => {
+        return this.init().delete('/deletecompanygallery', { data: { ...data } });
+    };
+    deleteSchoolGallery = (data) => {
+        return this.init().delete('/deleteschoolgallery', { data: { ...data } });
+    };
+
+    //update enterprise Galleries
+    updateAssociationGallery = (id, data) => {
+        return this.init().post(`/updateassociationgallery/${id}`, data);
+    };
+    updateCompanyGallery = (id, data) => {
+        return this.init().post(`/updatecompanygallery/${id}`, data);
+    };
+    updateSchoolGallery = (id, data) => {
+        return this.init().post(`/updateschoolgallery/${id}`, data);
+    };
+
+    //delete enterprise Branches
+    deleteAssociationBranch = (data) => {
+        return this.init().delete(`/deleteassociationbranch/${data.association_id}/${data.branch_id}`);
+    };
+    deleteCompanyBranch = (data) => {
+        return this.init().delete(`/deletecompanybranch/${data.company_id}/${data.branch_id}`);
+    };
+    deleteSchoolBranch = (data) => {
+        return this.init().delete(`/deleteschoolbranch/${data.school_id}/${data.branch_id}`);
+    };
+
+    //update branches
+    updateSchoolBranch = (data, info) => {
+        return this.init().post(`/updateschoolbranch/${data.school_id}/${data.branch_id}`, info);
+    };
+    updateAssociationBranch = (data, info) => {
+        return this.init().post(`/updateassociationbranch/${data.association_id}/${data.branch_id}`, info);
+    };
+    updateCompanyBranch = (data, info) => {
+        return this.init().post(`/updatecompanybranch/${data.company_id}/${data.branch_id}`, info);
+    };
+
+    //enterprise logos
+    changeSchoolLogo = (school_id, data) => {
+        return this.init().post(`/schangelogo/${school_id}`, data);
+    };
 }
 
 export default new Api();

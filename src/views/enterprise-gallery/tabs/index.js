@@ -9,6 +9,7 @@ import CompanyGalleryTab from './CompanyGalleryTab';
 
 export default function BranchesTab() {
     const [state, setState] = useState({ schools: [], companies: [], associations: [] });
+    const [reload, setReload] = useState(0);
     const { schools, companies, associations } = useSelector((state) => state.userDataReducer.enterprise_ids);
     useEffect(() => {
         const fectchData = async () => {
@@ -32,16 +33,16 @@ export default function BranchesTab() {
             }
         };
         fectchData();
-    }, []);
+    }, [reload]);
     console.log(state);
     return (
         <div>
             <AppTab
-                Tab1={<CompanyGalleryTab data={state.companies} />}
+                Tab1={<CompanyGalleryTab setReload={setReload} data={state.companies} />}
                 Tab1Label="Company"
-                Tab2={<SchoolGalleryTab data={state.schools} />}
+                Tab2={<SchoolGalleryTab setReload={setReload} data={state.schools} />}
                 Tab2Label="School"
-                Tab3={<AssociationGalleryTab data={state.associations} />}
+                Tab3={<AssociationGalleryTab setReload={setReload} data={state.associations} />}
                 Tab3Label="Association"
             />
         </div>

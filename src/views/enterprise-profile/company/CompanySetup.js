@@ -18,7 +18,6 @@ import Success from '../../../ui-component/modals/Success';
 import SetupCompany from '../../../components/reusables/forms/SetupCompany';
 
 const rebuildData = (formvalues, file) => {
-    console.log(formvalues.other_professions, 'other');
     let formData = new FormData();
 
     formData.append('company_name', formvalues.company_name);

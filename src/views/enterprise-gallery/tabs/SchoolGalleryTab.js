@@ -17,6 +17,7 @@ import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { useSelector } from 'react-redux';
 
 //icons
 import SearchIcon from '@mui/icons-material/Search';
@@ -25,9 +26,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import Success from '../../../ui-component/modals/Success';
 import ResumeUpload from '../../../components/reusables/forms/ResumeUpload';
 import Textfield from '../../../components/reusables/FormUI/Textfield';
-import { useSelector } from 'react-redux';
 import api from '../../../helpers/api';
 import EmptyPages from '../../../components/common/EmptyPages';
+import Warning from '../../../ui-component/modals/Warning';
 
 const useStyles = makeStyles((theme) => ({
     profile_cover_img: {
@@ -94,7 +95,7 @@ export const Picturebox2 = ({ image_title, image, date, setEdit, value = {}, cli
                 <Typography> {image_title} </Typography>
                 <Typography> {date} </Typography>
             </Box>
-            <Box sx={{ position: 'absolute', top: 1, right: 5, display: 'none' }}>
+            <Box sx={{ position: 'absolute', top: 1, right: 5 }}>
                 <BiEditAlt
                     style={{ color: theme.palette.secondary.main1 }}
                     onClick={async () => {
@@ -108,6 +109,14 @@ export const Picturebox2 = ({ image_title, image, date, setEdit, value = {}, cli
         </div>
     );
 };
+
+function promiseState(p) {
+    const t = {};
+    return Promise.race([p, t]).then(
+        (v) => (v === t ? 'pending' : 'fulfilled'),
+        () => 'rejected'
+    );
+}
 
 const rebuildData = (data, file) => {
     let formData = new FormData();
@@ -127,14 +136,18 @@ export const LowerButton = () => {
         </Box>
     );
 };
-export default function SchoolGalleryTab({ data }) {
+export default function SchoolGalleryTab({ data, setReload }) {
     const theme = useTheme();
     const { schools } = useSelector((state) => state.userDataReducer.enterprise_ids);
-    // pictures
     const filesharhe_ref = useRef();
     const matches = useMediaQuery('(min-width:900px)');
     const [picturesOpen, setPicturesOpen] = React.useState(false);
     const [pictureStep, setPictureStep] = React.useState(0);
+    const [edit, setEdit] = React.useState({ show: false });
+    const [modalMessage, setModalMessage] = React.useState('');
+    const [spinner, setSpinner] = React.useState(false);
+    const [fetchError, setFetchError] = React.useState(false);
+    const [refresh, setRefresh] = React.useState(false);
 
     if (schools.length === 0) {
         return (
@@ -144,6 +157,7 @@ export default function SchoolGalleryTab({ data }) {
             </Box>
         );
     }
+
     const handlePictures = () => {
         setPicturesOpen(false);
         window.scrollTo({
@@ -151,11 +165,26 @@ export default function SchoolGalleryTab({ data }) {
             left: 0,
             behavior: 'smooth'
         });
-        // setEdit((prev) => {
-        //     return { ...prev, show: false };
-        // });
+        setEdit((prev) => {
+            return { ...prev, show: false };
+        });
         setPictureStep(0);
-        window.location.reload();
+        if (refresh) {
+            setReload((prev) => prev + 1);
+        }
+
+        setRefresh(false);
+    };
+
+    const delGallery = async () => {
+        setSpinner(true);
+        api.deleteSchoolGallery({ id: edit.gallery_id })
+            .catch(async (error) => {})
+            .then(async () => {
+                await setRefresh(true);
+                setReload((prev) => prev + 1);
+            });
+        setSpinner(false);
     };
 
     return (
@@ -223,7 +252,7 @@ export default function SchoolGalleryTab({ data }) {
                 </Box>
                 {/* box 2 */}
                 <Button
-                    onClick={() => setPicturesOpen(true)}
+                    onClick={setPicturesOpen}
                     sx={{ textTransform: 'capitalize', padding: '7px 20px !important', height: 'max-content' }}
                     disableElevation
                     variant="contained"
@@ -247,7 +276,7 @@ export default function SchoolGalleryTab({ data }) {
                     }}
                 >
                     {data.map((item) => (
-                        <Picturebox2 from="schoolgalleries" {...item} />
+                        <Picturebox2 value={item} setEdit={setEdit} clicked={setPicturesOpen} from="schoolgalleries" {...item} />
                     ))}
                 </Box>
             ) : (
@@ -270,97 +299,262 @@ export default function SchoolGalleryTab({ data }) {
                         </Grid>
                     </Grid>
                     {/* ii */}
-                    <PortfolioStepper portfolioStep={pictureStep} setPortfolioStep={setPictureStep}>
-                        <Grid container>
-                            <Grid item xs={12}>
-                                <Formik
-                                    initialValues={{
-                                        gallery_title: '',
-                                        gallery_year: '',
-                                        gallery_image: ''
-                                    }}
-                                    onSubmit={async (values) => {
-                                        var formData = rebuildData(values, filesharhe_ref.current.files[0]);
-                                        //  await dispatch(addPortfolio(formData));
-                                        api.createSchoolGallery(schools[0]?.school_id, formData);
+                    {edit.show ? (
+                        <PortfolioStepper portfolioStep={pictureStep} setPortfolioStep={setPictureStep}>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Formik
+                                        initialValues={{
+                                            gallery_title: edit.image_title,
+                                            gallery_year: edit.date
+                                        }}
+                                        onSubmit={async (values) => {
+                                            setSpinner(true);
+                                            api.updateSchoolGallery(edit.gallery_id, {
+                                                image_title: values.gallery_title,
+                                                year: values.gallery_year
+                                            })
+                                                .catch(async (error) => {
+                                                    await setFetchError(true);
+                                                    await console.log('something went wrong');
+                                                })
+                                                .then(async () => {
+                                                    await setFetchError(false);
+                                                    await setRefresh(true);
+                                                    setReload((prev) => prev + 1);
+                                                });
 
-                                        setPictureStep((step) => step + 1);
-                                    }}
-                                    validationSchema={Yup.object().shape({
-                                        gallery_title: Yup.string().required('Title is Required'),
-                                        gallery_year: Yup.string().required('Gallery year is Required'),
-                                        gallery_image: Yup.string().required('Gallery image Institution is Required')
-                                    })}
-                                >
-                                    {({ isSubmitting }) => (
-                                        <Form autoComplete="off">
-                                            <Grid container>
-                                                <Grid
-                                                    sx={{
-                                                        paddingRight: '20px',
-                                                        '@media (max-width: 900px)': {
-                                                            padding: '0px'
-                                                        }
-                                                    }}
-                                                    item
-                                                    xs={12}
-                                                    md={6}
-                                                >
-                                                    <Textfield name="gallery_title" helpertext="Title" />
-                                                </Grid>
-                                                <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
-                                                    <Textfield name="gallery_year" helpertext="Year" />
-                                                </Grid>
-                                                <Grid mt="5px" xs={12}>
-                                                    <Typography variant="caption">Upload Image</Typography>
-                                                    <Box sx={{ mt: '5px' }}>
-                                                        <ResumeUpload name="gallery_image" ref={filesharhe_ref} />
-                                                    </Box>
-                                                </Grid>
+                                            if (!fetchError) {
+                                                await setModalMessage(
+                                                    'You have successfully update this portfolio item You can go to your dashboard now'
+                                                );
+                                                setPictureStep((step) => step + 2);
+                                            }
+                                            setFetchError(false);
+                                            setSpinner(false);
+                                        }}
+                                        validationSchema={Yup.object().shape({
+                                            gallery_title: Yup.string().required('Title is Required'),
+                                            gallery_year: Yup.string().required('Gallery year is Required')
+                                        })}
+                                    >
+                                        {({ isSubmitting }) => (
+                                            <Form autoComplete="off">
+                                                <Grid container>
+                                                    <Grid
+                                                        sx={{
+                                                            paddingRight: '20px',
+                                                            '@media (max-width: 900px)': {
+                                                                padding: '0px'
+                                                            }
+                                                        }}
+                                                        item
+                                                        xs={12}
+                                                        md={6}
+                                                    >
+                                                        <Textfield name="gallery_title" helpertext="Title" />
+                                                    </Grid>
+                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                        <Textfield name="gallery_year" helpertext="Year" />
+                                                    </Grid>
 
-                                                <Grid xs={12} item>
-                                                    <Box sx={{ ...theme.typography.flex }}>
-                                                        <DialogActions>
-                                                            <Button
-                                                                startIcon={
-                                                                    isSubmitting ? <CircularProgress color="secondary" size="1rem" /> : null
-                                                                }
+                                                    <Grid xs={12} item>
+                                                        <Box sx={{ ...theme.typography.flex }}>
+                                                            <DialogActions
                                                                 sx={{
-                                                                    width: '200px',
-                                                                    marginTop: '20px',
-                                                                    letterSpacing: '1px',
-                                                                    borderRadius: '0px',
-                                                                    color: 'white',
-                                                                    textTransform: 'capitalize',
-                                                                    '& :hover': {
-                                                                        color: 'black'
-                                                                    },
-                                                                    [theme.breakpoints.down('sm')]: {
-                                                                        marginTop: '30px'
+                                                                    display: 'flex',
+                                                                    gap: '20px',
+                                                                    '@media (max-width: 513px)': {
+                                                                        gap: '10px'
                                                                     }
                                                                 }}
-                                                                disableElevation
-                                                                variant="contained"
-                                                                type="submit"
                                                             >
-                                                                Save
-                                                            </Button>
-                                                        </DialogActions>
-                                                    </Box>
+                                                                <Button
+                                                                    startIcon={
+                                                                        spinner ? <CircularProgress color="secondary" size="1rem" /> : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'rgb(217, 38, 39)',
+                                                                        border: '1px solid rgb(217, 38, 39)',
+                                                                        textTransform: 'capitalize',
+                                                                        '&:hover': {
+                                                                            border: '1px solid rgb(217, 38, 39)'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        },
+                                                                        '@media (max-width: 513px)': {
+                                                                            width: '120px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="outlined"
+                                                                    onClick={() => setPictureStep((step) => step + 1)}
+                                                                >
+                                                                    Delete
+                                                                </Button>
+                                                                <Button
+                                                                    startIcon={
+                                                                        isSubmitting ? (
+                                                                            <CircularProgress color="secondary" size="1rem" />
+                                                                        ) : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'white',
+                                                                        textTransform: 'capitalize',
+                                                                        '& :hover': {
+                                                                            color: 'black'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        },
+                                                                        '@media (max-width: 513px)': {
+                                                                            width: '120px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="contained"
+                                                                    type="submit"
+                                                                >
+                                                                    Update
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Box>
+                                                    </Grid>
                                                 </Grid>
-                                            </Grid>
-                                        </Form>
-                                    )}
-                                </Formik>
+                                            </Form>
+                                        )}
+                                    </Formik>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                        <Success
-                            onclick={handlePictures}
-                            text="See All portfolios"
-                            content="You have successfully added a portfolio item
+                            <Warning
+                                load={spinner}
+                                onNoClick={() => setPictureStep((step) => step - 1)}
+                                onYesClick={async () => {
+                                    delGallery();
+                                    await setModalMessage('You have successfully delete a Gallery item You can go to your dashboard now');
+
+                                    setPictureStep((step) => step + 1);
+                                }}
+                                text="Are you sure you want to delete this Portfolio information from your portfolio list."
+                            />
+                            <Success onclick={handlePictures} text="Refresh Gallery" content={modalMessage} />
+                        </PortfolioStepper>
+                    ) : (
+                        <PortfolioStepper portfolioStep={pictureStep} setPortfolioStep={setPictureStep}>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Formik
+                                        initialValues={{
+                                            gallery_title: '',
+                                            gallery_year: '',
+                                            gallery_image: ''
+                                        }}
+                                        onSubmit={async (values) => {
+                                            setSpinner(true);
+                                            var formData = rebuildData(values, filesharhe_ref.current.files[0]);
+                                            //  await dispatch(addPortfolio(formData));
+                                            api.createSchoolGallery(schools[0]?.school_id, formData)
+                                                .catch(async (error) => {
+                                                    await setFetchError(true);
+                                                    await console.log('something went wrong');
+                                                })
+                                                .then(async () => {
+                                                    await setFetchError(false);
+                                                });
+
+                                            if (!fetchError) {
+                                                setPictureStep((step) => step + 1);
+                                            }
+                                            setFetchError(false);
+                                            setSpinner(false);
+                                        }}
+                                        validationSchema={Yup.object().shape({
+                                            gallery_title: Yup.string().required('Title is Required'),
+                                            gallery_year: Yup.string().required('Gallery year is Required'),
+                                            gallery_image: Yup.string().required('Gallery image Institution is Required')
+                                        })}
+                                    >
+                                        {({ isSubmitting }) => (
+                                            <Form autoComplete="off">
+                                                <Grid container>
+                                                    <Grid
+                                                        sx={{
+                                                            paddingRight: '20px',
+                                                            '@media (max-width: 900px)': {
+                                                                padding: '0px'
+                                                            }
+                                                        }}
+                                                        item
+                                                        xs={12}
+                                                        md={6}
+                                                    >
+                                                        <Textfield name="gallery_title" helpertext="Title" />
+                                                    </Grid>
+                                                    <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
+                                                        <Textfield name="gallery_year" helpertext="Year" />
+                                                    </Grid>
+                                                    <Grid mt="5px" xs={12}>
+                                                        <Typography variant="caption">Upload Image</Typography>
+                                                        <Box sx={{ mt: '5px' }}>
+                                                            <ResumeUpload name="gallery_image" ref={filesharhe_ref} />
+                                                        </Box>
+                                                    </Grid>
+
+                                                    <Grid xs={12} item>
+                                                        <Box sx={{ ...theme.typography.flex }}>
+                                                            <DialogActions>
+                                                                <Button
+                                                                    startIcon={
+                                                                        isSubmitting ? (
+                                                                            <CircularProgress color="secondary" size="1rem" />
+                                                                        ) : null
+                                                                    }
+                                                                    sx={{
+                                                                        width: '200px',
+                                                                        marginTop: '20px',
+                                                                        letterSpacing: '1px',
+                                                                        borderRadius: '0px',
+                                                                        color: 'white',
+                                                                        textTransform: 'capitalize',
+                                                                        '& :hover': {
+                                                                            color: 'black'
+                                                                        },
+                                                                        [theme.breakpoints.down('sm')]: {
+                                                                            marginTop: '30px'
+                                                                        }
+                                                                    }}
+                                                                    disableElevation
+                                                                    variant="contained"
+                                                                    type="submit"
+                                                                >
+                                                                    Save
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Box>
+                                                    </Grid>
+                                                </Grid>
+                                            </Form>
+                                        )}
+                                    </Formik>
+                                </Grid>
+                            </Grid>
+                            <Success
+                                onclick={handlePictures}
+                                text="Refresh Gallery"
+                                content="You have successfully added a gallery item
 You can go to your dashboard now."
-                        />
-                    </PortfolioStepper>
+                            />
+                        </PortfolioStepper>
+                    )}
                 </DialogContent>
             </Dialog>
         </Box>

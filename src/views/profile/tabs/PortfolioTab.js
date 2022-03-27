@@ -208,6 +208,7 @@ const PortfolioTab = () => {
 
         await setLoad(false);
     };
+
     const delSocial = async () => {
         await setLoad(true);
         await dispatch(
