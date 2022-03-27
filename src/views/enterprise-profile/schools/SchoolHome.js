@@ -376,10 +376,10 @@ const SchoolHome = ({ setReload }) => {
                                             formData.append('logo', filesharhe_ref.current.files[0]);
 
                                             await api.changeSchoolLogo(school.school_id, formData).then(async () => {
-                                                await setReload((prev) => prev + 1);
-                                                handleMessageClose();
-                                                setRefresh((prev) => prev + 1);
-                                                //   window.location.reload();
+                                                // await setReload((prev) => prev + 1);
+                                                // handleMessageClose();
+                                                // setRefresh((prev) => prev + 1);
+                                                window.location.reload();
                                             });
                                             // await dispatch(login(values));
                                             // if (!window.store.getState().authReducer.authenticated) {

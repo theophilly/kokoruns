@@ -98,7 +98,6 @@ const AssociationHome = () => {
                 >
                     <Avatar
                         alt="Remy Sharp"
-                        // src="./dashf.jpg"
                         src={`https://kokoruns.s3.eu-west-3.amazonaws.com/usercoverimages/1644944886620bddf609210.jpg`}
                         //  src={`https://kokoruns.s3.eu-west-3.amazonaws.com/usercoverimages/${bio.cover_image}`}
                         sx={{
@@ -233,7 +232,7 @@ const AssociationHome = () => {
                         <Box sx={{ display: 'flex', mt: '5px', background: '#CEE9FF', padding: '5px 10px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Email Address: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-                                {association.association_email}
+                                {association.association_contact_email}
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px', padding: '5px 10px 0px 10px' }}>

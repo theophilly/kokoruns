@@ -8,6 +8,7 @@ import Privacypolicy from '../pages/Privacypolicy';
 import Profilesetup from '../pages/Profilesetup';
 import Profilesetupsuccess from '../pages/Profilesetupsuccess';
 import MinimalLayout from '../layout/MinimalLayout';
+import Contactus from '../pages/Contactus';
 
 const Mainroutes = (authenticated, active, token) => {
     return {
@@ -45,6 +46,10 @@ const Mainroutes = (authenticated, active, token) => {
             {
                 path: '/profilesuccess',
                 element: <Profilesetupsuccess />
+            },
+            {
+                path: '/contact-us',
+                element: <Contactus />
             }
         ]
     };

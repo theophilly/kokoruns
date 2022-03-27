@@ -16,6 +16,47 @@ const socials = [
 ];
 const footerData = ['About Us', 'Contact Us', 'Our Community Guidelines', 'Terms of Use', 'Terms of Service', 'Privacy Policy', 'FAQs'];
 
+export const FooterSocials = (textAlign = 'end') => {
+    const theme = useTheme();
+    return (
+        <Box
+            sx={{
+                width: '300px',
+                height: '100px',
+                '@media (max-width: 704px)': {
+                    width: '100%'
+                }
+            }}
+        >
+            <Typography
+                sx={{
+                    ...theme.typography.subtitle1,
+                    textAlign: textAlign,
+                    '@media (max-width: 704px)': {
+                        textAlign: 'center'
+                    }
+                }}
+            >
+                Follow Kokoruns
+            </Typography>
+            <Box
+                sx={{
+                    ...theme.typography.flex,
+                    justifyContent: 'space-between',
+                    marginTop: '20px',
+                    '@media (max-width: 704px)': {
+                        justifyContent: 'space-evenly'
+                    }
+
+                    //  cursor: 'pointer'
+                }}
+            >
+                {socials.map((item) => item)}
+            </Box>
+        </Box>
+    );
+};
+
 export default function Footer() {
     const theme = useTheme();
     return (
@@ -99,6 +140,9 @@ export default function Footer() {
                         </Typography>
                     ))}
                 </Box>
+
+                {/*                 
+
                 <Box
                     sx={{
                         width: '300px',
@@ -134,6 +178,9 @@ export default function Footer() {
                         {socials.map((item) => item)}
                     </Box>
                 </Box>
+ */}
+
+                <FooterSocials />
             </Box>
             {/* lower */}
             <Box>

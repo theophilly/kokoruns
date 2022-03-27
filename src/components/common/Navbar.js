@@ -20,7 +20,7 @@ const headersData = () => [
     },
     {
         label: 'Contact Us',
-        href: '/'
+        href: '/contact-us'
     },
     {
         label: 'Help',
