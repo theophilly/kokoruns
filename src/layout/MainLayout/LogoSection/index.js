@@ -14,7 +14,7 @@ const LogoSection = () => (
         disableRipple
         component={Link}
         // to={config.defaultPath}
-        to="/"
+        to="/homepage"
     >
         <Logo />
     </ButtonBase>

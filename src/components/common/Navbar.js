@@ -431,7 +431,7 @@ export default function Navbar() {
         <Link
             {...{
                 component: RouterLink,
-                to: '/',
+                to: authenticated ? '/homepage' : '/',
                 color: 'inherit',
                 style: { textDecoration: 'none' }
             }}

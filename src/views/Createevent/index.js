@@ -109,7 +109,7 @@ export default function Createevent() {
                             if (pathname === '/create-school-event') {
                                 await api.createSchoolEvents(enterprise_ids.schools[0].school_id, formData);
                             } else if (pathname === '/create-association-event') {
-                                await api.createSchoolEvents(enterprise_ids.associations[0].association_id, formData);
+                                await api.createAssociationEvents(enterprise_ids.associations[0].association_id, formData);
                             } else if (pathname === '/create-company-event') {
                                 await api.createCompanyEvents(enterprise_ids.companies[0].company_id, formData);
                             }

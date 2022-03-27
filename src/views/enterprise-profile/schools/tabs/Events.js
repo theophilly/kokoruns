@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, useTheme } from '@mui/material';
 import Singleevent from '../../../Myevents/Singleevent';
 import { Createteam } from '../../../Myevents';

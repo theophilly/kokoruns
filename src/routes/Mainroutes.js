@@ -17,6 +17,10 @@ const Mainroutes = (authenticated, active, token) => {
         children: [
             {
                 path: '/',
+                element: authenticated ? <Navigate to="/profile" /> : <Home />
+            },
+            {
+                path: '/homepage',
                 element: <Home />
             },
             {

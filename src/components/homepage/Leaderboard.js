@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function Leaderboard() {
     return (
@@ -83,10 +84,17 @@ export default function Leaderboard() {
                         Kokoruns has got you the best of services. sign in or register to <br /> access them.
                     </Typography>
                     <Box marginTop="30px">
-                        <Button sx={{ borderRadius: '0px', marginRight: '30px', textTransform: 'capitalize' }} variant="contained">
+                        <Button
+                            to="/register"
+                            LinkComponent={Link}
+                            sx={{ borderRadius: '0px', marginRight: '30px', textTransform: 'capitalize' }}
+                            variant="contained"
+                        >
                             register
                         </Button>
                         <Button
+                            to="/contact-us"
+                            LinkComponent={Link}
                             sx={{ color: 'white', borderColor: 'white', borderRadius: '0px', textTransform: 'capitalize' }}
                             variant="outlined"
                         >

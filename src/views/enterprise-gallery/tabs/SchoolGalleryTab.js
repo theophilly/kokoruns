@@ -462,19 +462,12 @@ export default function SchoolGalleryTab({ data, setReload }) {
                                             setSpinner(true);
                                             var formData = rebuildData(values, filesharhe_ref.current.files[0]);
                                             //  await dispatch(addPortfolio(formData));
-                                            api.createSchoolGallery(schools[0]?.school_id, formData)
-                                                .catch(async (error) => {
-                                                    await setFetchError(true);
-                                                    await console.log('something went wrong');
-                                                })
-                                                .then(async () => {
-                                                    await setFetchError(false);
-                                                });
+                                            api.createSchoolGallery(schools[0]?.school_id, formData).then(async () => {
+                                                await setRefresh(true);
 
-                                            if (!fetchError) {
                                                 setPictureStep((step) => step + 1);
-                                            }
-                                            setFetchError(false);
+                                            });
+
                                             setSpinner(false);
                                         }}
                                         validationSchema={Yup.object().shape({
