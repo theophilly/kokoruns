@@ -26,6 +26,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SubCard from '../../../ui-component/cards/SubCard';
 import { updateProfilePicture, updateCoverPicture } from '../../../store/actions/userDataActions';
 import ResumeUpload from '../../../components/reusables/forms/ResumeUpload';
+import api from '../../../helpers/api';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -114,8 +115,8 @@ const CompanyHome = () => {
                     <Avatar
                         alt="Remy Sharp"
                         // src="./dashf.jpg"
-                        src={`https://kokoruns.s3.eu-west-3.amazonaws.com/usercoverimages/1644944886620bddf609210.jpg`}
-                        //  src={`https://kokoruns.s3.eu-west-3.amazonaws.com/usercoverimages/${bio.cover_image}`}
+
+                        src={`https://kokoruns.s3.eu-west-3.amazonaws.com/companies/coverimages/${company.cover_image}`}
                         sx={{
                             height: '25vh',
                             position: 'relative',
@@ -301,7 +302,7 @@ const CompanyHome = () => {
                         }}
                         title="About"
                     >
-                        <Typography sx={{ fontSize: '0.9rem', color: '#333333', ml: '5px' }}>{bio.about}</Typography>
+                        <Typography sx={{ fontSize: '0.9rem', color: '#333333', ml: '5px' }}>{company.about}</Typography>
                     </SubCard>
 
                     {/* tabs */}
@@ -319,23 +320,16 @@ const CompanyHome = () => {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                {/* <DialogTitle id="scroll-dialog-title">Message</DialogTitle> */}
-                {/* <Box sx={{ ...theme.typography.flex, flexDirection: 'column' }}> */}
                 <DialogContent sx={{ paddingTop: '20vh' }}>
                     <Stepper step={step} setStep={setStep}>
                         <>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box sx={{ ...theme.typography.column, alignItems: 'center' }}>
-                                        {/* <Box
-                                                src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
-                                                component="img"
-                                                sx={{ height: '150px', width: '150px', borderRadius: '5px' }}
-                                            /> */}
                                         <Typography sx={{ fontWeight: '600', mb: '10px' }}>Profile Picture</Typography>
                                         <Avatar
                                             alt="Remy Sharp"
-                                            src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
+                                            src={`https://kokoruns.s3.eu-west-3.amazonaws.com/companies/logos/${company.logo}`}
                                             sx={{
                                                 cursor: 'pointer',
                                                 width: 250,
@@ -381,20 +375,11 @@ const CompanyHome = () => {
                                             console.log(values);
 
                                             let formData = new FormData();
-                                            formData.append('profilepic', filesharhe_ref.current.files[0]);
+                                            formData.append('logo', filesharhe_ref.current.files[0]);
 
-                                            await dispatch(updateProfilePicture(formData));
-                                            handleMessageClose();
-                                            // await dispatch(login(values));
-                                            // if (!window.store.getState().authReducer.authenticated) {
-                                            //   await setClickData({
-                                            //     type: 'error',
-                                            //     content: window.store.getState().authReducer.error,
-                                            //   });
-                                            //   showToast();
-                                            // }
-                                            //  await sleep(3000);
-                                            //navigate('/profile-setup');
+                                            await api.changeCompanyLogo(company.company_id, formData).then(async () => {
+                                                window.location.reload();
+                                            });
                                         }}
                                         validationSchema={Yup.object().shape({
                                             profile_picture: Yup.mixed()
@@ -493,23 +478,16 @@ const CompanyHome = () => {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                {/* <DialogTitle id="scroll-dialog-title">Message</DialogTitle> */}
-                {/* <Box sx={{ ...theme.typography.flex, flexDirection: 'column' }}> */}
                 <DialogContent sx={{ paddingTop: '20vh' }}>
                     <Stepper step={step} setStep={setStep}>
                         <>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box sx={{ ...theme.typography.column, alignItems: 'center' }}>
-                                        {/* <Box
-                                                src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
-                                                component="img"
-                                                sx={{ height: '150px', width: '150px', borderRadius: '5px' }}
-                                            /> */}
                                         <Typography sx={{ fontWeight: '600', mb: '10px' }}>Cover Image</Typography>
                                         <Avatar
                                             alt="Remy Sharp"
-                                            src={`https://kokoruns.s3.eu-west-3.amazonaws.com/usercoverimages/${bio.cover_image}`}
+                                            src={`https://kokoruns.s3.eu-west-3.amazonaws.com/companies/coverimages/${company.cover_image}`}
                                             sx={{
                                                 cursor: 'pointer',
                                                 width: 250,
@@ -557,8 +535,12 @@ const CompanyHome = () => {
                                             let formData = new FormData();
                                             formData.append('coverimage', filesharhe_ref.current.files[0]);
 
-                                            await dispatch(updateCoverPicture(formData));
-                                            handleCoverClose();
+                                            await api.changeCompanyCover(company.company_id, formData).then(async () => {
+                                                // await setReload((prev) => prev + 1);
+                                                // handleMessageClose();
+                                                // setRefresh((prev) => prev + 1);
+                                                //  window.location.reload();
+                                            });
                                             // await dispatch(login(values));
                                             // if (!window.store.getState().authReducer.authenticated) {
                                             //   await setClickData({

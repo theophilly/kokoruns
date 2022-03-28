@@ -76,8 +76,6 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
     })
 }));
 
-// ==============================|| MAIN LAYOUT ||============================== //
-
 const MainLayout = ({ menuList }) => {
     const theme = useTheme();
     const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));

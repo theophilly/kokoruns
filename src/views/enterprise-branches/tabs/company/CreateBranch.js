@@ -86,12 +86,14 @@ export default function CreateBranch({ onSubmit }) {
                             }
                             handleClickOpen();
                         }}
-                        // validationSchema={Yup.object().shape({
-                        //     team_name: Yup.string().required('Team Name is Required'),
-                        //     team_purpose: Yup.string().required('Team Purpose is Required'),
-                        //     team_bio: Yup.string().required('Team Bio is Required'),
-                        //     team_policy: Yup.string().required('Team Policy is Required')
-                        // })}
+                        validationSchema={Yup.object().shape({
+                            opening_time: Yup.string().required('opening time is required'),
+                            closing_time: Yup.mixed()
+                                .required('closing time is required')
+                                .test('fileSize', 'closing time cannot be lower than opening time', function (value) {
+                                    return new Date(value) >= new Date(this.parent.opening_time);
+                                })
+                        })}
                     >
                         {({ isSubmitting }) => (
                             <Form autoComplete="off">

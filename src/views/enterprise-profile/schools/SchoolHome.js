@@ -1,19 +1,5 @@
 import React, { useRef } from 'react';
-import {
-    Box,
-    Grid,
-    Avatar,
-    Typography,
-    useTheme,
-    Button,
-    Dialog,
-    DialogTitle,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    Divider,
-    CircularProgress
-} from '@mui/material';
+import { Box, Grid, Avatar, Typography, useTheme, Button, Dialog, DialogActions, DialogContent, CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from '@mui/styles';
@@ -24,7 +10,7 @@ import FullWidthTabs from './tabs';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import SubCard from '../../../ui-component/cards/SubCard';
-import { updateProfilePicture, updateCoverPicture } from '../../../store/actions/userDataActions';
+import { updateCoverPicture } from '../../../store/actions/userDataActions';
 import ResumeUpload from '../../../components/reusables/forms/ResumeUpload';
 import api from '../../../helpers/api';
 
@@ -111,7 +97,7 @@ const SchoolHome = ({ setReload }) => {
                 >
                     <Avatar
                         alt="Remy Sharp"
-                        src={`https://kokoruns.s3.eu-west-3.amazonaws.com/usercoverimages/${bio.cover_image}`}
+                        src={`https://kokoruns.s3.eu-west-3.amazonaws.com/schools/coverimages/${school.cover_image}`}
                         sx={{
                             height: '25vh',
                             position: 'relative',
@@ -295,7 +281,7 @@ const SchoolHome = ({ setReload }) => {
                         }}
                         title="About"
                     >
-                        <Typography sx={{ fontSize: '0.9rem', color: '#333333', ml: '5px' }}>{bio.about}</Typography>
+                        <Typography sx={{ fontSize: '0.9rem', color: '#333333', ml: '5px' }}>{school.about}</Typography>
                     </SubCard>
 
                     {/* tabs */}
@@ -319,11 +305,6 @@ const SchoolHome = ({ setReload }) => {
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box sx={{ ...theme.typography.column, alignItems: 'center' }}>
-                                        {/* <Box
-                                                src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
-                                                component="img"
-                                                sx={{ height: '150px', width: '150px', borderRadius: '5px' }}
-                                            /> */}
                                         <Typography sx={{ fontWeight: '600', mb: '10px' }}>Profile Picture</Typography>
                                         <Avatar
                                             alt="Remy Sharp"
@@ -488,23 +469,16 @@ const SchoolHome = ({ setReload }) => {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                {/* <DialogTitle id="scroll-dialog-title">Message</DialogTitle> */}
-                {/* <Box sx={{ ...theme.typography.flex, flexDirection: 'column' }}> */}
                 <DialogContent sx={{ paddingTop: '20vh' }}>
                     <Stepper step={step} setStep={setStep}>
                         <>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box sx={{ ...theme.typography.column, alignItems: 'center' }}>
-                                        {/* <Box
-                                                src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
-                                                component="img"
-                                                sx={{ height: '150px', width: '150px', borderRadius: '5px' }}
-                                            /> */}
                                         <Typography sx={{ fontWeight: '600', mb: '10px' }}>Cover Image</Typography>
                                         <Avatar
                                             alt="Remy Sharp"
-                                            src={`https://kokoruns.s3.eu-west-3.amazonaws.com/usercoverimages/${bio.cover_image}`}
+                                            src={`https://kokoruns.s3.eu-west-3.amazonaws.com/schools/coverimages/${school.cover_image}`}
                                             sx={{
                                                 cursor: 'pointer',
                                                 width: 250,
@@ -552,9 +526,12 @@ const SchoolHome = ({ setReload }) => {
                                             let formData = new FormData();
                                             formData.append('coverimage', filesharhe_ref.current.files[0]);
 
-                                            await dispatch(updateCoverPicture(formData));
-                                            handleCoverClose();
-
+                                            await api.changeSchoolCover(school.school_id, formData).then(async () => {
+                                                // await setReload((prev) => prev + 1);
+                                                // handleMessageClose();
+                                                // setRefresh((prev) => prev + 1);
+                                                window.location.reload();
+                                            });
                                             // await dispatch(login(values));
                                             // if (!window.store.getState().authReducer.authenticated) {
                                             //   await setClickData({

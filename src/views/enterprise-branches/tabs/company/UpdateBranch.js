@@ -85,6 +85,11 @@ export default function UpdateBranch() {
                     //  setReload((prev) => prev + 1);
                 }); //    await setRefresh(true);
         } else if (pathname.includes('association')) {
+            api.deleteAssociationBranch({ association_id: enterprise_ids.associations[0].association_id, branch_id: id })
+                .catch(async (error) => {})
+                .then(async () => {
+                    //  setReload((prev) => prev + 1);
+                }); //    await setRefresh(true);
         } else if (pathname.includes('school')) {
             api.deleteSchoolBranch({ school_id: enterprise_ids.schools[0].school_id, branch_id: id })
                 .catch(async (error) => {})
@@ -163,12 +168,14 @@ export default function UpdateBranch() {
                             }
                             handleClickOpen();
                         }}
-                        // validationSchema={Yup.object().shape({
-                        //     team_name: Yup.string().required('Team Name is Required'),
-                        //     team_purpose: Yup.string().required('Team Purpose is Required'),
-                        //     team_bio: Yup.string().required('Team Bio is Required'),
-                        //     team_policy: Yup.string().required('Team Policy is Required')
-                        // })}
+                        validationSchema={Yup.object().shape({
+                            opening_time: Yup.string().required('opening time is required'),
+                            closing_time: Yup.mixed()
+                                .required('closing time is required')
+                                .test('fileSize', 'closing time cannot be lower than opening time', function (value) {
+                                    return new Date(value) >= new Date(this.parent.opening_time);
+                                })
+                        })}
                     >
                         {({ isSubmitting }) => (
                             <Form autoComplete="off">

@@ -344,6 +344,23 @@ class Api {
     changeSchoolLogo = (school_id, data) => {
         return this.init().post(`/schangelogo/${school_id}`, data);
     };
+    changeAssociationLogo = (association_id, data) => {
+        return this.init().post(`/achangelogo/${association_id}`, data);
+    };
+    changeCompanyLogo = (company_id, data) => {
+        return this.init().post(`/cchangelogo/${company_id}`, data);
+    };
+
+    //enterprise covers
+    changeSchoolCover = (school_id, data) => {
+        return this.init().post(`/schangecoverimage/${school_id}`, data);
+    };
+    changeAssociationCover = (association_id, data) => {
+        return this.init().post(`/achangecoverimage/${association_id}`, data);
+    };
+    changeCompanyCover = (company_id, data) => {
+        return this.init().post(`/cchangecoverimage/${company_id}`, data);
+    };
 }
 
 export default new Api();
