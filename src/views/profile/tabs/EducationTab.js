@@ -223,7 +223,7 @@ const EducationTab = () => {
         if (checkIsCurrent === true) {
             return '';
         } else {
-            return Yup.date().required('Date Completed is Required');
+            return Yup.date().typeError('this is not a valid date').required('Date Completed is Required');
         }
     };
 

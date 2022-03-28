@@ -63,8 +63,8 @@ export default function Createevent() {
         formData.append('event_description', formvalues.event_description);
         formData.append('event_type', formvalues.event_type);
         formData.append('event_industry', formvalues.industry);
-        formData.append('event_price1', 122);
-        formData.append('event_price2', 34554);
+        formData.append('event_price1', formvalues.event_min_ticket);
+        formData.append('event_price2', formvalues.event_ticket_price);
         // formData.append('event_price1', formvalues.event_ticket_price);
         // formData.append('event_price2', formvalues.event_min_ticket);
         formData.append('event_address', formvalues.address);
@@ -101,8 +101,8 @@ export default function Createevent() {
                             event_lga: '',
                             event_description: '',
                             event_price: '',
-                            event_ticket_price: '',
-                            event_min_ticket: ''
+                            event_ticket_price: 0,
+                            event_min_ticket: 0
                         }}
                         onSubmit={async (values) => {
                             let formData = await rebuildData(values, filesharhe_ref.current.files[0]);
@@ -115,12 +115,17 @@ export default function Createevent() {
                             }
                             handleClickOpen();
                         }}
-                        // validationSchema={Yup.object().shape({
-                        //     team_name: Yup.string().required('Team Name is Required'),
-                        //     team_purpose: Yup.string().required('Team Purpose is Required'),
-                        //     team_bio: Yup.string().required('Team Bio is Required'),
-                        //     team_policy: Yup.string().required('Team Policy is Required')
-                        // })}
+                        validationSchema={Yup.object().shape({
+                            event_ticket_price: Yup.number().typeError('value must be a number').required('event ticket price is required'),
+                            event_min_ticket: Yup.mixed()
+                                .required('minimum ticket price is required')
+                                .test('mustNum', 'value must be a number', function (value) {
+                                    return typeof value !== Number;
+                                })
+                                .test('fileSize', 'event min ticket cannot be higher than main ticket price', function (value) {
+                                    return value < this.parent.event_ticket_price;
+                                })
+                        })}
                     >
                         {({ isSubmitting }) => (
                             <Form autoComplete="off">
