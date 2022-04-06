@@ -37,7 +37,7 @@ export default function Singleevent({ page, to = '/', title, event_link, event_s
                 sx={{ width: 110, height: 110 }}
             />
             <Typography sx={{ fontWeight: '600', marginBottom: '-5px !important' }}> {title} </Typography>
-            <Typography sx={{}} variant="caption">
+            <Typography sx={{ visibility: 'hidden' }} variant="caption">
                 {event_link}
             </Typography>
             <Box sx={{ display: 'flex' }}>

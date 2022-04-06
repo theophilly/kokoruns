@@ -93,7 +93,7 @@ export default function Createevent() {
                             event_image: '',
                             event_title: '',
                             event_type: '',
-                            industry: '',
+                            industry: 'ddd',
                             start_date: '',
                             end_date: '',
                             address: '',
@@ -122,8 +122,8 @@ export default function Createevent() {
                                 .test('mustNum', 'value must be a number', function (value) {
                                     return typeof value !== Number;
                                 })
-                                .test('fileSize', 'event min ticket cannot be higher than main ticket price', function (value) {
-                                    return value < this.parent.event_ticket_price;
+                                .test('oo', 'event min ticket cannot be higher than main ticket price', function (value) {
+                                    return value <= this.parent.event_ticket_price;
                                 })
                         })}
                     >
@@ -163,7 +163,8 @@ export default function Createevent() {
                                         xs={12}
                                         md={6}
                                     >
-                                        <Textfield name="industry" helpertext="Industry" />
+                                        {/* <Textfield name="industry" helpertext="Industry" /> */}
+                                        <Textfield name="address" helpertext="Address" />
                                     </Grid>
                                     <Grid sx={{ paddingLeft: matches ? '40px' : '0px', marginTop: '10px' }} item xs={12} md={6}>
                                         <Datepicker name="start_date" helpertext="Start Date" />
@@ -184,7 +185,7 @@ export default function Createevent() {
                                         <Datepicker name="end_date" helpertext="End Date" />
                                     </Grid>
                                     <Grid sx={{ paddingLeft: matches ? '40px' : '0px', marginTop: '10px' }} item xs={12} md={6}>
-                                        <Textfield name="address" helpertext="Address" />
+                                        <SelectWrapper name="event_state" helpertext="Event State" options={stateData} />
                                     </Grid>
                                     {/* 
                                     <Grid
@@ -220,9 +221,6 @@ export default function Createevent() {
                                         xs={12}
                                         md={6}
                                     >
-                                        <SelectWrapper name="event_state" helpertext="Event State" options={stateData} />
-                                    </Grid>
-                                    <Grid sx={{ paddingLeft: matches ? '40px' : '0px', marginTop: '10px' }} item xs={12} md={6}>
                                         <SelectLGA dependentField="event_state" name="event_lga" helpertext="LGA" />
                                     </Grid>
 

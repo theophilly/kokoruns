@@ -58,9 +58,6 @@ export default function UpdateBranch() {
     const handleOpenModalClose = () => {
         setOpenModal(false);
         navigate('/branches');
-
-        //  await navigate.replace('/branches');
-        //  window.location.reload();
     };
 
     const handleClickOpen = () => {
@@ -70,9 +67,6 @@ export default function UpdateBranch() {
     const handleClose = () => {
         setOpen(false);
         navigate('/branches');
-
-        //  await navigate.replace('/branches');
-        //  window.location.reload();
     };
 
     const delBranch = async () => {
@@ -127,6 +121,18 @@ export default function UpdateBranch() {
         return formData;
     };
 
+    const getImageUrl = () => {
+        let src;
+        if (pathname.includes('company')) {
+            src = `https://kokoruns.s3.eu-west-3.amazonaws.com/companies/branchimages/${branch.branch_image}`;
+        } else if (pathname.includes('association')) {
+            src = `https://kokoruns.s3.eu-west-3.amazonaws.com/associations/branchimages/${branch.branch_image}`;
+        } else if (pathname.includes('school')) {
+            src = `https://kokoruns.s3.eu-west-3.amazonaws.com/schools/branchimages/${branch.branch_image}`;
+        }
+        return src;
+    };
+
     return branch ? (
         <Box>
             <Paper sx={{ padding: '10px 20px 60px' }}>
@@ -152,7 +158,7 @@ export default function UpdateBranch() {
                             ),
                             opening_week_day: branch.opening_week_day,
                             closing_week_day: branch.closing_week_day,
-                            branch_image: ''
+                            branch_image: getImageUrl()
                         }}
                         onSubmit={async (values) => {
                             let formData = await rebuildData(values, filesharhe_ref.current.files[0] ?? null);
@@ -195,7 +201,6 @@ export default function UpdateBranch() {
                                         onClick={handleOpenModal}
                                         sx={{
                                             width: '150px',
-                                            //  marginTop: '50px',
                                             letterSpacing: '1px',
                                             borderRadius: '0px',
                                             color: 'white',
@@ -217,7 +222,6 @@ export default function UpdateBranch() {
                                         startIcon={isSubmitting ? <CircularProgress color="secondary" size="1rem" /> : null}
                                         sx={{
                                             width: '150px',
-                                            //  marginTop: '50px',
                                             letterSpacing: '1px',
                                             borderRadius: '0px',
                                             color: 'white',

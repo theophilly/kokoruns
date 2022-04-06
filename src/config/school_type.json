@@ -1,0 +1,19 @@
+{
+    "Day care": "Day care",
+    "Kindergarten": "Kindergarten",
+    "Montessori": "Montessori",
+    "Special": "Special",
+    "Primary": "Primary",
+    "Secondary": "Secondary",
+    "Vocational": "Vocational",
+    "Technical": "Technical",
+    "College": "College",
+    "Polytechnic": "Polytechnic",
+    "University": "University",
+    "Divinity/Seminary": "Divinity/Seminary",
+    "Business/Administration": "Business/Administration",
+    "Medical": "Medical",
+    "Law": "Law",
+    "Language": "Language",
+    "Other": "Other"
+}

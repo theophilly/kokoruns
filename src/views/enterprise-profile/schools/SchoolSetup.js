@@ -92,7 +92,7 @@ const SchoolSetup = () => {
                     linkedin: '',
                     facebook: '',
                     twitter: '',
-                    school_director: '3d',
+                    school_director: '',
                     instagram: '',
                     founded: '',
                     field: 'ded',

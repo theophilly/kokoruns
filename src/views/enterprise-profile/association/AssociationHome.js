@@ -207,7 +207,7 @@ const AssociationHome = () => {
                     <SubCard divider={false} p={true} sx={{ marginTop: '30px' }} title="Bio">
                         {bio.profession && (
                             <Box sx={{ display: 'flex', background: '#CEE9FF', padding: '5px 10px' }}>
-                                <Typography sx={{ fontSize: '0.8rem' }}>association Type: {association.association_type} </Typography>
+                                <Typography sx={{ fontSize: '0.8rem' }}>Association Type: {association.association_type} </Typography>
                             </Box>
                         )}
 

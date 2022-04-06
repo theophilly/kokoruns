@@ -25,7 +25,7 @@ export default function Events() {
 
             {/* create team */}
             <Box sx={{ marginTop: '20px' }}>
-                <Createteam to="/create-school-event" />
+                <Createteam text="Create Event" to="/create-school-event" />
             </Box>
         </Box>
     );

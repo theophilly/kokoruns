@@ -54,12 +54,10 @@ const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
 const CompanyHome = () => {
     const {
-        authenticated,
         user: { bio }
     } = useSelector((state) => state.authReducer);
     const { companies } = useSelector((state) => state.userDataReducer.enterprise_ids);
 
-    const dispatch = useDispatch();
     const { root } = useStyles();
     const theme = useTheme();
     const filesharhe_ref = useRef();
@@ -69,6 +67,7 @@ const CompanyHome = () => {
     const [company, setCompany] = React.useState({});
     const [message, setMessage] = React.useState(false);
     const [cover, setCover] = React.useState(false);
+    const [refresh, setRefresh] = React.useState(0);
     const matches = useMediaQuery('(min-width:900px)');
     const handleClose = () => {
         setOpen(false);
@@ -91,6 +90,10 @@ const CompanyHome = () => {
         //setScroll(scrollType);
     };
 
+    React.useEffect(() => {
+        setRefresh((prev) => prev + 1);
+    }, []);
+
     const descriptionElementRef = React.useRef(null);
     React.useEffect(() => {
         if (open) {
@@ -103,7 +106,7 @@ const CompanyHome = () => {
 
     React.useEffect(() => {
         setCompany(companies[0]);
-    }, []);
+    }, [companies]);
 
     return (
         <Box className={root}>
@@ -224,7 +227,7 @@ const CompanyHome = () => {
                     <SubCard divider={false} p={true} sx={{ marginTop: '30px' }} title="Bio">
                         {bio.profession && (
                             <Box sx={{ display: 'flex', background: '#CEE9FF', padding: '5px 10px' }}>
-                                <Typography sx={{ fontSize: '0.8rem' }}>company Type: {company.company_type} </Typography>
+                                <Typography sx={{ fontSize: '0.8rem' }}>Company Type: {company.company_type} </Typography>
                             </Box>
                         )}
 
@@ -378,7 +381,7 @@ const CompanyHome = () => {
                                             formData.append('logo', filesharhe_ref.current.files[0]);
 
                                             await api.changeCompanyLogo(company.company_id, formData).then(async () => {
-                                                window.location.reload();
+                                                await window.location.reload(true);
                                             });
                                         }}
                                         validationSchema={Yup.object().shape({

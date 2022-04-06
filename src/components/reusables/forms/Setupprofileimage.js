@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useField } from 'formik';
 
 // material-ui
 import { Box, Grid, Typography, Button, useTheme } from '@mui/material';
+import { MyComponent } from './Teamsimage';
 
 const Setupprofileimage = React.forwardRef(({ name }, ref) => {
     const [field, mata] = useField(name);
+    const [imageUrl, setImageUrl] = useState('');
     const theme = useTheme();
 
     const configTextfield = {
@@ -15,6 +17,17 @@ const Setupprofileimage = React.forwardRef(({ name }, ref) => {
     if (mata && mata.touched && mata.error) {
         configTextfield.error = true;
         configTextfield.helperText = mata.error;
+    }
+
+    useEffect(() => {
+        if (mata.value) {
+            setImageUrl(mata.value);
+        }
+    }, []);
+
+    async function selectFile(event) {
+        await setImageUrl(URL.createObjectURL(event.target.files[0]));
+        console.log(URL.createObjectURL(event.target.files[0]));
     }
 
     return (
@@ -41,7 +54,8 @@ const Setupprofileimage = React.forwardRef(({ name }, ref) => {
                         <input
                             ref={ref}
                             accept="image/*"
-                            {...configTextfield}
+                            onChange={selectFile}
+                            // {...configTextfield}
                             style={{ display: 'none' }}
                             id="raised-button-file"
                             type="file"
@@ -56,11 +70,14 @@ const Setupprofileimage = React.forwardRef(({ name }, ref) => {
                                     borderRadius: '50%'
                                 }}
                             >
-                                <Button
-                                    variant="raised"
-                                    component="span"
-                                    sx={{ height: '200px', width: '200px', borderRadius: '50%', background: '#C4C4C4' }}
-                                ></Button>
+                                <MyComponent
+                                    sx={{
+                                        cursor: 'pointer',
+                                        width: '200px',
+                                        height: '200px'
+                                    }}
+                                    src={imageUrl}
+                                />
                             </Box>
                         </label>
                     </Box>

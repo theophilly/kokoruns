@@ -13,6 +13,7 @@ import Textarea from '../FormUI/Textarea';
 import SelectLGA from '../FormUI/SelectLGA';
 import stateData from '../../../config/stateData.json';
 import company_size from '../../../config/company_size.json';
+import school_type from '../../../config/school_type.json';
 
 const SetupSchool = ({ setDis_ability, setEmployment }) => {
     const matches = useMediaQuery('(min-width:900px)');
@@ -44,7 +45,7 @@ const SetupSchool = ({ setDis_ability, setEmployment }) => {
                     <Textfield name="school_name" helpertext="Name" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <Textfield name="school_type" helpertext="Type of School" />
+                    <SelectWrapper name="school_type" helpertext="Type of School" options={school_type} />
                 </Grid>
                 <Grid
                     sx={{
@@ -57,7 +58,7 @@ const SetupSchool = ({ setDis_ability, setEmployment }) => {
                     xs={12}
                     md={6}
                 >
-                    <Textfield name="school_nam" helpertext="Educational Level" />
+                    <Textfield name="school_director" helpertext="School Director" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <Textfield name="school_number" helpertext="Phone Number" />
