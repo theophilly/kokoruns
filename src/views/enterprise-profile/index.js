@@ -8,6 +8,8 @@ import Company from './company';
 import api from '../../helpers/api';
 import { ADD_ENTERPRISE_IDS } from '../../store/actionTypes/userDataActionTypes';
 import { addEnterpriseEvents } from '../../store/actions/userDataActions';
+import Loader from '../../ui-component/Loader';
+import Facebook from '../../ui-component/Loader2';
 
 const EnterpriseProfile = () => {
     const [reload, setReload] = useState(0);
@@ -49,7 +51,10 @@ const EnterpriseProfile = () => {
     return (
         <div>
             {state.empty ? (
-                <div></div>
+                <div>
+                    {/* <Loader /> */}
+                    <Facebook />
+                </div>
             ) : (
                 <AppTab
                     Tab1Label="Company"
