@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Card from '@mui/material/Card';
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -13,6 +13,7 @@ import Skeleton from '@mui/material/Skeleton';
 
 function Media(props) {
     const { loading = false } = props;
+    const theme = useTheme();
 
     return (
         <Box sx={{ maxWidth: '100%', m: 2, height: '80vh', background: 'transparent' }}>
@@ -38,7 +39,16 @@ function Media(props) {
                 subheader={loading ? <Skeleton animation="wave" height={10} width="40%" /> : '5 hours ago'}
             />
             {loading ? (
-                <Skeleton sx={{ height: 350 }} animation="wave" variant="rectangular" />
+                <Skeleton
+                    sx={{
+                        height: 350,
+                        [theme.breakpoints.down('sm')]: {
+                            height: 425
+                        }
+                    }}
+                    animation="wave"
+                    variant="rectangular"
+                />
             ) : (
                 <CardMedia
                     component="img"
