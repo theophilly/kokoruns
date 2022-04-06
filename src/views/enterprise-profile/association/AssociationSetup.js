@@ -56,7 +56,6 @@ const AssociationSetup = () => {
     let history = useNavigate();
 
     const filesharhe_ref = useRef();
-    const theme = useTheme();
     const user = useSelector((state) => state.authReducer.user);
     const [open, setOpen] = React.useState(false);
 
@@ -92,7 +91,7 @@ const AssociationSetup = () => {
                     linkedin: '',
                     facebook: '',
                     twitter: '',
-                    association_director: '3d',
+                    association_director: '',
                     instagram: '',
                     founded: '',
                     field: 'ded',

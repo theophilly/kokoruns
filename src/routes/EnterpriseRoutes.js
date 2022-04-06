@@ -10,6 +10,9 @@ import Branches from '../views/enterprise-branches';
 import Gallery from '../views/enterprise-gallery';
 import CreateBranch from '../views/enterprise-branches/tabs/company/CreateBranch';
 import UpdateBranch from '../views/enterprise-branches/tabs/company/UpdateBranch';
+import SchoolSetup from '../views/enterprise-profile/schools/SchoolSetup';
+import AssociationSetup from '../views/enterprise-profile/association/AssociationSetup';
+import CompanySetup from '../views/enterprise-profile/company/CompanySetup';
 
 // ==============================|| MAIN ROUTING ||============================== //
 const EnterpriseRoutes = (token, active) => {
@@ -17,6 +20,18 @@ const EnterpriseRoutes = (token, active) => {
         path: '/',
         element: token ? active ? <MainLayout menuList={menuItems2} /> : <Navigate to="/profile-setup" /> : <Navigate to="/login" />,
         children: [
+            {
+                path: '/update-school',
+                element: <SchoolSetup />
+            },
+            {
+                path: '/update-association',
+                element: <AssociationSetup />
+            },
+            {
+                path: '/update-company',
+                element: <CompanySetup />
+            },
             {
                 path: '/enterprise',
                 element: <EnterpriseProfile />

@@ -13,9 +13,9 @@ import Textarea from '../FormUI/Textarea';
 import SelectLGA from '../FormUI/SelectLGA';
 import stateData from '../../../config/stateData.json';
 import company_size from '../../../config/company_size.json';
-import association_type from '../../../config/association_type.json';
+import school_type from '../../../config/school_type.json';
 
-const SetupAssociation = () => {
+const UpdateSchool = ({ setDis_ability, setEmployment }) => {
     const matches = useMediaQuery('(min-width:900px)');
     const theme = useTheme();
 
@@ -23,11 +23,11 @@ const SetupAssociation = () => {
         <Box sx={{ marginTop: '0px', padding: '20px', background: 'white' }}>
             <Grid container spacing={2}>
                 <Grid xs={12} item>
-                    <Typography sx={{ ...theme.typography.heading }}>association Page Set Up</Typography>
-                    <Typography variant="caption">Kindly provide the following information to set up your association page.</Typography>
+                    <Typography sx={{ ...theme.typography.heading }}>School Page Set Up</Typography>
+                    <Typography variant="caption">Kindly provide the following information to set up your school page.</Typography>
                 </Grid>
                 <Grid xs={12} item>
-                    <Typography sx={{ ...theme.typography.heading }}>association Details</Typography>
+                    <Typography sx={{ ...theme.typography.heading }}>School Details</Typography>
                 </Grid>
                 <Grid
                     sx={{
@@ -40,10 +40,10 @@ const SetupAssociation = () => {
                     xs={12}
                     md={6}
                 >
-                    <Textfield name="association_name" helpertext="Name" />
+                    <Textfield name="school_name" helpertext="Name" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <SelectWrapper name="association_type" helpertext="Type of association" options={association_type} />
+                    <SelectWrapper name="school_type" helpertext="Type of School" options={school_type} />
                 </Grid>
                 <Grid
                     sx={{
@@ -56,10 +56,10 @@ const SetupAssociation = () => {
                     xs={12}
                     md={6}
                 >
-                    <Textfield name="association_director" helpertext="Association Director" />
+                    <Textfield name="school_director" helpertext="School Director" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <Textfield name="association_phone" helpertext="Phone Number" />
+                    <Textfield name="school_number" helpertext="Phone Number" />
                 </Grid>
                 <Grid
                     sx={{
@@ -72,10 +72,10 @@ const SetupAssociation = () => {
                     xs={12}
                     md={6}
                 >
-                    <Textfield name="association_contact_email" helpertext="Email Address" />
+                    <Textfield name="school_email" helpertext="Email Address" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <Textfield name="association_website" helpertext="Website" />
+                    <Textfield name="website" helpertext="Website" />
                 </Grid>
                 <Grid
                     sx={{
@@ -91,7 +91,7 @@ const SetupAssociation = () => {
                     <Datepicker name="founded" helpertext="Date Founded" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <Textfield name="association_address" helpertext="Main Office Address" />
+                    <Textfield name="school_address" helpertext="Main Office Address" />
                 </Grid>
                 <Grid
                     sx={{
@@ -104,14 +104,10 @@ const SetupAssociation = () => {
                     xs={12}
                     md={6}
                 >
-                    <SelectWrapper name="main_office_location_state" helpertext="State" options={stateData} />
+                    <SelectWrapper name="school_state" helpertext="State" options={stateData} />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <SelectLGA
-                        dependentField="main_office_location_state"
-                        name="main_office_location_lga"
-                        helpertext="Local Government Area"
-                    />
+                    <SelectLGA dependentField="school_state" name="school_lga" helpertext="Local Government Area" />
                 </Grid>
                 <Grid
                     sx={{
@@ -124,10 +120,10 @@ const SetupAssociation = () => {
                     xs={12}
                     md={6}
                 >
-                    <Textfield name="association_cac" helpertext="CAC Registration Number" />
+                    <Textfield name="cac" helpertext="CAC Registration Number" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                    <SelectWrapper name="association_size" helpertext="Association Size" options={company_size} />
+                    <SelectWrapper name="school_size" helpertext="School Size" options={company_size} />
                 </Grid>
                 <Grid
                     sx={{
@@ -171,4 +167,4 @@ const SetupAssociation = () => {
     );
 };
 
-export default SetupAssociation;
+export default UpdateSchool;
