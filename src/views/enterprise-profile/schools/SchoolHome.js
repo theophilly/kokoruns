@@ -530,7 +530,7 @@ const SchoolHome = ({ setReload }) => {
                                                 // await setReload((prev) => prev + 1);
                                                 // handleMessageClose();
                                                 // setRefresh((prev) => prev + 1);
-                                                window.location.reload();
+                                                window.location.reload(true);
                                             });
                                             // await dispatch(login(values));
                                             // if (!window.store.getState().authReducer.authenticated) {
