@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 export default function Profile() {
     const { associations } = useSelector((state) => state.userDataReducer.enterprise_ids);
 
-    if (associations.length !== 0) {
+    if (associations.length === 0) {
         return <AssociationSetup />;
     } else {
         return <AssociationHome />;

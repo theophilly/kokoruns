@@ -13,6 +13,7 @@ import UpdateBranch from '../views/enterprise-branches/tabs/company/UpdateBranch
 import SchoolSetup from '../views/enterprise-profile/schools/SchoolSetup';
 import AssociationSetup from '../views/enterprise-profile/association/AssociationSetup';
 import CompanySetup from '../views/enterprise-profile/company/CompanySetup';
+import UpdateSchool from '../components/reusables/forms/UpdateSchool';
 
 // ==============================|| MAIN ROUTING ||============================== //
 const EnterpriseRoutes = (token, active) => {
@@ -22,7 +23,7 @@ const EnterpriseRoutes = (token, active) => {
         children: [
             {
                 path: '/update-school',
-                element: <SchoolSetup />
+                element: <UpdateSchool />
             },
             {
                 path: '/update-association',
