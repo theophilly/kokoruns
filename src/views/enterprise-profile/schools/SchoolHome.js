@@ -187,10 +187,9 @@ const SchoolHome = ({ setReload }) => {
                                 <Box sx={{ display: 'flex', justifyContent: 'center', textTransform: 'capitalize', mt: '20px' }}>
                                     <Button
                                         LinkComponent={Link}
-                                        to="/update-profile"
+                                        to="/update-school"
                                         startIcon={<BiEditAlt />}
                                         disableElevation
-                                        disabled
                                         variant="contained"
                                         state={{ from: 'profile' }}
                                         sx={{ textTransform: 'capitalize', background: '#0991FF' }}
@@ -251,15 +250,14 @@ const SchoolHome = ({ setReload }) => {
                             <Box sx={{ display: 'flex', justifyContent: 'center', textTransform: 'capitalize', mt: '20px' }}>
                                 <Button
                                     LinkComponent={Link}
-                                    to="/update-profile"
+                                    to="/update-school"
                                     startIcon={<BiEditAlt />}
                                     disableElevation
-                                    disabled
                                     variant="contained"
                                     state={{ from: 'profile' }}
                                     sx={{ textTransform: 'capitalize', background: '#0991FF', width: '100%', padding: '15px 0' }}
                                 >
-                                    Edit Profile
+                                    Edit Page
                                 </Button>
                             </Box>
                         </Grid>

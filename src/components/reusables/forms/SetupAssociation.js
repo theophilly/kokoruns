@@ -156,7 +156,7 @@ const SetupAssociation = () => {
                     xs={12}
                     md={6}
                 >
-                    <Textfield name="linkedIn" helpertext="Linkedin Handle" />
+                    <Textfield name="linkedin" helpertext="Linkedin Handle" />
                 </Grid>
                 <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                     <Textfield name="instagram" helpertext="Instagram Handle" />

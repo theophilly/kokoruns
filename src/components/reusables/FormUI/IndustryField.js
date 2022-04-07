@@ -7,6 +7,7 @@ import Allstates from '../../../config/allstate copy.js';
 
 const IndustryField = ({ name, dependentField, options, dependentOptions, helpertext, ...otherProps }) => {
     const [field, meta] = useField(name);
+    const [firstRender, setFirstRender] = useState(true);
     const { setFieldValue, getFieldMeta } = useFormikContext();
     const state = getFieldMeta(dependentField);
     const state2 = getFieldMeta('company_industry');
@@ -18,7 +19,11 @@ const IndustryField = ({ name, dependentField, options, dependentOptions, helper
     }, [state.value]);
 
     useEffect(() => {
-        setFieldValue('company_industry3', '');
+        if (firstRender) {
+            setFirstRender(false);
+        } else {
+            setFieldValue('company_industry3', '');
+        }
     }, [state2.value]);
 
     const handleChange = (evt) => {

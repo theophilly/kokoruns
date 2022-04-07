@@ -16,8 +16,7 @@ import api from '../../../helpers/api';
 import dateFormatter from '../../../helpers/dateFormatter';
 import Success from '../../../ui-component/modals/Success';
 
-const rebuildData = (formvalues, file) => {
-    console.log(formvalues.other_professions, 'other');
+export const rebuildSchoolData = (formvalues, file) => {
     let formData = new FormData();
 
     formData.append('school_name', formvalues.school_name);
@@ -130,7 +129,7 @@ const SchoolSetup = () => {
                 onSubmit={async (formvalues) => {
                     await sleep(3000);
 
-                    const formData = await rebuildData(formvalues, filesharhe_ref.current.files[0]);
+                    const formData = await rebuildSchoolData(formvalues, filesharhe_ref.current.files[0]);
                     await api.addSchool(formData);
 
                     handleClickOpen();

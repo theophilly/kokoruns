@@ -237,7 +237,7 @@ const SetupCompany = () => {
                     xs={12}
                     md={6}
                 >
-                    <Textfield name="linkedIn" helpertext="Linkedin Handle" />
+                    <Textfield name="linkedin" helpertext="Linkedin Handle" />
                 </Grid>
                 <Grid
                     sx={{

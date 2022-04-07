@@ -17,7 +17,7 @@ import dateFormatter from '../../../helpers/dateFormatter';
 import Success from '../../../ui-component/modals/Success';
 import SetupCompany from '../../../components/reusables/forms/SetupCompany';
 
-const rebuildData = (formvalues, file) => {
+export const rebuildCompanyData = (formvalues, file) => {
     let formData = new FormData();
 
     formData.append('company_name', formvalues.company_name);
@@ -135,7 +135,7 @@ const CompanySetup = () => {
                 onSubmit={async (formvalues) => {
                     await sleep(3000);
 
-                    const formData = await rebuildData(formvalues, filesharhe_ref.current.files[0]);
+                    const formData = await rebuildCompanyData(formvalues, filesharhe_ref.current.files[0]);
                     await api.addCompany(formData);
 
                     handleClickOpen();

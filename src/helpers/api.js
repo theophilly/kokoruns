@@ -361,6 +361,20 @@ class Api {
     changeCompanyCover = (company_id, data) => {
         return this.init().post(`/cchangecoverimage/${company_id}`, data);
     };
+    //update  school
+    updateSchool = (school_id, data) => {
+        return this.init().put(`/updateschoolprofile/${school_id}`, data);
+    };
+
+    //update  association
+    updateAssociation = (association_id, data) => {
+        return this.init().put(`/updateassociationprofile/${association_id}`, data);
+    };
+
+    //update  company
+    updateCompany = (company_id, data) => {
+        return this.init().put(`/updatecompanyprofile/${company_id}`, data);
+    };
 }
 
 export default new Api();

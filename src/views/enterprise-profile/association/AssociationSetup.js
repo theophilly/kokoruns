@@ -16,7 +16,7 @@ import dateFormatter from '../../../helpers/dateFormatter';
 import Success from '../../../ui-component/modals/Success';
 import SetupAssociation from '../../../components/reusables/forms/SetupAssociation';
 
-const rebuildData = (formvalues, file) => {
+export const rebuildAssociationData = (formvalues, file) => {
     let formData = new FormData();
 
     formData.append('association_name', formvalues.association_name);
@@ -129,7 +129,7 @@ const AssociationSetup = () => {
                 onSubmit={async (formvalues) => {
                     await sleep(3000);
 
-                    const formData = await rebuildData(formvalues, filesharhe_ref.current.files[0]);
+                    const formData = await rebuildAssociationData(formvalues, filesharhe_ref.current.files[0]);
                     await api.addAssociation(formData);
 
                     handleClickOpen();

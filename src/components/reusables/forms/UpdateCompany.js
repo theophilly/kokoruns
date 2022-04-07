@@ -16,30 +16,34 @@ import Datepicker from '../FormUI/Datepicker';
 import Textarea from '../FormUI/Textarea';
 import SelectLGA from '../FormUI/SelectLGA';
 import stateData from '../../../config/stateData.json';
+import companyTypeA from '../../../config/companyTypeA.json';
 import company_size from '../../../config/company_size.json';
-import school_type from '../../../config/school_type.json';
-import { rebuildSchoolData } from '../../../views/enterprise-profile/schools/SchoolSetup';
+import IndustryField from '../FormUI/IndustryField';
+import companyTypeB from '../../../config/companyTypeB';
+import companyTypeC from '../../../config/companyTypeC';
+import company_type from '../../../config/company.json';
+import { rebuildCompanyData } from '../../../views/enterprise-profile/company/CompanySetup';
 import api from '../../../helpers/api';
 import Success from '../../../ui-component/modals/Success';
 
-const UpdateSchool = () => {
+const UpdateCompany = () => {
     const matches = useMediaQuery('(min-width:900px)');
     const theme = useTheme();
-    const [school, setSchool] = useState(null);
+    const [company, setCompany] = useState(null);
     let history = useNavigate();
-    const { schools } = useSelector((state) => state.userDataReducer.enterprise_ids);
+    const { companies } = useSelector((state) => state.userDataReducer.enterprise_ids);
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
-        if (schools.length < 1) {
+        if (companies.length < 1) {
             history('/enterprise');
         } else {
             (async function () {
-                await setSchool(schools[0]);
+                await setCompany(companies[0]);
             })();
         }
 
-        console.log(schools);
+        console.log(companies);
     }, []);
 
     const handleClickOpen = () => {
@@ -48,41 +52,42 @@ const UpdateSchool = () => {
     const handleClose = () => {
         setOpen(false);
         history('/enterprise');
+        // window.location.reload();
     };
 
     return (
         <div>
-            {school ? (
+            {company ? (
                 <Box marginTop="20px">
                     <Formik
                         initialValues={{
-                            school_name: school.school_name,
-                            cac: school.cac,
-                            school_address: school.school_address,
-                            school_email: school.school_email,
-                            school_number: school.phone,
-                            website: school.website,
-                            school_state: school.main_office_location_state,
-                            school_lga: school.main_office_location_lga,
-                            about: school.about,
-                            school_industry: 'ffff',
-                            school_industry2: '3d3d',
-                            school_industry3: 'd3d',
-                            school_type: school.school_type,
-                            school_size: school.school_size,
-                            linkedin: school.linkedin,
-                            facebook: school.facebook,
-                            twitter: school.twitter,
-                            school_director: school.school_director,
-                            instagram: school.instagram,
-                            founded: school.founded,
+                            company_name: company.company_name,
+                            cac: company.cac,
+                            company_address: company.company_address,
+                            company_email: company.company_email,
+                            company_number: company.phone,
+                            website: company.website,
+                            company_state: company.main_office_location_state,
+                            company_lga: company.main_office_location_lga,
+                            about: company.about,
+                            company_industry: company.company_industry,
+                            company_industry2: company.company_industry2,
+                            company_industry3: company.company_industry3,
+                            company_type: company.company_type,
+                            company_size: company.company_size,
+                            linkedin: company.linkedin,
+                            facebook: company.facebook,
+                            twitter: company.twitter,
+                            company_director: company.company_director,
+                            instagram: company.instagram,
+                            founded: company.founded_year,
                             field: 'ded'
                         }}
                         onSubmit={async (values) => {
-                            //  await sleep(3000);
+                            //   await sleep(3000);
 
-                            const formData = await rebuildSchoolData(values);
-                            await api.updateSchool(school.school_id, formData);
+                            const formData = await rebuildCompanyData(values);
+                            await api.updateCompany(company.company_id, formData);
 
                             handleClickOpen();
                         }}
@@ -99,13 +104,13 @@ const UpdateSchool = () => {
                                 <Box sx={{ marginTop: '0px', padding: '20px', background: 'white' }}>
                                     <Grid container spacing={2}>
                                         <Grid xs={12} item>
-                                            <Typography sx={{ ...theme.typography.heading }}>Update School Page</Typography>
+                                            <Typography sx={{ ...theme.typography.heading }}>Update Company Page</Typography>
                                             <Typography variant="caption">
-                                                Kindly edit the following fields to update your school page.
+                                                Kindly edit the following fields to update your company page.
                                             </Typography>
                                         </Grid>
                                         <Grid xs={12} item>
-                                            <Typography sx={{ ...theme.typography.heading }}>School Details</Typography>
+                                            <Typography sx={{ ...theme.typography.heading }}>company Details</Typography>
                                         </Grid>
                                         <Grid
                                             sx={{
@@ -118,10 +123,10 @@ const UpdateSchool = () => {
                                             xs={12}
                                             md={6}
                                         >
-                                            <Textfield name="school_name" helpertext="Name" />
+                                            <Textfield name="company_name" helpertext="Name" />
                                         </Grid>
                                         <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                            <SelectWrapper name="school_type" helpertext="Type of School" options={school_type} />
+                                            <SelectWrapper name="company_type" helpertext="Company Type" options={company_type} />
                                         </Grid>
                                         <Grid
                                             sx={{
@@ -134,11 +139,12 @@ const UpdateSchool = () => {
                                             xs={12}
                                             md={6}
                                         >
-                                            <Textfield name="school_director" helpertext="School Director" />
+                                            <Textfield name="company_director" helpertext="Company Director" />
                                         </Grid>
                                         <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                            <Textfield name="school_number" helpertext="Phone Number" />
+                                            <Textfield name="company_number" helpertext="Phone Number" />
                                         </Grid>
+
                                         <Grid
                                             sx={{
                                                 paddingRight: '40px',
@@ -150,14 +156,55 @@ const UpdateSchool = () => {
                                             xs={12}
                                             md={6}
                                         >
-                                            <Textfield name="school_email" helpertext="Email Address" />
+                                            <Textfield name="company_email" helpertext="Email Address" />
                                         </Grid>
                                         <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                                             <Textfield name="website" helpertext="Website" />
                                         </Grid>
+
+                                        {/* insert */}
                                         <Grid
                                             sx={{
                                                 paddingRight: '40px',
+                                                '@media (max-width: 900px)': {
+                                                    padding: '0px'
+                                                }
+                                            }}
+                                            item
+                                            xs={12}
+                                            md={6}
+                                        >
+                                            <SelectWrapper name="company_industry" helpertext="Company Industry" options={companyTypeA} />
+                                        </Grid>
+                                        <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
+                                            <IndustryField
+                                                dependentOptions={companyTypeB}
+                                                dependentField="company_industry"
+                                                name="company_industry2"
+                                                helpertext="Company Industry 2"
+                                            />
+                                        </Grid>
+                                        <Grid
+                                            sx={{
+                                                paddingRight: '40px',
+                                                '@media (max-width: 900px)': {
+                                                    padding: '0px'
+                                                }
+                                            }}
+                                            item
+                                            xs={12}
+                                            md={6}
+                                        >
+                                            <IndustryField
+                                                dependentOptions={companyTypeC}
+                                                dependentField="company_industry2"
+                                                name="company_industry3"
+                                                helpertext="Company Industry 3"
+                                            />
+                                        </Grid>
+
+                                        <Grid
+                                            sx={{
                                                 '@media (max-width: 900px)': {
                                                     padding: '0px'
                                                 }
@@ -168,9 +215,6 @@ const UpdateSchool = () => {
                                         >
                                             <Datepicker name="founded" helpertext="Date Founded" />
                                         </Grid>
-                                        <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                            <Textfield name="school_address" helpertext="Main Office Address" />
-                                        </Grid>
                                         <Grid
                                             sx={{
                                                 paddingRight: '40px',
@@ -182,14 +226,40 @@ const UpdateSchool = () => {
                                             xs={12}
                                             md={6}
                                         >
-                                            <SelectWrapper name="school_state" helpertext="State" options={stateData} />
-                                        </Grid>
-                                        <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                            <SelectLGA dependentField="school_state" name="school_lga" helpertext="Local Government Area" />
+                                            <Textfield name="company_address" helpertext="Main Office Address" />
                                         </Grid>
                                         <Grid
                                             sx={{
+                                                '@media (max-width: 900px)': {
+                                                    padding: '0px'
+                                                }
+                                            }}
+                                            item
+                                            xs={12}
+                                            md={6}
+                                        >
+                                            <SelectWrapper name="company_state" helpertext="State" options={stateData} />
+                                        </Grid>
+
+                                        <Grid
+                                            sx={{
                                                 paddingRight: '40px',
+                                                '@media (max-width: 900px)': {
+                                                    padding: '0px'
+                                                }
+                                            }}
+                                            item
+                                            xs={12}
+                                            md={6}
+                                        >
+                                            <SelectLGA
+                                                dependentField="company_state"
+                                                name="company_lga"
+                                                helpertext="Local Government Area"
+                                            />
+                                        </Grid>
+                                        <Grid
+                                            sx={{
                                                 '@media (max-width: 900px)': {
                                                     padding: '0px'
                                                 }
@@ -200,12 +270,21 @@ const UpdateSchool = () => {
                                         >
                                             <Textfield name="cac" helpertext="CAC Registration Number" />
                                         </Grid>
-                                        <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                            <SelectWrapper name="school_size" helpertext="School Size" options={company_size} />
-                                        </Grid>
                                         <Grid
                                             sx={{
                                                 paddingRight: '40px',
+                                                '@media (max-width: 900px)': {
+                                                    padding: '0px'
+                                                }
+                                            }}
+                                            item
+                                            xs={12}
+                                            md={6}
+                                        >
+                                            <SelectWrapper name="company_size" helpertext="Company Size" options={company_size} />
+                                        </Grid>
+                                        <Grid
+                                            sx={{
                                                 '@media (max-width: 900px)': {
                                                     padding: '0px'
                                                 }
@@ -216,8 +295,30 @@ const UpdateSchool = () => {
                                         >
                                             <Textfield name="facebook" helpertext="Facebook Handle" />
                                         </Grid>
-                                        <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
+                                        <Grid
+                                            sx={{
+                                                paddingRight: '40px',
+                                                '@media (max-width: 900px)': {
+                                                    padding: '0px'
+                                                }
+                                            }}
+                                            item
+                                            xs={12}
+                                            md={6}
+                                        >
                                             <Textfield name="twitter" helpertext="Twitter Handle" />
+                                        </Grid>
+                                        <Grid
+                                            sx={{
+                                                '@media (max-width: 900px)': {
+                                                    padding: '0px'
+                                                }
+                                            }}
+                                            item
+                                            xs={12}
+                                            md={6}
+                                        >
+                                            <Textfield name="linkedin" helpertext="Linkedin Handle" />
                                         </Grid>
                                         <Grid
                                             sx={{
@@ -230,9 +331,6 @@ const UpdateSchool = () => {
                                             xs={12}
                                             md={6}
                                         >
-                                            <Textfield name="linkedin" helpertext="Linkedin Handle" />
-                                        </Grid>
-                                        <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
                                             <Textfield name="instagram" helpertext="Instagram Handle" />
                                         </Grid>
                                         <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}></Grid>
@@ -246,6 +344,7 @@ const UpdateSchool = () => {
                                                     sx={{ padding: '8px 90px' }}
                                                     startIcon={isSubmitting ? <CircularProgress color="secondary" size="1rem" /> : null}
                                                     disabled={isSubmitting}
+                                                    //  disabled={true}
                                                     variant="contained"
                                                     disableElevation
                                                     type="submit"
@@ -263,7 +362,7 @@ const UpdateSchool = () => {
                         <DialogContent>
                             <Success
                                 text="See Page"
-                                content="You have successfully updated school page. View page now"
+                                content="You have successfully updated your company page. View page now"
                                 to="/enterprise"
                             ></Success>
                         </DialogContent>
@@ -276,4 +375,4 @@ const UpdateSchool = () => {
     );
 };
 
-export default UpdateSchool;
+export default UpdateCompany;

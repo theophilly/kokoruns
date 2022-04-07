@@ -14,6 +14,8 @@ import SchoolSetup from '../views/enterprise-profile/schools/SchoolSetup';
 import AssociationSetup from '../views/enterprise-profile/association/AssociationSetup';
 import CompanySetup from '../views/enterprise-profile/company/CompanySetup';
 import UpdateSchool from '../components/reusables/forms/UpdateSchool';
+import UpdateAssociation from '../components/reusables/forms/UpdateAssociation';
+import UpdateCompany from '../components/reusables/forms/UpdateCompany';
 
 // ==============================|| MAIN ROUTING ||============================== //
 const EnterpriseRoutes = (token, active) => {
@@ -27,11 +29,11 @@ const EnterpriseRoutes = (token, active) => {
             },
             {
                 path: '/update-association',
-                element: <AssociationSetup />
+                element: <UpdateAssociation />
             },
             {
                 path: '/update-company',
-                element: <CompanySetup />
+                element: <UpdateCompany />
             },
             {
                 path: '/enterprise',

@@ -17,29 +17,29 @@ import Textarea from '../FormUI/Textarea';
 import SelectLGA from '../FormUI/SelectLGA';
 import stateData from '../../../config/stateData.json';
 import company_size from '../../../config/company_size.json';
-import school_type from '../../../config/school_type.json';
-import { rebuildSchoolData } from '../../../views/enterprise-profile/schools/SchoolSetup';
+import association_type from '../../../config/association_type.json';
+import { rebuildAssociationData } from '../../../views/enterprise-profile/association/AssociationSetup';
 import api from '../../../helpers/api';
 import Success from '../../../ui-component/modals/Success';
 
-const UpdateSchool = () => {
+const UpdateAssociation = () => {
     const matches = useMediaQuery('(min-width:900px)');
     const theme = useTheme();
-    const [school, setSchool] = useState(null);
+    const [association, setAssociation] = useState(null);
     let history = useNavigate();
-    const { schools } = useSelector((state) => state.userDataReducer.enterprise_ids);
+    const { associations } = useSelector((state) => state.userDataReducer.enterprise_ids);
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
-        if (schools.length < 1) {
+        if (associations.length < 1) {
             history('/enterprise');
         } else {
             (async function () {
-                await setSchool(schools[0]);
+                await setAssociation(associations[0]);
             })();
         }
 
-        console.log(schools);
+        console.log(associations);
     }, []);
 
     const handleClickOpen = () => {
@@ -52,37 +52,37 @@ const UpdateSchool = () => {
 
     return (
         <div>
-            {school ? (
+            {association ? (
                 <Box marginTop="20px">
                     <Formik
                         initialValues={{
-                            school_name: school.school_name,
-                            cac: school.cac,
-                            school_address: school.school_address,
-                            school_email: school.school_email,
-                            school_number: school.phone,
-                            website: school.website,
-                            school_state: school.main_office_location_state,
-                            school_lga: school.main_office_location_lga,
-                            about: school.about,
-                            school_industry: 'ffff',
-                            school_industry2: '3d3d',
-                            school_industry3: 'd3d',
-                            school_type: school.school_type,
-                            school_size: school.school_size,
-                            linkedin: school.linkedin,
-                            facebook: school.facebook,
-                            twitter: school.twitter,
-                            school_director: school.school_director,
-                            instagram: school.instagram,
-                            founded: school.founded,
+                            association_name: association.association_name,
+                            association_cac: association.cac,
+                            association_address: association.association_address,
+                            association_contact_email: association.association_contact_email,
+                            association_phone: association.phone,
+                            association_website: association.website,
+                            main_office_location_state: association.main_office_location_state,
+                            main_office_location_lga: association.main_office_location_lga,
+                            about: association.about,
+                            association_industry: 'ffff',
+                            association_industry2: '3d3d',
+                            association_industry3: 'd3d',
+                            association_type: association.association_type,
+                            association_size: association.association_size,
+                            linkedin: association.linkedin,
+                            facebook: association.facebook,
+                            twitter: association.twitter,
+                            association_director: association.association_director,
+                            instagram: association.instagram,
+                            founded: association.founded_year,
                             field: 'ded'
                         }}
                         onSubmit={async (values) => {
-                            //  await sleep(3000);
+                            // await sleep(3000);
 
-                            const formData = await rebuildSchoolData(values);
-                            await api.updateSchool(school.school_id, formData);
+                            const formData = await rebuildAssociationData(values);
+                            await api.updateAssociation(association.association_id, formData);
 
                             handleClickOpen();
                         }}
@@ -99,13 +99,13 @@ const UpdateSchool = () => {
                                 <Box sx={{ marginTop: '0px', padding: '20px', background: 'white' }}>
                                     <Grid container spacing={2}>
                                         <Grid xs={12} item>
-                                            <Typography sx={{ ...theme.typography.heading }}>Update School Page</Typography>
+                                            <Typography sx={{ ...theme.typography.heading }}>Update Association Page</Typography>
                                             <Typography variant="caption">
-                                                Kindly edit the following fields to update your school page.
+                                                Kindly edit the following fields to update your association page.
                                             </Typography>
                                         </Grid>
                                         <Grid xs={12} item>
-                                            <Typography sx={{ ...theme.typography.heading }}>School Details</Typography>
+                                            <Typography sx={{ ...theme.typography.heading }}>association Details</Typography>
                                         </Grid>
                                         <Grid
                                             sx={{
@@ -118,10 +118,14 @@ const UpdateSchool = () => {
                                             xs={12}
                                             md={6}
                                         >
-                                            <Textfield name="school_name" helpertext="Name" />
+                                            <Textfield name="association_name" helpertext="Name" />
                                         </Grid>
                                         <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                            <SelectWrapper name="school_type" helpertext="Type of School" options={school_type} />
+                                            <SelectWrapper
+                                                name="association_type"
+                                                helpertext="Type of association"
+                                                options={association_type}
+                                            />
                                         </Grid>
                                         <Grid
                                             sx={{
@@ -134,10 +138,10 @@ const UpdateSchool = () => {
                                             xs={12}
                                             md={6}
                                         >
-                                            <Textfield name="school_director" helpertext="School Director" />
+                                            <Textfield name="association_director" helpertext="Association Director" />
                                         </Grid>
                                         <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                            <Textfield name="school_number" helpertext="Phone Number" />
+                                            <Textfield name="association_phone" helpertext="Phone Number" />
                                         </Grid>
                                         <Grid
                                             sx={{
@@ -150,10 +154,10 @@ const UpdateSchool = () => {
                                             xs={12}
                                             md={6}
                                         >
-                                            <Textfield name="school_email" helpertext="Email Address" />
+                                            <Textfield name="association_contact_email" helpertext="Email Address" />
                                         </Grid>
                                         <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                            <Textfield name="website" helpertext="Website" />
+                                            <Textfield name="association_website" helpertext="Website" />
                                         </Grid>
                                         <Grid
                                             sx={{
@@ -169,7 +173,7 @@ const UpdateSchool = () => {
                                             <Datepicker name="founded" helpertext="Date Founded" />
                                         </Grid>
                                         <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                            <Textfield name="school_address" helpertext="Main Office Address" />
+                                            <Textfield name="association_address" helpertext="Main Office Address" />
                                         </Grid>
                                         <Grid
                                             sx={{
@@ -182,10 +186,14 @@ const UpdateSchool = () => {
                                             xs={12}
                                             md={6}
                                         >
-                                            <SelectWrapper name="school_state" helpertext="State" options={stateData} />
+                                            <SelectWrapper name="main_office_location_state" helpertext="State" options={stateData} />
                                         </Grid>
                                         <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                            <SelectLGA dependentField="school_state" name="school_lga" helpertext="Local Government Area" />
+                                            <SelectLGA
+                                                dependentField="main_office_location_state"
+                                                name="main_office_location_lga"
+                                                helpertext="Local Government Area"
+                                            />
                                         </Grid>
                                         <Grid
                                             sx={{
@@ -198,10 +206,10 @@ const UpdateSchool = () => {
                                             xs={12}
                                             md={6}
                                         >
-                                            <Textfield name="cac" helpertext="CAC Registration Number" />
+                                            <Textfield name="association_cac" helpertext="CAC Registration Number" />
                                         </Grid>
                                         <Grid sx={{ paddingLeft: matches ? '40px' : '0px' }} item xs={12} md={6}>
-                                            <SelectWrapper name="school_size" helpertext="School Size" options={company_size} />
+                                            <SelectWrapper name="association_size" helpertext="Association Size" options={company_size} />
                                         </Grid>
                                         <Grid
                                             sx={{
@@ -263,7 +271,7 @@ const UpdateSchool = () => {
                         <DialogContent>
                             <Success
                                 text="See Page"
-                                content="You have successfully updated school page. View page now"
+                                content="You have successfully updated association page. View page now"
                                 to="/enterprise"
                             ></Success>
                         </DialogContent>
@@ -276,4 +284,4 @@ const UpdateSchool = () => {
     );
 };
 
-export default UpdateSchool;
+export default UpdateAssociation;
