@@ -80,8 +80,7 @@ const UpdateCompany = () => {
                             twitter: company.twitter,
                             company_director: company.company_director,
                             instagram: company.instagram,
-                            founded: company.founded_year,
-                            field: 'ded'
+                            founded: company.founded_year
                         }}
                         onSubmit={async (values) => {
                             //   await sleep(3000);

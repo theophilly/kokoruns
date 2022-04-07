@@ -21,6 +21,7 @@ import association_type from '../../../config/association_type.json';
 import { rebuildAssociationData } from '../../../views/enterprise-profile/association/AssociationSetup';
 import api from '../../../helpers/api';
 import Success from '../../../ui-component/modals/Success';
+import dateFormatter from '../../../helpers/dateFormatter';
 
 const UpdateAssociation = () => {
     const matches = useMediaQuery('(min-width:900px)');
@@ -81,8 +82,8 @@ const UpdateAssociation = () => {
                         onSubmit={async (values) => {
                             // await sleep(3000);
 
-                            const formData = await rebuildAssociationData(values);
-                            await api.updateAssociation(association.association_id, formData);
+                            //const formData = await rebuildAssociationData(values);
+                            await api.updateAssociation(association.association_id, { ...values, founded: dateFormatter(values.founded) });
 
                             handleClickOpen();
                         }}

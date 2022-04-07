@@ -38,6 +38,7 @@ export const rebuildSchoolData = (formvalues, file) => {
     formData.append('twitter', formvalues.twitter);
     formData.append('school_director', formvalues.school_director);
     formData.append('instagram', formvalues.instagram);
+    // formData.append('founded', '2022-08-15');
     formData.append('founded', dateFormatter(formvalues.founded));
     formData.append('field', formvalues.field);
 

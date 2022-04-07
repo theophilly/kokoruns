@@ -218,7 +218,7 @@ const Profile = () => {
                     <SubCard divider={false} p={true} sx={{ marginTop: '30px' }} title="Bio">
                         {bio.profession && (
                             <Box sx={{ display: 'flex', background: '#CEE9FF', padding: '5px 10px' }}>
-                                <Typography sx={{ fontSize: '0.8rem' }}>Occupation: </Typography>
+                                <Typography sx={{ fontSize: '0.8rem', minWidth: 'max-content' }}>Occupation: </Typography>
                                 <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
                                     {bio.profession}
                                     {Object.values(JSON.parse(bio.other_professions1)).map((item) => `, ` + item)}
@@ -227,13 +227,13 @@ const Profile = () => {
                         )}
 
                         <Box sx={{ display: 'flex', mt: '5px', padding: '5px 10px' }}>
-                            <Typography sx={{ fontSize: '0.8rem' }}> Education: </Typography>
+                            <Typography sx={{ fontSize: '0.8rem', minWidth: 'max-content' }}> Education: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
                                 {bio.educational_qualification}
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px', background: '#CEE9FF', padding: '5px 10px' }}>
-                            <Typography sx={{ fontSize: '0.8rem' }}> Languages: </Typography>
+                            <Typography sx={{ fontSize: '0.8rem', minWidth: 'max-content' }}> Languages: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
                                 {Object.values(JSON.parse(bio.languages1)).map((item, index) => {
                                     if (index === 0) {
@@ -245,19 +245,19 @@ const Profile = () => {
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px', padding: '5px 10px' }}>
-                            <Typography sx={{ fontSize: '0.8rem' }}> Phone Number: </Typography>
+                            <Typography sx={{ fontSize: '0.8rem', minWidth: 'max-content' }}> Phone Number: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
                                 {bio.phone}
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px', background: '#CEE9FF', padding: '5px 10px' }}>
-                            <Typography sx={{ fontSize: '0.8rem' }}> Email: </Typography>
+                            <Typography sx={{ fontSize: '0.8rem', minWidth: 'max-content' }}> Email: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
                                 {bio.email}
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', mt: '5px', padding: '5px 10px 0px 10px' }}>
-                            <Typography sx={{ fontSize: '0.8rem' }}> Location: </Typography>
+                            <Typography sx={{ fontSize: '0.8rem', minWidth: 'max-content' }}> Location: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
                                 {bio.lga}, {bio.state} State.
                             </Typography>

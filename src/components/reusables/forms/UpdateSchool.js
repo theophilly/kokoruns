@@ -21,6 +21,7 @@ import school_type from '../../../config/school_type.json';
 import { rebuildSchoolData } from '../../../views/enterprise-profile/schools/SchoolSetup';
 import api from '../../../helpers/api';
 import Success from '../../../ui-component/modals/Success';
+import dateFormatter from '../../../helpers/dateFormatter';
 
 const UpdateSchool = () => {
     const matches = useMediaQuery('(min-width:900px)');
@@ -75,14 +76,15 @@ const UpdateSchool = () => {
                             twitter: school.twitter,
                             school_director: school.school_director,
                             instagram: school.instagram,
-                            founded: school.founded,
-                            field: 'ded'
+                            founded: school.founded
                         }}
                         onSubmit={async (values) => {
                             //  await sleep(3000);
 
-                            const formData = await rebuildSchoolData(values);
-                            await api.updateSchool(school.school_id, formData);
+                            console.log(values);
+
+                            // const formData = await rebuildSchoolData({ ...values, founded: dateFormatter(values.founded) });
+                            await api.updateSchool(school.school_id, { ...values, founded: dateFormatter(values.founded) });
 
                             handleClickOpen();
                         }}

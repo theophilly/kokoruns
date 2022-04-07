@@ -40,7 +40,7 @@ export const rebuildCompanyData = (formvalues, file) => {
     formData.append('company_director', formvalues.company_director);
     formData.append('instagram', formvalues.instagram);
     formData.append('founded', dateFormatter(formvalues.founded));
-    formData.append('field', formvalues.field);
+    //  formData.append('field', formvalues.field);
 
     if (file) {
         formData.append('logo', file);
