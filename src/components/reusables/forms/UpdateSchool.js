@@ -76,15 +76,20 @@ const UpdateSchool = () => {
                             twitter: school.twitter,
                             school_director: school.school_director,
                             instagram: school.instagram,
-                            founded: school.founded
+                            founded: school.founded_year
                         }}
                         onSubmit={async (values) => {
                             //  await sleep(3000);
+                            console.log('FOUNDED LENGHT', values.founded);
+                            console.log('jjj', school.founded_year);
 
                             console.log(values);
 
                             // const formData = await rebuildSchoolData({ ...values, founded: dateFormatter(values.founded) });
-                            await api.updateSchool(school.school_id, { ...values, founded: dateFormatter(values.founded) });
+                            await api.updateSchool(school.school_id, {
+                                ...values,
+                                founded: values.founded ? dateFormatter(values.founded) : school.founded_year
+                            });
 
                             handleClickOpen();
                         }}

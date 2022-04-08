@@ -25,8 +25,8 @@ export const rebuildAssociationData = (formvalues, file) => {
     formData.append('association_contact_email', formvalues.association_contact_email);
     formData.append('association_phone', formvalues.association_phone);
     formData.append('association_website', formvalues.association_website);
-    formData.append('main_office_location_state', formvalues.main_office_location_state);
-    formData.append('main_office_location_lga', formvalues.main_office_location_lga);
+    formData.append('association_state', formvalues.main_office_location_state);
+    formData.append('association_lga', formvalues.main_office_location_lga);
     formData.append('about', formvalues.about);
     formData.append('association_industry', formvalues.association_industry);
     formData.append('association_industry2', formvalues.association_industry2);

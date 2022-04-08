@@ -25,6 +25,7 @@ import company_type from '../../../config/company.json';
 import { rebuildCompanyData } from '../../../views/enterprise-profile/company/CompanySetup';
 import api from '../../../helpers/api';
 import Success from '../../../ui-component/modals/Success';
+import dateFormatter from '../../../helpers/dateFormatter';
 
 const UpdateCompany = () => {
     const matches = useMediaQuery('(min-width:900px)');
@@ -85,8 +86,11 @@ const UpdateCompany = () => {
                         onSubmit={async (values) => {
                             //   await sleep(3000);
 
-                            const formData = await rebuildCompanyData(values);
-                            await api.updateCompany(company.company_id, formData);
+                            //    const formData = await rebuildCompanyData(values);
+                            await api.updateCompany(company.company_id, {
+                                ...values,
+                                founded: values.founded ? dateFormatter(values.founded) : company.founded_year
+                            });
 
                             handleClickOpen();
                         }}

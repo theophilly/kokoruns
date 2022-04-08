@@ -83,7 +83,10 @@ const UpdateAssociation = () => {
                             // await sleep(3000);
 
                             //const formData = await rebuildAssociationData(values);
-                            await api.updateAssociation(association.association_id, { ...values, founded: dateFormatter(values.founded) });
+                            await api.updateAssociation(association.association_id, {
+                                ...values,
+                                founded: values.founded ? dateFormatter(values.founded) : association.founded_year
+                            });
 
                             handleClickOpen();
                         }}

@@ -224,11 +224,12 @@ const CompanyHome = () => {
                     </Grid>
 
                     <SubCard divider={false} p={true} sx={{ marginTop: '30px' }} title="Bio">
-                        {bio.profession && (
-                            <Box sx={{ display: 'flex', background: '#CEE9FF', padding: '5px 10px' }}>
-                                <Typography sx={{ fontSize: '0.8rem' }}>Company Type: {company.company_type} </Typography>
-                            </Box>
-                        )}
+                        <Box sx={{ display: 'flex', padding: '5px 10px', background: '#CEE9FF' }}>
+                            <Typography sx={{ fontSize: '0.8rem' }}> Company Type: </Typography>
+                            <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
+                                {company.company_type}
+                            </Typography>
+                        </Box>
 
                         <Box sx={{ display: 'flex', mt: '5px', padding: '5px 10px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Location: </Typography>

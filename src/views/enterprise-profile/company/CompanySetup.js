@@ -26,8 +26,8 @@ export const rebuildCompanyData = (formvalues, file) => {
     formData.append('company_email', formvalues.company_email);
     formData.append('company_number', formvalues.company_number);
     formData.append('website', formvalues.website);
-    formData.append('state', formvalues.company_state);
-    formData.append('lga', formvalues.company_lga);
+    formData.append('company_state', formvalues.company_state);
+    formData.append('company_lga', formvalues.company_lga);
     formData.append('about', formvalues.about);
     formData.append('company_industry', formvalues.company_industry);
     formData.append('company_industry2', formvalues.company_industry2);
@@ -40,7 +40,7 @@ export const rebuildCompanyData = (formvalues, file) => {
     formData.append('company_director', formvalues.company_director);
     formData.append('instagram', formvalues.instagram);
     formData.append('founded', dateFormatter(formvalues.founded));
-    //  formData.append('field', formvalues.field);
+    formData.append('field', formvalues.field);
 
     if (file) {
         formData.append('logo', file);

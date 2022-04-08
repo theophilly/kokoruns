@@ -202,8 +202,11 @@ const SchoolHome = ({ setReload }) => {
                     </Grid>
 
                     <SubCard divider={false} p={true} sx={{ marginTop: '30px' }} title="Bio">
-                        <Box sx={{ display: 'flex', background: '#CEE9FF', padding: '5px 10px' }}>
-                            <Typography sx={{ fontSize: '0.8rem' }}>School Type: {school.school_type} </Typography>
+                        <Box sx={{ display: 'flex', padding: '5px 10px', background: '#CEE9FF' }}>
+                            <Typography sx={{ fontSize: '0.8rem' }}> School Type: </Typography>
+                            <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
+                                {school.school_type}
+                            </Typography>
                         </Box>
 
                         <Box sx={{ display: 'flex', mt: '5px', padding: '5px 10px' }}>
@@ -239,7 +242,7 @@ const SchoolHome = ({ setReload }) => {
                         <Box sx={{ display: 'flex', mt: '5px', background: '#CEE9FF', padding: '5px 10px' }}>
                             <Typography sx={{ fontSize: '0.8rem' }}> Founded: </Typography>
                             <Typography sx={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#0991FF', ml: '5px' }}>
-                                {school.school_size}
+                                {new Date(school.founded_year).getFullYear()}
                             </Typography>
                         </Box>
                     </SubCard>
