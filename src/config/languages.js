@@ -1,7 +1,9 @@
-let languages;
-export default languages = [
+let languages = [
     {
         name: 'Yoruba'
+    },
+    {
+        name: 'English'
     },
     {
         name: 'Hausa'
@@ -19,6 +21,9 @@ export default languages = [
         name: 'Tiv'
     },
     {
+        name: 'Izon'
+    },
+    {
         name: 'Fulfulde'
     },
     {
@@ -26,6 +31,9 @@ export default languages = [
     },
     {
         name: 'Ijaw-Izon'
+    },
+    {
+        name: 'Ijaw'
     },
     {
         name: 'Urhobo'
@@ -44,6 +52,9 @@ export default languages = [
     },
     {
         name: 'Igala'
+    },
+    {
+        name: 'German'
     },
     {
         name: 'Nupe-Ebira'
@@ -67,3 +78,5 @@ export default languages = [
         name: 'Mandarin'
     }
 ];
+
+export default languages;

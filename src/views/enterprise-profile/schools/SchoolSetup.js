@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
 import { Box, Grid, CircularProgress, Button, useTheme, DialogContent, Dialog } from '@mui/material';
@@ -38,7 +37,6 @@ export const rebuildSchoolData = (formvalues, file) => {
     formData.append('twitter', formvalues.twitter);
     formData.append('school_director', formvalues.school_director);
     formData.append('instagram', formvalues.instagram);
-    // formData.append('founded', '2022-08-15');
     formData.append('founded', dateFormatter(formvalues.founded));
     formData.append('field', formvalues.field);
 
@@ -48,17 +46,14 @@ export const rebuildSchoolData = (formvalues, file) => {
     return formData;
 };
 
-const FILE_SIZE = 200000;
+const FILE_SIZE = 1000000;
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
 const SchoolSetup = () => {
     let location = useLocation();
     let from = location.state?.from || '';
     let history = useNavigate();
-
     const filesharhe_ref = useRef();
-    const user = useSelector((state) => state.authReducer.user);
-    const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -98,35 +93,6 @@ const SchoolSetup = () => {
                     field: 'ded',
                     logo: ''
                 }}
-                // initialValues={{
-                //     firstName: user?.bio.first_name || '',
-                //     lastName: user?.bio.last_name || '',
-
-                //     email: user?.bio.email || '',
-                //     phone: user?.bio.phone || '',
-                //     gender: user?.bio.gender || '',
-                //     state: user?.bio.state || '',
-                //     maritalStatus: user?.bio.marital_status || '',
-                //     employment_status: user?.bio.employment_status || '',
-                //     lga: user?.bio.lga || '',
-                //     profession: user?.bio.profession || '',
-                //     academicLevel: user?.bio.educational_qualification || '',
-                //     about: user?.bio.about || '',
-                //     website: user?.bio.website || '',
-                //     preffered_jl: user?.bio.preferred_job_location_state || '',
-                //     preffered_jlga: user?.bio.preferred_job_location_lga || '',
-                //     employment_type: user?.bio.employment_type || '',
-                //     current_employer: user?.bio.current_employer || '',
-                //     employer_address: user?.bio.employers_address || '',
-                //     age_range: user?.bio.age_range || '',
-                //     disablility: user?.bio ? JSON.parse(user?.bio.disabled) : false,
-                //     other_professions: user?.bio.other_professions1 ? initiaValforLanandPro(user.bio.other_professions1) : [],
-                //     //other_professions: user?.bio.other_professions1 ? Object.values(JSON.parse(user?.bio.other_professions1)) : [],
-                //     languages: user?.bio.languages1 ? initiaValforLanandPro(user.bio.languages1) : [],
-                //     // languages: user?.bio.languages1 ? Object.values(JSON.parse(user?.bio.languages1)) : [],
-                //     disability_details: user?.bio.disability_details || '',
-                //     file: null
-                // }}
                 onSubmit={async (formvalues) => {
                     await sleep(3000);
 
