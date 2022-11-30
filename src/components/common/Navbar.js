@@ -9,10 +9,6 @@ import LogoSection from '../../layout/MainLayout/LogoSection';
 import Sidedrawer from './Sidebar';
 import { FaTimes } from 'react-icons/fa';
 
-// import Notification from '../layout/MainLayout/Header/NotificationSection.js';
-// import Profile from '../layout/MainLayout/Header/ProfileSection.js';
-// import CartSection from '../layout/MainLayout/Header/CartSection.js';
-
 const headersData = () => [
     {
         label: 'About us',
@@ -340,23 +336,6 @@ export default function Navbar() {
                                         );
                                     } else if (['Sign Out', 'Dashboard'].includes(label)) {
                                         return (
-                                            // <Button
-                                            //     onClick={() => {
-                                            //         logoutHandler();
-                                            //         handleDrawerClose();
-                                            //     }}
-                                            //     style={{ display: !token && 'none' }}
-                                            //     key={index}
-                                            //     {...{
-                                            //         key: label,
-                                            //         color: 'primary',
-                                            //         disableElevation: true,
-                                            //         variant: variant,
-                                            //         className: `${menuButton} ${signOutButton2}`
-                                            //     }}
-                                            // >
-                                            //     {label}
-                                            // </Button>
                                             <Button
                                                 onClick={
                                                     !href
@@ -417,12 +396,6 @@ export default function Navbar() {
                         <MenuIcon />
                     </IconButton>
                 </Box>
-
-                {/* <Box>
-          <Profile />
-          <CartSection />
-       {auth.authenticated && <Notification />} 
-        </Box> */}
             </Toolbar>
         );
     };

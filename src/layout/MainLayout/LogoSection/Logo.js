@@ -22,8 +22,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-// ==============================|| LOGO SVG ||============================== //
-
 const Logo = () => {
     const { footer_logo } = useStyles();
     const theme = useTheme();

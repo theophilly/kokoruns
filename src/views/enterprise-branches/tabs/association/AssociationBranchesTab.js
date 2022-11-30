@@ -23,13 +23,7 @@ export default function AssociationBranchesTab({ data }) {
     }
 
     return (
-        <Box
-            sx={
-                {
-                    //  borderBottom: '1px solid red'
-                }
-            }
-        >
+        <Box>
             <Box
                 sx={{
                     display: 'flex',

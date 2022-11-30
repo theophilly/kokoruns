@@ -24,7 +24,6 @@ export default function RecommendationItem({ handleRecommendOpen, text }) {
                         sx={{
                             fontWeight: '600',
                             color: theme.palette.text
-                            // ...theme.typography.heading
                         }}
                     >
                         Cynthia Eluzonam

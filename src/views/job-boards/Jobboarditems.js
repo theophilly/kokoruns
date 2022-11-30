@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Avatar, Typography, useTheme, Paper } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-//import IoLocationOutline from '@mui/icons-material/Place';
 import { IoLocationOutline } from 'react-icons/io5';
 
 import { RiCalendarTodoLine } from 'react-icons/ri';

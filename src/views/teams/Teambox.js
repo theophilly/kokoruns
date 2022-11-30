@@ -18,9 +18,6 @@ export default function Teamsbox({ to = '/' }) {
                 margintop: '30px !important',
                 cursor: 'pointer',
                 textDecoration: 'none'
-                // [theme.breakpoints.down('sm')]: {
-                //     width: '80%'
-                // }
             }}
         >
             <Avatar alt="Remy Sharp" src="./register.png" sx={{ width: 110, height: 110 }} />

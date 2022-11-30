@@ -38,23 +38,6 @@ export default function Createevent() {
 
     const rebuildData = (formvalues, file) => {
         let formData = new FormData();
-        console.log('file event', file);
-        //     {
-        //         "from": "23323",
-        //         "to" : "swswsw",
-        //         "event_title": "swdw",
-        //         "event_link": "swd",
-        //         "event_description": "swsw",
-        //         "event_type": "swsw",
-        //         "event_industry": "swsw",
-        //         "event_price1": 4343,
-        //         "event_price2": 3242,
-        //         "event_address": "3d3d",
-        //         "event_state": "iduedi",
-        //         "event_lga": "Shswj",
-        //         "event_image1": "ewdueiu",
-        //         "event_logo": "deyvdedgeu"
-        //    }
 
         formData.append('event_start', dateFormatter(formvalues.start_date));
         formData.append('event_end', dateFormatter(formvalues.end_date));
@@ -65,8 +48,6 @@ export default function Createevent() {
         formData.append('event_industry', formvalues.industry);
         formData.append('event_price1', formvalues.event_min_ticket);
         formData.append('event_price2', formvalues.event_ticket_price);
-        // formData.append('event_price1', formvalues.event_ticket_price);
-        // formData.append('event_price2', formvalues.event_min_ticket);
         formData.append('event_address', formvalues.address);
         formData.append('event_state', formvalues.event_state);
         formData.append('event_lga', formvalues.event_lga);
@@ -187,28 +168,7 @@ export default function Createevent() {
                                     <Grid sx={{ paddingLeft: matches ? '40px' : '0px', marginTop: '10px' }} item xs={12} md={6}>
                                         <SelectWrapper name="event_state" helpertext="Event State" options={stateData} />
                                     </Grid>
-                                    {/* 
-                                    <Grid
-                                        sx={{
-                                            paddingRight: '40px',
 
-                                            marginTop: '10px',
-                                            '@media (max-width: 900px)': {
-                                                padding: '0px'
-                                            }
-                                        }}
-                                        item
-                                        xs={12}
-                                        md={6}
-                                    >
-                                        <Textfield name="team_bio" helpertext="Team Bio" />
-                                    </Grid>
-
-                                    <Grid sx={{ paddingLeft: matches ? '40px' : '0px', marginTop: '10px' }} item xs={12} md={6}>
-                                        <SelectWrapper name="team_policy" helpertext="Team Policy" options={maritalStatusData} />
-                                    </Grid> */}
-
-                                    {/* preferred job state and LGA */}
                                     <Grid
                                         sx={{
                                             paddingRight: '40px',

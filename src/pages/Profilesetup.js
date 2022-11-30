@@ -138,9 +138,7 @@ const Profilesetup = () => {
                     age_range: user?.bio.age_range || '',
                     disablility: user?.bio ? JSON.parse(user?.bio.disabled) : false,
                     other_professions: user?.bio.other_professions1 ? initiaValforLanandPro(user.bio.other_professions1) : [],
-                    //other_professions: user?.bio.other_professions1 ? Object.values(JSON.parse(user?.bio.other_professions1)) : [],
                     languages: user?.bio.languages1 ? initiaValforLanandPro(user.bio.languages1) : [],
-                    // languages: user?.bio.languages1 ? Object.values(JSON.parse(user?.bio.languages1)) : [],
                     disability_details: user?.bio.disability_details || '',
                     file: null
                 }}

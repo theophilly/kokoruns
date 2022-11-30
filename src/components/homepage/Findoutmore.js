@@ -39,7 +39,6 @@ export default function Findoutmore(props) {
                     width: '100%',
                     height: '100%',
                     background: theme.palette.primary.main,
-                    //  background-image: linear-gradient(120deg, #eaee44, #33d0ff),
                     opacity: 0.7,
                     zIndex: 1,
                     mixBlendMode: 'multiply'

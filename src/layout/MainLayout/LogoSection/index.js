@@ -7,8 +7,6 @@ import { ButtonBase } from '@mui/material';
 // import config from '../../../utils/';
 import Logo from './Logo';
 
-// ==============================|| MAIN LOGO ||============================== //
-
 const LogoSection = () => (
     <ButtonBase
         disableRipple

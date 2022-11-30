@@ -141,35 +141,12 @@ export default function Sponsoredevents() {
                     Register for career-focused sponsored events here.
                 </Typography>
             </Box>
-            {/* <Box
-                sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '40px',
-                    justifyContent: 'center',
-                    '@media (max-width: 750px)': {
-                        gap: '10px'
-                    }
-                }}
-            >
 
-
-                
-                <Single />
-                <Single />
-                <Single />
-                <Single />
-                <Single />
-                <Single /> 
-            </Box> */}
             <Box
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     background: 'white',
-                    //   padding: '20px 10px',
-                    //    justifyContent: 'center',
-                    //   border: '1px solid red',
                     width: '70%',
                     borderRadius: '3px',
                     padding: '20px 0 50px',

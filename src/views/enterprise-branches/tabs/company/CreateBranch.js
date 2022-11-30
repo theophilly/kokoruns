@@ -27,9 +27,6 @@ export default function CreateBranch({ onSubmit }) {
     const handleClose = () => {
         setOpen(false);
         navigate('/branches');
-
-        //  await navigate.replace('/branches');
-        //  window.location.reload();
     };
 
     const rebuildData = (formvalues, file) => {

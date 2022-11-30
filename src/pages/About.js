@@ -15,7 +15,6 @@ export default function About() {
         <Box
             sx={{
                 background: '#faf9f9'
-                //   background: theme.palette.background1
             }}
         >
             <Box

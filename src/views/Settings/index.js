@@ -106,26 +106,7 @@ export default function Settings() {
                                     bvn: '',
                                     user_id: ''
                                 }}
-                                onSubmit={async (values) => {
-                                    console.log(values);
-                                    // await dispatch(login(values));
-                                    // if (!window.store.getState().authReducer.authenticated) {
-                                    //   await setClickData({
-                                    //     type: 'error',
-                                    //     content: window.store.getState().authReducer.error,
-                                    //   });
-                                    //   showToast();
-                                    // }
-                                    //  await sleep(3000);
-                                    //navigate('/profile-setup');
-                                }}
-                                // validationSchema={Yup.object().shape({
-                                //     title: Yup.string().required('Title is Required'),
-                                //     recievers_address: Yup.string().required('Recievers Address is Required'),
-                                //     message: Yup.string().required('Message is Required'),
-                                //     use_kokoruns_resume: Yup.string().required('Message is Required'),
-                                //     user_id: ''
-                                // })}
+                                onSubmit={async (values) => {}}
                             >
                                 {(formik) => (
                                     <Form autoComplete="off">
@@ -141,18 +122,10 @@ export default function Settings() {
                                                 xs={12}
                                                 md={6}
                                             >
-                                                <Textfield
-                                                    //  disabled={!!user.firstName}
-                                                    name="user_phone"
-                                                    helpertext="Phone Number*"
-                                                />
+                                                <Textfield name="user_phone" helpertext="Phone Number*" />
                                             </Grid>
                                             <Grid sx={{ paddingLeft: matches ? '20px' : '0px' }} item xs={12} md={6}>
-                                                <Textfield
-                                                    //  disabled={!!user.lastName}
-                                                    name="nin"
-                                                    helpertext="National Identification Number(NIN)"
-                                                />
+                                                <Textfield name="nin" helpertext="National Identification Number(NIN)" />
                                             </Grid>
                                             <Grid
                                                 sx={{
@@ -165,11 +138,7 @@ export default function Settings() {
                                                 xs={12}
                                                 md={6}
                                             >
-                                                <Textfield
-                                                    //  disabled={!!user.firstName}
-                                                    name="bvn"
-                                                    helpertext="Bank Verification Number"
-                                                />
+                                                <Textfield name="bvn" helpertext="Bank Verification Number" />
                                             </Grid>
                                             <Grid sx={{ paddingLeft: matches ? '20px' : '0px', mt: '7px' }} item xs={12} md={6}>
                                                 <Typography variant="caption" sx={{ color: theme.palette.textColor, mt: '10px' }}>
@@ -214,9 +183,7 @@ export default function Settings() {
                     </Grid>
                 </SubCard>
             </TabPanel>
-            <TabPanel value={value} index={1}>
-                {/* <SubCard sx={{ ml: '-10px' }}></SubCard> */}
-            </TabPanel>
+            <TabPanel value={value} index={1}></TabPanel>
         </Box>
     );
 }

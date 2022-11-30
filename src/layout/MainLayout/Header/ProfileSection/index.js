@@ -40,8 +40,6 @@ import User1 from '../../../../assets/images/users/user-round.svg';
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 
-// ==============================|| PROFILE MENU ||============================== //
-
 const ProfileSection = () => {
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
@@ -92,49 +90,6 @@ const ProfileSection = () => {
 
     return (
         <>
-            {/* <Chip
-                // label="Clickable Deletable"
-                sx={{
-                    height: '48px',
-                    alignItems: 'center',
-                    borderRadius: '27px',
-                    transition: 'all .2s ease-in-out',
-                    border: 'none',
-                    backgroundColor: 'white',
-                    '&[aria-controls="menu-list-grow"], &:hover': {
-                        borderColor: theme.palette.primary.main,
-                        background: `${theme.palette.primary.main}!important`,
-                        color: theme.palette.primary.light,
-                        '& svg': {
-                            stroke: theme.palette.primary.light
-                        }
-                    },
-                    '& .MuiChip-label': {
-                        lineHeight: 0
-                    }
-                }}
-                icon={
-                    <Avatar
-                        src={User1}
-                        sx={{
-                            ...theme.typography.mediumAvatar,
-                            margin: '8px 0 8px 8px !important',
-                            cursor: 'pointer'
-                        }}
-                        ref={anchorRef}
-                        aria-controls={open ? 'menu-list-grow' : undefined}
-                        aria-haspopup="true"
-                        color="inherit"
-                    />
-                }
-                label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.primary.main} />}
-                variant="outlined"
-                ref={anchorRef}
-                aria-controls={open ? 'menu-list-grow' : undefined}
-                aria-haspopup="true"
-                onClick={handleToggle}
-                color="primary"
-            /> */}
             <ButtonBase
                 // onClick={handleToggle}
                 component={Link}

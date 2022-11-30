@@ -14,7 +14,6 @@ import Teammember from '../teams/Teammember';
 
 const Yourevents = () => {
     const theme = useTheme();
-    // const matchDownMd = useMediaQuery('(min-width:600px)');
 
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 

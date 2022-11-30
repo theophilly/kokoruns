@@ -102,13 +102,7 @@ export default function AssociationGalleryTab({ data, setReload }) {
     };
 
     return (
-        <Box
-            sx={
-                {
-                    //  borderBottom: '1px solid red'
-                }
-            }
-        >
+        <Box>
             <Box
                 sx={{
                     display: 'flex',

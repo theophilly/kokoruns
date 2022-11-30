@@ -81,12 +81,10 @@ const Profile = () => {
     const handleClickOpen = () => {
         setMessage(true);
         setStep(0);
-        //setScroll(scrollType);
     };
     const handleCoverOpen = () => {
         setCover(true);
         setStep(0);
-        //setScroll(scrollType);
     };
 
     const descriptionElementRef = React.useRef(null);
@@ -105,12 +103,8 @@ const Profile = () => {
                     sx={{ position: 'relative', overflowY: 'hidden !important', overflowX: 'hidden !important', borderRadius: '10px' }}
                     item
                 >
-                    {/* <Box className={profile_cover_img}>
-                        <img alt="bio" src="./dashf.jpg" />
-                    </Box> */}
                     <Avatar
                         alt="Remy Sharp"
-                        //  src="./dashf.jpg"
                         src={`https://kokoruns.s3.eu-west-3.amazonaws.com/usercoverimages/${bio.cover_image}`}
                         sx={{
                             height: '25vh',
@@ -419,19 +413,12 @@ const Profile = () => {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                {/* <DialogTitle id="scroll-dialog-title">Message</DialogTitle> */}
-                {/* <Box sx={{ ...theme.typography.flex, flexDirection: 'column' }}> */}
                 <DialogContent sx={{ paddingTop: '20vh' }}>
                     <Stepper step={step} setStep={setStep}>
                         <>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box sx={{ ...theme.typography.column, alignItems: 'center' }}>
-                                        {/* <Box
-                                                src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
-                                                component="img"
-                                                sx={{ height: '150px', width: '150px', borderRadius: '5px' }}
-                                            /> */}
                                         <Typography sx={{ fontWeight: '600', mb: '10px' }}>Profile Picture</Typography>
                                         <Avatar
                                             alt="Remy Sharp"
@@ -459,7 +446,6 @@ const Profile = () => {
                                             disableElevation
                                             sx={{ padding: '8px 60px', textTransform: 'capitalize' }}
                                             variant="contained"
-                                            // onClick={handleMessageClose}
                                             onClick={() => setStep(step + 1)}
                                         >
                                             Change Profile Picture
@@ -485,16 +471,6 @@ const Profile = () => {
 
                                             await dispatch(updateProfilePicture(formData));
                                             handleMessageClose();
-                                            // await dispatch(login(values));
-                                            // if (!window.store.getState().authReducer.authenticated) {
-                                            //   await setClickData({
-                                            //     type: 'error',
-                                            //     content: window.store.getState().authReducer.error,
-                                            //   });
-                                            //   showToast();
-                                            // }
-                                            //  await sleep(3000);
-                                            //navigate('/profile-setup');
                                         }}
                                         validationSchema={Yup.object().shape({
                                             profile_picture: Yup.mixed()
@@ -536,10 +512,8 @@ const Profile = () => {
                                                                         ) : null
                                                                     }
                                                                     sx={{
-                                                                        //  width: '200px',
                                                                         marginTop: '20px',
                                                                         letterSpacing: '1px',
-                                                                        // borderRadius: '0px',
                                                                         padding: '8px 60px',
                                                                         color: 'white',
                                                                         textTransform: 'capitalize',
@@ -593,19 +567,12 @@ const Profile = () => {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                {/* <DialogTitle id="scroll-dialog-title">Message</DialogTitle> */}
-                {/* <Box sx={{ ...theme.typography.flex, flexDirection: 'column' }}> */}
                 <DialogContent sx={{ paddingTop: '20vh' }}>
                     <Stepper step={step} setStep={setStep}>
                         <>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box sx={{ ...theme.typography.column, alignItems: 'center' }}>
-                                        {/* <Box
-                                                src={`https://kokoruns.s3.eu-west-3.amazonaws.com/userprofilepics/${bio.profile_image}`}
-                                                component="img"
-                                                sx={{ height: '150px', width: '150px', borderRadius: '5px' }}
-                                            /> */}
                                         <Typography sx={{ fontWeight: '600', mb: '10px' }}>Cover Image</Typography>
                                         <Avatar
                                             alt="Remy Sharp"
@@ -633,7 +600,6 @@ const Profile = () => {
                                             disableElevation
                                             sx={{ padding: '8px 60px', textTransform: 'capitalize' }}
                                             variant="contained"
-                                            // onClick={handleMessageClose}
                                             onClick={() => setStep(step + 1)}
                                         >
                                             Change Cover Image
@@ -659,16 +625,6 @@ const Profile = () => {
 
                                             await dispatch(updateCoverPicture(formData));
                                             handleCoverClose();
-                                            // await dispatch(login(values));
-                                            // if (!window.store.getState().authReducer.authenticated) {
-                                            //   await setClickData({
-                                            //     type: 'error',
-                                            //     content: window.store.getState().authReducer.error,
-                                            //   });
-                                            //   showToast();
-                                            // }
-                                            //  await sleep(3000);
-                                            //navigate('/profile-setup');
                                         }}
                                         validationSchema={Yup.object().shape({
                                             coverimage: Yup.mixed()
@@ -710,10 +666,9 @@ const Profile = () => {
                                                                         ) : null
                                                                     }
                                                                     sx={{
-                                                                        //  width: '200px',
                                                                         marginTop: '20px',
                                                                         letterSpacing: '1px',
-                                                                        // borderRadius: '0px',
+
                                                                         padding: '8px 60px',
                                                                         color: 'white',
                                                                         textTransform: 'capitalize',

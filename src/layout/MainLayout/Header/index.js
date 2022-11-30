@@ -13,8 +13,6 @@ import NotificationSection from './NotificationSection';
 // assets
 import { IconMenu2 } from '@tabler/icons';
 
-// ==============================|| MAIN NAVBAR / HEADER ||============================== //
-
 const Header = ({ handleLeftDrawerToggle }) => {
     const theme = useTheme();
 
@@ -26,7 +24,6 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     width: 300,
                     mt: '20px',
                     display: 'flex',
-                    //   border: '1px solid red',
                     [theme.breakpoints.down('md')]: {
                         width: 'auto',
                         mt: '10px'
@@ -42,7 +39,6 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     sx={{
                         mt: '8px',
                         mr: '40px',
-                        //   border: '1px solid red',
                         cursor: 'pointer',
                         [theme.breakpoints.down('md')]: {
                             mt: '0px'

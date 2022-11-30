@@ -54,8 +54,6 @@ export default function MessagesScreen() {
                             className="customscroll"
                             style={{
                                 height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 88px)',
-                                //  paddingLeft: '16px',
-                                //  paddingRight: '16px',
                                 scrollbarWidth: '5px'
                             }}
                         >
@@ -65,7 +63,6 @@ export default function MessagesScreen() {
                                     sx={{
                                         ...theme.typography.column,
                                         height: '200px',
-                                        //  border: '1px solid red',
                                         alignItems: 'center',
                                         paddingTop: '20px'
                                     }}
@@ -90,11 +87,8 @@ export default function MessagesScreen() {
                                         alignItems: 'center',
                                         bgcolor: '#CEE9FF',
                                         borderRadius: '6px',
-                                        // marginLeft: '15px',
                                         border: 'none',
-                                        '&:hover': {
-                                            //  border: '1px solid  rgba(0, 0, 0, 0.87)'
-                                        }
+                                        '&:hover': {}
                                     }}
                                 >
                                     <Avatar sx={{ bgcolor: 'inherit', height: '30px', width: '30px' }} variant="round">
@@ -200,13 +194,6 @@ export default function MessagesScreen() {
                                     flex: 1
                                 }}
                             >
-                                {/* chats
-                            <Box>
-                                {chats.map((item) => (
-                                    <ChatItem {...item} />
-                                ))}
-                            </Box>
-                             */}
                                 <Box sx={{ display: 'flex', justifyContent: 'flex-end !important', flexDirection: 'column' }}>
                                     <Message />
                                     <Message />
@@ -223,7 +210,6 @@ export default function MessagesScreen() {
                                     display: 'flex',
                                     alignItems: 'center',
                                     padding: '0 30px',
-                                    //   border: '1px solid red',
                                     borderTop: '1px solid #C4C4C4',
                                     height: '70px'
                                 }}

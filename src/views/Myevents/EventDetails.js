@@ -22,7 +22,6 @@ const EventDetails = () => {
     useEffect(() => {
         const event = searchEvent();
         setState(event);
-        //   console.log(event);
     }, []);
 
     const searchEvent = () => {
@@ -42,7 +41,6 @@ const EventDetails = () => {
     };
 
     const theme = useTheme();
-    // const matchDownMd = useMediaQuery('(min-width:600px)');
 
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 

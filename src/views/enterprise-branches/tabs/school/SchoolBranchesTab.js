@@ -23,13 +23,7 @@ export default function SchoolBranchesTab({ data }) {
     }
 
     return (
-        <Box
-            sx={
-                {
-                    //  borderBottom: '1px solid red'
-                }
-            }
-        >
+        <Box>
             <Box
                 sx={{
                     display: 'flex',
